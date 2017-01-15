@@ -1,0 +1,19 @@
+.track-container .artwork-wrapper {
+  position: relative; }
+  .track-container .artwork-wrapper .artwork-icon {
+    width: 200px; }
+    .track-container .artwork-wrapper .artwork-icon:hover {
+      cursor: pointer; }
+  .track-container .artwork-wrapper .artwork-play {
+    position: absolute;
+    width: 50px;
+    top: 75px;
+    left: 75px; }
+    .track-container .artwork-wrapper .artwork-play:hover {
+      cursor: pointer;
+      width: 60px;
+      left: 70px; }
+.track-container .track-title:hover {
+  cursor: pointer; }
+
+/*# sourceMappingURL=main.css.map */

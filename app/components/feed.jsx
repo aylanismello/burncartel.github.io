@@ -1,10 +1,4 @@
 import React from 'react';
-import Masonry from 'react-masonry-component';
-
-const masonryOptions = {
-	transitionDuration: 0
-};
-
 
 const dummyImages = [
 	'https://i1.sndcdn.com/artworks-000201810345-8gnucx-large.jpg',
@@ -23,27 +17,41 @@ const dummyImages = [
 
 const Feed = (props) => {
 
-	const childElements = dummyImages.map(function(element, idx) {
+	const childElements = dummyImages.map((element, idx) => {
 		return (
-			<div
-				className="image-element-class jumbotron"
-				key={`${element}-${idx}-div`}
-			>
-				{/* <span> OH HAI {elementK}! </span> */}
-				<img key={`${element}-${idx}-image`} src={element}/>
+			<div className="row track-container">
+				<div className="col-sm-6 col-md-4">
+					<div className="thumbnail">
+						<div className="artwork-wrapper">
+							<img
+								src={element}
+								className="artwork-icon"
+							/>
+							<img
+								src='http://wptf.com/wp-content/uploads/2014/05/play-button.png'
+								className="artwork-play"
+							/>
+							<span className="glyphicon glyphicon-play-circle"/>
+						</div>
+						<div className="caption">
+							<h3 className="track-title">Song Title here</h3>
+							<p>Posted by n curators</p>
+							<p>
+								<a href="#" className="btn btn-primary" role="button">Button</a>
+								<a href="#" className="btn btn-default" role="button">Button</a>
+							</p>
+						</div>
+					</div>
+				</div>
 			</div>
+
 		);
 	});
 
 	return (
-		<Masonry className={'my-gallery-class'} // default ''
-			elementType={'ul'} // default 'div'
-			options={masonryOptions} // default {}
-			disableImagesLoaded={false} // default false
-			updateOnEachImageLoad={false} // default false and works only if disableImagesLoaded is false
-		>
+		<div>
 			{childElements}
-		</Masonry>
+		</div>
 	);
 
 };
