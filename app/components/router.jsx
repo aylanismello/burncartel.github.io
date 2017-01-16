@@ -2,7 +2,7 @@ import React from 'react';
 import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 
 // import components here
-import App from './app';
+import AppContainer from './app_container';
 
 
 class AppRouter extends React.Component{
@@ -13,7 +13,7 @@ class AppRouter extends React.Component{
   render() {
   	return (
   		<Router history={hashHistory}>
-        <Route path="/" component={ App }>
+        <Route path="/" component={ AppContainer }>
           // Routes go here
         </Route>
   		</Router>

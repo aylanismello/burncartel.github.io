@@ -1,11 +1,12 @@
 import React from 'react';
 import {Link} from 'react-router';
 import {withRouter} from 'react-router';
-import Feed from './feed';
+import FeedContainer from './feed_container';
 
 class App extends React.Component {
   constructor(props) {
   	super(props);
+    props.fetchTracks();
   }
 
   render() {
@@ -42,7 +43,7 @@ class App extends React.Component {
 
         <div className="container">
           {/* <div className="jumbotron"> */}
-            <Feed elements={['dope', 'as', 'fuck']}/>
+            <FeedContainer elements={['dope', 'as', 'fuck']}/>
             {/* <h1>Track One</h1>
             <h2>Artist A</h2>
             <p className="lead">This is where all of our React Modals go.... let's separate styling and functionality for the love of god..</p>
