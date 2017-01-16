@@ -29091,7 +29091,7 @@
 /* 274 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 		value: true
@@ -29125,63 +29125,70 @@
 		if (tracks.length === 0) {
 	
 			childElements = _react2.default.createElement(
-				"div",
+				'div',
 				null,
 				_react2.default.createElement(
-					"h1",
+					'h1',
 					null,
-					"LOADING"
+					'LOADING'
 				)
 			);
 		} else {
 	
-			childElements = tracks.map(function (element, idx) {
+			childElements = tracks.map(function (track, idx) {
+				var numCurators = track.curators.length;
+				var curatorWord = numCurators <= 1 ? 'curator' : 'curators';
+				var curatorsStr = numCurators + ' ' + curatorWord;
 				return _react2.default.createElement(
-					"div",
-					{ className: "row" },
+					'div',
+					{ className: 'row' },
 					_react2.default.createElement(
-						"div",
-						{ className: "col-sm-6 col-md-4 track-container" },
+						'div',
+						{ className: 'col-sm-6 col-md-4 track-container' },
 						_react2.default.createElement(
-							"div",
-							{ className: "thumbnail" },
+							'div',
+							{ className: 'thumbnail' },
 							_react2.default.createElement(
-								"div",
-								{ className: "artwork-wrapper" },
-								_react2.default.createElement("img", {
-									src: element.artwork_url,
-									className: "artwork-icon"
+								'div',
+								{ className: 'artwork-wrapper' },
+								_react2.default.createElement('img', {
+									src: track.artwork_url,
+									className: 'artwork-icon'
 								}),
-								_react2.default.createElement("img", {
-									src: "http://wptf.com/wp-content/uploads/2014/05/play-button.png",
-									className: "artwork-play"
+								_react2.default.createElement('img', {
+									src: 'http://wptf.com/wp-content/uploads/2014/05/play-button.png',
+									className: 'artwork-play'
 								}),
-								_react2.default.createElement("span", { className: "glyphicon glyphicon-play-circle" })
+								_react2.default.createElement('span', { className: 'glyphicon glyphicon-play-circle' })
 							),
 							_react2.default.createElement(
-								"div",
-								{ className: "caption" },
+								'div',
+								{ className: 'caption' },
 								_react2.default.createElement(
-									"h3",
-									{ className: "track-title" },
-									element.name
+									'h3',
+									{ className: 'track-title' },
+									track.name
 								),
 								_react2.default.createElement(
-									"p",
+									'span',
 									null,
-									"Posted by ",
-									element.curators.length,
-									" curators"
+									'Selected by ',
+									_react2.default.createElement(
+										'a',
+										{ href: '#' },
+										curatorsStr
+									),
+									' '
 								),
 								_react2.default.createElement(
-									"p",
+									'p',
 									null,
 									_react2.default.createElement(
-										"div",
-										{ className: "fire-emoji-container" },
-										_react2.default.createElement("img", {
-											className: "fire-emoji",
-											src: "http://pix.iemoji.com/images/emoji/apple/ios-9/256/fire.png" })
+										'div',
+										{ className: 'fire-emoji-container' },
+										_react2.default.createElement('img', {
+											className: 'fire-emoji',
+											src: 'http://pix.iemoji.com/images/emoji/apple/ios-9/256/fire.png' })
 									)
 								)
 							)
@@ -29191,8 +29198,8 @@
 			});
 		}
 		return _react2.default.createElement(
-			"div",
-			{ className: "feed-container" },
+			'div',
+			{ className: 'feed-container' },
 			childElements
 		);
 	};

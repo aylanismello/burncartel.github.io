@@ -28,14 +28,17 @@ const Feed = ({ tracks }) => {
 		);
 	} else {
 
-		childElements = tracks.map((element, idx) => {
+		childElements = tracks.map((track, idx) => {
+			const numCurators = track.curators.length;
+			const curatorWord = (numCurators <= 1 ? 'curator' : 'curators');
+			const curatorsStr = `${numCurators} ${curatorWord}`
 			return (
 				<div className="row">
 					<div className="col-sm-6 col-md-4 track-container">
 						<div className="thumbnail">
 							<div className="artwork-wrapper">
 								<img
-									src={element.artwork_url}
+									src={track.artwork_url}
 									className="artwork-icon"
 								/>
 								<img
@@ -45,8 +48,8 @@ const Feed = ({ tracks }) => {
 								<span className="glyphicon glyphicon-play-circle"/>
 							</div>
 							<div className="caption">
-								<h3 className="track-title">{element.name}</h3>
-								<p>Posted by {element.curators.length} curators</p>
+								<h3 className="track-title">{track.name}</h3>
+								<span>Selected by <a href="#">{curatorsStr}</a> </span>
 								<p>
 									<div className="fire-emoji-container">
 										<img
