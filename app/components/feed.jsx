@@ -45,15 +45,15 @@ const Feed = ({ tracks }) => {
 								<span className="glyphicon glyphicon-play-circle"/>
 							</div>
 							<div className="caption">
-								<h3 className="track-title">Song Title here</h3>
-								<p>Posted by n curators</p>
+								<h3 className="track-title">{element.name}</h3>
+								<p>Posted by {element.curators.length} curators</p>
 								<p>
 									<div className="fire-emoji-container">
 										<img
 											className="fire-emoji"
 											src="http://pix.iemoji.com/images/emoji/apple/ios-9/256/fire.png"/>
 									</div>
-									<a href="#" className="btn btn-default" role="button">Button</a>
+									{/* <a href="#" className="btn btn-default" role="button">Button</a> */}
 								</p>
 							</div>
 						</div>

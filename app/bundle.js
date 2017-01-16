@@ -29164,12 +29164,14 @@
 								_react2.default.createElement(
 									"h3",
 									{ className: "track-title" },
-									"Song Title here"
+									element.name
 								),
 								_react2.default.createElement(
 									"p",
 									null,
-									"Posted by n curators"
+									"Posted by ",
+									element.curators.length,
+									" curators"
 								),
 								_react2.default.createElement(
 									"p",
@@ -29180,11 +29182,6 @@
 										_react2.default.createElement("img", {
 											className: "fire-emoji",
 											src: "http://pix.iemoji.com/images/emoji/apple/ios-9/256/fire.png" })
-									),
-									_react2.default.createElement(
-										"a",
-										{ href: "#", className: "btn btn-default", role: "button" },
-										"Button"
 									)
 								)
 							)
