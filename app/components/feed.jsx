@@ -32,13 +32,16 @@ const Feed = ({ tracks }) => {
 			const numCurators = track.curators.length;
 			const curatorWord = (numCurators <= 1 ? 'curator' : 'curators');
 			const curatorsStr = `${numCurators} ${curatorWord}`
+
+			const artwork_url = (track.artwork_url ? track.artwork_url : track.publisher.avatar_url);
+
 			return (
 				<div className="row">
 					<div className="col-sm-6 col-md-4 track-container">
 						<div className="thumbnail">
 							<div className="artwork-wrapper">
 								<img
-									src={track.artwork_url}
+									src={artwork_url}
 									className="artwork-icon"
 								/>
 								<img
