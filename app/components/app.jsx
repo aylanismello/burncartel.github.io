@@ -2,8 +2,10 @@ import React from 'react';
 import {Link} from 'react-router';
 import {withRouter} from 'react-router';
 import Select from 'react-select';
-import 'react-select/dist/react-select.css';
+import * as FontAwesome from 'react-icons/lib/fa/';
+
 import FeedContainer from './feed_container';
+import 'react-select/dist/react-select.css';
 
 class App extends React.Component {
   constructor(props) {
@@ -69,23 +71,16 @@ class App extends React.Component {
             options={options}
             onChange={this.onSelectChange.bind(this)}
             />
-          {/* <select class="custom-select">
-            <option selected>Choose a filter</option>
-            {
-              ['hot', 'influential', 'not'].map((filter) => {
-                return (
-                  <option value={filter}>{filter}</option>
-                );
-              })
-            }
-          </select> */}
           <FeedContainer elements={['dope', 'as', 'fuck']}/>
         </div>
 
 
 
-        <nav className="navbar navbar-toggleable-md navbar-inverse fixed-bottom bg-inverse">
-          <button className="btn btn-outline-success my-2 my-sm-0" type="submit">PLAY</button>
+        <nav className="navbar navbar-toggleable-md navbar-inverse fixed-bottom bg-inverse bc-menu">
+
+          {/* <button className="btn btn-outline-success my-2 my-sm-0" type="submit">PLAY</button> */}
+          <FontAwesome.FaGlobe />
+
         </nav>
 			</div>
       );
