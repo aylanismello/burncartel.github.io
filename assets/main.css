@@ -36,4 +36,13 @@ body {
 .bc-menu {
   color: white; }
 
+.bc-icon {
+  max-height: 300px;
+  margin: 0 auto;
+  /* poor attempt at centering */
+  max-width: 300px;
+  display: inline; }
+  .bc-icon:hover {
+    cursor: pointer; }
+
 /*# sourceMappingURL=main.css.map */

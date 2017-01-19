@@ -56,3 +56,19 @@ body {
 .bc-menu {
 	color: white;
 }
+
+.bc-icon {
+	max-height: 300px;
+
+	margin: 0 auto; /* poor attempt at centering */
+
+	// height: auto !important; /* overrides inline */
+	// width: auto !important; /* overrides inline */
+
+	max-width: 300px;
+	display: inline;
+	&:hover {
+		cursor: pointer;
+	}
+}
+//
