@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 const UserItem = ({ user }) => {
 	// the thing we're going to print out here is actually
@@ -8,16 +9,22 @@ const UserItem = ({ user }) => {
 		<div className="row">
 			<div className="col-sm-6 col-md-4 user-container">
 				<div className="thumbnail">
-					<div className="caption">
-						<h3 className="user-title">{user.name}</h3>
-						<h4 className="user-location">Based out of {userLocation}</h4>
-						<span>Posted <a href="#">{user.track_count}</a> tracks</span>
-							<div className="fire-emoji-container">
-							<img
-								src={user.avatar_url}/>
+
+					<Link
+						to={`/users/${user.id}`}
+					>
+						<div className="caption">
+							<h3 className="user-title">{user.name}</h3>
+							<h4 className="user-location">Based out of {userLocation}</h4>
+							<span>Posted <a href="#">{user.track_count}</a> tracks</span>
+								<div className="fire-emoji-container">
+								<img
+									src={user.avatar_url}/>
+							</div>
+								{/* <a href="#" className="btn btn-default" role="button">Button</a> */}
 						</div>
-							{/* <a href="#" className="btn btn-default" role="button">Button</a> */}
-					</div>
+					</Link>
+
 				</div>
 			</div>
 		</div>
