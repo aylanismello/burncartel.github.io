@@ -3,7 +3,8 @@ const initialState = {
 	tracks: {},
 	currentFilter: 'influential',
 	trackIdx: 0,
-	trackId: -1
+	trackId: -1,
+	userId: -1
 };
 // consider doing obejct for tracks...
 // with trackId: {trackObj..} structure instead

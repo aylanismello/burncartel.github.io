@@ -37,9 +37,9 @@
     "react-masonry-component": "^5.0.3",
     "react-redux": "^4.4.5",
     "react-router": "^2.6.1",
-    "react-select": "^1.0.0-rc.2",
     "react-soundplayer": "^0.3.6",
     "redux": "^3.5.2",
+    "reselect": "^2.5.4",
     "serve-favicon": "~2.3.0",
     "style-loader": "^0.13.0",
     "webpack": "^1.13.1"
