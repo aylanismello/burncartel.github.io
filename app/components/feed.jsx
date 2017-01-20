@@ -5,7 +5,7 @@ import TrackItem from './track_item';
 const Feed = ({ tracks, handleTrackUpdate }) => {
 	let childElements;
 
-	if(tracks.length === 0) {
+	if(Object.keys(tracks).length === 0) {
 		childElements = (
 			<div>
 				<h1>
@@ -15,13 +15,15 @@ const Feed = ({ tracks, handleTrackUpdate }) => {
 		);
 	} else {
 
-		childElements = tracks.map((track, idx) => (
-			<TrackItem
-				track={track}
-				handleTrackUpdate={handleTrackUpdate}
-				idx={idx}
-			/>
-		));
+
+
+	childElements = Object.keys(tracks).map((track, idx) => (
+		<TrackItem
+			track={tracks[track]}
+			handleTrackUpdate={handleTrackUpdate}
+			idx={idx}
+		/>
+	));
 
 	}
 	return (

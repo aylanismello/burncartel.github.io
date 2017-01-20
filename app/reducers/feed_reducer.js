@@ -1,8 +1,9 @@
 import { feedConstants } from '../actions/feed_actions';
 const initialState = {
-	tracks: [],
+	tracks: {},
 	currentFilter: 'influential',
-	trackIdx: 0
+	trackIdx: 0,
+	trackId: -1
 };
 // consider doing obejct for tracks...
 // with trackId: {trackObj..} structure instead
@@ -10,11 +11,15 @@ const initialState = {
 const FeedReducer = (state = initialState, action) => {
 	switch(action.type) {
 		case feedConstants.RECEIVE_TRACKS:
-			return Object.assign({}, state, { tracks: action.tracks });
+			const newTracks = {};
+			action.tracks.forEach((track) => {
+				newTracks[track.id] = track;
+			});
+			return Object.assign({}, state, { tracks: newTracks });
 		case feedConstants.UPDATE_FILTER:
 			return Object.assign({}, state, { currentFilter: action.filter });
-		case feedConstants.UPDATE_TRACK_IDX:
-			return Object.assign({}, state, { trackIdx: action.trackIdx });
+		case feedConstants.UPDATE_TRACK_ID:
+			return Object.assign({}, state, { trackId: action.trackId });
 		default:
 			return state;
 	}

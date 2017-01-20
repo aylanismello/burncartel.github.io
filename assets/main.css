@@ -45,4 +45,7 @@ body {
   .bc-icon:hover {
     cursor: pointer; }
 
+.track-show .track-banner {
+  background: gray; }
+
 /*# sourceMappingURL=main.css.map */

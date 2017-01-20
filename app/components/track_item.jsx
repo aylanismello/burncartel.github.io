@@ -13,7 +13,8 @@ const TrackItem = ({ track, handleTrackUpdate, idx }) => {
 		<div className="row">
 			<div className="col-sm-6 col-md-4 track-container">
 				{/* <div className="thumbnail" onClick={handleTrackUpdate.bind(null, track.id)}> */}
-				<div className="thumbnail" onClick={() => handleTrackUpdate(idx)}>
+				{/* <div className="thumbnail" onClick={() => handleTrackUpdate(idx)}> */}
+				<div className="thumbnail" onClick={() => handleTrackUpdate(track.id)}>
 					<div className="artwork-wrapper">
 						<img
 							src={artwork_url}
