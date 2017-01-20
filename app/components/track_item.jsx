@@ -27,22 +27,21 @@ const TrackItem = ({ track, handleTrackUpdate, idx }) => {
 						<span className="glyphicon glyphicon-play-circle"/>
 					</div>
 
-					<Link
-						to={`/tracks/${track.id}`}
-					>
 						<div className="caption">
-							<h3 className="track-title">{track.name}</h3>
+							<Link
+								to={`/tracks/${track.id}`}
+							>
+								<h3 className="track-title">{track.name}</h3>
+							</Link>
 							<span>Selected by <a href="#">{curatorsStr}</a> </span>
-							<p>
+
 								<div className="fire-emoji-container">
 									<img
 										className="fire-emoji"
 										src="http://pix.iemoji.com/images/emoji/apple/ios-9/256/fire.png"/>
 								</div>
 								{/* <a href="#" className="btn btn-default" role="button">Button</a> */}
-							</p>
 						</div>
-					</Link>
 
 				</div>
 			</div>

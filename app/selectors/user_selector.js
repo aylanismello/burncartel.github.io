@@ -1,21 +1,21 @@
 import { createSelector } from 'reselect';
 
 const getTracks = state => state.feed.tracks;
-const getUserId = state => state.feed.userId
+const getUserId = state => state.feed.userId;
 
 export const getUserFromTracks = createSelector(
 	[getTracks, getUserId],
 	(tracks, userId) => {
-		const keys = Object.keys(getTracks);
-		let user;
-		keys.forEach((track) => {
-			tracks[track].curators.forEach((curator) => {
-				console.log(`${curator.id} === ${userId}`);
+		const keys = Object.keys(tracks);
+
+		for(const track of keys) {
+			for(const curator of tracks[track].curators) {
 				if(`${curator.id}` === `${userId}`) {
-					user = curator;
+					return curator;
 				}
-			});
-		});
-		return user;
+			}
+		}
+
+		throw `USER ${userId} not found :(`
 	}
 );

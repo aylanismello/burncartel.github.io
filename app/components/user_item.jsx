@@ -1,20 +1,23 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-const UserItem = ({ user }) => {
+const UserItem = ({ user, handleUserChange }) => {
 	// the thing we're going to print out here is actually
 	// the location data we've found using geocode api and more
 	const userLocation = (user.city ? user.city : 'nowhere, usa');
 	return (
 		<div className="row">
 			<div className="col-sm-6 col-md-4 user-container">
-				<div className="thumbnail">
+				<div className="thumbnail" onClick={() => handleUserChange(user.id)}>
 
-					<Link
-						to={`/users/${user.id}`}
-					>
 						<div className="caption">
-							<h3 className="user-title">{user.name}</h3>
+
+							<Link
+								to={`/users/${user.id}`}
+							>
+								<h3 className="user-title">{user.name}</h3>
+							</Link>
+
 							<h4 className="user-location">Based out of {userLocation}</h4>
 							<span>Posted <a href="#">{user.track_count}</a> tracks</span>
 								<div className="fire-emoji-container">
@@ -23,7 +26,6 @@ const UserItem = ({ user }) => {
 							</div>
 								{/* <a href="#" className="btn btn-default" role="button">Button</a> */}
 						</div>
-					</Link>
 
 				</div>
 			</div>

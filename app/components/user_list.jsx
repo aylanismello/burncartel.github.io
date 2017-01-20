@@ -1,10 +1,13 @@
 import React from 'react';
-import UserItem from './user_item';
+import UserItemContainer from './user_item_container';
 
 const UserList = ({ track }) => {
 
-	const childElements = track.curators.map((curator) => (
-		<UserItem user={curator} />
+	const childElements = track.curators.map((curator, idx) => (
+		<UserItemContainer
+			user={curator}
+			key={idx}
+		/>
 	));
 
 	return (

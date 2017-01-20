@@ -5,26 +5,9 @@ import UserShow from './user_show';
 
 // maybe use selectors here? this is weird.
 const mapStateToProps = (state, ownProps) => {
-
-	const uzer = getUserFromTracks(state);
-	const userId = ownProps.params.id
-
-	let user;
-	// not optimal, this will NOT exit when we found out user.
-	const { tracks } = state.feed;
-	const keys = Object.keys(tracks);
-
-	keys.forEach((track) => {
-		tracks[track].curators.forEach((curator) => {
-			if(`${curator.id}` === `${userId}`) {
-				user = curator;
-			}
-		});
-	});
-
 	return {
 		id: ownProps.params.id,
-		user
+		user: getUserFromTracks(state)
 	}
 };
 

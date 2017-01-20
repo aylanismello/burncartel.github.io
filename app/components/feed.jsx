@@ -22,6 +22,7 @@ const Feed = ({ tracks, handleTrackUpdate }) => {
 			track={tracks[track]}
 			handleTrackUpdate={handleTrackUpdate}
 			idx={idx}
+			key={idx}
 		/>
 	));
 

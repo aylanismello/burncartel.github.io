@@ -21,6 +21,8 @@ const FeedReducer = (state = initialState, action) => {
 			return Object.assign({}, state, { currentFilter: action.filter });
 		case feedConstants.UPDATE_TRACK_ID:
 			return Object.assign({}, state, { trackId: action.trackId });
+		case feedConstants.UPDATE_USER_ID:
+			return Object.assign({}, state, { userId: action.userId });
 		default:
 			return state;
 	}

@@ -10,7 +10,7 @@ import UserList from './user_list';
 // link or bookmark. In this case, we will have to hit the api
 // and add this song somehwo to our redux store
 
-const TrackShow = ({id, tracks}) => {
+const TrackShow = ({ id, tracks }) => {
 
 	let track = tracks[id];
 	if(!track) {
@@ -27,7 +27,9 @@ const TrackShow = ({id, tracks}) => {
 	return (
 		<div className="container track-show">
 			<TrackBanner track={track} />
-			<UserList track={track} />
+			<UserList
+				track={track}
+			/>
 		</div>
 	);
 };

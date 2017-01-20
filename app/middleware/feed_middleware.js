@@ -5,9 +5,9 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 	switch(action.type) {
 		case feedConstants.FETCH_TRACKS:
 			getTracks(getState().feed.currentFilter, (tracks) => {
-				console.log(`received ${tracks}`);
 				dispatch(receiveTracks(tracks));
 			}, (error) => {
+				// make error reducer here
 				console.log(`fucekd up n got ${error}`);
 			});
 			return next(action);
