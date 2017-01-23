@@ -4,7 +4,8 @@ import { fetchTracks, updateTrackIdx, updateTrackId } from '../actions/feed_acti
 
 const mapStateToProps = (state, ownProps) => ({
 	tracks: state.feed.tracks,
-	elements: ownProps.elements
+	elements: ownProps.elements,
+	filters: state.feed.filters
 });
 
 const mapDispatchToProps = dispatch => ({

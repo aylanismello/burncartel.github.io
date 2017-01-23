@@ -1,6 +1,10 @@
 import React from 'react';
 import UserItemContainer from './user_item_container';
 
+const style = {
+	background: 'green'
+};
+
 const UserList = ({ track }) => {
 
 	const childElements = track.curators.map((curator, idx) => (

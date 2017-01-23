@@ -1,31 +1,50 @@
 import React from 'react';
 import { Link } from 'react-router';
 
+const style = {
+	border: '5px solid black'
+};
+
 const UserItem = ({ user, handleUserChange }) => {
 	// the thing we're going to print out here is actually
 	// the location data we've found using geocode api and more
 	const userLocation = (user.city ? user.city : 'nowhere, usa');
 	return (
 		<div className="row">
-			<div className="col-sm-6 col-md-4 user-container">
-				<div className="thumbnail" onClick={() => handleUserChange(user.id)}>
+			<div className="col-sm-6 col-md-4 track-container">
+				<div
+					className="thumbnail"
+					onClick={() => handleUserChange(user.id)}
+				>
 
-						<div className="caption">
+					<div className="artwork-wrapper">
+						<img
+							src={user.avatar_url}
+							className="artwork-icon"
+						/>
+						<img
+							src='http://wptf.com/wp-content/uploads/2014/05/play-button.png'
+							className="artwork-play"
+						/>
+						<span className="glyphicon glyphicon-play-circle"/>
+					</div>
 
-							<Link
-								to={`/users/${user.id}`}
-							>
-								<h3 className="user-title">{user.name}</h3>
-							</Link>
 
-							<h4 className="user-location">Based out of {userLocation}</h4>
-							<span>Posted <a href="#">{user.track_count}</a> tracks</span>
-								<div className="fire-emoji-container">
-								<img
-									src={user.avatar_url}/>
-							</div>
-								{/* <a href="#" className="btn btn-default" role="button">Button</a> */}
+					<div className="caption">
+
+						<Link
+							to={`/users/${user.id}`}
+						>
+							<h3 className="user-title">{user.name}</h3>
+						</Link>
+
+						<h4 className="user-location">Based out of {userLocation}</h4>
+						<span>Posted <a href="#">{user.track_count}</a> tracks</span>
+							<div className="fire-emoji-container">
+
 						</div>
+							{/* <a href="#" className="btn btn-default" role="button">Button</a> */}
+					</div>
 
 				</div>
 			</div>

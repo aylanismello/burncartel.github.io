@@ -1,7 +1,8 @@
 import { feedConstants } from '../actions/feed_actions';
 const initialState = {
 	tracks: {},
-	currentFilter: 'influential',
+	// currentFilter: 'influential',
+	filters: {},
 	trackIdx: 0,
 	trackId: -1,
 	userId: -1
@@ -17,8 +18,8 @@ const FeedReducer = (state = initialState, action) => {
 				newTracks[track.id] = track;
 			});
 			return Object.assign({}, state, { tracks: newTracks });
-		case feedConstants.UPDATE_FILTER:
-			return Object.assign({}, state, { currentFilter: action.filter });
+		case feedConstants.UPDATE_FILTERS:
+			return Object.assign({}, state, { filters: action.filters });
 		case feedConstants.UPDATE_TRACK_ID:
 			return Object.assign({}, state, { trackId: action.trackId });
 		case feedConstants.UPDATE_USER_ID:

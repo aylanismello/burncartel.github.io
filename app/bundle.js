@@ -28946,7 +28946,8 @@
 	var mapStateToProps = function mapStateToProps(state, ownProps) {
 		return {
 			tracks: state.feed.tracks,
-			elements: ownProps.elements
+			elements: ownProps.elements,
+			filters: state.feed.filters
 		};
 	};
 	
@@ -28974,6 +28975,8 @@
 		value: true
 	});
 	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
 	var _react = __webpack_require__(1);
 	
 	var _react2 = _interopRequireDefault(_react);
@@ -28986,39 +28989,77 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var Feed = function Feed(_ref) {
-		var tracks = _ref.tracks,
-		    handleTrackUpdate = _ref.handleTrackUpdate;
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
-		var childElements = void 0;
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
-		if (Object.keys(tracks).length === 0) {
-			childElements = _react2.default.createElement(
-				'div',
-				null,
-				_react2.default.createElement(
-					'h1',
-					null,
-					'LOADING'
-				)
-			);
-		} else {
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-			childElements = Object.keys(tracks).map(function (track, idx) {
-				return _react2.default.createElement(_track_item2.default, {
-					track: tracks[track],
-					handleTrackUpdate: handleTrackUpdate,
-					idx: idx,
-					key: idx
-				});
-			});
+	var Feed = function (_React$Component) {
+		_inherits(Feed, _React$Component);
+	
+		function Feed(props) {
+			_classCallCheck(this, Feed);
+	
+			return _possibleConstructorReturn(this, (Feed.__proto__ || Object.getPrototypeOf(Feed)).call(this, props));
 		}
-		return _react2.default.createElement(
-			'div',
-			{ className: 'feed-container' },
-			childElements
-		);
-	};
+	
+		// shouldComponentUpdate(nextProps, nextState) {
+		// 	console.log(nextProps.filters)
+		// }
+	
+		_createClass(Feed, [{
+			key: 'shouldComponentUpdate',
+			value: function shouldComponentUpdate(nextProps) {
+				return true;
+			}
+		}, {
+			key: 'componentWillUpdate',
+			value: function componentWillUpdate(nextProps) {
+				// debugger;
+				console.log(nextProps.filters);
+			}
+		}, {
+			key: 'render',
+			value: function render() {
+				var _props = this.props,
+				    tracks = _props.tracks,
+				    handleTrackUpdate = _props.handleTrackUpdate;
+	
+	
+				var childElements = void 0;
+	
+				if (Object.keys(tracks).length === 0) {
+					childElements = _react2.default.createElement(
+						'div',
+						null,
+						_react2.default.createElement(
+							'h1',
+							null,
+							'LOADING'
+						)
+					);
+				} else {
+	
+					childElements = Object.keys(tracks).map(function (track, idx) {
+						return _react2.default.createElement(_track_item2.default, {
+							track: tracks[track],
+							handleTrackUpdate: handleTrackUpdate,
+							idx: idx,
+							key: idx
+						});
+					});
+				}
+				return _react2.default.createElement(
+					'div',
+					{ className: 'feed-container' },
+					childElements
+				);
+			}
+		}]);
+	
+		return Feed;
+	}(_react2.default.Component);
 	
 	exports.default = Feed;
 
@@ -29127,7 +29168,8 @@
 	var feedConstants = exports.feedConstants = {
 		FETCH_TRACKS: 'FETCH_TRACKS',
 		RECEIVE_TRACKS: 'RECEIVE_TRACKS',
-		UPDATE_FILTER: 'UPDATE_FILTER',
+		// UPDATE_FILTER: 'UPDATE_FILTER',
+		UPDATE_FILTERS: 'UPDATE_FILTERS',
 		UPDATE_TRACK_IDX: 'UPDATE_TRACK_IDX',
 		UPDATE_TRACK_ID: 'UPDATE_TRACK_ID',
 		UPDATE_USER_ID: 'UPDATE_USER_ID'
@@ -29145,11 +29187,16 @@
 			type: feedConstants.FETCH_TRACKS
 		};
 	};
+	//
+	// export const updateFilter = (filter) => ({
+	// 	type: feedConstants.UPDATE_FILTER,
+	// 	filter
+	// });
 	
-	var updateFilter = exports.updateFilter = function updateFilter(filter) {
+	var updateFilters = exports.updateFilters = function updateFilters(filters) {
 		return {
-			type: feedConstants.UPDATE_FILTER,
-			filter: filter
+			type: feedConstants.UPDATE_FILTERS,
+			filters: filters
 		};
 	};
 	
@@ -29306,7 +29353,7 @@
 /* 279 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 		value: true
@@ -29318,22 +29365,29 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	var style = {
+		border: '5px solid black'
+	};
+	
 	var TrackBanner = function TrackBanner(_ref) {
 		var track = _ref.track;
 	
 	
 		return _react2.default.createElement(
-			"div",
-			{ className: "thumbnail track-banner" },
+			'div',
+			{
+				className: 'thumbnail track-banner',
+				style: style
+			},
 			_react2.default.createElement(
-				"h2",
+				'h2',
 				null,
-				" ",
+				' ',
 				track.name,
-				" - ",
+				' - ',
 				track.publisher.name
 			),
-			_react2.default.createElement("img", { src: track.artwork_url })
+			_react2.default.createElement('img', { src: track.artwork_url })
 		);
 	};
 	
@@ -29358,6 +29412,10 @@
 	var _user_item_container2 = _interopRequireDefault(_user_item_container);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var style = {
+		background: 'green'
+	};
 	
 	var UserList = function UserList(_ref) {
 		var track = _ref.track;
@@ -29413,7 +29471,8 @@
 	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 		return {
 			handleUserChange: function handleUserChange(userId) {
-				return dispatch((0, _feed_actions.updateUserId)(userId));
+				dispatch((0, _feed_actions.updateUserId)(userId));
+				dispatch((0, _feed_actions.updateFilters)({ curator: userId }));
 			}
 		};
 	};
@@ -29438,6 +29497,10 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	var style = {
+		border: '5px solid black'
+	};
+	
 	var UserItem = function UserItem(_ref) {
 		var user = _ref.user,
 		    handleUserChange = _ref.handleUserChange;
@@ -29450,12 +29513,28 @@
 			{ className: 'row' },
 			_react2.default.createElement(
 				'div',
-				{ className: 'col-sm-6 col-md-4 user-container' },
+				{ className: 'col-sm-6 col-md-4 track-container' },
 				_react2.default.createElement(
 					'div',
-					{ className: 'thumbnail', onClick: function onClick() {
+					{
+						className: 'thumbnail',
+						onClick: function onClick() {
 							return handleUserChange(user.id);
-						} },
+						}
+					},
+					_react2.default.createElement(
+						'div',
+						{ className: 'artwork-wrapper' },
+						_react2.default.createElement('img', {
+							src: user.avatar_url,
+							className: 'artwork-icon'
+						}),
+						_react2.default.createElement('img', {
+							src: 'http://wptf.com/wp-content/uploads/2014/05/play-button.png',
+							className: 'artwork-play'
+						}),
+						_react2.default.createElement('span', { className: 'glyphicon glyphicon-play-circle' })
+					),
 					_react2.default.createElement(
 						'div',
 						{ className: 'caption' },
@@ -29487,12 +29566,7 @@
 							),
 							' tracks'
 						),
-						_react2.default.createElement(
-							'div',
-							{ className: 'fire-emoji-container' },
-							_react2.default.createElement('img', {
-								src: user.avatar_url })
-						)
+						_react2.default.createElement('div', { className: 'fire-emoji-container' })
 					)
 				)
 			)
@@ -29815,7 +29889,7 @@
 /* 287 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 		value: true
@@ -29827,23 +29901,31 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	var style = {
+		border: '5px solid black'
+	};
+	
 	var UserBanner = function UserBanner(_ref) {
 		var user = _ref.user;
 	
 		return _react2.default.createElement(
-			"div",
-			{ className: "thumbnail user-banner" },
+			'div',
+			{
+				className: 'thumbnail user-banner',
+				style: style
+			},
 			_react2.default.createElement(
-				"h2",
+				'h2',
 				null,
-				" ",
+				' ',
 				user.name
 			),
-			_react2.default.createElement("img", { src: user.avatar_url })
+			_react2.default.createElement('img', { src: user.avatar_url })
 		);
 	};
 	
 	exports.default = UserBanner;
+	1;
 
 /***/ },
 /* 288 */
@@ -56574,7 +56656,8 @@
 	
 	var initialState = {
 		tracks: {},
-		currentFilter: 'influential',
+		// currentFilter: 'influential',
+		filters: {},
 		trackIdx: 0,
 		trackId: -1,
 		userId: -1
@@ -56596,9 +56679,9 @@
 					return {
 						v: Object.assign({}, state, { tracks: newTracks })
 					};
-				case _feed_actions.feedConstants.UPDATE_FILTER:
+				case _feed_actions.feedConstants.UPDATE_FILTERS:
 					return {
-						v: Object.assign({}, state, { currentFilter: action.filter })
+						v: Object.assign({}, state, { filters: action.filters })
 					};
 				case _feed_actions.feedConstants.UPDATE_TRACK_ID:
 					return {
@@ -56704,6 +56787,8 @@
 	var devUrl = 'https://bc-services.herokuapp.com/api/v1/tracks/filter/influential';
 	
 	var url = location.hostname === 'localhost' ? localUrl : devUrl;
+	// url = devUrl;
+	
 	
 	var getTracks = exports.getTracks = function getTracks() {
 		var filter = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'influential';

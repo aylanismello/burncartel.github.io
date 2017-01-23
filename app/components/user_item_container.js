@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { updateUserId } from '../actions/feed_actions';
+import { updateUserId, updateFilters } from '../actions/feed_actions';
 import UserItem from './user_item';
 
 
@@ -9,7 +9,10 @@ const mapStateToProps = (state, ownProps) => {
 }};
 
 const mapDispatchToProps = dispatch => ({
-	handleUserChange: (userId) => dispatch(updateUserId(userId))
+	handleUserChange: (userId) => {
+		dispatch(updateUserId(userId));
+		dispatch(updateFilters({curator: userId}));
+	}
 });
 
 export default connect(
