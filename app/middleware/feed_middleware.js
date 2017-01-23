@@ -3,8 +3,9 @@ import { getTracks } from '../util/bc_api';
 
 const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 	switch(action.type) {
+
 		case feedConstants.FETCH_TRACKS:
-			getTracks(getState().feed.currentFilter, (tracks) => {
+			getTracks(action.filters, (tracks) => {
 				dispatch(receiveTracks(tracks));
 			}, (error) => {
 				// make error reducer here

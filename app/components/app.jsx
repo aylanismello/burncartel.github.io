@@ -8,18 +8,15 @@ import FeedContainer from './feed_container';
 class App extends React.Component {
   constructor(props) {
   	super(props);
-    props.fetchTracks();
+    props.fetchTracks(this.props.filters);
   }
 
-  onSelectChange(option) {
-    // console.log(`Selected ${option.value}: ${option.label}`);
-    this.props.updateFilter(option.value);
-  }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.currentFilter !== nextProps.currentFilter) {
+    if (this.props.filters !== nextProps.filters) {
       console.log('props changed!');
-      this.props.fetchTracks(nextProps.currentFilter);
+      this.props.fetchTracks(nextProps.filters);
+      // debugger;
     }
   }
 

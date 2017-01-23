@@ -13,14 +13,11 @@ export const receiveTracks = (tracks) => ({
 	tracks
 });
 
-export const fetchTracks = () => ({
-	type: feedConstants.FETCH_TRACKS
+export const fetchTracks = (filters) => ({
+	type: feedConstants.FETCH_TRACKS,
+	filters
 });
-//
-// export const updateFilter = (filter) => ({
-// 	type: feedConstants.UPDATE_FILTER,
-// 	filter
-// });
+
 
 export const updateFilters = (filters) => ({
 	type: feedConstants.UPDATE_FILTERS,

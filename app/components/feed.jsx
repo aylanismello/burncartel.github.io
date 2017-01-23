@@ -8,16 +8,7 @@ class Feed extends React.Component {
 		super(props);
 	}
 
-	// shouldComponentUpdate(nextProps, nextState) {
-	// 	console.log(nextProps.filters)
-	// }
-
-	shouldComponentUpdate(nextProps) {
-		return true;
-	}
-
-	componentWillUpdate(nextProps) {
-		// debugger;
+	componentWillReceiveProps(nextProps) {
 		console.log(nextProps.filters);
 	}
 

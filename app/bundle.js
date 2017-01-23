@@ -29004,19 +29004,9 @@
 			return _possibleConstructorReturn(this, (Feed.__proto__ || Object.getPrototypeOf(Feed)).call(this, props));
 		}
 	
-		// shouldComponentUpdate(nextProps, nextState) {
-		// 	console.log(nextProps.filters)
-		// }
-	
 		_createClass(Feed, [{
-			key: 'shouldComponentUpdate',
-			value: function shouldComponentUpdate(nextProps) {
-				return true;
-			}
-		}, {
-			key: 'componentWillUpdate',
-			value: function componentWillUpdate(nextProps) {
-				// debugger;
+			key: 'componentWillReceiveProps',
+			value: function componentWillReceiveProps(nextProps) {
 				console.log(nextProps.filters);
 			}
 		}, {
@@ -29182,16 +29172,12 @@
 		};
 	};
 	
-	var fetchTracks = exports.fetchTracks = function fetchTracks() {
+	var fetchTracks = exports.fetchTracks = function fetchTracks(filters) {
 		return {
-			type: feedConstants.FETCH_TRACKS
+			type: feedConstants.FETCH_TRACKS,
+			filters: filters
 		};
 	};
-	//
-	// export const updateFilter = (filter) => ({
-	// 	type: feedConstants.UPDATE_FILTER,
-	// 	filter
-	// });
 	
 	var updateFilters = exports.updateFilters = function updateFilters(filters) {
 		return {
@@ -29353,7 +29339,7 @@
 /* 279 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
 		value: true
@@ -29365,29 +29351,24 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var style = {
-		border: '5px solid black'
-	};
-	
 	var TrackBanner = function TrackBanner(_ref) {
 		var track = _ref.track;
 	
 	
 		return _react2.default.createElement(
-			'div',
+			"div",
 			{
-				className: 'thumbnail track-banner',
-				style: style
+				className: "thumbnail track-banner"
 			},
 			_react2.default.createElement(
-				'h2',
+				"h2",
 				null,
-				' ',
+				" ",
 				track.name,
-				' - ',
+				" - ",
 				track.publisher.name
 			),
-			_react2.default.createElement('img', { src: track.artwork_url })
+			_react2.default.createElement("img", { src: track.artwork_url })
 		);
 	};
 	
@@ -29889,7 +29870,7 @@
 /* 287 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
 		value: true
@@ -29901,26 +29882,21 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var style = {
-		border: '5px solid black'
-	};
-	
 	var UserBanner = function UserBanner(_ref) {
 		var user = _ref.user;
 	
 		return _react2.default.createElement(
-			'div',
+			"div",
 			{
-				className: 'thumbnail user-banner',
-				style: style
+				className: "thumbnail user-banner"
 			},
 			_react2.default.createElement(
-				'h2',
+				"h2",
 				null,
-				' ',
+				" ",
 				user.name
 			),
-			_react2.default.createElement('img', { src: user.avatar_url })
+			_react2.default.createElement("img", { src: user.avatar_url })
 		);
 	};
 	
@@ -29950,17 +29926,14 @@
 	var mapStateToProps = function mapStateToProps(state, ownProps) {
 		return {
 			feed: state.feed,
-			currentFilter: state.feed.currentFilter
+			filters: state.feed.filters
 		};
 	};
 	
 	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 		return {
-			fetchTracks: function fetchTracks() {
-				return dispatch((0, _feed_actions.fetchTracks)());
-			},
-			updateFilter: function updateFilter(filter) {
-				return dispatch((0, _feed_actions.updateFilter)(filter));
+			fetchTracks: function fetchTracks(filters) {
+				return dispatch((0, _feed_actions.fetchTracks)(filters));
 			}
 		};
 	};
@@ -30013,22 +29986,17 @@
 	
 	    var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 	
-	    props.fetchTracks();
+	    props.fetchTracks(_this.props.filters);
 	    return _this;
 	  }
 	
 	  _createClass(App, [{
-	    key: 'onSelectChange',
-	    value: function onSelectChange(option) {
-	      // console.log(`Selected ${option.value}: ${option.label}`);
-	      this.props.updateFilter(option.value);
-	    }
-	  }, {
 	    key: 'componentWillReceiveProps',
 	    value: function componentWillReceiveProps(nextProps) {
-	      if (this.props.currentFilter !== nextProps.currentFilter) {
+	      if (this.props.filters !== nextProps.filters) {
 	        console.log('props changed!');
-	        this.props.fetchTracks(nextProps.currentFilter);
+	        this.props.fetchTracks(nextProps.filters);
+	        // debugger;
 	      }
 	    }
 	  }, {
@@ -56657,7 +56625,9 @@
 	var initialState = {
 		tracks: {},
 		// currentFilter: 'influential',
-		filters: {},
+		filters: {
+			sort: 'influential'
+		},
 		trackIdx: 0,
 		trackId: -1,
 		userId: -1
@@ -56749,8 +56719,9 @@
 		return function (next) {
 			return function (action) {
 				switch (action.type) {
+	
 					case _feed_actions.feedConstants.FETCH_TRACKS:
-						(0, _bc_api.getTracks)(getState().feed.currentFilter, function (tracks) {
+						(0, _bc_api.getTracks)(action.filters, function (tracks) {
 							dispatch((0, _feed_actions.receiveTracks)(tracks));
 						}, function (error) {
 							// make error reducer here
@@ -56783,24 +56754,26 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var localUrl = 'http://localhost:3000/api/v1/tracks/filter/influential';
-	var devUrl = 'https://bc-services.herokuapp.com/api/v1/tracks/filter/influential';
+	var localUrl = 'http://localhost:3000/api/v1/tracks/filter';
+	var devUrl = 'https://bc-services.herokuapp.com/api/v1/tracks/filter';
 	
 	var url = location.hostname === 'localhost' ? localUrl : devUrl;
 	// url = devUrl;
 	
 	
-	var getTracks = exports.getTracks = function getTracks() {
-		var filter = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'influential';
+	var getTracks = exports.getTracks = function getTracks(filters) {
 		var success = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : suc;
 		var error = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : err;
+	
+		url = url + '/' + filters['sort'];
+		debugger;
 	
 		_jquery2.default.ajax({
 			url: url,
 			// url: 'https://bc-services.herokuapp.com/api/v1/tracks/filter/influential',
 			// url: 'http://localhost:3000/api/v1/tracks/filter/influential',
 			method: 'GET',
-			data: { filter: filter },
+			data: filters,
 			success: success,
 			error: error
 		});
