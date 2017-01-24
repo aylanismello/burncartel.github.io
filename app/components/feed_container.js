@@ -5,12 +5,12 @@ import { fetchTracks, updateTrackIdx, updateTrackId } from '../actions/feed_acti
 const mapStateToProps = (state, ownProps) => ({
 	tracks: state.feed.tracks,
 	elements: ownProps.elements,
-	filters: state.feed.filters
+	filters: state.feed.filters,
+	loadingFeed: state.feed.loadingFeed
 });
 
 const mapDispatchToProps = dispatch => ({
 	fetchTracks: () => dispatch(fetchTracks()),
-	// handleTrackUpdate: (trackIdx) => dispatch(updateTrackIdx(trackIdx)),
 	handleTrackUpdate: (trackId) => dispatch(updateTrackId(trackId))
 });
 

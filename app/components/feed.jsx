@@ -21,7 +21,7 @@ class Feed extends React.Component {
 
 		let childElements;
 
-		if(Object.keys(tracks).length === 0) {
+		if(this.props.loadingFeed) {
 			childElements = (
 				<div>
 					<h1>
@@ -30,17 +30,14 @@ class Feed extends React.Component {
 				</div>
 			);
 		} else {
-
-
-
-		childElements = Object.keys(tracks).map((track, idx) => (
-			<TrackItem
-				track={tracks[track]}
-				handleTrackUpdate={handleTrackUpdate}
-				idx={idx}
-				key={idx}
-			/>
-		));
+			childElements = Object.keys(tracks).map((track, idx) => (
+				<TrackItem
+					track={tracks[track]}
+					handleTrackUpdate={handleTrackUpdate}
+					idx={idx}
+					key={idx}
+				/>
+			));
 
 		}
 		return (

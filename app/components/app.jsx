@@ -8,15 +8,13 @@ import FeedContainer from './feed_container';
 class App extends React.Component {
   constructor(props) {
   	super(props);
-    props.fetchTracks(this.props.filters);
+    // props.fetchTracks(this.props.filters);
   }
 
 
   componentWillReceiveProps(nextProps) {
     if (this.props.filters !== nextProps.filters) {
-      console.log('props changed!');
       this.props.fetchTracks(nextProps.filters);
-      // debugger;
     }
   }
 

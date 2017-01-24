@@ -5,8 +5,18 @@ export const feedConstants = {
 	UPDATE_FILTERS: 'UPDATE_FILTERS',
 	UPDATE_TRACK_IDX: 'UPDATE_TRACK_IDX',
 	UPDATE_TRACK_ID: 'UPDATE_TRACK_ID',
-	UPDATE_USER_ID: 'UPDATE_USER_ID'
+	UPDATE_USER_ID: 'UPDATE_USER_ID',
+	LOADING_START: 'LOADING_START',
+	LOADING_STOP: 'LOADING_STOP',
 };
+
+export const loadingStart = () => ({
+	type: feedConstants.LOADING_START
+});
+
+export const loadingStop = () => ({
+	type: feedConstants.LOADING_STOP
+});
 
 export const receiveTracks = (tracks) => ({
 	type: feedConstants.RECEIVE_TRACKS,

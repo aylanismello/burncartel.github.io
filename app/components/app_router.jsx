@@ -1,23 +1,19 @@
 import React from 'react';
 import { Router, Route, IndexRoute, hashHistory } from 'react-router';
-import Home from './home';
+import HomeContainer from './home_container';
 import BurnCartelCurated from './burn_cartel_curated';
 import TrackShowContainer from './track_show_container';
 import UserShowContainer from './user_show_container';
-// import components here
 import AppContainer from './app_container';
 
 
 class AppRouter extends React.Component{
-  constructor(props){
-    super(props);
-  }
 
   render() {
   	return (
   		<Router history={hashHistory}>
         <Route path="/" component={AppContainer}>
-          <IndexRoute component={Home} />
+          <IndexRoute component={HomeContainer} />
           <Route path="/tracks/:id" component={TrackShowContainer} />
           <Route path="/users/:id" component={UserShowContainer} />
           <Route path="/curated" component={BurnCartelCurated} />

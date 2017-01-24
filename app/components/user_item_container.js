@@ -11,7 +11,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = dispatch => ({
 	handleUserChange: (userId) => {
 		dispatch(updateUserId(userId));
-		dispatch(updateFilters({curator: userId}));
+		dispatch(updateFilters({curator: userId, sort: 'recent'}));
 	}
 });
 
