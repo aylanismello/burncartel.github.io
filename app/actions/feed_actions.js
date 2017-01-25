@@ -31,11 +31,6 @@ export const updateFilters = (filters) => ({
 	filters
 });
 
-export const updateTrackIdx = (trackIdx) => ({
-	type: feedConstants.UPDATE_TRACK_IDX,
-	trackIdx
-});
-
 export const updateTrackId = (trackId) => ({
 	type: feedConstants.UPDATE_TRACK_ID,
 	trackId

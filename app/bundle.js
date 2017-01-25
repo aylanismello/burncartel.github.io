@@ -28988,13 +28988,6 @@
 		};
 	};
 	
-	var updateTrackIdx = exports.updateTrackIdx = function updateTrackIdx(trackIdx) {
-		return {
-			type: feedConstants.UPDATE_TRACK_IDX,
-			trackIdx: trackIdx
-		};
-	};
-	
 	var updateTrackId = exports.updateTrackId = function updateTrackId(trackId) {
 		return {
 			type: feedConstants.UPDATE_TRACK_ID,
@@ -29665,8 +29658,6 @@
 	
 	var _reactRedux = __webpack_require__(179);
 	
-	var _feed_actions = __webpack_require__(272);
-	
 	var _user_selector = __webpack_require__(285);
 	
 	var _user_show = __webpack_require__(287);
@@ -29683,15 +29674,7 @@
 		};
 	};
 	
-	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-		return {
-			updateTrackIdx: function updateTrackIdx(userIdx) {
-				return dispatch((0, _feed_actions.updateTrackIdx)(userIdx));
-			}
-		};
-	};
-	
-	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_user_show2.default);
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, {})(_user_show2.default);
 
 /***/ },
 /* 285 */
@@ -56685,12 +56668,9 @@
 		filters: {
 			sort: 'influential'
 		},
-		trackIdx: 0,
 		trackId: -1,
 		loadingFeed: false
 	};
-	// consider doing obejct for tracks...
-	// with trackId: {trackObj..} structure instead
 	
 	var FeedReducer = function FeedReducer() {
 		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;

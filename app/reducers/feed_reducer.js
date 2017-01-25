@@ -4,12 +4,9 @@ const initialState = {
 	filters: {
 		sort: 'influential'
 	},
-	trackIdx: 0,
 	trackId: -1,
 	loadingFeed: false
 };
-// consider doing obejct for tracks...
-// with trackId: {trackObj..} structure instead
 
 const FeedReducer = (state = initialState, action) => {
 	switch(action.type) {
