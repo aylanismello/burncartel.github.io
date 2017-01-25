@@ -11,7 +11,8 @@ class AppRouter extends React.Component{
 
   render() {
   	return (
-  		<Router history={hashHistory}>
+      // hurray! this onUpdate func fixes that stupid glitch
+  		<Router onUpdate={() => window.scrollTo(0, 0)} history={hashHistory}>
         <Route path="/" component={AppContainer}>
           <IndexRoute component={HomeContainer} />
           <Route path="/tracks/:id" component={TrackShowContainer} />
