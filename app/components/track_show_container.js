@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-import { updateUserId } from '../actions/feed_actions';
 import TrackShow from './track_show';
 
 
@@ -10,11 +9,8 @@ const mapStateToProps = (state, ownProps) => {
 
 }};
 
-const mapDispatchToProps = dispatch => ({
-	updateUserId: (userId) => dispatch(updateUserId(userId))
-});
 
 export default connect(
 	mapStateToProps,
-	mapDispatchToProps
+	{}
 )(TrackShow);

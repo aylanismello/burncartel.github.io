@@ -28948,11 +28948,9 @@
 	var feedConstants = exports.feedConstants = {
 		FETCH_TRACKS: 'FETCH_TRACKS',
 		RECEIVE_TRACKS: 'RECEIVE_TRACKS',
-		// UPDATE_FILTER: 'UPDATE_FILTER',
 		UPDATE_FILTERS: 'UPDATE_FILTERS',
 		UPDATE_TRACK_IDX: 'UPDATE_TRACK_IDX',
 		UPDATE_TRACK_ID: 'UPDATE_TRACK_ID',
-		UPDATE_USER_ID: 'UPDATE_USER_ID',
 		LOADING_START: 'LOADING_START',
 		LOADING_STOP: 'LOADING_STOP'
 	};
@@ -29001,13 +28999,6 @@
 		return {
 			type: feedConstants.UPDATE_TRACK_ID,
 			trackId: trackId
-		};
-	};
-	
-	var updateUserId = exports.updateUserId = function updateUserId(userId) {
-		return {
-			type: feedConstants.UPDATE_USER_ID,
-			userId: userId
 		};
 	};
 
@@ -29329,8 +29320,6 @@
 	
 	var _reactRedux = __webpack_require__(179);
 	
-	var _feed_actions = __webpack_require__(272);
-	
 	var _track_show = __webpack_require__(279);
 	
 	var _track_show2 = _interopRequireDefault(_track_show);
@@ -29345,15 +29334,7 @@
 		};
 	};
 	
-	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-		return {
-			updateUserId: function updateUserId(userId) {
-				return dispatch((0, _feed_actions.updateUserId)(userId));
-			}
-		};
-	};
-	
-	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_track_show2.default);
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, {})(_track_show2.default);
 
 /***/ },
 /* 279 */
@@ -29532,7 +29513,6 @@
 	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 		return {
 			handleUserChange: function handleUserChange(userId) {
-				dispatch((0, _feed_actions.updateUserId)(userId));
 				dispatch((0, _feed_actions.updateFilters)({ curator: userId, sort: 'recent' }));
 			}
 		};
@@ -29730,7 +29710,7 @@
 		return state.feed.tracks;
 	};
 	var getUserId = function getUserId(state) {
-		return state.feed.userId;
+		return state.feed.filters.curator;
 	};
 	
 	var getUserFromTracks = exports.getUserFromTracks = (0, _reselect.createSelector)([getTracks, getUserId], function (tracks, userId) {
@@ -56702,13 +56682,11 @@
 	
 	var initialState = {
 		tracks: {},
-		// currentFilter: 'influential',
 		filters: {
 			sort: 'influential'
 		},
 		trackIdx: 0,
 		trackId: -1,
-		userId: -1,
 		loadingFeed: false
 	};
 	// consider doing obejct for tracks...
@@ -56737,10 +56715,6 @@
 				case _feed_actions.feedConstants.UPDATE_TRACK_ID:
 					return {
 						v: Object.assign({}, state, { trackId: action.trackId })
-					};
-				case _feed_actions.feedConstants.UPDATE_USER_ID:
-					return {
-						v: Object.assign({}, state, { userId: action.userId })
 					};
 				case _feed_actions.feedConstants.LOADING_START:
 					return {
@@ -56854,7 +56828,8 @@
 		var success = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : suc;
 		var error = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : err;
 	
-		var url = 'http://localhost:3000/api/v1/tracks/filter/' + filters['sort'];
+		var baseUrl = location.hostname === 'localhost' ? localUrl : devUrl;
+		var url = baseUrl + '/' + filters['sort'];
 		// debugger;
 	
 		_jquery2.default.ajax({

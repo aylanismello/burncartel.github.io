@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect';
 
 const getTracks = state => state.feed.tracks;
-const getUserId = state => state.feed.userId;
+const getUserId = state => state.feed.filters.curator;
 
 export const getUserFromTracks = createSelector(
 	[getTracks, getUserId],

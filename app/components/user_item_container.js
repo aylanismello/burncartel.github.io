@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { updateUserId, updateFilters } from '../actions/feed_actions';
+import { updateFilters } from '../actions/feed_actions';
 import UserItem from './user_item';
 
 
@@ -10,7 +10,6 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => ({
 	handleUserChange: (userId) => {
-		dispatch(updateUserId(userId));
 		dispatch(updateFilters({curator: userId, sort: 'recent'}));
 	}
 });

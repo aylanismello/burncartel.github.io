@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { updateUserId, updateFilters } from '../actions/feed_actions';
+import { updateFilters } from '../actions/feed_actions';
 import Home from './home';
 
 const mapStateToProps = (state, ownProps) => ({
