@@ -2,7 +2,8 @@ import { feedConstants } from '../actions/feed_actions';
 const initialState = {
 	tracks: {},
 	filters: {
-		sort: 'influential'
+		sort: 'influential',
+		curator: -1
 	},
 	trackId: -1,
 	loadingFeed: false
@@ -17,7 +18,10 @@ const FeedReducer = (state = initialState, action) => {
 			});
 			return Object.assign({}, state, { tracks: newTracks });
 		case feedConstants.UPDATE_FILTERS:
-			const newFilters = { ...state.filters, ...action.filters } ;
+			// const newFilters = { ...state.filters, ...action.filters } ;
+			// this is because we aren't combining filters!!!
+			// but might break users track feed view...
+			const newFilters = { ...initialState.filters, ...action.filters } ;
 			const newState = { ...state, filters: newFilters };
 			return newState;
 		case feedConstants.UPDATE_TRACK_ID:

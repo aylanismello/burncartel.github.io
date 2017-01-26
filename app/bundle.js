@@ -29029,18 +29029,85 @@
 		function Home(props) {
 			_classCallCheck(this, Home);
 	
-			return _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).call(this, props));
+			// this.handleFilterChange = this.handleFilterChange.bind(this);
+			var _this = _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).call(this, props));
+	
+			_this.state = {
+				selected: 0
+			};
+			return _this;
 		}
 	
 		_createClass(Home, [{
 			key: 'componentWillMount',
 			value: function componentWillMount() {
-				this.props.updateFilters({ curator: -1, sort: 'influential' });
+				// this.props.updateFilters({curator: -1, sort: 'influential'});
+				this.props.updateFilters({ sort: 'influential' });
+			}
+		}, {
+			key: 'handleFilterChange',
+			value: function handleFilterChange(newFilter) {
+				// debugger;
+				this.props.updateFilters(newFilter);
 			}
 		}, {
 			key: 'render',
 			value: function render() {
-				return _react2.default.createElement(_feed_container2.default, null);
+	
+				return _react2.default.createElement(
+					'div',
+					{ className: 'home-page-container' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'btn-group btn-group-justified', role: 'group', 'aria-label': 'Justified button group' },
+						_react2.default.createElement(
+							'button',
+							{ className: 'btn btn-default',
+								onClick: this.handleFilterChange.bind(this, { sort: 'influential' })
+							},
+							' Influential '
+						),
+						_react2.default.createElement(
+							'button',
+							{
+								className: 'btn btn-default',
+								onClick: this.handleFilterChange.bind(this, { sort: 'bc' })
+							},
+							' BC Selected '
+						),
+						_react2.default.createElement(
+							'button',
+							{
+								className: 'btn btn-default',
+								onClick: this.handleFilterChange.bind(this, { sort: 'hot' })
+							},
+							'Hot'
+						),
+						_react2.default.createElement(
+							'button',
+							{
+								className: 'btn btn-default',
+								onClick: this.handleFilterChange.bind(this, { remixed: 'remix' })
+							},
+							' Remixes'
+						),
+						_react2.default.createElement(
+							'button',
+							{ className: 'btn btn-default',
+								onClick: this.handleFilterChange.bind(this, { track_type: 'mix' })
+							},
+							' Mixes '
+						),
+						_react2.default.createElement(
+							'button',
+							{ className: 'btn btn-default',
+								onClick: this.handleFilterChange.bind(this, { sort: 'not' })
+							},
+							' Unheard '
+						)
+					),
+					_react2.default.createElement(_feed_container2.default, null)
+				);
 			}
 		}]);
 	
@@ -56666,7 +56733,8 @@
 	var initialState = {
 		tracks: {},
 		filters: {
-			sort: 'influential'
+			sort: 'influential',
+			curator: -1
 		},
 		trackId: -1,
 		loadingFeed: false
@@ -56687,7 +56755,10 @@
 						v: Object.assign({}, state, { tracks: newTracks })
 					};
 				case _feed_actions.feedConstants.UPDATE_FILTERS:
-					var newFilters = _extends({}, state.filters, action.filters);
+					// const newFilters = { ...state.filters, ...action.filters } ;
+					// this is because we aren't combining filters!!!
+					// but might break users track feed view...
+					var newFilters = _extends({}, initialState.filters, action.filters);
 					var newState = _extends({}, state, { filters: newFilters });
 					return {
 						v: newState
