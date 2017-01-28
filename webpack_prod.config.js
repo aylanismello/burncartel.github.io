@@ -2,10 +2,10 @@ const path = require('path');
 const webpack = require('webpack');
 module.exports = {
   context: __dirname,
-  entry: './index.jsx',
+  entry: './app/index.jsx',
   output: {
-    path: '../server/static',
-    filename: 'bundle.js'
+    path: './',
+    filename: './app/bundle.js'
   },
   resolve: {
     extensions: ['', '.js', '.jsx']
@@ -17,7 +17,8 @@ module.exports = {
         exclude: /(node_modules|bower_components)/,
         loader: 'babel',
         query: {
-          presets: ['react', 'es2015']
+          presets: ['react', 'es2015'],
+          plugins: ["transform-object-rest-spread"]
         }
       },
       {

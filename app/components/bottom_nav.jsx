@@ -1,11 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router';
 import * as FontAwesome from 'react-icons/lib/fa/';
+import BurnCartelPlayerContainer from './burn_cartel_player_container';
 
 
 const BottomNav = () => {
 	return (
 		<nav className="navbar navbar-toggleable-md navbar-inverse fixed-bottom bg-inverse bc-menu">
+
+
+		<BurnCartelPlayerContainer />
 
 		{/* https://gorangajic.github.io/react-icons/fa.html */}
 

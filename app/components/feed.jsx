@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import TrackItem from './track_item';
+import BurnCartelPlayer from './burn_cartel_player';
 
 class Feed extends React.Component {
 
@@ -9,7 +10,10 @@ class Feed extends React.Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		console.log(nextProps.filters);
+		// console.log(nextProps.filters);
+		// if (this.props.trackId !== nextProps.trackId) {
+		// 	alert('changed track!');
+		// }
 	}
 
 	render() {
@@ -42,6 +46,8 @@ class Feed extends React.Component {
 		}
 		return (
 			<div className="feed-container">
+				<h2> holler </h2>
+
 				{childElements}
 			</div>
 		);

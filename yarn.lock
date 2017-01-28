@@ -3136,7 +3136,7 @@ sorted-object@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/sorted-object/-/sorted-object-2.0.0.tgz#1cfea981609047d8043807a490a9d99b317faf7f"
 
-soundcloud-audio@^1.0.3:
+soundcloud-audio@^1.0.3, soundcloud-audio@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/soundcloud-audio/-/soundcloud-audio-1.1.0.tgz#e2ec2da4f8ceefa50f03c013364884a2fc6385a5"
 

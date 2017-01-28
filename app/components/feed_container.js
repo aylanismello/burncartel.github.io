@@ -6,7 +6,8 @@ const mapStateToProps = (state, ownProps) => ({
 	tracks: state.feed.tracks,
 	elements: ownProps.elements,
 	filters: state.feed.filters,
-	loadingFeed: state.feed.loadingFeed
+	loadingFeed: state.feed.loadingFeed,
+	trackId: state.feed.trackId
 });
 
 const mapDispatchToProps = dispatch => ({

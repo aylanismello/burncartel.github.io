@@ -3,8 +3,8 @@ const path = require('path');
     context: __dirname,
     entry: './app/index.jsx',
     output: {
-    path: './',
-    filename: './app/bundle.js'
+      path: './',
+      filename: './app/bundle.js'
   },
   resolve: {
     extensions: ['', '.js', '.jsx']
