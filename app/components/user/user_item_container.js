@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { updateFilters } from '../actions/feed_actions';
+import { updateFilters } from '../../actions/feed_actions';
 import UserItem from './user_item';
 
 

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
-import TrackItem from './track_item';
-import BurnCartelPlayer from './burn_cartel_player';
+import TrackItem from '../track/track_item';
 
 class Feed extends React.Component {
 

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { getUserFromTracks } from '../selectors/user_selector';
+import { getUserFromTracks } from '../../selectors/user_selector';
 import UserShow from './user_show';
 
 // maybe use selectors here? this is weird.

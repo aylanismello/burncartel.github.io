@@ -28,31 +28,60 @@ import SoundCloudAudio from 'soundcloud-audio';
 // }
 
 
-
 class BurnCartelPlayer extends React.Component {
 
   constructor(props) {
     super(props);
     this.toggle = this.toggle.bind(this);
     this.scAudio = new SoundCloudAudio(props.clientId);
+    this.track = null;
+    // refactor this into reducer
+    // bad idea! playing could be changed from a lot of places.
+    this.state = {
+      playing: false
+    };
   }
 
   componentWillReceiveProps(nextProps) {
     if (this.props.trackId !== nextProps.trackId) {
       const streamUrl = nextProps.tracks[nextProps.trackId].stream_url
+      this.track = nextProps.tracks[nextProps.trackId];
       this.scAudio.play({streamUrl: streamUrl})
     }
   }
 
   toggle() {
-
+    this.setState({playing: !this.state.playing});
   }
 
   render() {
+    const playText = (this.state.playing ? 'Pause' : 'Play');
+    let details = <div></div>;
+
+    if(this.track) {
+
+      details = (
+        <div>
+          <div>
+            {this.track.name}
+          </div>
+          <div>
+            by {this.track.publisher.name}
+          </div>
+        </div>
+    );
+  }
 
     return (
       <div className="burn-cartel-player-container">
-        <button onClick={this.toggle()}>Play </button>
+
+        <div className='burn-cartel-player-details'>
+          {details}
+        </div>
+
+        <div className='burn-cartel-player-control'>
+          <button onClick={this.toggle}> {playText} </button>
+        </div>
       </div>
 		);
   }

@@ -1,6 +1,6 @@
 import React from 'react';
 import UserBanner from './user_banner';
-import FeedContainer from './feed_container';
+import FeedContainer from '../feed/feed_container';
 
 const UserShow = ({ user }) => {
 	return (

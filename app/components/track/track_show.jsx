@@ -1,6 +1,6 @@
 import React from 'react';
 import TrackBanner from './track_banner';
-import UserList from './user_list';
+import UserList from '../user/user_list';
 
 // There are two scenarios here. One is that
 // a user got sent here via the internal react-router,

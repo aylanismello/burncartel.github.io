@@ -1,5 +1,5 @@
 import React from 'react';
-import FeedContainer from './feed_container';
+import FeedContainer from '../feed/feed_container';
 
 class Home extends React.Component {
 	constructor(props) {

@@ -1,16 +1,14 @@
 import React from 'react';
 import {Link} from 'react-router';
 import {withRouter} from 'react-router';
-import TopNav from './top_nav';
-import BottomNav from './bottom_nav';
-import FeedContainer from './feed_container';
+import TopNav from '../navs/top_nav';
+import BottomNav from '../navs/bottom_nav';
+import FeedContainer from '../feed/feed_container';
 
 class App extends React.Component {
   constructor(props) {
   	super(props);
-    // props.fetchTracks(this.props.filters);
   }
-
 
   componentWillReceiveProps(nextProps) {
     if (this.props.filters !== nextProps.filters) {
@@ -19,7 +17,6 @@ class App extends React.Component {
   }
 
   render() {
-
   	return (
   		<div>
 

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Feed from './feed';
-import { fetchTracks, updateTrackId } from '../actions/feed_actions';
+import { fetchTracks, updateTrackId } from '../../actions/feed_actions';
 
 const mapStateToProps = (state, ownProps) => ({
 	tracks: state.feed.tracks,
