@@ -28956,8 +28956,7 @@
 	var _feed_actions = __webpack_require__(272);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 	
 	var mapStateToProps = function mapStateToProps(state, ownProps) {return {
-			// tracks: state.feed.tracks,
-			tracks: state.feed.tracksArr,
+			tracks: state.feed.tracks,
 			elements: ownProps.elements,
 			filters: state.feed.filters,
 			loadingFeed: state.feed.loadingFeed,
@@ -29129,17 +29128,14 @@
 	var _feed_actions = __webpack_require__(272);
 	var _track_selector = __webpack_require__(284);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 	
-	
-	
 	var mapStateToProps = function mapStateToProps(state, ownProps) {
 		var tracksHash = (0, _track_selector.getTracksHash)(state);
 		var track = tracksHash[ownProps.params.id];
-		// debugger;
+	
 		return {
 			id: ownProps.params.id,
-			track: track
-			// track: state.feed.tracks[ownProps.params.id]
-		};
+			track: track };
+	
 	};
 	
 	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
@@ -29378,32 +29374,18 @@
 
 	'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.getTracksHash = undefined;var _reselect = __webpack_require__(285);
 	
-	var getTracks = function getTracks(state) {return state.feed.tracksArr;};
+	var getTracks = function getTracks(state) {return state.feed.tracks;};
 	
 	var getTracksHash = exports.getTracksHash = (0, _reselect.createSelector)(
 	[getTracks],
 	function (tracks) {
-		// console.log(id);
 		var tracksObject = {};var _iteratorNormalCompletion = true;var _didIteratorError = false;var _iteratorError = undefined;try {
 	
 			for (var _iterator = tracks[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {var track = _step.value;
 				tracksObject[track.id] = track;
-				// return track;
 			}} catch (err) {_didIteratorError = true;_iteratorError = err;} finally {try {if (!_iteratorNormalCompletion && _iterator.return) {_iterator.return();}} finally {if (_didIteratorError) {throw _iteratorError;}}}
 		return tracksObject;
 	});
-	
-	
-	// instead we traverse all tracks search for trackId!!
-	
-	
-	
-	
-	// this means I have to write a custom sort function
-	// for already ordered data fromt the API.
-	
-	// there should be another way...
-	// export const get
 
 /***/ },
 /* 285 */
@@ -56297,12 +56279,10 @@
 	    nextProps) {
 	      if (this.props.trackId !== nextProps.trackId) {
 	        // const streamUrl = nextProps.tracks[nextProps.trackId].stream_url
-	
-	
 	        // this.track = nextProps.tracks[nextProps.trackId];
 	        this.track = nextProps.track;
 	
-	        // this.scAudio.play({streamUrl: streamUrl})
+	        // this.scAudio.play({streamUrl: this.track.stream_url})
 	      }
 	    } }, { key: 'toggle', value: function toggle()
 	
@@ -56606,8 +56586,7 @@
 
 	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {return typeof obj;} : function (obj) {return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;};var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};var _feed_actions = __webpack_require__(272);
 	var initialState = {
-		tracks: {},
-		tracksArr: [],
+		tracks: [],
 		filters: {
 			sort: 'influential',
 			curator: -1 },
@@ -56623,7 +56602,7 @@
 					action.tracks.forEach(function (track) {
 						newTracks[track.id] = track;
 					});
-					return { v: Object.assign({}, state, { tracks: newTracks, tracksArr: action.tracks }) };
+					return { v: Object.assign({}, state, { tracks: action.tracks }) };
 				case _feed_actions.feedConstants.UPDATE_FILTERS:
 					// const newFilters = { ...state.filters, ...action.filters } ;
 					// this is because we aren't combining filters!!!
