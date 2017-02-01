@@ -14,11 +14,14 @@ const path = require('path');
       {
         test: /.jsx?$/,
         exclude: /(node_modules|bower_components)/,
-        loader: 'babel',
-        query: {
-          presets: ['react', 'es2015'],
-          plugins: ["transform-object-rest-spread"]
-        }
+        loaders: [
+          'babel?presets[]=es2015,presets[]=react,plugins[]=transform-object-rest-spread&retainLines=true',
+          'ng-annotate-loader'
+        ]
+        // query: {
+        //   presets: ['react', 'es2015'],
+        //   plugins: ["transform-object-rest-spread"]
+        // }
       },
       {
         test: /.node$/,

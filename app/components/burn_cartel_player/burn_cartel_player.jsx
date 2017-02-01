@@ -4,7 +4,6 @@ import SoundCloudAudio from 'soundcloud-audio';
 // class CustomPlayer extends React.Component {
 //
 //   render() {
-//     debugger;
 //     let { track, playing, currentTime } = this.props;
 //
 //     if (!track) {
@@ -46,7 +45,7 @@ class BurnCartelPlayer extends React.Component {
     if (this.props.trackId !== nextProps.trackId) {
       const streamUrl = nextProps.tracks[nextProps.trackId].stream_url
       this.track = nextProps.tracks[nextProps.trackId];
-      this.scAudio.play({streamUrl: streamUrl})
+      // this.scAudio.play({streamUrl: streamUrl})
     }
   }
 

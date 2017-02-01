@@ -10,12 +10,13 @@ import UserList from '../user/user_list';
 // link or bookmark. In this case, we will have to hit the api
 // and add this song somehwo to our redux store
 
-const TrackShow = ({ id, tracks }) => {
+const TrackShow = ({ id, track, fetchTracks }) => {
 
-	let track = tracks[id];
-	if(!track) {
-		alert('fuck! we have to hit our endpoint again!')
-	}
+	// if(!track) {
+	// 	fetchTrack(id);
+	// 	alert('fuck! we have to hit our endpoint again!');
+	//
+	// }
 
 
 	// const track = tracks[id];

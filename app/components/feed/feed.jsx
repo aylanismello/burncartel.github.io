@@ -33,14 +33,25 @@ class Feed extends React.Component {
 				</div>
 			);
 		} else {
-			childElements = Object.keys(tracks).map((track, idx) => (
+
+			childElements = tracks.map((track, idx) => (
 				<TrackItem
-					track={tracks[track]}
+					track={track}
 					handleTrackUpdate={handleTrackUpdate}
 					idx={idx}
 					key={idx}
 				/>
 			));
+
+			// childElements = Object.keys(tracks).map((track, idx) => (
+			// 	<TrackItem
+			// 		track={tracks[track]}
+			// 		handleTrackUpdate={handleTrackUpdate}
+			// 		idx={idx}
+			// 		key={idx}
+			// 	/>
+			// ));
+			//
 
 		}
 		return (

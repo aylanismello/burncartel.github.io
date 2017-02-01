@@ -40,7 +40,7 @@ const TrackItem = ({ track, handleTrackUpdate, idx }) => {
 										className="fire-emoji"
 										src="http://pix.iemoji.com/images/emoji/apple/ios-9/256/fire.png"/>
 								</div>
-								{/* <a href="#" className="btn btn-default" role="button">Button</a> */}
+								<a href="#" className="btn btn-default" role="button">Button</a>
 						</div>
 
 				</div>

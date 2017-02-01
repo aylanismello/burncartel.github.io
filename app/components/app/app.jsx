@@ -4,6 +4,8 @@ import {withRouter} from 'react-router';
 import TopNav from '../navs/top_nav';
 import BottomNav from '../navs/bottom_nav';
 import FeedContainer from '../feed/feed_container';
+import { getTrackFromId } from '../../selectors/track_selector';
+
 
 class App extends React.Component {
   constructor(props) {

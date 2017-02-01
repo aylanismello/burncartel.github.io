@@ -16,7 +16,6 @@ class Home extends React.Component {
 	}
 
 	handleFilterChange(newFilter) {
-		// debugger;
 		this.props.updateFilters(newFilter);
 	}
 
