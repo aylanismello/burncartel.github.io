@@ -28828,9 +28828,9 @@
 	var _feed_actions = __webpack_require__(272);
 	var _home = __webpack_require__(273);var _home2 = _interopRequireDefault(_home);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 	
-	var mapStateToProps = function mapStateToProps(state, ownProps) {return {
-			tracks: state.feed.tracks };};
 	
+	// how do i get rid of this obj without breaking everything?
+	var mapStateToProps = function mapStateToProps(state) {return {};};
 	
 	var mapDispatchToProps = function mapDispatchToProps(dispatch) {return {
 			updateFilters: function updateFilters(filters) {return dispatch((0, _feed_actions.updateFilters)(filters));} };};exports.default =
@@ -56226,13 +56226,21 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _reactRedux = __webpack_require__(179);
-	var _burn_cartel_player = __webpack_require__(925);var _burn_cartel_player2 = _interopRequireDefault(_burn_cartel_player);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+	var _burn_cartel_player = __webpack_require__(925);var _burn_cartel_player2 = _interopRequireDefault(_burn_cartel_player);
+	var _track_selector = __webpack_require__(284);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 	
-	var mapStateToProps = function mapStateToProps(state, ownProps) {return {
+	
+	var mapStateToProps = function mapStateToProps(state) {
+	
+		var tracksHash = (0, _track_selector.getTracksHash)(state);
+		var track = tracksHash[state.feed.trackId];
+	
+		return {
 			clientId: "282558e0e8cdcd8a9b3ba2b4917596b7",
-			tracks: state.feed.tracks,
-			trackId: state.feed.trackId };};exports.default =
+			track: track,
+			trackId: state.feed.trackId };
 	
+	};exports.default =
 	
 	
 	(0, _reactRedux.connect)(
@@ -56288,8 +56296,12 @@
 	
 	    nextProps) {
 	      if (this.props.trackId !== nextProps.trackId) {
-	        var streamUrl = nextProps.tracks[nextProps.trackId].stream_url;
-	        this.track = nextProps.tracks[nextProps.trackId];
+	        // const streamUrl = nextProps.tracks[nextProps.trackId].stream_url
+	
+	
+	        // this.track = nextProps.tracks[nextProps.trackId];
+	        this.track = nextProps.track;
+	
 	        // this.scAudio.play({streamUrl: streamUrl})
 	      }
 	    } }, { key: 'toggle', value: function toggle()
