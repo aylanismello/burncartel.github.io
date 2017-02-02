@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import TrackShow from './track_show';
-import { fetchTracks } from '../../actions/feed_actions';
+import { updateTrackId,
+ 	updateFilters } from '../../actions/feed_actions';
 import { getTracksHash } from '../../selectors/track_selector';
 
 const mapStateToProps = (state, ownProps) => {
@@ -13,15 +14,13 @@ const mapStateToProps = (state, ownProps) => {
 	};
 };
 
-const mapDispatchToProps = (dispatch) => {
-	return {
-		fetchTrack: (id) => {
-			fetchTracks({id});
-		}
-	};
-};
+const mapDispatchToProps = (dispatch) => ({
+	// fetchTracks: (filters) => dispatch(fetchTracks(filters)),
+  updateFilters: (filters) => dispatch(updateFilters(filters)),
+	updateTrackId: (id) => dispatch(updateTrackId(id))
+});
 
 export default connect(
 	mapStateToProps,
-	{}
+	mapDispatchToProps
 )(TrackShow);

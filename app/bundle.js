@@ -28976,72 +28976,35 @@
 /* 275 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var _react = __webpack_require__(1);var _react2 = _interopRequireDefault(_react);
+	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _react = __webpack_require__(1);var _react2 = _interopRequireDefault(_react);
 	var _reactRouter = __webpack_require__(210);
-	var _track_item = __webpack_require__(276);var _track_item2 = _interopRequireDefault(_track_item);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}var
+	var _track_item = __webpack_require__(276);var _track_item2 = _interopRequireDefault(_track_item);
+	var _loading = __webpack_require__(940);var _loading2 = _interopRequireDefault(_loading);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 	
-	Feed = function (_React$Component) {_inherits(Feed, _React$Component);
+	var Feed = function Feed(_ref) {var tracks = _ref.tracks,handleTrackUpdate = _ref.handleTrackUpdate,loadingFeed = _ref.loadingFeed;
+		var childElements = void 0;
 	
-		function Feed(props) {_classCallCheck(this, Feed);return _possibleConstructorReturn(this, (Feed.__proto__ || Object.getPrototypeOf(Feed)).call(this,
-			props));
-		}_createClass(Feed, [{ key: 'componentWillReceiveProps', value: function componentWillReceiveProps(
+		if (loadingFeed) {
+			childElements = _react2.default.createElement(_loading2.default, null);
+		} else {
 	
-			nextProps) {
-				// console.log(nextProps.filters);
-				// if (this.props.trackId !== nextProps.trackId) {
-				// 	alert('changed track!');
-				// }
-			} }, { key: 'render', value: function render()
-	
-			{var _props =
-	
-	
-	
-	
-				this.props,tracks = _props.tracks,handleTrackUpdate = _props.handleTrackUpdate;
-	
-				var childElements = void 0;
-	
-				if (this.props.loadingFeed) {
-					childElements =
-					_react2.default.createElement('div', null,
-						_react2.default.createElement('h1', null, 'LOADING'));
+			childElements = tracks.map(function (track, idx) {return (
+					_react2.default.createElement(_track_item2.default, {
+						track: track,
+						handleTrackUpdate: handleTrackUpdate,
+						idx: idx,
+						key: idx }));});
 	
 	
 	
+		}
 	
-				} else {
-	
-					childElements = tracks.map(function (track, idx) {return (
-							_react2.default.createElement(_track_item2.default, {
-								track: track,
-								handleTrackUpdate: handleTrackUpdate,
-								idx: idx,
-								key: idx }));});
+		return (
+			_react2.default.createElement('div', { className: 'feed-container' },
+				childElements));
 	
 	
-	
-					// childElements = Object.keys(tracks).map((track, idx) => (
-					// 	<TrackItem
-					// 		track={tracks[track]}
-					// 		handleTrackUpdate={handleTrackUpdate}
-					// 		idx={idx}
-					// 		key={idx}
-					// 	/>
-					// ));
-					//
-	
-				}
-				return (
-					_react2.default.createElement('div', { className: 'feed-container' },
-						_react2.default.createElement('h2', null, ' holler '),
-	
-						childElements));
-	
-	
-			} }]);return Feed;}(_react2.default.Component);exports.default =
-	
-	
+	};exports.default =
 	
 	Feed;
 
@@ -29126,6 +29089,7 @@
 	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _reactRedux = __webpack_require__(179);
 	var _track_show = __webpack_require__(279);var _track_show2 = _interopRequireDefault(_track_show);
 	var _feed_actions = __webpack_require__(272);
+	
 	var _track_selector = __webpack_require__(284);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 	
 	var mapStateToProps = function mapStateToProps(state, ownProps) {
@@ -29138,17 +29102,15 @@
 	
 	};
 	
-	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-		return {
-			fetchTrack: function fetchTrack(id) {
-				(0, _feed_actions.fetchTracks)({ id: id });
-			} };
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {return {
+			// fetchTracks: (filters) => dispatch(fetchTracks(filters)),
+			updateFilters: function updateFilters(filters) {return dispatch((0, _feed_actions.updateFilters)(filters));},
+			updateTrackId: function updateTrackId(id) {return dispatch((0, _feed_actions.updateTrackId)(id));} };};exports.default =
 	
-	};exports.default =
 	
 	(0, _reactRedux.connect)(
 	mapStateToProps,
-	{})(_track_show2.default);
+	mapDispatchToProps)(_track_show2.default);
 
 /***/ },
 /* 279 */
@@ -29156,7 +29118,8 @@
 
 	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _react = __webpack_require__(1);var _react2 = _interopRequireDefault(_react);
 	var _track_banner = __webpack_require__(280);var _track_banner2 = _interopRequireDefault(_track_banner);
-	var _user_list = __webpack_require__(281);var _user_list2 = _interopRequireDefault(_user_list);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+	var _user_list = __webpack_require__(281);var _user_list2 = _interopRequireDefault(_user_list);
+	var _loading = __webpack_require__(940);var _loading2 = _interopRequireDefault(_loading);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 	
 	// There are two scenarios here. One is that
 	// a user got sent here via the internal react-router,
@@ -29166,27 +29129,35 @@
 	// link or bookmark. In this case, we will have to hit the api
 	// and add this song somehwo to our redux store
 	
-	var TrackShow = function TrackShow(_ref) {var id = _ref.id,track = _ref.track,fetchTracks = _ref.fetchTracks;
-	
-		// if(!track) {
-		// 	fetchTrack(id);
-		// 	alert('fuck! we have to hit our endpoint again!');
-		//
-		// }
+	var TrackShow = function TrackShow(_ref) {var id = _ref.id,track = _ref.track,updateFilters = _ref.updateFilters,updateTrackId = _ref.updateTrackId;
+		var childElements = void 0;
 	
 	
-		// const track = tracks[id];
-		// but here we have bigger problems.
-		// if we try to make this a link ppl could share,
-		// then we have to hit up the tracks api
-		// in case we don't have the track in our redux store
+		if (!track) {
+			updateTrackId(id);
+			updateFilters({ id: id });
+			// alert('fuck! we have to hit our endpoint again!');
+			return (
+				_react2.default.createElement(_loading2.default, null));
 	
-		return (
-			_react2.default.createElement('div', { className: 'container track-show' },
-				_react2.default.createElement(_track_banner2.default, { track: track }),
-				_react2.default.createElement(_user_list2.default, {
-					track: track })));
 	
+		} else {
+	
+			// const track = tracks[id];
+			// but here we have bigger problems.
+			// if we try to make this a link ppl could share,
+			// then we have to hit up the tracks api
+			// in case we don't have the track in our redux store
+	
+			return (
+				_react2.default.createElement('div', { className: 'container track-show' },
+					_react2.default.createElement(_track_banner2.default, { track: track }),
+					_react2.default.createElement(_user_list2.default, {
+						track: track })));
+	
+	
+	
+		}
 	
 	
 	};exports.default =
@@ -56224,7 +56195,6 @@
 	
 	};exports.default =
 	
-	
 	(0, _reactRedux.connect)(
 	mapStateToProps,
 	{})(_burn_cartel_player2.default);
@@ -56650,7 +56620,7 @@
 /* 931 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _feed_actions = __webpack_require__(272);
+	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};var _feed_actions = __webpack_require__(272);
 	
 	
 	
@@ -56662,7 +56632,8 @@
 					case _feed_actions.feedConstants.FETCH_TRACKS:
 						dispatch((0, _feed_actions.loadingStart)());
 	
-						(0, _bc_api.getTracks)(action.filters, function (tracks) {
+	
+						(0, _bc_api.getTracks)(_extends({ sort: 'influential' }, action.filters), function (tracks) {
 							dispatch((0, _feed_actions.loadingStop)());
 							dispatch((0, _feed_actions.receiveTracks)(tracks));
 						}, function (error) {
@@ -56690,6 +56661,7 @@
 	
 	var getTracks = exports.getTracks = function getTracks(filters) {var success = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : suc;var error = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : err;
 		var baseUrl = location.hostname === 'localhost' ? localUrl : devUrl;
+	
 		var url = baseUrl + '/' + filters['sort'];
 	
 		_jquery2.default.ajax({
@@ -67785,6 +67757,22 @@
 	  transformer: undefined
 	};
 	module.exports = exports['default'];
+
+/***/ },
+/* 940 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _react = __webpack_require__(1);var _react2 = _interopRequireDefault(_react);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+	
+	var Loading = function Loading() {return (
+			_react2.default.createElement('div', null,
+				_react2.default.createElement('h1', null, 'LOADING')));};exports.default =
+	
+	
+	
+	
+	
+	Loading;
 
 /***/ }
 /******/ ]);
