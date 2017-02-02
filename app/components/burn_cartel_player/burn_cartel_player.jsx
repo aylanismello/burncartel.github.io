@@ -43,11 +43,18 @@ class BurnCartelPlayer extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (this.props.trackId !== nextProps.trackId) {
-      // const streamUrl = nextProps.tracks[nextProps.trackId].stream_url
       // this.track = nextProps.tracks[nextProps.trackId];
       this.track = nextProps.track;
 
-      // this.scAudio.play({streamUrl: this.track.stream_url})
+      this.scAudio.play({streamUrl: this.track.stream_url});
+
+      // this.scAudio.on('timeupdate', () => {
+      //   console.log(this.scAudio.audio.currentTime);
+      // });
+
+      this.scAudio.on('ended', () => {
+        this.props.updateTrackId(this.props.nextTrackId);
+      });
     }
   }
 
