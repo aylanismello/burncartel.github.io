@@ -14,19 +14,16 @@ import Loading from '../loading';
 const TrackShow = ({ id, track, updateFilters, updateTrackId }) => {
 	let childElements;
 
-
 	if(!track) {
 		updateTrackId(id);
 		updateFilters({id});
-		// alert('fuck! we have to hit our endpoint again!');
+
 		return (
 			<Loading />
 		);
 
 	} else {
 
-	// const track = tracks[id];
-	// but here we have bigger problems.
 	// if we try to make this a link ppl could share,
 	// then we have to hit up the tracks api
 	// in case we don't have the track in our redux store
@@ -40,7 +37,6 @@ const TrackShow = ({ id, track, updateFilters, updateTrackId }) => {
 			</div>
 		)
 	}
-
 
 };
 

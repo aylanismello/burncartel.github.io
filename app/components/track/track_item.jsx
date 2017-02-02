@@ -14,8 +14,9 @@ const TrackItem = ({ track, handleTrackUpdate, idx }) => {
 			<div className="col-sm-6 col-md-4 track-container">
 				{/* <div className="thumbnail" onClick={handleTrackUpdate.bind(null, track.id)}> */}
 				{/* <div className="thumbnail" onClick={() => handleTrackUpdate(idx)}> */}
-				<div className="thumbnail" onClick={() => handleTrackUpdate(track.id)}>
-					<div className="artwork-wrapper">
+				<div className="thumbnail" >
+				{/*  do NOT use image itself to set width of this, there's invisble white space on edges*/}
+					<div className="artwork-wrapper" onClick={() => handleTrackUpdate(track.id)}>
 						<img
 							src={artwork_url}
 							className="artwork-icon"
@@ -31,19 +32,20 @@ const TrackItem = ({ track, handleTrackUpdate, idx }) => {
 							<Link
 								to={`/tracks/${track.id}`}
 							>
-								<h3 className="track-title">{track.name}</h3>
+								<h3 className="track-title" onClick={() => handleTrackUpdate(track.id)}>{track.name}</h3>
 							</Link>
-							<span>Selected by <a href="#">{curatorsStr}</a> </span>
 
-								<div className="fire-emoji-container">
-									<img
-										className="fire-emoji"
-										src="http://pix.iemoji.com/images/emoji/apple/ios-9/256/fire.png"/>
-								</div>
-								<a href="#" className="btn btn-default" role="button">Button</a>
+							<span>Selected by {curatorsStr} </span>
+							<div className="fire-emoji-container">
+								<img
+								className="fire-emoji"
+								src="http://pix.iemoji.com/images/emoji/apple/ios-9/256/fire.png"/>
+							</div>
+
 						</div>
 
 				</div>
+
 			</div>
 		</div>
 

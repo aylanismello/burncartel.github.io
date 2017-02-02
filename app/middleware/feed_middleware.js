@@ -10,7 +10,6 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 		case feedConstants.FETCH_TRACKS:
 			dispatch(loadingStart());
 
-
 			getTracks({ sort: 'influential', ...action.filters}, (tracks) => {
 				dispatch(loadingStop());
 				dispatch(receiveTracks(tracks));

@@ -3,6 +3,7 @@ import TrackShow from './track_show';
 import { updateTrackId,
  	updateFilters } from '../../actions/feed_actions';
 import { getTracksHash } from '../../selectors/track_selector';
+import * as _ from 'lodash';
 
 const mapStateToProps = (state, ownProps) => {
 	const tracksHash = getTracksHash(state);
@@ -15,7 +16,6 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-	// fetchTracks: (filters) => dispatch(fetchTracks(filters)),
   updateFilters: (filters) => dispatch(updateFilters(filters)),
 	updateTrackId: (id) => dispatch(updateTrackId(id))
 });

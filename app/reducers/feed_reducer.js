@@ -2,7 +2,7 @@ import { feedConstants } from '../actions/feed_actions';
 const initialState = {
 	tracks: [],
 	filters: {
-		sort: 'influential',
+		// sort: 'influential',
 		curator: -1
 	},
 	trackId: -1,

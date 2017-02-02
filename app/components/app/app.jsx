@@ -13,7 +13,7 @@ class App extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.filters !== nextProps.filters) {
+    if (!_.isEqual(this.props.filters, nextProps.filters)) {
       this.props.fetchTracks(nextProps.filters);
     }
   }
