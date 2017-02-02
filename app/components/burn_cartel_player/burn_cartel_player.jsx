@@ -32,6 +32,7 @@ class BurnCartelPlayer extends React.Component {
   constructor(props) {
     super(props);
     this.toggle = this.toggle.bind(this);
+    this.playTrack = this.playTrack.bind(this);
     this.scAudio = new SoundCloudAudio(props.clientId);
     this.track = null;
     // refactor this into reducer
@@ -41,20 +42,30 @@ class BurnCartelPlayer extends React.Component {
     };
   }
 
+
+  playTrack() {
+    this.scAudio.play({streamUrl: this.track.stream_url});
+
+    // this.scAudio.on('timeupdate', () => {
+    //   console.log(this.scAudio.audio.currentTime);
+    // });
+
+    this.scAudio.on('ended', () => {
+      this.props.updateTrackId(this.props.nextTrackId);
+    });
+
+  }
+
   componentWillReceiveProps(nextProps) {
     if (this.props.trackId !== nextProps.trackId) {
-      // this.track = nextProps.tracks[nextProps.trackId];
       this.track = nextProps.track;
 
-      this.scAudio.play({streamUrl: this.track.stream_url});
+      if(process.env.NODE_ENV !== 'hotspot') {
+        this.playTrack()
+      } else {
+        console.log('hotspot! i do not want to play the track and use dataz :(');
+      }
 
-      // this.scAudio.on('timeupdate', () => {
-      //   console.log(this.scAudio.audio.currentTime);
-      // });
-
-      this.scAudio.on('ended', () => {
-        this.props.updateTrackId(this.props.nextTrackId);
-      });
     }
   }
 
