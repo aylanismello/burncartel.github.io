@@ -2,18 +2,22 @@ import React from 'react';
 import { Link } from 'react-router';
 
 
-const TrackItem = ({ track, handleTrackUpdate, idx }) => {
+const TrackItem = ({ track, handleTrackUpdate, playing, trackId }) => {
 	const numCurators = track.curators.length;
 	const curatorWord = (numCurators <= 1 ? 'curator' : 'curators');
 	const curatorsStr = `${numCurators} ${curatorWord}`
 
 	const artwork_url = (track.artwork_url ? track.artwork_url : track.publisher.avatar_url);
 
+	let playIcon = 'https://cdn3.iconfinder.com/data/icons/seo-marketing-2-1/48/56-128.png';
+
+	if(trackId === track.id && playing) {
+		playIcon = 'https://cdn2.iconfinder.com/data/icons/general-22/1000/pause_button-128.png';
+	}
+
 	return (
 		<div className="row">
 			<div className="col-sm-6 col-md-4 track-container">
-				{/* <div className="thumbnail" onClick={handleTrackUpdate.bind(null, track.id)}> */}
-				{/* <div className="thumbnail" onClick={() => handleTrackUpdate(idx)}> */}
 				<div className="thumbnail" >
 				{/*  do NOT use image itself to set width of this, there's invisble white space on edges*/}
 					<div className="artwork-wrapper" onClick={() => handleTrackUpdate(track.id)}>
@@ -22,7 +26,7 @@ const TrackItem = ({ track, handleTrackUpdate, idx }) => {
 							className="artwork-icon"
 						/>
 						<img
-							src='http://wptf.com/wp-content/uploads/2014/05/play-button.png'
+							src={playIcon}
 							className="artwork-play"
 						/>
 						<span className="glyphicon glyphicon-play-circle"/>

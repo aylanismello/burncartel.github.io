@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import TrackItem from '../track/track_item';
 import Loading from '../loading';
 
-const Feed = ({ tracks, handleTrackUpdate, loadingFeed }) => {
+const Feed = ({ tracks, handleTrackUpdate, loadingFeed, trackId, playing }) => {
 	let childElements;
 
 	if(loadingFeed) {
@@ -13,8 +13,9 @@ const Feed = ({ tracks, handleTrackUpdate, loadingFeed }) => {
 		childElements = tracks.map((track, idx) => (
 			<TrackItem
 				track={track}
+				trackId={trackId}
+				playing={playing}
 				handleTrackUpdate={handleTrackUpdate}
-				idx={idx}
 				key={idx}
 			/>
 		));

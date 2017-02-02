@@ -1,49 +1,22 @@
 import React from 'react';
 import SoundCloudAudio from 'soundcloud-audio';
 
-// class CustomPlayer extends React.Component {
-//
-//   render() {
-//     let { track, playing, currentTime } = this.props;
-//
-//     if (!track) {
-//       return <div>Loading...</div>;
-//     }
-//
-//     return (
-//       <div>
-//           <h2>{track.title}</h2>
-//           <h3>{track.user.username}</h3>
-//           <Timer className="h6 mr1" duration={track ? track.duration / 1000 : 0} currentTime={currentTime} {...this.props} />
-//
-//           <PlayButton className="flex-none h4 button button-transparent button-grow rounded" {...this.props} />
-//           <Progress
-//             {...this.props}
-//           />
-//
-//       </div>
-//     );
-//   }
-// }
 
-
+// <Timer className="h6 mr1" duration={track ? track.duration / 1000 : 0} currentTime={currentTime} {...this.props} />
 class BurnCartelPlayer extends React.Component {
 
   constructor(props) {
     super(props);
     this.toggle = this.toggle.bind(this);
-    this.playTrack = this.playTrack.bind(this);
+    this.playAndLoadTrack = this.playAndLoadTrack.bind(this);
+    this.pauseTrack = this.pauseTrack.bind(this);
+    this.resumeTrack = this.resumeTrack.bind(this);
     this.scAudio = new SoundCloudAudio(props.clientId);
     this.track = null;
-    // refactor this into reducer
-    // bad idea! playing could be changed from a lot of places.
-    this.state = {
-      playing: false
-    };
   }
 
 
-  playTrack() {
+  playAndLoadTrack() {
     this.scAudio.play({streamUrl: this.track.stream_url});
 
     // this.scAudio.on('timeupdate', () => {
@@ -56,25 +29,41 @@ class BurnCartelPlayer extends React.Component {
 
   }
 
+  pauseTrack() {
+    this.scAudio.pause();
+  }
+
+  resumeTrack() {
+    this.scAudio.play();
+  }
+
   componentWillReceiveProps(nextProps) {
     if (this.props.trackId !== nextProps.trackId) {
       this.track = nextProps.track;
 
       if(process.env.NODE_ENV !== 'hotspot') {
-        this.playTrack()
+        this.playAndLoadTrack();
       } else {
         console.log('hotspot! i do not want to play the track and use dataz :(');
       }
-
     }
+
+    if (this.props.playing !== nextProps.playing) {
+      if(!nextProps.playing) {
+        this.pauseTrack();
+      } else {
+        this.resumeTrack();
+      }
+    }
+
   }
 
   toggle() {
-    this.setState({playing: !this.state.playing});
+    this.props.togglePlay();
   }
 
   render() {
-    const playText = (this.state.playing ? 'Pause' : 'Play');
+    const playText = (this.props.playing ? 'Pause' : 'Play');
     let details = <div></div>;
 
     if(this.track) {
