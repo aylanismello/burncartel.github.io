@@ -11,7 +11,7 @@ const mapStateToProps = (state) => {
 	const track = tracksHash[state.feed.trackId];
 	const nextTrackId = getNextTrackId(state);
 
-	console.log(`next track id is ${nextTrackId}`);
+	// console.log(`next track id is ${nextTrackId}`);
 
 	// replace this with reading from .env
 

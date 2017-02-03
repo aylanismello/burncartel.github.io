@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import TrackItem from '../track/track_item';
 import Loading from '../loading';
 
-const Feed = ({ tracks, handleTrackUpdate, loadingFeed, trackId, playing }) => {
+const Feed = ({ tracks, handleTrackClick, loadingFeed, trackId, playing }) => {
 	let childElements;
 
 	if(loadingFeed) {
@@ -15,7 +15,7 @@ const Feed = ({ tracks, handleTrackUpdate, loadingFeed, trackId, playing }) => {
 				track={track}
 				trackId={trackId}
 				playing={playing}
-				handleTrackUpdate={handleTrackUpdate}
+				handleTrackClick={handleTrackClick}
 				key={idx}
 			/>
 		));

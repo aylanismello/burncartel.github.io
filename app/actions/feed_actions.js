@@ -6,7 +6,14 @@ export const feedConstants = {
 	UPDATE_TRACK_ID: 'UPDATE_TRACK_ID',
 	LOADING_START: 'LOADING_START',
 	LOADING_STOP: 'LOADING_STOP',
+	HANDLE_TRACK_CLICK: 'HANDLE_TRACK_CLICK'
 };
+
+
+export const handleTrackClick = (trackId) => ({
+	type: feedConstants.HANDLE_TRACK_CLICK,
+	trackId
+});
 
 export const loadingStart = () => ({
 	type: feedConstants.LOADING_START

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Feed from './feed';
-import { fetchTracks, updateTrackId } from '../../actions/feed_actions';
+import { fetchTracks, updateTrackId, handleTrackClick } from '../../actions/feed_actions';
 
 const mapStateToProps = (state, ownProps) => ({
 	tracks: state.feed.tracks,
@@ -13,7 +13,9 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = dispatch => ({
 	fetchTracks: () => dispatch(fetchTracks()),
-	handleTrackUpdate: (trackId) => dispatch(updateTrackId(trackId))
+	handleTrackClick: (trackId) => {
+		dispatch(handleTrackClick(trackId))
+	}
 });
 
 export default connect(

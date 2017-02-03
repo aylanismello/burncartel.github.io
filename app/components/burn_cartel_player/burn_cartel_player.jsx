@@ -17,24 +17,24 @@ class BurnCartelPlayer extends React.Component {
 
 
   playAndLoadTrack() {
-    this.scAudio.play({streamUrl: this.track.stream_url});
+    // this.scAudio.play({streamUrl: this.track.stream_url});
 
     // this.scAudio.on('timeupdate', () => {
     //   console.log(this.scAudio.audio.currentTime);
     // });
 
-    this.scAudio.on('ended', () => {
-      this.props.updateTrackId(this.props.nextTrackId);
-    });
+    // this.scAudio.on('ended', () => {
+    //   this.props.updateTrackId(this.props.nextTrackId);
+    // });
 
   }
 
   pauseTrack() {
-    this.scAudio.pause();
+    // this.scAudio.pause();
   }
 
   resumeTrack() {
-    this.scAudio.play();
+    // this.scAudio.play();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -55,7 +55,6 @@ class BurnCartelPlayer extends React.Component {
         this.resumeTrack();
       }
     }
-
   }
 
   toggle() {

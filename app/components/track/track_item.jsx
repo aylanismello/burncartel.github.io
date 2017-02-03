@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 
 
-const TrackItem = ({ track, handleTrackUpdate, playing, trackId }) => {
+const TrackItem = ({ track, handleTrackClick, playing, trackId }) => {
 	const numCurators = track.curators.length;
 	const curatorWord = (numCurators <= 1 ? 'curator' : 'curators');
 	const curatorsStr = `${numCurators} ${curatorWord}`
@@ -20,7 +20,7 @@ const TrackItem = ({ track, handleTrackUpdate, playing, trackId }) => {
 			<div className="col-sm-6 col-md-4 track-container">
 				<div className="thumbnail" >
 				{/*  do NOT use image itself to set width of this, there's invisble white space on edges*/}
-					<div className="artwork-wrapper" onClick={() => handleTrackUpdate(track.id)}>
+					<div className="artwork-wrapper" onClick={() => handleTrackClick(track.id)}>
 						<img
 							src={artwork_url}
 							className="artwork-icon"
@@ -36,7 +36,7 @@ const TrackItem = ({ track, handleTrackUpdate, playing, trackId }) => {
 							<Link
 								to={`/tracks/${track.id}`}
 							>
-								<h3 className="track-title" onClick={() => handleTrackUpdate(track.id)}>{track.name}</h3>
+								<h3 className="track-title" onClick={() => handleTrackClick(track.id)}>{track.name}</h3>
 							</Link>
 
 							<span>Selected by {curatorsStr} </span>
