@@ -12,7 +12,6 @@ const mapStateToProps = (state) => {
 	const nextTrackId = getNextTrackId(state);
 
 	// console.log(`next track id is ${nextTrackId}`);
-
 	// replace this with reading from .env
 
 	return {

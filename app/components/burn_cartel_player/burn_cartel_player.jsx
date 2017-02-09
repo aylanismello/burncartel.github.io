@@ -10,49 +10,54 @@ class BurnCartelPlayer extends React.Component {
     this.toggle = this.toggle.bind(this);
     this.playAndLoadTrack = this.playAndLoadTrack.bind(this);
     this.pauseTrack = this.pauseTrack.bind(this);
-    this.resumeTrack = this.resumeTrack.bind(this);
+    // this.resumeTrack = this.resumeTrack.bind(this);
+    this.playTrack = this.playTrack.bind(this);
     this.scAudio = new SoundCloudAudio(props.clientId);
     this.track = null;
   }
 
 
   playAndLoadTrack() {
-    // this.scAudio.play({streamUrl: this.track.stream_url});
+    this.playTrack();
 
     // this.scAudio.on('timeupdate', () => {
     //   console.log(this.scAudio.audio.currentTime);
     // });
 
-    // this.scAudio.on('ended', () => {
-    //   this.props.updateTrackId(this.props.nextTrackId);
-    // });
+    this.scAudio.on('ended', () => {
+      this.props.updateTrackId(this.props.nextTrackId);
+    });
 
   }
 
   pauseTrack() {
-    // this.scAudio.pause();
+    this.scAudio.pause();
   }
 
-  resumeTrack() {
-    // this.scAudio.play();
+  playTrack() {
+    this.scAudio.play({streamUrl: this.track.stream_url});
   }
+
 
   componentWillReceiveProps(nextProps) {
+    // debugger;
+
+    // TRACK CHANGED
     if (this.props.trackId !== nextProps.trackId) {
       this.track = nextProps.track;
 
-      if(process.env.NODE_ENV !== 'hotspot') {
-        this.playAndLoadTrack();
-      } else {
-        console.log('hotspot! i do not want to play the track and use dataz :(');
-      }
-    }
-
-    if (this.props.playing !== nextProps.playing) {
+      // if(process.env.NODE_ENV !== 'hotspot') {
+      this.playAndLoadTrack();
+      // } else {
+        // console.log('hotspot! i do not want to play the track and use dataz :(');
+      // }
+    } else if (this.props.playing !== nextProps.playing) {
+    // CURRENT TRACK JUST CHANGED STATE
       if(!nextProps.playing) {
         this.pauseTrack();
       } else {
-        this.resumeTrack();
+        // debugger;
+        this.playTrack();
       }
     }
   }

@@ -13,6 +13,9 @@ class App extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    // you also have to check for pagination being invoked here.
+    // so maybe if this.props.feed.length !=== nextProps.feed.length
+    // wait what...
     if (!_.isEqual(this.props.filters, nextProps.filters)) {
       this.props.fetchTracks(nextProps.filters);
     }

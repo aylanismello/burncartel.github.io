@@ -23,21 +23,17 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 				console.log(`ERROR FETCHING TRACKS: got ${error}`);
 			});
 			return next(action);
-// track click
 		case feedConstants.HANDLE_TRACK_CLICK:
-				// debugger;
-				if(getState().feed.trackId !== action.trackId) {
-					dispatch(updateTrackId(action.trackId));
-					if(!getState().player.playing) {
-						dispatch(togglePlay());
-					}
-				} else {
+			// GOING TO NEW TRACK
+			if(getState().feed.trackId !== action.trackId) {
+				dispatch(updateTrackId(action.trackId));
+				if(!getState().player.playing) {
 					dispatch(togglePlay());
 				}
-
+			} else {
+				dispatch(togglePlay()); 	// TOGGLING OLD TRACK
+			}
 				// what if you're coming from a paused song?
-
-
 				return next(action);
 		default:
 			return next(action);
