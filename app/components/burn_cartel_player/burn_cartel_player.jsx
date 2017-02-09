@@ -20,12 +20,28 @@ class BurnCartelPlayer extends React.Component {
   playAndLoadTrack() {
     this.playTrack();
 
-    // this.scAudio.on('timeupdate', () => {
-    //   console.log(this.scAudio.audio.currentTime);
-    // });
+    let currentTime = 0;
+
+    this.scAudio.on('timeupdate', () => {
+
+      if(!this.props.trackLoaded && this.scAudio.audio.currentTime > 0) {
+        this.props.setTrackLoaded();
+      }
+
+      if(this.scAudio.audio.currentTime - currentTime > 1) {
+        currentTime++;
+        // console.log(this.scAudio.audio.currentTime);
+        this.props.updateCurrentTime(currentTime);
+        // console.log(trackTime);
+      }
+
+      // what constitutes a play?
+    });
 
     this.scAudio.on('ended', () => {
       this.props.updateTrackId(this.props.nextTrackId);
+      // maybe here we send a post request to increment play count of
+      // this track and add to user's history
     });
 
   }
@@ -40,12 +56,14 @@ class BurnCartelPlayer extends React.Component {
 
 
   componentWillReceiveProps(nextProps) {
+
     // debugger;
+    // console.log(nextProps.currentTime);
 
     // TRACK CHANGED
     if (this.props.trackId !== nextProps.trackId) {
       this.track = nextProps.track;
-
+      this.props.setTrackNotLoaded();
       // if(process.env.NODE_ENV !== 'hotspot') {
       this.playAndLoadTrack();
       // } else {
@@ -56,7 +74,6 @@ class BurnCartelPlayer extends React.Component {
       if(!nextProps.playing) {
         this.pauseTrack();
       } else {
-        // debugger;
         this.playTrack();
       }
     }
@@ -70,8 +87,7 @@ class BurnCartelPlayer extends React.Component {
     const playText = (this.props.playing ? 'Pause' : 'Play');
     let details = <div></div>;
 
-    if(this.track) {
-
+    if(this.track && this.props.trackLoaded) {
       details = (
         <div>
           <div>
@@ -80,8 +96,17 @@ class BurnCartelPlayer extends React.Component {
           <div>
             by {this.track.publisher.name}
           </div>
+          <div>
+            {this.props.currentTime}
+          </div>
         </div>
     );
+  } else if(this.track && !this.props.trackLoaded) {
+    details = (
+      <div>
+        LOADING
+      </div>
+    )
   }
 
     return (

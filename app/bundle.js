@@ -28968,7 +28968,8 @@
 			filters: state.feed.filters,
 			loadingFeed: state.feed.loadingFeed,
 			trackId: state.feed.trackId,
-			playing: state.player.playing };};
+			playing: state.player.playing,
+			trackLoaded: state.player.trackLoaded };};
 	
 	
 	var mapDispatchToProps = function mapDispatchToProps(dispatch) {return {
@@ -28992,7 +28993,7 @@
 	var _loading = __webpack_require__(277);var _loading2 = _interopRequireDefault(_loading);
 	var _paginate_button = __webpack_require__(278);var _paginate_button2 = _interopRequireDefault(_paginate_button);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 	
-	var Feed = function Feed(_ref) {var tracks = _ref.tracks,handleTrackClick = _ref.handleTrackClick,loadingFeed = _ref.loadingFeed,trackId = _ref.trackId,playing = _ref.playing;
+	var Feed = function Feed(_ref) {var tracks = _ref.tracks,trackLoaded = _ref.trackLoaded,handleTrackClick = _ref.handleTrackClick,loadingFeed = _ref.loadingFeed,trackId = _ref.trackId,playing = _ref.playing;
 		var childElements = void 0;
 	
 		if (loadingFeed) {
@@ -29004,6 +29005,7 @@
 						track: track,
 						trackId: trackId,
 						playing: playing,
+						trackLoaded: trackLoaded,
 						handleTrackClick: handleTrackClick,
 						key: idx }));});
 	
@@ -29029,7 +29031,7 @@
 	var _reactRouter = __webpack_require__(210);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 	
 	
-	var TrackItem = function TrackItem(_ref) {var track = _ref.track,handleTrackClick = _ref.handleTrackClick,playing = _ref.playing,trackId = _ref.trackId;
+	var TrackItem = function TrackItem(_ref) {var track = _ref.track,handleTrackClick = _ref.handleTrackClick,playing = _ref.playing,trackId = _ref.trackId,trackLoaded = _ref.trackLoaded;
 		var numCurators = track.curators.length;
 		var curatorWord = numCurators <= 1 ? 'curator' : 'curators';
 		var curatorsStr = numCurators + ' ' + curatorWord;
@@ -29038,8 +29040,12 @@
 	
 		var playIcon = 'https://cdn3.iconfinder.com/data/icons/seo-marketing-2-1/48/56-128.png';
 	
-		if (trackId === track.id && playing) {
-			playIcon = 'https://cdn2.iconfinder.com/data/icons/general-22/1000/pause_button-128.png';
+		if (trackId === track.id) {
+			if (trackLoaded && playing) {
+				playIcon = 'https://cdn2.iconfinder.com/data/icons/general-22/1000/pause_button-128.png';
+			} else {
+				playIcon = 'https://cdn1.iconfinder.com/data/icons/loading-wait-time/256/loading_wait_time_02-128.png';
+			}
 		}
 	
 		return (
@@ -73359,6 +73365,9 @@
 	var _burn_cartel_player = __webpack_require__(928);var _burn_cartel_player2 = _interopRequireDefault(_burn_cartel_player);
 	var _feed_actions = __webpack_require__(272);
 	var _player_actions = __webpack_require__(930);
+	
+	
+	
 	var _track_selector = __webpack_require__(286);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 	
 	
@@ -73374,15 +73383,21 @@
 		return {
 			clientId: "282558e0e8cdcd8a9b3ba2b4917596b7",
 			track: track,
+			trackLoaded: state.player.trackLoaded,
 			trackId: state.feed.trackId,
 			nextTrackId: nextTrackId,
-			playing: state.player.playing };
+			playing: state.player.playing,
+			currentTime: state.player.currentTime };
 	
 	};
 	
 	var mapDispatchToProps = function mapDispatchToProps(dispatch) {return {
 			updateTrackId: function updateTrackId(id) {return dispatch((0, _feed_actions.updateTrackId)(id));},
-			togglePlay: function togglePlay() {return dispatch((0, _player_actions.togglePlay)());} };};exports.default =
+			togglePlay: function togglePlay() {return dispatch((0, _player_actions.togglePlay)());},
+			setTrackLoaded: function setTrackLoaded() {return dispatch((0, _player_actions.setTrackLoaded)());},
+			setTrackNotLoaded: function setTrackNotLoaded() {return dispatch((0, _player_actions.setTrackNotLoaded)());},
+			updateCurrentTime: function updateCurrentTime(currentTime) {return dispatch((0, _player_actions.updateCurrentTime)(currentTime));} };};exports.default =
+	
 	
 	
 	(0, _reactRedux.connect)(
@@ -73415,12 +73430,28 @@
 	    {var _this2 = this;
 	      this.playTrack();
 	
-	      // this.scAudio.on('timeupdate', () => {
-	      //   console.log(this.scAudio.audio.currentTime);
-	      // });
+	      var currentTime = 0;
+	
+	      this.scAudio.on('timeupdate', function () {
+	
+	        if (!_this2.props.trackLoaded && _this2.scAudio.audio.currentTime > 0) {
+	          _this2.props.setTrackLoaded();
+	        }
+	
+	        if (_this2.scAudio.audio.currentTime - currentTime > 1) {
+	          currentTime++;
+	          // console.log(this.scAudio.audio.currentTime);
+	          _this2.props.updateCurrentTime(currentTime);
+	          // console.log(trackTime);
+	        }
+	
+	        // what constitutes a play?
+	      });
 	
 	      this.scAudio.on('ended', function () {
 	        _this2.props.updateTrackId(_this2.props.nextTrackId);
+	        // maybe here we send a post request to increment play count of
+	        // this track and add to user's history
 	      });
 	
 	    } }, { key: 'pauseTrack', value: function pauseTrack()
@@ -73435,12 +73466,14 @@
 	
 	
 	    nextProps) {
+	
 	      // debugger;
+	      // console.log(nextProps.currentTime);
 	
 	      // TRACK CHANGED
 	      if (this.props.trackId !== nextProps.trackId) {
 	        this.track = nextProps.track;
-	
+	        this.props.setTrackNotLoaded();
 	        // if(process.env.NODE_ENV !== 'hotspot') {
 	        this.playAndLoadTrack();
 	        // } else {
@@ -73451,7 +73484,6 @@
 	        if (!nextProps.playing) {
 	          this.pauseTrack();
 	        } else {
-	          // debugger;
 	          this.playTrack();
 	        }
 	      }
@@ -73465,15 +73497,23 @@
 	      var playText = this.props.playing ? 'Pause' : 'Play';
 	      var details = _react2.default.createElement('div', null);
 	
-	      if (this.track) {
-	
+	      if (this.track && this.props.trackLoaded) {
 	        details =
 	        _react2.default.createElement('div', null,
 	          _react2.default.createElement('div', null,
 	            this.track.name),
 	
 	          _react2.default.createElement('div', null, 'by ',
-	            this.track.publisher.name));
+	            this.track.publisher.name),
+	
+	          _react2.default.createElement('div', null,
+	            this.props.currentTime));
+	
+	
+	
+	      } else if (this.track && !this.props.trackLoaded) {
+	        details =
+	        _react2.default.createElement('div', null, 'LOADING');
 	
 	
 	
@@ -73726,7 +73766,11 @@
 
 	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var playerConstants = exports.playerConstants = {
 		TOGGLE_PLAY: 'TOGGLE_PLAY',
-		INIT_PLAYER: 'INIT_PLAYER' };
+		INIT_PLAYER: 'INIT_PLAYER',
+		SET_TRACK_NOT_LOADED: 'SET_TRACK_NOT_LOADED',
+		// refactor these names to match feeder loading
+		SET_TRACK_LOADED: 'SET_TRACK_LOADED',
+		UPDATE_CURRENT_TIME: 'UPDATE_CURRENT_TIME' };
 	
 	
 	var togglePlay = exports.togglePlay = function togglePlay() {return {
@@ -73735,6 +73779,19 @@
 	
 	var initPlayer = exports.initPlayer = function initPlayer() {return {
 			type: playerConstants.INIT_PLAYER };};
+	
+	
+	var setTrackLoaded = exports.setTrackLoaded = function setTrackLoaded() {return {
+			type: playerConstants.SET_TRACK_LOADED };};
+	
+	
+	var setTrackNotLoaded = exports.setTrackNotLoaded = function setTrackNotLoaded() {return {
+			type: playerConstants.SET_TRACK_NOT_LOADED };};
+	
+	
+	var updateCurrentTime = exports.updateCurrentTime = function updateCurrentTime(currentTime) {return {
+			type: playerConstants.UPDATE_CURRENT_TIME,
+			currentTime: currentTime };};
 
 /***/ },
 /* 931 */
@@ -73820,7 +73877,9 @@
 	
 	var initialState = {
 		playerInitialized: false,
-		playing: false };
+		playing: false,
+		trackLoaded: false,
+		currentTime: 0 };
 	
 	
 	var PlayerReducer = function PlayerReducer() {var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;var action = arguments[1];
@@ -73829,6 +73888,12 @@
 				return _extends({}, state, { playing: !state.playing });
 			case _player_actions.playerConstants.INIT_PLAYER:
 				return _extends({}, state, { playerInitialized: true });
+			case _player_actions.playerConstants.SET_TRACK_LOADED:
+				return _extends({}, state, { trackLoaded: true });
+			case _player_actions.playerConstants.SET_TRACK_NOT_LOADED:
+				return _extends({}, state, { trackLoaded: false });
+			case _player_actions.playerConstants.UPDATE_CURRENT_TIME:
+				return _extends({}, state, { currentTime: action.currentTime });
 			default:
 				return state;}
 	

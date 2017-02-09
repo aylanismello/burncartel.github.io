@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 
 
-const TrackItem = ({ track, handleTrackClick, playing, trackId }) => {
+const TrackItem = ({ track, handleTrackClick, playing, trackId, trackLoaded }) => {
 	const numCurators = track.curators.length;
 	const curatorWord = (numCurators <= 1 ? 'curator' : 'curators');
 	const curatorsStr = `${numCurators} ${curatorWord}`
@@ -11,8 +11,12 @@ const TrackItem = ({ track, handleTrackClick, playing, trackId }) => {
 
 	let playIcon = 'https://cdn3.iconfinder.com/data/icons/seo-marketing-2-1/48/56-128.png';
 
-	if(trackId === track.id && playing) {
-		playIcon = 'https://cdn2.iconfinder.com/data/icons/general-22/1000/pause_button-128.png';
+	if(trackId === track.id) {
+		if(trackLoaded && playing) {
+			playIcon = 'https://cdn2.iconfinder.com/data/icons/general-22/1000/pause_button-128.png';
+		} else {
+			playIcon = 'https://cdn1.iconfinder.com/data/icons/loading-wait-time/256/loading_wait_time_02-128.png';
+		}
 	}
 
 	return (
