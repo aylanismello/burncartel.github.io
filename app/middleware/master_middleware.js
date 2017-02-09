@@ -1,8 +1,9 @@
 import FeedMiddleware from './feed_middleware';
+import PlayerMiddleware from './player_middleware';
 import { applyMiddleware } from 'redux';
 import createLogger  from 'redux-logger';
 
-let myMiddlewares = [ FeedMiddleware ];
+let myMiddlewares = [ FeedMiddleware,  PlayerMiddleware ];
 
 
 if(process.env['NODE_ENV'] !== 'production') {

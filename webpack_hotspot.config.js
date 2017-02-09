@@ -1,5 +1,7 @@
 const path = require('path');
-  module.exports = {
+const webpack = require('webpack');
+
+module.exports = {
     context: __dirname,
     entry: './app/index.jsx',
     output: {
@@ -33,5 +35,12 @@ const path = require('path');
       }
     ]
   },
+	plugins: [
+		new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('hotspot'),
+      }
+    })
+	],
   devtool: 'source-maps'
 };

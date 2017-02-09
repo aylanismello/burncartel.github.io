@@ -1,37 +1,40 @@
 body {
   background: whitesmoke; }
 
-.feed-container .track-container {
-  background: white;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  padding: 20px;
-  margin-bottom: 20px; }
-  .feed-container .track-container .artwork-wrapper {
-    position: relative; }
-    .feed-container .track-container .artwork-wrapper .artwork-icon {
-      width: 200px; }
-      .feed-container .track-container .artwork-wrapper .artwork-icon:hover {
-        cursor: pointer; }
-    .feed-container .track-container .artwork-wrapper .artwork-play {
-      position: absolute;
-      width: 50px;
-      top: 75px;
-      left: 75px; }
-      .feed-container .track-container .artwork-wrapper .artwork-play:hover {
-        cursor: pointer;
-        width: 60px;
-        top: 70px;
-        left: 70px; }
-  .feed-container .track-container .track-title:hover {
-    cursor: pointer; }
-  .feed-container .track-container .fire-emoji-container {
-    width: 50px; }
-    .feed-container .track-container .fire-emoji-container:hover {
+.feed-container {
+  margin-bottom: 5em;
+  margin-top: 1.5em; }
+  .feed-container .track-container {
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 20px;
+    margin-bottom: 20px; }
+    .feed-container .track-container .artwork-wrapper {
+      position: relative; }
+      .feed-container .track-container .artwork-wrapper .artwork-icon {
+        width: 200px; }
+        .feed-container .track-container .artwork-wrapper .artwork-icon:hover {
+          cursor: pointer; }
+      .feed-container .track-container .artwork-wrapper .artwork-play {
+        position: absolute;
+        width: 50px;
+        top: 75px;
+        left: 75px; }
+        .feed-container .track-container .artwork-wrapper .artwork-play:hover {
+          cursor: pointer;
+          width: 60px;
+          top: 70px;
+          left: 70px; }
+    .feed-container .track-container .track-title:hover {
       cursor: pointer; }
-    .feed-container .track-container .fire-emoji-container .fire-emoji {
-      width: 100%;
-      height: 100%; }
+    .feed-container .track-container .fire-emoji-container {
+      width: 50px; }
+      .feed-container .track-container .fire-emoji-container:hover {
+        cursor: pointer; }
+      .feed-container .track-container .fire-emoji-container .fire-emoji {
+        width: 100%;
+        height: 100%; }
 
 .bc-menu {
   color: white; }
