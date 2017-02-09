@@ -14,7 +14,7 @@ const TrackItem = ({ track, handleTrackClick, playing, trackId, trackLoaded }) =
 	if(trackId === track.id) {
 		if(trackLoaded && playing) {
 			playIcon = 'https://cdn2.iconfinder.com/data/icons/general-22/1000/pause_button-128.png';
-		} else {
+		} else if(!trackLoaded) {
 			playIcon = 'https://cdn1.iconfinder.com/data/icons/loading-wait-time/256/loading_wait_time_02-128.png';
 		}
 	}
@@ -48,6 +48,14 @@ const TrackItem = ({ track, handleTrackClick, playing, trackId, trackLoaded }) =
 								<img
 								className="fire-emoji"
 								src="http://pix.iemoji.com/images/emoji/apple/ios-9/256/fire.png"/>
+							</div>
+
+							<div className="sd-icon-container">
+								<a href={track.permalink_url} >
+									<img
+									className="sd-icon"
+									src="http://pix.iemoji.com/images/emoji/apple/ios-9/256/fire.png"/>
+								</a>
 							</div>
 
 						</div>

@@ -29043,7 +29043,7 @@
 		if (trackId === track.id) {
 			if (trackLoaded && playing) {
 				playIcon = 'https://cdn2.iconfinder.com/data/icons/general-22/1000/pause_button-128.png';
-			} else {
+			} else if (!trackLoaded) {
 				playIcon = 'https://cdn1.iconfinder.com/data/icons/loading-wait-time/256/loading_wait_time_02-128.png';
 			}
 		}
@@ -29076,7 +29076,15 @@
 							_react2.default.createElement('div', { className: 'fire-emoji-container' },
 								_react2.default.createElement('img', {
 									className: 'fire-emoji',
-									src: 'http://pix.iemoji.com/images/emoji/apple/ios-9/256/fire.png' })))))));
+									src: 'http://pix.iemoji.com/images/emoji/apple/ios-9/256/fire.png' })),
+	
+	
+							_react2.default.createElement('div', { className: 'sd-icon-container' },
+								_react2.default.createElement('a', { href: track.permalink_url },
+									_react2.default.createElement('img', {
+										className: 'sd-icon',
+										src: 'http://pix.iemoji.com/images/emoji/apple/ios-9/256/fire.png' }))))))));
+	
 	
 	
 	
