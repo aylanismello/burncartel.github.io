@@ -1,6 +1,9 @@
 import { connect } from 'react-redux';
 import App from './app';
-import { fetchTracks } from '../../actions/feed_actions';
+import {
+	fetchTracks,
+ 	fetchEpisodes
+} from '../../actions/feed_actions';
 
 
 const mapStateToProps = (state, ownProps) => ({
@@ -10,7 +13,8 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-	fetchTracks: (filters) => dispatch(fetchTracks(filters))
+	fetchTracks: (filters) => dispatch(fetchTracks(filters)),
+	fetchEpisodes: (filters) => dispatch(fetchEpisodes(filters))
 });
 
 export default connect(

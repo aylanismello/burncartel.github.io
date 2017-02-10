@@ -8,8 +8,21 @@ export const feedConstants = {
 	LOADING_STOP: 'LOADING_STOP',
 	HANDLE_TRACK_CLICK: 'HANDLE_TRACK_CLICK',
 	SET_BC_FEED: 'SET_BC_FEED',
-	SET_FIRE_FEED: 'SET_FIRE_FEED'
+	SET_FIRE_FEED: 'SET_FIRE_FEED',
+	FETCH_EPISODES: 'FETCH_EPISODES',
+	RECEIVE_EPISODES: 'RECEIVE_EPISODES'
 };
+
+
+export const receiveEpisodes = (episodes) => ({
+	type: feedConstants.RECEIVE_EPISODES,
+	episodes
+})
+
+export const fetchEpisodes = (filters) => ({
+	type: feedConstants.FETCH_EPISODES,
+	filters
+});
 
 export const setBcFeed = () => ({
 	type: feedConstants.SET_BC_FEED

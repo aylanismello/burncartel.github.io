@@ -1,5 +1,6 @@
 import { feedConstants,
 	receiveTracks,
+	receiveEpisodes,
  	loadingStart,
 	loadingStop,
 	updateTrackId
@@ -8,7 +9,7 @@ import {
 	togglePlay
 } from '../actions/player_actions';
 
-import { getTracks } from '../util/bc_api';
+import { getTracks, getEpisodes } from '../util/bc_api';
 
 const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 	switch(action.type) {
@@ -22,6 +23,18 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 				// make error reducer here
 				console.log(`ERROR FETCHING TRACKS: got ${error}`);
 			});
+			return next(action);
+		case feedConstants.FETCH_EPISODES:
+			dispatch(loadingStart());
+			// debugger;
+
+			getEpisodes(action.filters, (episodes) => {
+				dispatch(loadingStop());
+				dispatch(receiveEpisodes(episodes))
+			}, (error) => {
+				console.log(`ERROR FETCHING EPISODES: got ${error}`);
+			});
+
 			return next(action);
 		case feedConstants.HANDLE_TRACK_CLICK:
 			// GOING TO NEW TRACK

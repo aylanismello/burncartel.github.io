@@ -91,7 +91,13 @@ class BurnCartelPlayer extends React.Component {
             {this.track.name}
           </div>
           <div>
-            by {this.track.publisher.name}
+            {/* {
+              if(this.track.publisher) {
+                return (
+                  <p> by {this.track.publisher.name} </p>
+                )
+              }
+            } */}
           </div>
           <div>
             {this.formatTime(this.props.currentTime)}

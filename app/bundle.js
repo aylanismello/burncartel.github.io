@@ -28854,7 +28854,20 @@
 		LOADING_STOP: 'LOADING_STOP',
 		HANDLE_TRACK_CLICK: 'HANDLE_TRACK_CLICK',
 		SET_BC_FEED: 'SET_BC_FEED',
-		SET_FIRE_FEED: 'SET_FIRE_FEED' };
+		SET_FIRE_FEED: 'SET_FIRE_FEED',
+		FETCH_EPISODES: 'FETCH_EPISODES',
+		RECEIVE_EPISODES: 'RECEIVE_EPISODES' };
+	
+	
+	
+	var receiveEpisodes = exports.receiveEpisodes = function receiveEpisodes(episodes) {return {
+			type: feedConstants.RECEIVE_EPISODES,
+			episodes: episodes };};
+	
+	
+	var fetchEpisodes = exports.fetchEpisodes = function fetchEpisodes(filters) {return {
+			type: feedConstants.FETCH_EPISODES,
+			filters: filters };};
 	
 	
 	var setBcFeed = exports.setBcFeed = function setBcFeed() {return {
@@ -29045,9 +29058,17 @@
 	
 	
 	var TrackItem = function TrackItem(_ref) {var track = _ref.track,handleTrackClick = _ref.handleTrackClick,playing = _ref.playing,trackId = _ref.trackId,trackLoaded = _ref.trackLoaded;
-		var numCurators = track.curators.length;
-		var curatorWord = numCurators <= 1 ? 'curator' : 'curators';
-		var curatorsStr = numCurators + ' ' + curatorWord;
+	
+		var curatorsStr = 'Burn Cartel Curation';
+	
+		// this is temporrary logic
+		// TO TAKE CARE OF WHEN WE HAVE EPISODES WITH NO CURATORS
+		// VS REGULAR TRACKS
+		if (track.curators) {
+			var numCurators = track.curators.length;
+			var curatorWord = numCurators <= 1 ? 'curator' : 'curators';
+			curatorsStr = numCurators + ' ' + curatorWord;
+		}
 	
 		var artwork_url = track.artwork_url ? track.artwork_url : track.publisher.avatar_url;
 	
@@ -46807,6 +46828,9 @@
 	var _feed_actions = __webpack_require__(272);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 	
 	
+	
+	
+	
 	var mapStateToProps = function mapStateToProps(state, ownProps) {return {
 			feed: state.feed,
 			filters: state.feed.filters,
@@ -46814,7 +46838,8 @@
 	
 	
 	var mapDispatchToProps = function mapDispatchToProps(dispatch) {return {
-			fetchTracks: function fetchTracks(filters) {return dispatch((0, _feed_actions.fetchTracks)(filters));} };};exports.default =
+			fetchTracks: function fetchTracks(filters) {return dispatch((0, _feed_actions.fetchTracks)(filters));},
+			fetchEpisodes: function fetchEpisodes(filters) {return dispatch((0, _feed_actions.fetchEpisodes)(filters));} };};exports.default =
 	
 	
 	(0, _reactRedux.connect)(
@@ -46844,9 +46869,9 @@
 	      if (nextProps.feedType === 'FIRE' && !_.isEqual(this.props.filters, nextProps.filters)) {
 	        this.props.fetchTracks(nextProps.filters);
 	      } else if (nextProps.feedType !== this.props.feedType) {//the feed type changed
-	
+	        this.props.fetchEpisodes(nextProps.filters);
 	        // HERE IS THE LOGIC FOR FETCHING EPISODE TRACKS
-	        alert('feed type changed!');
+	        // alert('feed type changed!')
 	      }
 	    } }, { key: 'render', value: function render()
 	
@@ -73568,8 +73593,14 @@
 	          _react2.default.createElement('div', null,
 	            this.track.name),
 	
-	          _react2.default.createElement('div', null, 'by ',
-	            this.track.publisher.name),
+	          _react2.default.createElement('div', null),
+	
+	
+	
+	
+	
+	
+	
 	
 	          _react2.default.createElement('div', null,
 	            this.formatTime(this.props.currentTime)));
@@ -73924,6 +73955,15 @@
 						newTracks[track.id] = track;
 					});
 					return { v: Object.assign({}, state, { tracks: action.tracks }) };
+				case _feed_actions.feedConstants.RECEIVE_EPISODES:
+					// debugger;
+					// const newEpisodes = {};
+					var newEpisodes = action.episodes.map(function (episode) {return episode.track;});
+					// debugger;
+					// action.episodes.forEach((episode) => {
+					// 	newEpisodes[episode.id] = episode;
+					// });
+					return { v: _extends({}, state, { tracks: newEpisodes }) };
 				case _feed_actions.feedConstants.UPDATE_FILTERS:
 					// const newFilters = { ...state.filters, ...action.filters } ;
 					// this is because we aren't combining filters!!!
@@ -74014,6 +74054,7 @@
 	
 	
 	
+	
 	var _player_actions = __webpack_require__(931);
 	
 	
@@ -74032,6 +74073,18 @@
 							// make error reducer here
 							console.log('ERROR FETCHING TRACKS: got ' + error);
 						});
+						return next(action);
+					case _feed_actions.feedConstants.FETCH_EPISODES:
+						dispatch((0, _feed_actions.loadingStart)());
+						// debugger;
+	
+						(0, _bc_api.getEpisodes)(action.filters, function (episodes) {
+							dispatch((0, _feed_actions.loadingStop)());
+							dispatch((0, _feed_actions.receiveEpisodes)(episodes));
+						}, function (error) {
+							console.log('ERROR FETCHING EPISODES: got ' + error);
+						});
+	
 						return next(action);
 					case _feed_actions.feedConstants.HANDLE_TRACK_CLICK:
 						// GOING TO NEW TRACK
@@ -74056,7 +74109,7 @@
 /* 938 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.getTracks = undefined;var _jquery = __webpack_require__(939);var _jquery2 = _interopRequireDefault(_jquery);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+	'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.getEpisodes = exports.getTracks = undefined;var _jquery = __webpack_require__(939);var _jquery2 = _interopRequireDefault(_jquery);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 	
 	var localUrl = 'http://localhost:3000/api/v1/tracks/filter';
 	var devUrl = 'https://bc-services.herokuapp.com/api/v1/tracks/filter';
@@ -74065,11 +74118,22 @@
 	
 	var getTracks = exports.getTracks = function getTracks(filters) {var success = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : suc;var error = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : err;
 		var baseUrl = location.hostname === 'localhost' ? localUrl : devUrl;
-	
 		var url = baseUrl + '/' + filters['sort'];
 	
 		_jquery2.default.ajax({
 			url: url,
+			method: 'GET',
+			data: filters,
+			success: success,
+			error: error });
+	
+	};
+	
+	var getEpisodes = exports.getEpisodes = function getEpisodes(filters) {var success = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : suc;var error = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : err;
+		var episodeUrl = 'http://localhost:3000/api/v1/episodes';
+	
+		_jquery2.default.ajax({
+			url: episodeUrl,
 			method: 'GET',
 			data: filters,
 			success: success,

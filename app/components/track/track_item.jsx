@@ -3,9 +3,17 @@ import { Link } from 'react-router';
 
 
 const TrackItem = ({ track, handleTrackClick, playing, trackId, trackLoaded }) => {
-	const numCurators = track.curators.length;
-	const curatorWord = (numCurators <= 1 ? 'curator' : 'curators');
-	const curatorsStr = `${numCurators} ${curatorWord}`
+
+	let curatorsStr = 'Burn Cartel Curation';
+
+	// this is temporrary logic
+	// TO TAKE CARE OF WHEN WE HAVE EPISODES WITH NO CURATORS
+	// VS REGULAR TRACKS
+	if(track.curators) {
+		const numCurators = track.curators.length;
+		const curatorWord = (numCurators <= 1 ? 'curator' : 'curators');
+		curatorsStr = `${numCurators} ${curatorWord}`
+	}
 
 	const artwork_url = (track.artwork_url ? track.artwork_url : track.publisher.avatar_url);
 

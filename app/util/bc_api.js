@@ -7,11 +7,22 @@ const devUrl = 'https://bc-services.herokuapp.com/api/v1/tracks/filter';
 
 export const getTracks = (filters, success = suc, error = err) => {
 	const baseUrl = ((location.hostname === 'localhost') ? localUrl : devUrl);
-
 	const url = `${baseUrl}/${filters['sort']}`;
 
 	$.ajax({
 		url,
+		method: 'GET',
+		data: filters,
+		success,
+		error
+	});
+};
+
+export const getEpisodes = (filters, success = suc, error = err) => {
+	const episodeUrl = 'http://localhost:3000/api/v1/episodes';
+
+	$.ajax({
+		url: episodeUrl,
 		method: 'GET',
 		data: filters,
 		success,
