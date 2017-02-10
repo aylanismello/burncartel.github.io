@@ -17,7 +17,11 @@ class App extends React.Component {
     if (nextProps.feedType === 'FIRE' && !_.isEqual(this.props.filters, nextProps.filters)) {
       this.props.fetchTracks(nextProps.filters);
     } else if(nextProps.feedType !== this.props.feedType) {//the feed type changed
-      this.props.fetchEpisodes(nextProps.filters);
+      if(nextProps.feedType === 'BC') {
+        this.props.fetchEpisodes(nextProps.filters);
+      } else {
+        this.props.fetchTracks(nextProps.filters);
+      }
       // HERE IS THE LOGIC FOR FETCHING EPISODE TRACKS
       // alert('feed type changed!')
     }
