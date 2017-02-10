@@ -31,11 +31,11 @@ class Home extends React.Component {
 					onClick={this.handleFilterChange.bind(this, {sort: 'influential'})}
 					> Influential </button>
 
-					<Link
+					{/* <Link
 						className="btn btn-default"
 						to="/curated"
 						// onClick={this.handleFilterChange.bind(this, {sort: 'bc'})}
-					> BC Selected </Link>
+					> BC Selected </Link> */}
 
 					<button
 						className="btn btn-default"
