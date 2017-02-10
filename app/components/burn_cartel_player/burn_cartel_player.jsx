@@ -1,8 +1,6 @@
 import React from 'react';
 import SoundCloudAudio from 'soundcloud-audio';
 
-
-// <Timer className="h6 mr1" duration={track ? track.duration / 1000 : 0} currentTime={currentTime} {...this.props} />
 class BurnCartelPlayer extends React.Component {
 
   constructor(props) {
@@ -10,12 +8,22 @@ class BurnCartelPlayer extends React.Component {
     this.toggle = this.toggle.bind(this);
     this.playAndLoadTrack = this.playAndLoadTrack.bind(this);
     this.pauseTrack = this.pauseTrack.bind(this);
-    // this.resumeTrack = this.resumeTrack.bind(this);
     this.playTrack = this.playTrack.bind(this);
+    this.formatTime = this.formatTime.bind(this);
     this.scAudio = new SoundCloudAudio(props.clientId);
     this.track = null;
   }
 
+  formatTime(totalSeconds) {
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+
+    if(seconds < 10) {
+      return `${minutes}:0${seconds}`
+    } else {
+      return `${minutes}:${seconds}`
+    }
+  }
 
   playAndLoadTrack() {
     this.playTrack();
@@ -23,19 +31,17 @@ class BurnCartelPlayer extends React.Component {
     let currentTime = 0;
 
     this.scAudio.on('timeupdate', () => {
-
       if(!this.props.trackLoaded && this.scAudio.audio.currentTime > 0) {
         this.props.setTrackLoaded();
       }
 
       if(this.scAudio.audio.currentTime - currentTime > 1) {
         currentTime++;
-        // console.log(this.scAudio.audio.currentTime);
         this.props.updateCurrentTime(currentTime);
-        // console.log(trackTime);
       }
 
-      // what constitutes a play?
+      // what constitutes a play? for counting purposes?
+      // a whole play through... a few seconds?
     });
 
     this.scAudio.on('ended', () => {
@@ -54,21 +60,12 @@ class BurnCartelPlayer extends React.Component {
     this.scAudio.play({streamUrl: this.track.stream_url});
   }
 
-
   componentWillReceiveProps(nextProps) {
-
-    // debugger;
-    // console.log(nextProps.currentTime);
-
     // TRACK CHANGED
     if (this.props.trackId !== nextProps.trackId) {
       this.track = nextProps.track;
       this.props.setTrackNotLoaded();
-      // if(process.env.NODE_ENV !== 'hotspot') {
       this.playAndLoadTrack();
-      // } else {
-        // console.log('hotspot! i do not want to play the track and use dataz :(');
-      // }
     } else if (this.props.playing !== nextProps.playing) {
     // CURRENT TRACK JUST CHANGED STATE
       if(!nextProps.playing) {
@@ -97,7 +94,7 @@ class BurnCartelPlayer extends React.Component {
             by {this.track.publisher.name}
           </div>
           <div>
-            {this.props.currentTime}
+            {this.formatTime(this.props.currentTime)}
           </div>
         </div>
     );
@@ -106,7 +103,7 @@ class BurnCartelPlayer extends React.Component {
       <div>
         LOADING
       </div>
-    )
+    );
   }
 
     return (

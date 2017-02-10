@@ -44,20 +44,26 @@ const TrackItem = ({ track, handleTrackClick, playing, trackId, trackLoaded }) =
 							</Link>
 
 							<span>Selected by {curatorsStr} </span>
-							<div className="fire-emoji-container">
-								<img
-								className="fire-emoji"
-								src="http://pix.iemoji.com/images/emoji/apple/ios-9/256/fire.png"/>
-							</div>
 
-							<div className="sd-icon-container">
-								<a href={track.permalink_url} >
+							<div className="track-icons">
+								<div className="fire-emoji-container">
 									<img
-									className="sd-icon"
+									className="fire-emoji"
 									src="http://pix.iemoji.com/images/emoji/apple/ios-9/256/fire.png"/>
-								</a>
-							</div>
+								</div>
 
+								<div className="sd-icon-container">
+									<a
+										href={track.permalink_url}
+										target="_blank"
+									>
+										<img
+										className="sd-icon"
+										src="https://cdn2.iconfinder.com/data/icons/social-icon-3/512/social_style_3_soundCloud-128.png"/>
+									</a>
+								</div>
+
+							</div>
 						</div>
 
 				</div>

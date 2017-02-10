@@ -2,6 +2,22 @@ body {
 	background: whitesmoke;
 }
 
+.track-container {
+	.track-icons {
+		display: flex;
+
+		.sd-icon-container {
+			width: 45px;
+			.sd-icon {
+				width: 100%;
+				height: auto;
+			}
+		}
+	}
+}
+
+
+
 .feed-container {
 	margin-bottom: 5em;
 	margin-top: 1.5em;

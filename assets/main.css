@@ -1,6 +1,14 @@
 body {
   background: whitesmoke; }
 
+.track-container .track-icons {
+  display: flex; }
+  .track-container .track-icons .sd-icon-container {
+    width: 45px; }
+    .track-container .track-icons .sd-icon-container .sd-icon {
+      width: 100%;
+      height: auto; }
+
 .feed-container {
   margin-bottom: 5em;
   margin-top: 1.5em; }
