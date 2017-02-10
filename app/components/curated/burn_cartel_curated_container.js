@@ -1,16 +1,15 @@
 import { connect } from 'react-redux';
-import { updateFilters, setFireFeed } from '../../actions/feed_actions';
-import Home from './home';
+import { updateFilters, setBcFeed } from '../../actions/feed_actions';
+import BurnCartelCurated from './burn_cartel_curated';
 
 // how do i get rid of this obj without breaking everything?
 const mapStateToProps = (state) => ({});
 
 const mapDispatchToProps = dispatch => ({
-	updateFilters: (filters) => dispatch(updateFilters(filters)),
-	setFireFeed: () => dispatch(setFireFeed())
+	setBcFeed: () => dispatch(setBcFeed())
 });
 
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(Home);
+)(BurnCartelCurated);

@@ -1,11 +1,24 @@
 import React from 'react';
+import FeedContainer from '../feed/feed_container';
 
-const BurnCartelCurated = () => (
-  <div>
-    <h3>
-      Whoa.. now my shit is all curated!
-    </h3>
-  </div>
-);
+class BurnCartelCurated extends React.Component {
+
+	constructor(props) {
+		super(props);
+	}
+
+	componentWillMount() {
+		this.props.setBcFeed();
+	}
+
+	render() {
+		return (
+			<div className="home-page-container">
+        <h1> Welcome to Burn Cartel - Curated ! </h1>
+				<FeedContainer />
+			</div>
+		);
+	}
+};
 
 export default BurnCartelCurated;

@@ -6,9 +6,18 @@ export const feedConstants = {
 	UPDATE_TRACK_ID: 'UPDATE_TRACK_ID',
 	LOADING_START: 'LOADING_START',
 	LOADING_STOP: 'LOADING_STOP',
-	HANDLE_TRACK_CLICK: 'HANDLE_TRACK_CLICK'
+	HANDLE_TRACK_CLICK: 'HANDLE_TRACK_CLICK',
+	SET_BC_FEED: 'SET_BC_FEED',
+	SET_FIRE_FEED: 'SET_FIRE_FEED'
 };
 
+export const setBcFeed = () => ({
+	type: feedConstants.SET_BC_FEED
+});
+
+export const setFireFeed = () => ({
+	type: feedConstants.SET_FIRE_FEED
+});
 
 export const handleTrackClick = (trackId) => ({
 	type: feedConstants.HANDLE_TRACK_CLICK,

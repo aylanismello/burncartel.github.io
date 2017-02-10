@@ -5,7 +5,8 @@ import { fetchTracks } from '../../actions/feed_actions';
 
 const mapStateToProps = (state, ownProps) => ({
 	feed: state.feed,
-	filters: state.feed.filters
+	filters: state.feed.filters,
+	feedType: state.feed.feedType
 });
 
 const mapDispatchToProps = dispatch => ({

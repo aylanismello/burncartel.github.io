@@ -1,14 +1,22 @@
 import { feedConstants } from '../actions/feed_actions';
+
+const FEEDS = {
+	FIRE: 'FIRE',
+	BC: 'BC'
+};
+
 const initialState = {
-	// fire: {
 	tracks: [],
 	filters: {
 		// sort: 'influential',
 		curator: -1
 	},
 	trackId: -1,
-	loadingTracks: false
-	// }
+	loadingTracks: false,
+	feedType: FEEDS.FIRE,
+	bc: {
+		episodeTrackId: -1
+	}
 };
 
 const FeedReducer = (state = initialState, action) => {
@@ -32,6 +40,10 @@ const FeedReducer = (state = initialState, action) => {
 			return { ...state, loadingTracks: true };
 		case feedConstants.LOADING_STOP:
 			return { ...state, loadingTracks: false };
+		case feedConstants.SET_BC_FEED:
+			return { ...state, feedType: FEEDS.BC }
+		case feedConstants.SET_FIRE_FEED:
+			return { ...state, feedType: FEEDS.FIRE }
 		default:
 			return state;
 	}

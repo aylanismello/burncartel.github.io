@@ -23257,7 +23257,7 @@
 	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var _react = __webpack_require__(1);var _react2 = _interopRequireDefault(_react);
 	var _reactRouter = __webpack_require__(210);
 	var _home_container = __webpack_require__(271);var _home_container2 = _interopRequireDefault(_home_container);
-	var _burn_cartel_curated = __webpack_require__(279);var _burn_cartel_curated2 = _interopRequireDefault(_burn_cartel_curated);
+	var _burn_cartel_curated_container = __webpack_require__(946);var _burn_cartel_curated_container2 = _interopRequireDefault(_burn_cartel_curated_container);
 	var _track_show_container = __webpack_require__(280);var _track_show_container2 = _interopRequireDefault(_track_show_container);
 	var _user_show_container = __webpack_require__(289);var _user_show_container2 = _interopRequireDefault(_user_show_container);
 	var _app_container = __webpack_require__(293);var _app_container2 = _interopRequireDefault(_app_container);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}var
@@ -23273,7 +23273,7 @@
 	            _react2.default.createElement(_reactRouter.IndexRoute, { component: _home_container2.default }),
 	            _react2.default.createElement(_reactRouter.Route, { path: '/tracks/:id', component: _track_show_container2.default }),
 	            _react2.default.createElement(_reactRouter.Route, { path: '/users/:id', component: _user_show_container2.default }),
-	            _react2.default.createElement(_reactRouter.Route, { path: '/curated', component: _burn_cartel_curated2.default }))));
+	            _react2.default.createElement(_reactRouter.Route, { path: '/curated', component: _burn_cartel_curated_container2.default }))));
 	
 	
 	
@@ -28828,12 +28828,12 @@
 	var _feed_actions = __webpack_require__(272);
 	var _home = __webpack_require__(273);var _home2 = _interopRequireDefault(_home);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 	
-	
 	// how do i get rid of this obj without breaking everything?
 	var mapStateToProps = function mapStateToProps(state) {return {};};
 	
 	var mapDispatchToProps = function mapDispatchToProps(dispatch) {return {
-			updateFilters: function updateFilters(filters) {return dispatch((0, _feed_actions.updateFilters)(filters));} };};exports.default =
+			updateFilters: function updateFilters(filters) {return dispatch((0, _feed_actions.updateFilters)(filters));},
+			setFireFeed: function setFireFeed() {return dispatch((0, _feed_actions.setFireFeed)());} };};exports.default =
 	
 	
 	(0, _reactRedux.connect)(
@@ -28852,8 +28852,17 @@
 		UPDATE_TRACK_ID: 'UPDATE_TRACK_ID',
 		LOADING_START: 'LOADING_START',
 		LOADING_STOP: 'LOADING_STOP',
-		HANDLE_TRACK_CLICK: 'HANDLE_TRACK_CLICK' };
+		HANDLE_TRACK_CLICK: 'HANDLE_TRACK_CLICK',
+		SET_BC_FEED: 'SET_BC_FEED',
+		SET_FIRE_FEED: 'SET_FIRE_FEED' };
 	
+	
+	var setBcFeed = exports.setBcFeed = function setBcFeed() {return {
+			type: feedConstants.SET_BC_FEED };};
+	
+	
+	var setFireFeed = exports.setFireFeed = function setFireFeed() {return {
+			type: feedConstants.SET_FIRE_FEED };};
 	
 	
 	var handleTrackClick = exports.handleTrackClick = function handleTrackClick(trackId) {return {
@@ -28893,6 +28902,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var _react = __webpack_require__(1);var _react2 = _interopRequireDefault(_react);
+	var _reactRouter = __webpack_require__(210);
 	var _feed_container = __webpack_require__(274);var _feed_container2 = _interopRequireDefault(_feed_container);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}var
 	
 	Home = function (_React$Component) {_inherits(Home, _React$Component);
@@ -28906,6 +28916,7 @@
 	
 			{
 				// this.props.updateFilters({curator: -1, sort: 'influential'});
+				this.props.setFireFeed();
 				this.props.updateFilters({ sort: 'influential' });
 			} }, { key: 'handleFilterChange', value: function handleFilterChange(
 	
@@ -28922,10 +28933,12 @@
 							_react2.default.createElement('button', { className: 'btn btn-default',
 									onClick: this.handleFilterChange.bind(this, { sort: 'influential' }) }, ' Influential '),
 	
-							_react2.default.createElement('button', {
-									className: 'btn btn-default',
-									onClick: this.handleFilterChange.bind(this, { sort: 'bc' }) }, ' BC Selected '),
 	
+							_react2.default.createElement(_reactRouter.Link, {
+									className: 'btn btn-default',
+									to: '/curated'
+									// onClick={this.handleFilterChange.bind(this, {sort: 'bc'})}
+								}, ' BC Selected '),
 	
 							_react2.default.createElement('button', {
 									className: 'btn btn-default',
@@ -29145,15 +29158,28 @@
 /* 279 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _react = __webpack_require__(1);var _react2 = _interopRequireDefault(_react);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var _react = __webpack_require__(1);var _react2 = _interopRequireDefault(_react);
+	var _feed_container = __webpack_require__(274);var _feed_container2 = _interopRequireDefault(_feed_container);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}var
 	
-	var BurnCartelCurated = function BurnCartelCurated() {return (
-	    _react2.default.createElement('div', null,
-	      _react2.default.createElement('h3', null, 'Whoa.. now my shit is all curated!')));};exports.default =
+	BurnCartelCurated = function (_React$Component) {_inherits(BurnCartelCurated, _React$Component);
+	
+		function BurnCartelCurated(props) {_classCallCheck(this, BurnCartelCurated);return _possibleConstructorReturn(this, (BurnCartelCurated.__proto__ || Object.getPrototypeOf(BurnCartelCurated)).call(this,
+			props));
+		}_createClass(BurnCartelCurated, [{ key: 'componentWillMount', value: function componentWillMount()
+	
+			{
+				this.props.setBcFeed();
+			} }, { key: 'render', value: function render()
+	
+			{
+				return (
+					_react2.default.createElement('div', { className: 'home-page-container' },
+						_react2.default.createElement('h1', null, ' Welcome to Burn Cartel - Curated ! '),
+						_react2.default.createElement(_feed_container2.default, null)));
 	
 	
-	
-	
+			} }]);return BurnCartelCurated;}(_react2.default.Component);
+	;exports.default =
 	
 	BurnCartelCurated;
 
@@ -46764,7 +46790,8 @@
 	
 	var mapStateToProps = function mapStateToProps(state, ownProps) {return {
 			feed: state.feed,
-			filters: state.feed.filters };};
+			filters: state.feed.filters,
+			feedType: state.feed.feedType };};
 	
 	
 	var mapDispatchToProps = function mapDispatchToProps(dispatch) {return {
@@ -46780,13 +46807,9 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();var _react = __webpack_require__(1);var _react2 = _interopRequireDefault(_react);
-	var _reactRouter = __webpack_require__(210);
-	
 	var _top_nav = __webpack_require__(295);var _top_nav2 = _interopRequireDefault(_top_nav);
 	var _bottom_nav = __webpack_require__(296);var _bottom_nav2 = _interopRequireDefault(_bottom_nav);
-	var _feed_container = __webpack_require__(274);var _feed_container2 = _interopRequireDefault(_feed_container);
-	var _track_selector = __webpack_require__(286);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}var
-	
+	var _feed_container = __webpack_require__(274);var _feed_container2 = _interopRequireDefault(_feed_container);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}var
 	
 	App = function (_React$Component) {_inherits(App, _React$Component);
 	  function App(props) {_classCallCheck(this, App);return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this,
@@ -46797,8 +46820,14 @@
 	      // you also have to check for pagination being invoked here.
 	      // so maybe if this.props.feed.length !=== nextProps.feed.length
 	      // wait what...
-	      if (!_.isEqual(this.props.filters, nextProps.filters)) {
+	
+	      // somethign changed in fire feed
+	      if (nextProps.feedType === 'FIRE' && !_.isEqual(this.props.filters, nextProps.filters)) {
 	        this.props.fetchTracks(nextProps.filters);
+	      } else if (nextProps.feedType !== this.props.feedType) {//the feed type changed
+	
+	        // HERE IS THE LOGIC FOR FETCHING EPISODE TRACKS
+	        alert('feed type changed!');
 	      }
 	    } }, { key: 'render', value: function render()
 	
@@ -73842,17 +73871,25 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {return typeof obj;} : function (obj) {return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;};var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};var _feed_actions = __webpack_require__(272);
+	
+	var FEEDS = {
+		FIRE: 'FIRE',
+		BC: 'BC' };
+	
+	
 	var initialState = {
-		// fire: {
 		tracks: [],
 		filters: {
 			// sort: 'influential',
 			curator: -1 },
 	
 		trackId: -1,
-		loadingTracks: false
-		// }
-	};
+		loadingTracks: false,
+		feedType: FEEDS.FIRE,
+		bc: {
+			episodeTrackId: -1 } };
+	
+	
 	
 	var FeedReducer = function FeedReducer() {var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;var action = arguments[1];var _ret = function () {
 			switch (action.type) {
@@ -73875,6 +73912,10 @@
 					return { v: _extends({}, state, { loadingTracks: true }) };
 				case _feed_actions.feedConstants.LOADING_STOP:
 					return { v: _extends({}, state, { loadingTracks: false }) };
+				case _feed_actions.feedConstants.SET_BC_FEED:
+					return { v: _extends({}, state, { feedType: FEEDS.BC }) };
+				case _feed_actions.feedConstants.SET_FIRE_FEED:
+					return { v: _extends({}, state, { feedType: FEEDS.FIRE }) };
 				default:
 					return { v: state };}}();if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
 	
@@ -85119,6 +85160,25 @@
 	  transformer: undefined
 	};
 	module.exports = exports['default'];
+
+/***/ },
+/* 946 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _reactRedux = __webpack_require__(179);
+	var _feed_actions = __webpack_require__(272);
+	var _burn_cartel_curated = __webpack_require__(279);var _burn_cartel_curated2 = _interopRequireDefault(_burn_cartel_curated);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+	
+	// how do i get rid of this obj without breaking everything?
+	var mapStateToProps = function mapStateToProps(state) {return {};};
+	
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {return {
+			setBcFeed: function setBcFeed() {return dispatch((0, _feed_actions.setBcFeed)());} };};exports.default =
+	
+	
+	(0, _reactRedux.connect)(
+	mapStateToProps,
+	mapDispatchToProps)(_burn_cartel_curated2.default);
 
 /***/ }
 /******/ ]);

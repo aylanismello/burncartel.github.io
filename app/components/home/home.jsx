@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 import FeedContainer from '../feed/feed_container';
 
 class Home extends React.Component {
@@ -12,6 +13,7 @@ class Home extends React.Component {
 
 	componentWillMount() {
 		// this.props.updateFilters({curator: -1, sort: 'influential'});
+		this.props.setFireFeed();
 		this.props.updateFilters({sort: 'influential'});
 	}
 
@@ -28,10 +30,12 @@ class Home extends React.Component {
 					<button className="btn btn-default"
 					onClick={this.handleFilterChange.bind(this, {sort: 'influential'})}
 					> Influential </button>
-					<button
+
+					<Link
 						className="btn btn-default"
-						onClick={this.handleFilterChange.bind(this, {sort: 'bc'})}
-					> BC Selected </button>
+						to="/curated"
+						// onClick={this.handleFilterChange.bind(this, {sort: 'bc'})}
+					> BC Selected </Link>
 
 					<button
 						className="btn btn-default"
