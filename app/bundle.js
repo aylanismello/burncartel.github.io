@@ -28966,7 +28966,7 @@
 			tracks: state.feed.tracks,
 			elements: ownProps.elements,
 			filters: state.feed.filters,
-			loadingFeed: state.feed.loadingFeed,
+			loadingTracks: state.feed.loadingTracks,
 			trackId: state.feed.trackId,
 			playing: state.player.playing,
 			trackLoaded: state.player.trackLoaded };};
@@ -28993,10 +28993,10 @@
 	var _loading = __webpack_require__(277);var _loading2 = _interopRequireDefault(_loading);
 	var _paginate_button = __webpack_require__(278);var _paginate_button2 = _interopRequireDefault(_paginate_button);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 	
-	var Feed = function Feed(_ref) {var tracks = _ref.tracks,trackLoaded = _ref.trackLoaded,handleTrackClick = _ref.handleTrackClick,loadingFeed = _ref.loadingFeed,trackId = _ref.trackId,playing = _ref.playing;
+	var Feed = function Feed(_ref) {var tracks = _ref.tracks,trackLoaded = _ref.trackLoaded,handleTrackClick = _ref.handleTrackClick,loadingTracks = _ref.loadingTracks,trackId = _ref.trackId,playing = _ref.playing;
 		var childElements = void 0;
 	
-		if (loadingFeed) {
+		if (loadingTracks) {
 			childElements = _react2.default.createElement(_loading2.default, null);
 		} else {
 	
@@ -73843,14 +73843,16 @@
 
 	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {return typeof obj;} : function (obj) {return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;};var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};var _feed_actions = __webpack_require__(272);
 	var initialState = {
+		// fire: {
 		tracks: [],
 		filters: {
 			// sort: 'influential',
 			curator: -1 },
 	
 		trackId: -1,
-		loadingFeed: false };
-	
+		loadingTracks: false
+		// }
+	};
 	
 	var FeedReducer = function FeedReducer() {var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;var action = arguments[1];var _ret = function () {
 			switch (action.type) {
@@ -73870,9 +73872,9 @@
 				case _feed_actions.feedConstants.UPDATE_TRACK_ID:
 					return { v: Object.assign({}, state, { trackId: action.trackId }) };
 				case _feed_actions.feedConstants.LOADING_START:
-					return { v: _extends({}, state, { loadingFeed: true }) };
+					return { v: _extends({}, state, { loadingTracks: true }) };
 				case _feed_actions.feedConstants.LOADING_STOP:
-					return { v: _extends({}, state, { loadingFeed: false }) };
+					return { v: _extends({}, state, { loadingTracks: false }) };
 				default:
 					return { v: state };}}();if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
 	

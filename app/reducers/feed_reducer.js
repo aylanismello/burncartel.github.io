@@ -1,12 +1,14 @@
 import { feedConstants } from '../actions/feed_actions';
 const initialState = {
+	// fire: {
 	tracks: [],
 	filters: {
 		// sort: 'influential',
 		curator: -1
 	},
 	trackId: -1,
-	loadingFeed: false
+	loadingTracks: false
+	// }
 };
 
 const FeedReducer = (state = initialState, action) => {
@@ -27,9 +29,9 @@ const FeedReducer = (state = initialState, action) => {
 		case feedConstants.UPDATE_TRACK_ID:
 			return Object.assign({}, state, { trackId: action.trackId });
 		case feedConstants.LOADING_START:
-			return { ...state, loadingFeed: true };
+			return { ...state, loadingTracks: true };
 		case feedConstants.LOADING_STOP:
-			return { ...state, loadingFeed: false };
+			return { ...state, loadingTracks: false };
 		default:
 			return state;
 	}

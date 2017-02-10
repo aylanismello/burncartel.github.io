@@ -4,10 +4,10 @@ import TrackItem from '../track/track_item';
 import Loading from '../loading';
 import PaginateButton from './paginate_button';
 
-const Feed = ({ tracks, trackLoaded, handleTrackClick, loadingFeed, trackId, playing }) => {
+const Feed = ({ tracks, trackLoaded, handleTrackClick, loadingTracks, trackId, playing }) => {
 	let childElements;
 
-	if(loadingFeed) {
+	if(loadingTracks) {
 		childElements = <Loading />;
 	} else {
 
