@@ -6,7 +6,11 @@ const TopNav = () => {
 			{/* <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
 				<span className="navbar-toggler-icon"></span>
 			</button> */}
-			<a className="navbar-brand" href="#">Burn Cartel</a>
+			<a className="navbar-brand" href="#">
+				<div className="logo-container">
+					<img src="../../assets/bc_white_1.png" alt="Burn Cartel"/>
+				</div>
+			</a>
 
 			<div className="collapse navbar-collapse" id="navbarCollapse">
 

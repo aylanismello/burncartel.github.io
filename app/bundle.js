@@ -46818,7 +46818,11 @@
 	
 	
 	
-				_react2.default.createElement("a", { className: "navbar-brand", href: "#" }, "Burn Cartel"),
+				_react2.default.createElement("a", { className: "navbar-brand", href: "#" },
+					_react2.default.createElement("div", { className: "logo-container" },
+						_react2.default.createElement("img", { src: "../../assets/bc_white_1.png", alt: "Burn Cartel" }))),
+	
+	
 	
 				_react2.default.createElement("div", { className: "collapse navbar-collapse", id: "navbarCollapse" })));
 	
