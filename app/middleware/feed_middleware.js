@@ -1,16 +1,21 @@
 import { feedConstants,
 	receiveTracks,
  	loadingStart,
-	loadingStop
+	loadingStop,
+	updateTrackId
 } from '../actions/feed_actions';
+import {
+	togglePlay
+} from '../actions/player_actions';
+
 import { getTracks } from '../util/bc_api';
 
 const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 	switch(action.type) {
 		case feedConstants.FETCH_TRACKS:
 			dispatch(loadingStart());
-			
-			getTracks(action.filters, (tracks) => {
+
+			getTracks({ sort: 'influential', ...action.filters}, (tracks) => {
 				dispatch(loadingStop());
 				dispatch(receiveTracks(tracks));
 			}, (error) => {
@@ -18,6 +23,18 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 				console.log(`ERROR FETCHING TRACKS: got ${error}`);
 			});
 			return next(action);
+		case feedConstants.HANDLE_TRACK_CLICK:
+			// GOING TO NEW TRACK
+			if(getState().feed.trackId !== action.trackId) {
+				dispatch(updateTrackId(action.trackId));
+				if(!getState().player.playing) {
+					dispatch(togglePlay());
+				}
+			} else {
+				dispatch(togglePlay()); 	// TOGGLING OLD TRACK
+			}
+				// what if you're coming from a paused song?
+				return next(action);
 		default:
 			return next(action);
 	}

@@ -16,6 +16,6 @@ export const getUserFromTracks = createSelector(
 			}
 		}
 
-		throw `USER ${userId} not found :(`
+		// throw `USER ${userId} not found :(`
 	}
 );

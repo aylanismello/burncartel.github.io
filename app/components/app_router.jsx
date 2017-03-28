@@ -1,10 +1,10 @@
 import React from 'react';
 import { Router, Route, IndexRoute, hashHistory } from 'react-router';
-import HomeContainer from './home_container';
-import BurnCartelCurated from './burn_cartel_curated';
-import TrackShowContainer from './track_show_container';
-import UserShowContainer from './user_show_container';
-import AppContainer from './app_container';
+import HomeContainer from './home/home_container';
+import BurnCartelCurated from './curated/burn_cartel_curated';
+import TrackShowContainer from './track/track_show_container';
+import UserShowContainer from './user/user_show_container';
+import AppContainer from './app/app_container';
 
 
 class AppRouter extends React.Component{

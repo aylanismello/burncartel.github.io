@@ -1,8 +1,8 @@
 import { feedConstants } from '../actions/feed_actions';
 const initialState = {
-	tracks: {},
+	tracks: [],
 	filters: {
-		sort: 'influential',
+		// sort: 'influential',
 		curator: -1
 	},
 	trackId: -1,
@@ -16,7 +16,7 @@ const FeedReducer = (state = initialState, action) => {
 			action.tracks.forEach((track) => {
 				newTracks[track.id] = track;
 			});
-			return Object.assign({}, state, { tracks: newTracks });
+			return Object.assign({}, state, { tracks: action.tracks });
 		case feedConstants.UPDATE_FILTERS:
 			// const newFilters = { ...state.filters, ...action.filters } ;
 			// this is because we aren't combining filters!!!

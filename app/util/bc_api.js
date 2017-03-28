@@ -7,8 +7,8 @@ const devUrl = 'https://bc-services.herokuapp.com/api/v1/tracks/filter';
 
 export const getTracks = (filters, success = suc, error = err) => {
 	const baseUrl = ((location.hostname === 'localhost') ? localUrl : devUrl);
+
 	const url = `${baseUrl}/${filters['sort']}`;
-	// debugger;
 
 	$.ajax({
 		url,
