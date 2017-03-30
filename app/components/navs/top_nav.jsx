@@ -8,7 +8,7 @@ const TopNav = () => {
 			</button> */}
 			<a className="navbar-brand" href="#">
 				<div className="logo-container">
-					<img src="../../assets/bc_white_1.png" alt="Burn Cartel"/>
+					<img src="../../assets/bc_small_1.png" alt="Burn Cartel"/>
 				</div>
 			</a>
 

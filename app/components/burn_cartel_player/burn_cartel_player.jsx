@@ -1,8 +1,6 @@
 import React from 'react';
 import SoundCloudAudio from 'soundcloud-audio';
 
-
-// <Timer className="h6 mr1" duration={track ? track.duration / 1000 : 0} currentTime={currentTime} {...this.props} />
 class BurnCartelPlayer extends React.Component {
 
   constructor(props) {
@@ -10,12 +8,25 @@ class BurnCartelPlayer extends React.Component {
     this.toggle = this.toggle.bind(this);
     this.playAndLoadTrack = this.playAndLoadTrack.bind(this);
     this.pauseTrack = this.pauseTrack.bind(this);
-    // this.resumeTrack = this.resumeTrack.bind(this);
     this.playTrack = this.playTrack.bind(this);
     this.scAudio = new SoundCloudAudio(props.clientId);
+    this.secondsToMinutes = this.secondsToMinutes.bind(this);
     this.track = null;
   }
 
+  secondsToMinutes(seconds) {
+    let timeStamp;
+    const secondsLeft = seconds % 60;
+    const minutesLeft = Math.floor(seconds / 60)
+
+    if((secondsLeft) < 10) {
+      timeStamp = `${minutesLeft}:0${secondsLeft}`
+    } else {
+      timeStamp = `${minutesLeft}:${secondsLeft}`
+    }
+
+    return timeStamp;
+  }
 
   playAndLoadTrack() {
     this.playTrack();
@@ -30,12 +41,10 @@ class BurnCartelPlayer extends React.Component {
 
       if(this.scAudio.audio.currentTime - currentTime > 1) {
         currentTime++;
-        // console.log(this.scAudio.audio.currentTime);
         this.props.updateCurrentTime(currentTime);
-        // console.log(trackTime);
       }
-
       // what constitutes a play?
+      // how many seconds in?
     });
 
     this.scAudio.on('ended', () => {
@@ -43,7 +52,6 @@ class BurnCartelPlayer extends React.Component {
       // maybe here we send a post request to increment play count of
       // this track and add to user's history
     });
-
   }
 
   pauseTrack() {
@@ -54,23 +62,13 @@ class BurnCartelPlayer extends React.Component {
     this.scAudio.play({streamUrl: this.track.stream_url});
   }
 
-
   componentWillReceiveProps(nextProps) {
-
-    // debugger;
-    // console.log(nextProps.currentTime);
-
     // TRACK CHANGED
     if (this.props.trackId !== nextProps.trackId) {
       this.track = nextProps.track;
       this.props.setTrackNotLoaded();
-      // if(process.env.NODE_ENV !== 'hotspot') {
       this.playAndLoadTrack();
-      // } else {
-        // console.log('hotspot! i do not want to play the track and use dataz :(');
-      // }
     } else if (this.props.playing !== nextProps.playing) {
-    // CURRENT TRACK JUST CHANGED STATE
       if(!nextProps.playing) {
         this.pauseTrack();
       } else {
@@ -97,7 +95,7 @@ class BurnCartelPlayer extends React.Component {
             by {this.track.publisher.name}
           </div>
           <div>
-            {this.props.currentTime}
+            {this.secondsToMinutes(this.props.currentTime)}
           </div>
         </div>
     );
@@ -117,12 +115,13 @@ class BurnCartelPlayer extends React.Component {
         </div>
 
         <div className='burn-cartel-player-control'>
-          <button onClick={this.toggle}> {playText} </button>
+          {/* <button  type="submit">PLAY</button> */}
+
+          <button className="btn btn-outline-success my-2 my-sm-0" onClick={this.toggle}> {playText} </button>
         </div>
       </div>
 		);
   }
 }
-
 
 export default BurnCartelPlayer;

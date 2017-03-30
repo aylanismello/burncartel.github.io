@@ -34,13 +34,15 @@ body {
           left: 70px; }
     .feed-container .track-container .track-title:hover {
       cursor: pointer; }
-    .feed-container .track-container .fire-emoji-container {
-      width: 50px; }
-      .feed-container .track-container .fire-emoji-container:hover {
-        cursor: pointer; }
-      .feed-container .track-container .fire-emoji-container .fire-emoji {
-        width: 100%;
-        height: 100%; }
+    .feed-container .track-container .track-item-icons {
+      display: flex; }
+      .feed-container .track-container .track-item-icons .track-item-icon-container {
+        width: 50px; }
+        .feed-container .track-container .track-item-icons .track-item-icon-container:hover {
+          cursor: pointer; }
+        .feed-container .track-container .track-item-icons .track-item-icon-container .track-item-icon {
+          width: 100%;
+          height: 100%; }
 
 .bc-menu {
   color: white; }

@@ -13,7 +13,6 @@ const BottomNav = () => {
 
 		{/* https://gorangajic.github.io/react-icons/fa.html */}
 
-			{/* <button className="btn btn-outline-success my-2 my-sm-0" type="submit">PLAY</button> */}
 			{/* <Link
 				to="/">
 				<FontAwesome.FaHome
@@ -21,17 +20,17 @@ const BottomNav = () => {
 				color='aliceblue'
 				className='bc-icon'
 				/>
-			</Link>
-
-			<Link
-				to="/curated">
-				<FontAwesome.FaSoundcloud
-				size={30}
-				color='aliceblue'
-				className='bc-icon'
-				/>
 			</Link> */}
-			{/* <FontAwesome.FaGlobe
+
+			{/* <Link */}
+				{/*  to="/curated"> */}
+			<FontAwesome.FaSoundcloud
+			size={30}
+			color='aliceblue'
+			className='bc-icon'
+			/>
+			{/* </Link> */}
+			<FontAwesome.FaGlobe
 				size={30}
 				color='aliceblue'
 						className='bc-icon'
@@ -45,7 +44,7 @@ const BottomNav = () => {
 				size={30}
 				color='aliceblue'
 						className='bc-icon'
-				/> */}
+				/>
 
 		</nav>
 
