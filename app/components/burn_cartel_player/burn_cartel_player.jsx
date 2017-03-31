@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router';
+import * as FontAwesome from 'react-icons/lib/fa/';
 import SoundCloudAudio from 'soundcloud-audio';
 
 class BurnCartelPlayer extends React.Component {
@@ -12,6 +14,7 @@ class BurnCartelPlayer extends React.Component {
     this.scAudio = new SoundCloudAudio(props.clientId);
     this.secondsToMinutes = this.secondsToMinutes.bind(this);
     this.track = null;
+    this.playIcon = null;
   }
 
   secondsToMinutes(seconds) {
@@ -82,30 +85,52 @@ class BurnCartelPlayer extends React.Component {
   }
 
   render() {
-    const playText = (this.props.playing ? 'Pause' : 'Play');
+    if(!this.props.playing) {
+      this.playIcon = (
+          <FontAwesome.FaPlayCircleO
+          size={50}
+          color='aliceblue'
+          className='bc-icon'
+        />
+      );
+    } else {
+      this.playIcon = (
+        <FontAwesome.FaPauseCircleO
+          size={50}
+          color='aliceblue'
+          className='bc-icon'
+        />
+      )
+    }
+
     let details = <div></div>;
 
     if(this.track && this.props.trackLoaded) {
+        details = (
+          <div>
+            <div>
+              <Link
+                to={`/tracks/${this.track.id}`}
+              >
+                {/* {this.track.name} */}
+                <h3 className="track-title" onClick={() => handleTrackClick(this.track.id)}>{this.track.name}</h3>
+              </Link>
+            </div>
+            <div>
+              by {this.track.publisher.name}
+            </div>
+            <div>
+              {this.secondsToMinutes(this.props.currentTime)}
+            </div>
+          </div>
+      );
+    } else if(this.track && !this.props.trackLoaded) {
       details = (
         <div>
-          <div>
-            {this.track.name}
-          </div>
-          <div>
-            by {this.track.publisher.name}
-          </div>
-          <div>
-            {this.secondsToMinutes(this.props.currentTime)}
-          </div>
+          LOADING
         </div>
-    );
-  } else if(this.track && !this.props.trackLoaded) {
-    details = (
-      <div>
-        LOADING
-      </div>
-    )
-  }
+      )
+    }
 
     return (
       <div className="burn-cartel-player-container">
@@ -115,9 +140,25 @@ class BurnCartelPlayer extends React.Component {
         </div>
 
         <div className='burn-cartel-player-control'>
-          {/* <button  type="submit">PLAY</button> */}
 
-          <button className="btn btn-outline-success my-2 my-sm-0" onClick={this.toggle}> {playText} </button>
+          <FontAwesome.FaStepBackward
+            size={50}
+            color='aliceblue'
+            className='bc-icon'/>
+          <div onClick={this.toggle}> {this.playIcon} </div>
+
+          <FontAwesome.FaStepForward
+            size={50}
+            color='aliceblue'
+            className='bc-icon'/>
+
+          <div onClick={this.props.toggleRepeat}>
+            <FontAwesome.FaRepeat
+               size={50}
+               color={this.props.repeating? 'green' : 'red'}
+              className='bc-icon'/>
+          </div>
+
         </div>
       </div>
 		);

@@ -4,8 +4,14 @@ export const playerConstants = {
 	SET_TRACK_NOT_LOADED: 'SET_TRACK_NOT_LOADED',
 	// refactor these names to match feeder loading
 	SET_TRACK_LOADED: 'SET_TRACK_LOADED',
-	UPDATE_CURRENT_TIME: 'UPDATE_CURRENT_TIME'
+	UPDATE_CURRENT_TIME: 'UPDATE_CURRENT_TIME',
+	TOGGLE_REPEAT: 'TOGGLE_REPEAT'
 };
+
+
+export const toggleRepeat = () => ({
+	type: playerConstants.TOGGLE_REPEAT
+});
 
 export const togglePlay = () => ({
 	type: playerConstants.TOGGLE_PLAY

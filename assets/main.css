@@ -7,6 +7,16 @@ body {
     max-width: 100%;
     height: auto; }
 
+.bc-menu {
+  display: block; }
+  .bc-menu .burn-cartel-player-container {
+    display: flex;
+    justify-content: space-between; }
+    .bc-menu .burn-cartel-player-container .burn-cartel-player-control {
+      display: flex; }
+  .bc-menu .bottom-nav-icons {
+    display: flex; }
+
 .feed-container {
   margin-bottom: 5em;
   margin-top: 1.5em; }

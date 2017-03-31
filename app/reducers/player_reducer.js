@@ -4,7 +4,8 @@ const initialState = {
 	playerInitialized: false,
 	playing: false,
 	trackLoaded: false,
-	currentTime: 0
+	currentTime: 0,
+	repeating: false
 };
 
 const PlayerReducer = (state = initialState, action) => {
@@ -13,6 +14,8 @@ const PlayerReducer = (state = initialState, action) => {
 			return { ...state, playing: !state.playing }
 		case playerConstants.INIT_PLAYER:
 			return { ...state, playerInitialized: true }
+		case playerConstants.TOGGLE_REPEAT:
+			return { ...state, repeating: !state.repeating }
 		case playerConstants.SET_TRACK_LOADED:
 			return { ...state, trackLoaded: true }
 		case playerConstants.SET_TRACK_NOT_LOADED:

@@ -4,6 +4,32 @@ import * as FontAwesome from 'react-icons/lib/fa/';
 import BurnCartelPlayerContainer from '../burn_cartel_player/burn_cartel_player_container';
 
 
+
+const BottomNavIcons = () => (
+	<div className='bottom-nav-icons'>
+		<FontAwesome.FaSoundcloud
+			size={30}
+			color='aliceblue'
+			className='bc-icon'
+			/>
+		<FontAwesome.FaGlobe
+			size={30}
+			color='aliceblue'
+					className='bc-icon'
+		/>
+		<FontAwesome.FaHeart
+			size={30}
+			color='aliceblue'
+					className='bc-icon'
+			/>
+		<FontAwesome.FaSearch
+			size={30}
+			color='aliceblue'
+					className='bc-icon'
+			/>
+	</div>
+);
+
 const BottomNav = () => {
 	return (
 		<nav className="navbar navbar-toggleable-md navbar-inverse fixed-bottom bg-inverse bc-menu">
@@ -21,30 +47,8 @@ const BottomNav = () => {
 				className='bc-icon'
 				/>
 			</Link> */}
+			<BottomNavIcons />
 
-			{/* <Link */}
-				{/*  to="/curated"> */}
-			<FontAwesome.FaSoundcloud
-			size={30}
-			color='aliceblue'
-			className='bc-icon'
-			/>
-			{/* </Link> */}
-			<FontAwesome.FaGlobe
-				size={30}
-				color='aliceblue'
-						className='bc-icon'
-			/>
-			<FontAwesome.FaHeart
-				size={30}
-				color='aliceblue'
-						className='bc-icon'
-				/>
-			<FontAwesome.FaSearch
-				size={30}
-				color='aliceblue'
-						className='bc-icon'
-				/>
 
 		</nav>
 

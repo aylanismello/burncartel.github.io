@@ -12,6 +12,20 @@ body {
 	}
 }
 
+.bc-menu {
+	display: block;
+	.burn-cartel-player-container {
+		display: flex;
+		justify-content: space-between;
+		.burn-cartel-player-control {
+			display: flex;
+		}
+	}
+	.bottom-nav-icons {
+		display: flex;
+	}
+}
+
 .feed-container {
 	margin-bottom: 5em;
 	margin-top: 1.5em;
