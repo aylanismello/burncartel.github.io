@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 
 
-const TrackItem = ({ track, handleTrackClick, playing, trackId, trackLoaded }) => {
+const TrackItem = ({ track, handleTrackClick, playing, trackId, trackLoaded, trackIdx }) => {
 	const numCurators = track.curators.length;
 	const curatorWord = (numCurators <= 1 ? 'curator' : 'curators');
 	const curatorsStr = `${numCurators} ${curatorWord}`
@@ -19,6 +19,7 @@ const TrackItem = ({ track, handleTrackClick, playing, trackId, trackLoaded }) =
 		}
 	}
 
+	debugger;
 	return (
 		<div className="row">
 			<div className="col-sm-6 col-md-4 track-container">
@@ -37,6 +38,7 @@ const TrackItem = ({ track, handleTrackClick, playing, trackId, trackLoaded }) =
 					</div>
 
 						<div className="caption">
+							<h2>{trackIdx + 1}</h2>
 							<Link
 								to={`/tracks/${track.id}`}
 							>

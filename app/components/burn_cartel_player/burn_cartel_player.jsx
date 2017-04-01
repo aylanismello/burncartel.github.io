@@ -1,3 +1,4 @@
+// https://github.com/voronianski/soundcloud-audio.js
 import React from 'react';
 import { Link } from 'react-router';
 import * as FontAwesome from 'react-icons/lib/fa/';
@@ -78,6 +79,24 @@ class BurnCartelPlayer extends React.Component {
         this.playTrack();
       }
     }
+
+
+    // repeat changed
+    if (this.props.repeating !== nextProps.repeating) {
+      if(nextProps.repeating) {
+        debugger;
+        this.scAudio.on('ended', () => {
+          debugger;
+          this.scAudio.audio.currentTime = 0;
+        });
+      } else {
+        this.scAudio.on('ended', () => {
+          this.props.updateTrackId(this.props.nextTrackId);
+        });
+      }
+
+    }
+
   }
 
   toggle() {

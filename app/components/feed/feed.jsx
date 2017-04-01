@@ -14,6 +14,7 @@ const Feed = ({ tracks, trackLoaded, handleTrackClick, loadingFeed, trackId, pla
 		childElements = tracks.map((track, idx) => (
 			<TrackItem
 				track={track}
+				trackIdx={idx}
 				trackId={trackId}
 				playing={playing}
 				trackLoaded={trackLoaded}
