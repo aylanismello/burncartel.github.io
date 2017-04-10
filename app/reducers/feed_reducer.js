@@ -12,6 +12,8 @@ const initialState = {
 
 const FeedReducer = (state = initialState, action) => {
 	switch(action.type) {
+		case feedConstants.RESET_PAGE:
+			return { ...state, page: 1 };
 		case feedConstants.RECEIVE_TRACKS:
 			const newTracks = {};
 			action.tracks.forEach((track) => {

@@ -2,7 +2,9 @@ import { feedConstants,
 	receiveTracks,
  	loadingStart,
 	loadingStop,
-	updateTrackId
+	updateTrackId,
+	resetPage,
+	incrementPage
 } from '../actions/feed_actions';
 import {
 	togglePlay
@@ -14,6 +16,12 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 	switch(action.type) {
 		case feedConstants.FETCH_TRACKS:
 			dispatch(loadingStart());
+
+			if(action.isNewPage) {
+				// want to dispatch increment page
+			} else {
+				dispatch(resetPage());
+			}
 
 			getTracks({ sort: 'influential', ...action.filters}, (tracks) => {
 				dispatch(loadingStop());

@@ -28852,8 +28852,18 @@
 		UPDATE_TRACK_ID: 'UPDATE_TRACK_ID',
 		LOADING_START: 'LOADING_START',
 		LOADING_STOP: 'LOADING_STOP',
-		HANDLE_TRACK_CLICK: 'HANDLE_TRACK_CLICK' };
+		HANDLE_TRACK_CLICK: 'HANDLE_TRACK_CLICK',
+		INCREMENT_PAGE: 'INCREMENT_PAGE',
+		RESET_PAGE: 'RESET_PAGE' };
 	
+	
+	
+	var incrementPage = exports.incrementPage = function incrementPage() {return {
+			type: feedConstants.INCREMENT_PAGE };};
+	
+	
+	var resetPage = exports.resetPage = function resetPage() {return {
+			type: feedConstants.RESET_PAGE };};
 	
 	
 	var handleTrackClick = exports.handleTrackClick = function handleTrackClick(trackId) {return {
@@ -28874,9 +28884,10 @@
 			tracks: tracks };};
 	
 	
-	var fetchTracks = exports.fetchTracks = function fetchTracks(filters) {return {
+	var fetchTracks = exports.fetchTracks = function fetchTracks(filters) {var isNewPage = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;return {
 			type: feedConstants.FETCH_TRACKS,
-			filters: filters };};
+			filters: filters,
+			isNewPage: isNewPage };};
 	
 	
 	var updateFilters = exports.updateFilters = function updateFilters(filters) {return {
@@ -73931,6 +73942,8 @@
 	
 	var FeedReducer = function FeedReducer() {var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;var action = arguments[1];var _ret = function () {
 			switch (action.type) {
+				case _feed_actions.feedConstants.RESET_PAGE:
+					return { v: _extends({}, state, { page: 1 }) };
 				case _feed_actions.feedConstants.RECEIVE_TRACKS:
 					var newTracks = {};
 					action.tracks.forEach(function (track) {
@@ -74026,6 +74039,8 @@
 	
 	
 	
+	
+	
 	var _player_actions = __webpack_require__(930);
 	
 	
@@ -74036,6 +74051,12 @@
 				switch (action.type) {
 					case _feed_actions.feedConstants.FETCH_TRACKS:
 						dispatch((0, _feed_actions.loadingStart)());
+	
+						if (action.isNewPage) {
+							// want to dispatch increment page
+						} else {
+							dispatch((0, _feed_actions.resetPage)());
+						}
 	
 						(0, _bc_api.getTracks)(_extends({ sort: 'influential' }, action.filters), function (tracks) {
 							dispatch((0, _feed_actions.loadingStop)());

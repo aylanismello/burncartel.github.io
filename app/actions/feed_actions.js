@@ -6,9 +6,19 @@ export const feedConstants = {
 	UPDATE_TRACK_ID: 'UPDATE_TRACK_ID',
 	LOADING_START: 'LOADING_START',
 	LOADING_STOP: 'LOADING_STOP',
-	HANDLE_TRACK_CLICK: 'HANDLE_TRACK_CLICK'
+	HANDLE_TRACK_CLICK: 'HANDLE_TRACK_CLICK',
+	INCREMENT_PAGE: 'INCREMENT_PAGE',
+	RESET_PAGE: 'RESET_PAGE'
 };
 
+
+export const incrementPage = () => ({
+	type: feedConstants.INCREMENT_PAGE
+});
+
+export const resetPage = () => ({
+	type: feedConstants.RESET_PAGE
+});
 
 export const handleTrackClick = (trackId) => ({
 	type: feedConstants.HANDLE_TRACK_CLICK,
@@ -28,9 +38,10 @@ export const receiveTracks = (tracks) => ({
 	tracks
 });
 
-export const fetchTracks = (filters) => ({
+export const fetchTracks = (filters, isNewPage = false) => ({
 	type: feedConstants.FETCH_TRACKS,
-	filters
+	filters,
+	isNewPage
 });
 
 export const updateFilters = (filters) => ({
