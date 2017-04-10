@@ -1,6 +1,7 @@
 export const feedConstants = {
 	FETCH_TRACKS: 'FETCH_TRACKS',
 	RECEIVE_TRACKS: 'RECEIVE_TRACKS',
+	RESET_TRACKS: 'RESET_TRACKS',
 	UPDATE_FILTERS: 'UPDATE_FILTERS',
 	UPDATE_TRACK_IDX: 'UPDATE_TRACK_IDX',
 	UPDATE_TRACK_ID: 'UPDATE_TRACK_ID',
@@ -11,6 +12,9 @@ export const feedConstants = {
 	RESET_PAGE: 'RESET_PAGE'
 };
 
+export const resetTracks = () => ({
+	type: feedConstants.RESET_TRACKS
+});
 
 export const incrementPage = () => ({
 	type: feedConstants.INCREMENT_PAGE

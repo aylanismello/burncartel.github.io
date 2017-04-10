@@ -16,6 +16,8 @@ const FeedReducer = (state = initialState, action) => {
 			return { ...state, page: (state.page + 1) }
 		case feedConstants.RESET_PAGE:
 			return { ...state, page: 1 };
+		case feedConstants.RESET_TRACKS:
+			return { ...state, tracks: [] };
 		case feedConstants.RECEIVE_TRACKS:
 			const newTracks = {};
 			// why is this even still here?

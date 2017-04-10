@@ -4,7 +4,8 @@ import { feedConstants,
 	loadingStop,
 	updateTrackId,
 	resetPage,
-	incrementPage
+	incrementPage,
+	resetTracks
 } from '../actions/feed_actions';
 import {
 	togglePlay
@@ -25,7 +26,7 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 				// if not new page, we have a need feed load...
 				// might need to clear the feed.tracks here too
 				dispatch(resetPage());
-				// dispsatch(resetTracks());
+				dispatch(resetTracks());
 			}
 
 			getTracks({ sort: 'influential', ...action.filters}, (tracks) => {

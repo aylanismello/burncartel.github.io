@@ -28847,6 +28847,7 @@
 	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var feedConstants = exports.feedConstants = {
 		FETCH_TRACKS: 'FETCH_TRACKS',
 		RECEIVE_TRACKS: 'RECEIVE_TRACKS',
+		RESET_TRACKS: 'RESET_TRACKS',
 		UPDATE_FILTERS: 'UPDATE_FILTERS',
 		UPDATE_TRACK_IDX: 'UPDATE_TRACK_IDX',
 		UPDATE_TRACK_ID: 'UPDATE_TRACK_ID',
@@ -28856,6 +28857,9 @@
 		INCREMENT_PAGE: 'INCREMENT_PAGE',
 		RESET_PAGE: 'RESET_PAGE' };
 	
+	
+	var resetTracks = exports.resetTracks = function resetTracks() {return {
+			type: feedConstants.RESET_TRACKS };};
 	
 	
 	var incrementPage = exports.incrementPage = function incrementPage() {return {
@@ -73950,6 +73954,8 @@
 					return { v: _extends({}, state, { page: state.page + 1 }) };
 				case _feed_actions.feedConstants.RESET_PAGE:
 					return { v: _extends({}, state, { page: 1 }) };
+				case _feed_actions.feedConstants.RESET_TRACKS:
+					return { v: _extends({}, state, { tracks: [] }) };
 				case _feed_actions.feedConstants.RECEIVE_TRACKS:
 					var newTracks = {};
 					// why is this even still here?
@@ -74052,6 +74058,7 @@
 	
 	
 	
+	
 	var _player_actions = __webpack_require__(930);
 	
 	
@@ -74071,7 +74078,7 @@
 							// if not new page, we have a need feed load...
 							// might need to clear the feed.tracks here too
 							dispatch((0, _feed_actions.resetPage)());
-							// dispsatch(resetTracks());
+							dispatch((0, _feed_actions.resetTracks)());
 						}
 	
 						(0, _bc_api.getTracks)(_extends({ sort: 'influential' }, action.filters), function (tracks) {
