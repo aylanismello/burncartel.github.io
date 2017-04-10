@@ -4,7 +4,7 @@ import TrackItem from '../track/track_item';
 import Loading from '../loading';
 import PaginateButton from './paginate_button';
 
-const Feed = ({ tracks, trackLoaded, handleTrackClick, loadingFeed, trackId, playing }) => {
+const Feed = ({ tracks, trackLoaded, handleTrackClick, loadingFeed, trackId, playing, fetchTracks  }) => {
 	let childElements;
 
 	if(loadingFeed) {
@@ -28,7 +28,9 @@ const Feed = ({ tracks, trackLoaded, handleTrackClick, loadingFeed, trackId, pla
 	return (
 		<div className="feed-container">
 			{childElements}
-			<PaginateButton />
+			<PaginateButton
+				fetchTracks={fetchTracks}
+			/>
 		</div>
 	);
 };

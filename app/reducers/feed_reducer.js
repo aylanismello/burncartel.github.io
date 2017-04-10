@@ -12,14 +12,21 @@ const initialState = {
 
 const FeedReducer = (state = initialState, action) => {
 	switch(action.type) {
+		case feedConstants.INCREMENT_PAGE:
+			return { ...state, page: (state.page + 1) }
 		case feedConstants.RESET_PAGE:
 			return { ...state, page: 1 };
 		case feedConstants.RECEIVE_TRACKS:
 			const newTracks = {};
+			// why is this even still here?
+			// doesn't the track selector do this for us?
 			action.tracks.forEach((track) => {
 				newTracks[track.id] = track;
 			});
-			return { ...state, tracks: action.tracks };
+
+
+
+			return { ...state, tracks: [ ...state.tracks, ...action.tracks ] };
 		case feedConstants.UPDATE_FILTERS:
 			// const newFilters = { ...state.filters, ...action.filters } ;
 			// this is because we aren't combining filters!!!

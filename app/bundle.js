@@ -28984,7 +28984,7 @@
 	
 	
 	var mapDispatchToProps = function mapDispatchToProps(dispatch) {return {
-			fetchTracks: function fetchTracks() {return dispatch((0, _feed_actions.fetchTracks)());},
+			fetchTracks: function fetchTracks(filters, isNewpage) {return dispatch((0, _feed_actions.fetchTracks)(filters, isNewpage));},
 			handleTrackClick: function handleTrackClick(trackId) {
 				dispatch((0, _feed_actions.handleTrackClick)(trackId));
 			} };};exports.default =
@@ -29004,7 +29004,7 @@
 	var _loading = __webpack_require__(277);var _loading2 = _interopRequireDefault(_loading);
 	var _paginate_button = __webpack_require__(278);var _paginate_button2 = _interopRequireDefault(_paginate_button);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 	
-	var Feed = function Feed(_ref) {var tracks = _ref.tracks,trackLoaded = _ref.trackLoaded,handleTrackClick = _ref.handleTrackClick,loadingFeed = _ref.loadingFeed,trackId = _ref.trackId,playing = _ref.playing;
+	var Feed = function Feed(_ref) {var tracks = _ref.tracks,trackLoaded = _ref.trackLoaded,handleTrackClick = _ref.handleTrackClick,loadingFeed = _ref.loadingFeed,trackId = _ref.trackId,playing = _ref.playing,fetchTracks = _ref.fetchTracks;
 		var childElements = void 0;
 	
 		if (loadingFeed) {
@@ -29028,7 +29028,9 @@
 		return (
 			_react2.default.createElement('div', { className: 'feed-container' },
 				childElements,
-				_react2.default.createElement(_paginate_button2.default, null)));
+				_react2.default.createElement(_paginate_button2.default, {
+					fetchTracks: fetchTracks })));
+	
 	
 	
 	};exports.default =
@@ -29142,10 +29144,12 @@
 	
 	// takes in function to trigger pagination
 	
-	var PaginateButton = function PaginateButton() {
+	var PaginateButton = function PaginateButton(_ref) {var fetchTracks = _ref.fetchTracks;
 	
 		return (
-			_react2.default.createElement("button", { className: "btn btn-default" }, " More "));
+			_react2.default.createElement("button", {
+					onClick: function onClick() {return fetchTracks({}, true);},
+					className: "btn btn-default" }, " More "));
 	
 	};exports.default =
 	
@@ -73928,7 +73932,7 @@
 /* 933 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {return typeof obj;} : function (obj) {return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;};var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};var _feed_actions = __webpack_require__(272);
+	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {return typeof obj;} : function (obj) {return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;};var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};var _feed_actions = __webpack_require__(272);function _toConsumableArray(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;} else {return Array.from(arr);}}
 	var initialState = {
 		tracks: [],
 		filters: {
@@ -73942,14 +73946,21 @@
 	
 	var FeedReducer = function FeedReducer() {var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;var action = arguments[1];var _ret = function () {
 			switch (action.type) {
+				case _feed_actions.feedConstants.INCREMENT_PAGE:
+					return { v: _extends({}, state, { page: state.page + 1 }) };
 				case _feed_actions.feedConstants.RESET_PAGE:
 					return { v: _extends({}, state, { page: 1 }) };
 				case _feed_actions.feedConstants.RECEIVE_TRACKS:
 					var newTracks = {};
+					// why is this even still here?
+					// doesn't the track selector do this for us?
 					action.tracks.forEach(function (track) {
 						newTracks[track.id] = track;
 					});
-					return { v: _extends({}, state, { tracks: action.tracks }) };
+	
+	
+	
+					return { v: _extends({}, state, { tracks: [].concat(_toConsumableArray(state.tracks), _toConsumableArray(action.tracks)) }) };
 				case _feed_actions.feedConstants.UPDATE_FILTERS:
 					// const newFilters = { ...state.filters, ...action.filters } ;
 					// this is because we aren't combining filters!!!
@@ -74052,10 +74063,15 @@
 					case _feed_actions.feedConstants.FETCH_TRACKS:
 						dispatch((0, _feed_actions.loadingStart)());
 	
+						debugger;
 						if (action.isNewPage) {
 							// want to dispatch increment page
+							dispatch((0, _feed_actions.incrementPage)());
 						} else {
+							// if not new page, we have a need feed load...
+							// might need to clear the feed.tracks here too
 							dispatch((0, _feed_actions.resetPage)());
+							// dispsatch(resetTracks());
 						}
 	
 						(0, _bc_api.getTracks)(_extends({ sort: 'influential' }, action.filters), function (tracks) {

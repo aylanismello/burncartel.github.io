@@ -13,7 +13,7 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-	fetchTracks: () => dispatch(fetchTracks()),
+	fetchTracks: (filters, isNewpage) => dispatch(fetchTracks(filters, isNewpage)),
 	handleTrackClick: (trackId) => {
 		dispatch(handleTrackClick(trackId))
 	}

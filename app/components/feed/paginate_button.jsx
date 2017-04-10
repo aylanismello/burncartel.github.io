@@ -4,10 +4,12 @@ import React from 'react';
 
 // takes in function to trigger pagination
 
-const PaginateButton = () => {
+const PaginateButton = ({ fetchTracks }) => {
 
 	return (
-		<button className="btn btn-default"> More </button>
+		<button
+			onClick={() => fetchTracks({}, true)}
+			className="btn btn-default"> More </button>
 	);
 }
 
