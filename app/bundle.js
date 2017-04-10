@@ -73413,7 +73413,6 @@
 		var tracksHash = (0, _track_selector.getTracksHash)(state);
 		var track = tracksHash[state.feed.trackId];
 		var nextTrackId = (0, _track_selector.getNextTrackId)(state);
-	
 		// console.log(`next track id is ${nextTrackId}`);
 		// replace this with reading from .env
 	
@@ -73425,7 +73424,8 @@
 			nextTrackId: nextTrackId,
 			playing: state.player.playing,
 			repeating: state.player.repeating,
-			currentTime: state.player.currentTime };
+			currentTime: state.player.currentTime,
+			filters: state.feed.filters };
 	
 	};
 	
@@ -73435,7 +73435,8 @@
 			toggleRepeat: function toggleRepeat() {return dispatch((0, _player_actions.toggleRepeat)());},
 			setTrackLoaded: function setTrackLoaded() {return dispatch((0, _player_actions.setTrackLoaded)());},
 			setTrackNotLoaded: function setTrackNotLoaded() {return dispatch((0, _player_actions.setTrackNotLoaded)());},
-			updateCurrentTime: function updateCurrentTime(currentTime) {return dispatch((0, _player_actions.updateCurrentTime)(currentTime));} };};exports.default =
+			updateCurrentTime: function updateCurrentTime(currentTime) {return dispatch((0, _player_actions.updateCurrentTime)(currentTime));},
+			fetchTracks: function fetchTracks(filters, isNewpage) {return dispatch((0, _feed_actions.fetchTracks)(filters, isNewpage));} };};exports.default =
 	
 	
 	
@@ -73486,6 +73487,11 @@
 	
 	      var currentTime = 0;
 	
+	
+	
+	      debugger;
+	
+	
 	      this.scAudio.on('timeupdate', function () {
 	
 	        if (!_this2.props.trackLoaded && _this2.scAudio.audio.currentTime > 0) {
@@ -73515,7 +73521,7 @@
 	      this.scAudio.play({ streamUrl: this.track.stream_url });
 	    } }, { key: 'componentWillReceiveProps', value: function componentWillReceiveProps(
 	
-	    nextProps) {var _this3 = this;
+	    nextProps) {
 	      // TRACK CHANGED
 	      if (this.props.trackId !== nextProps.trackId) {
 	        this.track = nextProps.track;
@@ -73531,18 +73537,18 @@
 	
 	
 	      // repeat changed
-	      if (this.props.repeating !== nextProps.repeating) {
-	        if (nextProps.repeating) {
-	          this.scAudio.on('ended', function () {
-	            _this3.scAudio.audio.currentTime = 0;
-	          });
-	        } else {
-	          this.scAudio.on('ended', function () {
-	            _this3.props.updateTrackId(_this3.props.nextTrackId);
-	          });
-	        }
-	
-	      }
+	      // if (this.props.repeating !== nextProps.repeating) {
+	      //   if(nextProps.repeating) {
+	      //     this.scAudio.on('ended', () => {
+	      //       this.scAudio.audio.currentTime = 0;
+	      //     });
+	      //   } else {
+	      //     this.scAudio.on('ended', () => {
+	      //       this.props.updateTrackId(this.props.nextTrackId);
+	      //     });
+	      //   }
+	      //
+	      // }
 	
 	    } }, { key: 'toggle', value: function toggle()
 	
@@ -73550,7 +73556,7 @@
 	      this.props.togglePlay();
 	    } }, { key: 'render', value: function render()
 	
-	    {var _this4 = this;
+	    {var _this3 = this;
 	      if (!this.props.playing) {
 	        this.playIcon =
 	        _react2.default.createElement(FontAwesome.FaPlayCircleO, {
@@ -73579,7 +73585,7 @@
 	                to: '/tracks/' + this.track.id },
 	
 	
-	              _react2.default.createElement('h3', { className: 'track-title', onClick: function onClick() {return handleTrackClick(_this4.track.id);} }, this.track.name))),
+	              _react2.default.createElement('h3', { className: 'track-title', onClick: function onClick() {return handleTrackClick(_this3.track.id);} }, this.track.name))),
 	
 	
 	          _react2.default.createElement('div', null, 'by ',
@@ -74065,9 +74071,7 @@
 					case _feed_actions.feedConstants.FETCH_TRACKS:
 						dispatch((0, _feed_actions.loadingStart)());
 	
-						debugger;
 						if (action.isNewPage) {
-							// want to dispatch increment page
 							dispatch((0, _feed_actions.incrementPage)());
 						} else {
 							// if not new page, we have a need feed load...

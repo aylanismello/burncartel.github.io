@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import BurnCartelPlayer from './burn_cartel_player';
-import { updateTrackId } from '../../actions/feed_actions';
+import { updateTrackId, fetchTracks } from '../../actions/feed_actions';
 import { togglePlay,
 	setTrackLoaded,
 	setTrackNotLoaded,
@@ -14,7 +14,6 @@ const mapStateToProps = (state) => {
 	const tracksHash = getTracksHash(state);
 	const track = tracksHash[state.feed.trackId];
 	const nextTrackId = getNextTrackId(state);
-
 	// console.log(`next track id is ${nextTrackId}`);
 	// replace this with reading from .env
 
@@ -26,7 +25,8 @@ const mapStateToProps = (state) => {
 		nextTrackId,
 		playing: state.player.playing,
 		repeating: state.player.repeating,
-		currentTime: state.player.currentTime
+		currentTime: state.player.currentTime,
+		filters: state.feed.filters
 	};
 };
 
@@ -36,7 +36,8 @@ const mapDispatchToProps = (dispatch) => ({
 	toggleRepeat: () => dispatch(toggleRepeat()),
 	setTrackLoaded: () => dispatch(setTrackLoaded()),
 	setTrackNotLoaded: () => dispatch(setTrackNotLoaded()),
-	updateCurrentTime: (currentTime) => dispatch(updateCurrentTime(currentTime))
+	updateCurrentTime: (currentTime) => dispatch(updateCurrentTime(currentTime)),
+	fetchTracks: (filters, isNewpage) => dispatch(fetchTracks(filters, isNewpage))
 
 });
 

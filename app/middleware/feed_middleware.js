@@ -18,9 +18,7 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 		case feedConstants.FETCH_TRACKS:
 			dispatch(loadingStart());
 
-			debugger;
 			if(action.isNewPage) {
-				// want to dispatch increment page
 				dispatch(incrementPage());
 			} else {
 				// if not new page, we have a need feed load...

@@ -37,6 +37,11 @@ class BurnCartelPlayer extends React.Component {
 
     let currentTime = 0;
 
+
+
+    debugger;
+
+
     this.scAudio.on('timeupdate', () => {
 
       if(!this.props.trackLoaded && this.scAudio.audio.currentTime > 0) {
@@ -82,18 +87,18 @@ class BurnCartelPlayer extends React.Component {
 
 
     // repeat changed
-    if (this.props.repeating !== nextProps.repeating) {
-      if(nextProps.repeating) {
-        this.scAudio.on('ended', () => {
-          this.scAudio.audio.currentTime = 0;
-        });
-      } else {
-        this.scAudio.on('ended', () => {
-          this.props.updateTrackId(this.props.nextTrackId);
-        });
-      }
-
-    }
+    // if (this.props.repeating !== nextProps.repeating) {
+    //   if(nextProps.repeating) {
+    //     this.scAudio.on('ended', () => {
+    //       this.scAudio.audio.currentTime = 0;
+    //     });
+    //   } else {
+    //     this.scAudio.on('ended', () => {
+    //       this.props.updateTrackId(this.props.nextTrackId);
+    //     });
+    //   }
+    //
+    // }
 
   }
 
