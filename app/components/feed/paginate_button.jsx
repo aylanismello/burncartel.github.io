@@ -1,17 +1,12 @@
 import React from 'react';
 
-
-
-// takes in function to trigger pagination
-
-const PaginateButton = ({ fetchTracks }) => {
+const PaginateButton = ({ fetchTracks, filters }) => {
 
 	return (
 		<button
-			onClick={() => fetchTracks({}, true)}
+			onClick={() => fetchTracks(filters, true)}
 			className="btn btn-default"> More </button>
 	);
-}
-
+};
 
 export default PaginateButton;

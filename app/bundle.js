@@ -29008,7 +29008,7 @@
 	var _loading = __webpack_require__(277);var _loading2 = _interopRequireDefault(_loading);
 	var _paginate_button = __webpack_require__(278);var _paginate_button2 = _interopRequireDefault(_paginate_button);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 	
-	var Feed = function Feed(_ref) {var tracks = _ref.tracks,trackLoaded = _ref.trackLoaded,handleTrackClick = _ref.handleTrackClick,loadingFeed = _ref.loadingFeed,trackId = _ref.trackId,playing = _ref.playing,fetchTracks = _ref.fetchTracks;
+	var Feed = function Feed(_ref) {var tracks = _ref.tracks,filters = _ref.filters,trackLoaded = _ref.trackLoaded,handleTrackClick = _ref.handleTrackClick,loadingFeed = _ref.loadingFeed,trackId = _ref.trackId,playing = _ref.playing,fetchTracks = _ref.fetchTracks;
 		var childElements = void 0;
 	
 		if (loadingFeed) {
@@ -29033,7 +29033,8 @@
 			_react2.default.createElement('div', { className: 'feed-container' },
 				childElements,
 				_react2.default.createElement(_paginate_button2.default, {
-					fetchTracks: fetchTracks })));
+					fetchTracks: fetchTracks,
+					filters: filters })));
 	
 	
 	
@@ -29144,19 +29145,14 @@
 
 	"use strict";Object.defineProperty(exports, "__esModule", { value: true });var _react = __webpack_require__(1);var _react2 = _interopRequireDefault(_react);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 	
-	
-	
-	// takes in function to trigger pagination
-	
-	var PaginateButton = function PaginateButton(_ref) {var fetchTracks = _ref.fetchTracks;
+	var PaginateButton = function PaginateButton(_ref) {var fetchTracks = _ref.fetchTracks,filters = _ref.filters;
 	
 		return (
 			_react2.default.createElement("button", {
-					onClick: function onClick() {return fetchTracks({}, true);},
+					onClick: function onClick() {return fetchTracks(filters, true);},
 					className: "btn btn-default" }, " More "));
 	
 	};exports.default =
-	
 	
 	PaginateButton;
 
@@ -73964,9 +73960,8 @@
 						newTracks[track.id] = track;
 					});
 	
-	
-	
-					return { v: _extends({}, state, { tracks: [].concat(_toConsumableArray(state.tracks), _toConsumableArray(action.tracks)) }) };
+					// for some reason the last tracks from old tracks and new tracks double up
+					return { v: _extends({}, state, { tracks: [].concat(_toConsumableArray(state.tracks), _toConsumableArray(action.tracks.slice(1))) }) };
 				case _feed_actions.feedConstants.UPDATE_FILTERS:
 					// const newFilters = { ...state.filters, ...action.filters } ;
 					// this is because we aren't combining filters!!!
