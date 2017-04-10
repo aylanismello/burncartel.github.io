@@ -3,7 +3,6 @@ import { Link } from 'react-router';
 import VisibilitySensor from 'react-visibility-sensor';
 import TrackItem from '../track/track_item';
 import Loading from '../loading';
-import PaginateButton from './paginate_button';
 
 const Feed = ({ tracks, filters, trackLoaded, handleTrackClick, loadingFeed, trackId, playing, fetchTracks  }) => {
 	let childElements;
