@@ -19,7 +19,6 @@ const TrackItem = ({ track, handleTrackClick, playing, trackId, trackLoaded, tra
 		}
 	}
 
-	debugger;
 	return (
 		<div className="row">
 			<div className="col-sm-6 col-md-4 track-container">

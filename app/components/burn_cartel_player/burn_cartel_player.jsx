@@ -84,9 +84,7 @@ class BurnCartelPlayer extends React.Component {
     // repeat changed
     if (this.props.repeating !== nextProps.repeating) {
       if(nextProps.repeating) {
-        debugger;
         this.scAudio.on('ended', () => {
-          debugger;
           this.scAudio.audio.currentTime = 0;
         });
       } else {

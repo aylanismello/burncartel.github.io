@@ -29049,7 +29049,6 @@
 			}
 		}
 	
-		debugger;
 		return (
 			_react2.default.createElement('div', { className: 'row' },
 				_react2.default.createElement('div', { className: 'col-sm-6 col-md-4 track-container' },
@@ -73519,9 +73518,7 @@
 	      // repeat changed
 	      if (this.props.repeating !== nextProps.repeating) {
 	        if (nextProps.repeating) {
-	          debugger;
 	          this.scAudio.on('ended', function () {
-	            debugger;
 	            _this3.scAudio.audio.currentTime = 0;
 	          });
 	        } else {
@@ -73928,7 +73925,8 @@
 			curator: -1 },
 	
 		trackId: -1,
-		loadingFeed: false };
+		loadingFeed: false,
+		page: 1 };
 	
 	
 	var FeedReducer = function FeedReducer() {var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;var action = arguments[1];var _ret = function () {

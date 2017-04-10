@@ -6,7 +6,8 @@ const initialState = {
 		curator: -1
 	},
 	trackId: -1,
-	loadingFeed: false
+	loadingFeed: false,
+	page: 1
 };
 
 const FeedReducer = (state = initialState, action) => {
