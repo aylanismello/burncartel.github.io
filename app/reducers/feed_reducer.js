@@ -16,7 +16,7 @@ const FeedReducer = (state = initialState, action) => {
 			action.tracks.forEach((track) => {
 				newTracks[track.id] = track;
 			});
-			return Object.assign({}, state, { tracks: action.tracks });
+			return { ...state, tracks: action.tracks };
 		case feedConstants.UPDATE_FILTERS:
 			// const newFilters = { ...state.filters, ...action.filters } ;
 			// this is because we aren't combining filters!!!
@@ -25,7 +25,7 @@ const FeedReducer = (state = initialState, action) => {
 			const newState = { ...state, filters: newFilters };
 			return newState;
 		case feedConstants.UPDATE_TRACK_ID:
-			return Object.assign({}, state, { trackId: action.trackId });
+			return { ...state, trackId: action.trackId };
 		case feedConstants.LOADING_START:
 			return { ...state, loadingFeed: true };
 		case feedConstants.LOADING_STOP:

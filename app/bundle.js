@@ -29055,6 +29055,7 @@
 				_react2.default.createElement('div', { className: 'col-sm-6 col-md-4 track-container' },
 					_react2.default.createElement('div', { className: 'thumbnail' },
 	
+						_react2.default.createElement('h2', null, trackIdx + 1),
 						_react2.default.createElement('div', { className: 'artwork-wrapper', onClick: function onClick() {return handleTrackClick(track.id);} },
 							_react2.default.createElement('img', {
 								src: artwork_url,
@@ -29068,7 +29069,7 @@
 	
 	
 						_react2.default.createElement('div', { className: 'caption' },
-							_react2.default.createElement('h2', null, trackIdx + 1),
+	
 							_react2.default.createElement(_reactRouter.Link, {
 									to: '/tracks/' + track.id },
 	
@@ -73937,7 +73938,7 @@
 					action.tracks.forEach(function (track) {
 						newTracks[track.id] = track;
 					});
-					return { v: Object.assign({}, state, { tracks: action.tracks }) };
+					return { v: _extends({}, state, { tracks: action.tracks }) };
 				case _feed_actions.feedConstants.UPDATE_FILTERS:
 					// const newFilters = { ...state.filters, ...action.filters } ;
 					// this is because we aren't combining filters!!!
@@ -73946,7 +73947,7 @@
 					var newState = _extends({}, state, { filters: newFilters });
 					return { v: newState };
 				case _feed_actions.feedConstants.UPDATE_TRACK_ID:
-					return { v: Object.assign({}, state, { trackId: action.trackId }) };
+					return { v: _extends({}, state, { trackId: action.trackId }) };
 				case _feed_actions.feedConstants.LOADING_START:
 					return { v: _extends({}, state, { loadingFeed: true }) };
 				case _feed_actions.feedConstants.LOADING_STOP:

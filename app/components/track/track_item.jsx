@@ -25,6 +25,7 @@ const TrackItem = ({ track, handleTrackClick, playing, trackId, trackLoaded, tra
 			<div className="col-sm-6 col-md-4 track-container">
 				<div className="thumbnail" >
 				{/*  do NOT use image itself to set width of this, there's invisble white space on edges*/}
+					<h2>{trackIdx + 1}</h2>
 					<div className="artwork-wrapper" onClick={() => handleTrackClick(track.id)}>
 						<img
 							src={artwork_url}
@@ -38,7 +39,7 @@ const TrackItem = ({ track, handleTrackClick, playing, trackId, trackLoaded, tra
 					</div>
 
 						<div className="caption">
-							<h2>{trackIdx + 1}</h2>
+
 							<Link
 								to={`/tracks/${track.id}`}
 							>
