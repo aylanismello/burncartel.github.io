@@ -2902,6 +2902,10 @@ react-soundplayer@^0.3.6:
     object-assign "^4.0.1"
     soundcloud-audio "^1.0.3"
 
+react-visibility-sensor@^3.8.0:
+  version "3.8.0"
+  resolved "https://registry.yarnpkg.com/react-visibility-sensor/-/react-visibility-sensor-3.8.0.tgz#c9b2fd760ea796ee0edd1ebb17b6e7aee0693ece"
+
 react@^15.3.0:
   version "15.4.2"
   resolved "https://registry.yarnpkg.com/react/-/react-15.4.2.tgz#41f7991b26185392ba9bae96c8889e7e018397ef"

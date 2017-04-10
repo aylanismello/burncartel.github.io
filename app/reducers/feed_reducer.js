@@ -6,7 +6,7 @@ const initialState = {
 		curator: -1
 	},
 	trackId: -1,
-	loadingFeed: false,
+	loadingFeed: true,
 	page: 1
 };
 
