@@ -21,7 +21,7 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 			}, (error) => {
 				// make error reducer here
 				console.log(`ERROR FETCHING TRACKS: got ${error}`);
-			});
+			}, getState().feed.page);
 			return next(action);
 		case feedConstants.HANDLE_TRACK_CLICK:
 			// GOING TO NEW TRACK

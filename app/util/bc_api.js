@@ -5,10 +5,12 @@ const devUrl = 'https://bc-fire-api.herokuapp.com/api/v1/tracks/filter';
 
 // let url = ((location.hostname === 'localhost') ? localUrl : devUrl);
 
-export const getTracks = (filters, success = suc, error = err) => {
+// the page number is passed in here as well
+
+export const getTracks = (filters, success = suc, error = err, page = 1) => {
 	const baseUrl = ((location.hostname === 'localhost') ? localUrl : devUrl);
 
-	const url = `${baseUrl}/${filters['sort']}`;
+	const url = `${baseUrl}/${filters['sort']}?page=${page}`;
 
 	$.ajax({
 		url,

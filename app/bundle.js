@@ -74043,7 +74043,7 @@
 						}, function (error) {
 							// make error reducer here
 							console.log('ERROR FETCHING TRACKS: got ' + error);
-						});
+						}, getState().feed.page);
 						return next(action);
 					case _feed_actions.feedConstants.HANDLE_TRACK_CLICK:
 						// GOING TO NEW TRACK
@@ -74075,10 +74075,12 @@
 	
 	// let url = ((location.hostname === 'localhost') ? localUrl : devUrl);
 	
-	var getTracks = exports.getTracks = function getTracks(filters) {var success = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : suc;var error = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : err;
+	// the page number is passed in here as well
+	
+	var getTracks = exports.getTracks = function getTracks(filters) {var success = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : suc;var error = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : err;var page = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 1;
 		var baseUrl = location.hostname === 'localhost' ? localUrl : devUrl;
 	
-		var url = baseUrl + '/' + filters['sort'];
+		var url = baseUrl + '/' + filters['sort'] + '?page=' + page;
 	
 		_jquery2.default.ajax({
 			url: url,
