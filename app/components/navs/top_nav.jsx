@@ -1,34 +1,62 @@
+import $ from 'jquery';
 import React from 'react';
 
 
 const TopNav = () => {
+
+	let fbButton = null;
+
+
+
+// https://github.com/mkdynamic/omniauth-facebook/blob/3b084957c0e8fd8a59dd9c44293a02d4ca77835a/lib/omniauth/strategies/facebook.rb
+	const loginFB = () =>  {
+		FB.login(response => {
+			if(response.authResponse.accessToken) {
+				debugger;
+				$.ajax({
+					url: 'http://localhost:3000/auth/facebook/callback',
+					method: 'GET',
+					xhrFields: {
+						withCredentials: true
+				 },
+				 data: {
+					 code: response.authResponse.signedRequest
+				 },
+					error: (err) => {
+						// debugger;
+					}
+				})
+
+				console.log('logged in');
+			} else {
+				console.log('not logged in');
+			}
+	});
+	}
+
+
 	return (
 		<nav className="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
-			{/* <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+			{/* <fbButton className="navbar-toggler navbar-toggler-right" type="fbButton" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
 				<span className="navbar-toggler-icon"></span>
-			</button> */}
+			</fbButton> */}
 			<a className="navbar-brand" href="#">
 				<div className="logo-container">
 					<img src="../../assets/bc_small_1.png" alt="Burn Cartel"/>
 				</div>
 			</a>
 
+
+
+
 			<div id="user-widget">
+
 				<button
-					id="sign_in"
-					onClick={() => {
-						FB.login(response => {
-							if(response.authResponse) {
-								debugger;
-								$.get('http://localhost:3000/auth/facebook/callback')
-								// window.location = 'localhost:3000/auth/facebook/callback';
-								// = localhost:8080/auth/facebook/callback
-							}
-						});
-					}}
+					onClick={() => loginFB()}
 					>
-					Sign in with Facebook
-				</button>
+						LOGIN
+					</button>
+
 			</div>
 
 			<div className="collapse navbar-collapse" id="navbarCollapse">
