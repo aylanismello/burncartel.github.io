@@ -10,28 +10,45 @@ const TopNav = () => {
 
 // https://github.com/mkdynamic/omniauth-facebook/blob/3b084957c0e8fd8a59dd9c44293a02d4ca77835a/lib/omniauth/strategies/facebook.rb
 	const loginFB = () =>  {
-		FB.login(response => {
-			if(response.authResponse.accessToken) {
+		// window.location = 'https://www.facebook.com/v2.8/dialog/oauth?client_id=156389341554296&redirect_uri=https://www.facebook.com/connect/login_success.html';
+		$.ajax({
+			method: 'get',
+			// url: 'https://www.facebook.com/v2.8/dialog/oauth?client_id=156389341554296&redirect_uri=https://www.facebook.com/connect/login_success.html',
+			url: 'http://localhost:3000/yo',
+			success: (data) => {
 				debugger;
-				$.ajax({
-					url: 'http://localhost:3000/auth/facebook/callback',
-					method: 'GET',
-					xhrFields: {
-						withCredentials: true
-				 },
-				 data: {
-					 code: response.authResponse.signedRequest
-				 },
-					error: (err) => {
-						// debugger;
-					}
-				})
-
-				console.log('logged in');
-			} else {
-				console.log('not logged in');
+			},
+			error: (err) => {
+				debugger;
 			}
-	});
+		})
+
+	// 	FB.login(response => {
+	//
+	// 		// debugger;
+	// 		if(response.authResponse.accessToken) {
+	//
+	//
+	// 		// 	debugger;
+	// 		// 	$.ajax({
+	// 		// 		url: 'http://localhost:4000/auth/facebook/callback',
+	// 		// 		method: 'GET',
+	// 		// 		xhrFields: {
+	// 		// 			withCredentials: true
+	// 		// 	 },
+	// 		// 	 data: {
+	// 		// 		 code: response.authResponse.signedRequest
+	// 		// 	 },
+	// 		// 		error: (err) => {
+	// 		// 			// debugger;
+	// 		// 		}
+	// 		// 	})
+	// 		//
+	// 		// 	console.log('logged in');
+	// 		} else {
+	// 			console.log('not logged in');
+	// 		}
+	// });
 	}
 
 
