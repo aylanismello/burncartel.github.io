@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 const TopNav = () => {
 	return (
 		<nav className="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
@@ -11,6 +12,24 @@ const TopNav = () => {
 					<img src="../../assets/bc_small_1.png" alt="Burn Cartel"/>
 				</div>
 			</a>
+
+			<div id="user-widget">
+				<button
+					id="sign_in"
+					onClick={() => {
+						FB.login(response => {
+							if(response.authResponse) {
+								debugger;
+								$.get('http://localhost:3000/auth/facebook/callback')
+								// window.location = 'localhost:3000/auth/facebook/callback';
+								// = localhost:8080/auth/facebook/callback
+							}
+						});
+					}}
+					>
+					Sign in with Facebook
+				</button>
+			</div>
 
 			<div className="collapse navbar-collapse" id="navbarCollapse">
 
