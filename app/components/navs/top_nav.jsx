@@ -4,9 +4,7 @@ import React from 'react';
 const TopNav = () => {
 
 	let fbButton = null;
-
-
-
+	
 // https://github.com/mkdynamic/omniauth-facebook/blob/3b084957c0e8fd8a59dd9c44293a02d4ca77835a/lib/omniauth/strategies/facebook.rb
 	const loginFB = () =>  {
 		FB.getLoginStatus((response) => {
@@ -31,6 +29,7 @@ const TopNav = () => {
 						data,
 						success: (sux) => {
 							debugger;
+							// set your state here
 							console.log(sux);
 						},
 						error: (err) => {

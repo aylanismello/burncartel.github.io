@@ -57435,8 +57435,6 @@
 	
 		var fbButton = null;
 	
-	
-	
 		// https://github.com/mkdynamic/omniauth-facebook/blob/3b084957c0e8fd8a59dd9c44293a02d4ca77835a/lib/omniauth/strategies/facebook.rb
 		var loginFB = function loginFB() {
 			FB.getLoginStatus(function (response) {
@@ -57461,6 +57459,7 @@
 								data: data,
 								success: function success(sux) {
 									debugger;
+									// set your state here
 									console.log(sux);
 								},
 								error: function error(err) {
