@@ -3,6 +3,8 @@ body {
 
 .login-out-container {
   width: 200px; }
+  .login-out-container:hover {
+    cursor: pointer; }
   .login-out-container .login-out-img {
     width: 100%;
     height: auto;

@@ -12,6 +12,10 @@ class App extends React.Component {
   	super(props);
   }
 
+  componentWillMount() {
+    this.props.initFB();
+  }
+
   componentWillReceiveProps(nextProps) {
     // you also have to check for pagination being invoked here.
     // so maybe if this.props.feed.length !=== nextProps.feed.length
@@ -29,6 +33,8 @@ class App extends React.Component {
         currentUser={this.props.currentUser}
         logoutCurrentUser={this.props.logoutCurrentUser}
         receiveCurrentUser={this.props.receiveCurrentUser}
+        loginFB={this.props.loginFB}
+        fbDidInit={this.props.fbDidInit}
       />
         <div className="container">
           {this.props.children}

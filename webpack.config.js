@@ -18,10 +18,6 @@ const path = require('path');
           'babel?presets[]=es2015,presets[]=react,plugins[]=transform-object-rest-spread&retainLines=true',
           'ng-annotate-loader'
         ]
-        // query: {
-        //   presets: ['react', 'es2015'],
-        //   plugins: ["transform-object-rest-spread"]
-        // }
       },
       {
         test: /.node$/,

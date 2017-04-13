@@ -44,76 +44,19 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';var _jquery = __webpack_require__(1);var _jquery2 = _interopRequireDefault(_jquery);
-	var _react = __webpack_require__(2);var _react2 = _interopRequireDefault(_react);
+	'use strict';var _react = __webpack_require__(2);var _react2 = _interopRequireDefault(_react);
 	var _reactDom = __webpack_require__(33);var _reactDom2 = _interopRequireDefault(_reactDom);
 	var _root = __webpack_require__(179);var _root2 = _interopRequireDefault(_root);
 	var _store = __webpack_require__(934);var _store2 = _interopRequireDefault(_store);
+	var _login_api = __webpack_require__(1127);
 	var _user_actions = __webpack_require__(933);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 	
 	document.addEventListener('DOMContentLoaded', function () {
-	
-	
-	
+	  (0, _login_api.connectFB)();
+	  debugger;
 	  var store = (0, _store2.default)();
 	  var root = document.getElementById('root');
 	  _reactDom2.default.render(_react2.default.createElement(_root2.default, { store: store }), root);
-	
-	
-	
-	  (0, _jquery2.default)('body').prepend('<div id="fb-root"></div>');
-	  _jquery2.default.ajax({
-	    url: window.location.protocol + '//connect.facebook.net/en_US/all.js',
-	    dataType: 'script',
-	    cache: true });
-	
-	
-	  window.fbAsyncInit = function () {
-	    FB.init({
-	      appId: '156389341554296',
-	      cookie: true });
-	
-	
-	
-	    FB.getLoginStatus(function (response) {
-	      if (response.status === 'connected') {(function () {
-	          console.log('Logged in.');
-	          var data = {};
-	
-	          FB.api('/me', { fields: 'first_name,last_name,email' }, function (response) {
-	            console.log(response);
-	            data['last_name'] = response.last_name;
-	            data['first_name'] = response.first_name;
-	            data['id'] = response.id;
-	            data['email'] = response.email;
-	
-	            _jquery2.default.ajax({
-	              url: 'http://localhost:3000/yo',
-	              method: 'POST',
-	              xhrFields: {
-	                withCredentials: true },
-	
-	              data: data,
-	              success: function success(sux) {
-	                store.dispatch((0, _user_actions.receiveCurrentUser)(sux));
-	                console.log(sux);
-	              },
-	              error: function error(err) {
-	                console.log(err);
-	              } });
-	
-	
-	
-	          });})();
-	      }
-	    });
-	
-	  };
-	
-	
-	
-	
-	
 	});
 
 /***/ },
@@ -57413,16 +57356,24 @@
 	var _user_actions = __webpack_require__(933);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 	
 	
+	
+	
+	
+	
+	
 	var mapStateToProps = function mapStateToProps(state, ownProps) {return {
 			feed: state.feed,
 			filters: state.feed.filters,
-			currentUser: state.user };};
+			currentUser: state.user.currentUser,
+			fbDidInit: state.user.fbDidInit };};
 	
 	
 	var mapDispatchToProps = function mapDispatchToProps(dispatch) {return {
 			fetchTracks: function fetchTracks(filters) {return dispatch((0, _feed_actions.fetchTracks)(filters));},
 			logoutCurrentUser: function logoutCurrentUser() {return dispatch((0, _user_actions.logoutCurrentUser)());},
-			receiveCurrentUser: function receiveCurrentUser(currentUser) {return dispatch((0, _user_actions.receiveCurrentUser)(currentUser));} };};exports.default =
+			receiveCurrentUser: function receiveCurrentUser(currentUser) {return dispatch((0, _user_actions.receiveCurrentUser)(currentUser));},
+			initFB: function initFB() {return dispatch((0, _user_actions.initFB)());},
+			loginFB: function loginFB() {return dispatch((0, _user_actions.loginFB)());} };};exports.default =
 	
 	
 	(0, _reactRedux.connect)(
@@ -57445,7 +57396,11 @@
 	App = function (_React$Component) {_inherits(App, _React$Component);
 	  function App(props) {_classCallCheck(this, App);return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this,
 	    props));
-	  }_createClass(App, [{ key: 'componentWillReceiveProps', value: function componentWillReceiveProps(
+	  }_createClass(App, [{ key: 'componentWillMount', value: function componentWillMount()
+	
+	    {
+	      this.props.initFB();
+	    } }, { key: 'componentWillReceiveProps', value: function componentWillReceiveProps(
 	
 	    nextProps) {
 	      // you also have to check for pagination being invoked here.
@@ -57463,7 +57418,9 @@
 	          _react2.default.createElement(_top_nav2.default, {
 	            currentUser: this.props.currentUser,
 	            logoutCurrentUser: this.props.logoutCurrentUser,
-	            receiveCurrentUser: this.props.receiveCurrentUser }),
+	            receiveCurrentUser: this.props.receiveCurrentUser,
+	            loginFB: this.props.loginFB,
+	            fbDidInit: this.props.fbDidInit }),
 	
 	          _react2.default.createElement('div', { className: 'container' },
 	            this.props.children),
@@ -57485,7 +57442,8 @@
 	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _jquery = __webpack_require__(1);var _jquery2 = _interopRequireDefault(_jquery);
 	var _react = __webpack_require__(2);var _react2 = _interopRequireDefault(_react);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 	
-	var TopNav = function TopNav(_ref) {var currentUser = _ref.currentUser,logoutCurrentUser = _ref.logoutCurrentUser,receiveCurrentUser = _ref.receiveCurrentUser;
+	var TopNav = function TopNav(_ref)
+	{var currentUser = _ref.currentUser,logoutCurrentUser = _ref.logoutCurrentUser,receiveCurrentUser = _ref.receiveCurrentUser,loginFB = _ref.loginFB,fbDidInit = _ref.fbDidInit;
 	
 		var fbButton = null;
 		var buttonImgSrc = void 0;
@@ -57497,58 +57455,23 @@
 				FB.logout();
 				logoutCurrentUser();
 			};
-		} else {(function () {
-				buttonImgSrc = '../../assets/fb_login.png';
-				var data = {};
-				facebookLoginOut = function facebookLoginOut() {
-					FB.login(function (response) {
-						if (response.authResponse.accessToken) {
-							// let data = {}
-							FB.api('/me', { fields: 'first_name,last_name,email' }, function (response) {
-								console.log(response);
-								data['last_name'] = response.last_name;
-								data['first_name'] = response.first_name;
-								data['id'] = response.id;
-								data['email'] = response.email;
-	
-								_jquery2.default.ajax({
-									url: 'http://localhost:3000/yo',
-									method: 'POST',
-									xhrFields: {
-										withCredentials: true },
-	
-									data: data,
-									success: function success(sux) {
-										receiveCurrentUser(sux);
-									},
-									error: function error(err) {
-										console.log(err);
-									} });
-	
-							});
-	
-							console.log('logged in');
-						} else {
-							console.log('not logged in');
-						}
-	
-					});
-					// });
-				};})();
+		} else {
+			buttonImgSrc = '../../assets/fb_login.png';
+			facebookLoginOut = function facebookLoginOut() {return loginFB();};
 		}
 	
+		// we CANNOT enable FB login facebook has initialized on the page
+		if (!fbDidInit) {
+			buttonImgSrc = '../../assets/fb_login.png';
+			facebookLoginOut = function facebookLoginOut() {return console.log('easy tiger! wait for FB to init');};
+		}
 	
 		return (
-			_react2.default.createElement('nav', { className: 'navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse' },
-	
-	
+			_react2.default.createElement('nav', { className: 'navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse bc-nav' },
 	
 				_react2.default.createElement('a', { className: 'navbar-brand', href: '#' },
 					_react2.default.createElement('div', { className: 'logo-container' },
 						_react2.default.createElement('img', { src: '../../assets/bc_small_1.png', alt: 'Burn Cartel' }))),
-	
-	
-	
 	
 	
 	
@@ -57558,8 +57481,6 @@
 						className: 'login-out-img',
 						onClick: function onClick() {return facebookLoginOut();},
 						src: buttonImgSrc }))));
-	
-	
 	
 	
 	
@@ -84591,7 +84512,23 @@
 
 	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var userConstants = exports.userConstants = {
 	  RECEIVE_CURRENT_USER: 'RECEIVE_CURRENT_USER',
-	  LOGOUT_CURRENT_USER: 'LOGOUT_CURRENT_USER' };
+	  LOGOUT_CURRENT_USER: 'LOGOUT_CURRENT_USER',
+	  INIT_FB: 'INIT_FB',
+	  SET_FB_DID_INIT: 'SET_FB_DID_INIT',
+	  LOGIN_FB: 'LOGIN_FB' };
+	
+	
+	
+	var setFBDidInit = exports.setFBDidInit = function setFBDidInit() {return {
+	    type: userConstants.SET_FB_DID_INIT };};
+	
+	
+	var loginFB = exports.loginFB = function loginFB() {return {
+	    type: userConstants.LOGIN_FB };};
+	
+	
+	var initFB = exports.initFB = function initFB() {return {
+	    type: userConstants.INIT_FB };};
 	
 	
 	var receiveCurrentUser = exports.receiveCurrentUser = function receiveCurrentUser(currentUser) {return {
@@ -84730,21 +84667,26 @@
 /* 938 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _user_actions = __webpack_require__(933);
+	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};var _user_actions = __webpack_require__(933);
 	
 	var initialState = Object.freeze({
-	  handle: null,
-	  uid: null,
-	  name: null,
-	  email: null });
+	  currentUser: {
+	    handle: null,
+	    uid: null,
+	    name: null,
+	    email: null },
+	
+	  fbDidInit: false });
 	
 	
 	var UserReducer = function UserReducer() {var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;var action = arguments[1];
 	  switch (action.type) {
+	    case _user_actions.userConstants.SET_FB_DID_INIT:
+	      return _extends({}, state, { fbDidInit: true });
 	    case _user_actions.userConstants.RECEIVE_CURRENT_USER:
-	      return action.currentUser;
+	      return _extends({}, state, { currentUser: action.currentUser });
 	    case _user_actions.userConstants.LOGOUT_CURRENT_USER:
-	      return initialState;
+	      return _extends({}, initialState, { fbDidInit: true });
 	    default:
 	      return state;}
 	
@@ -84758,16 +84700,15 @@
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _feed_middleware = __webpack_require__(940);var _feed_middleware2 = _interopRequireDefault(_feed_middleware);
 	var _player_middleware = __webpack_require__(942);var _player_middleware2 = _interopRequireDefault(_player_middleware);
+	var _user_middleware = __webpack_require__(1128);var _user_middleware2 = _interopRequireDefault(_user_middleware);
 	var _redux = __webpack_require__(187);
 	var _reduxLogger = __webpack_require__(943);var _reduxLogger2 = _interopRequireDefault(_reduxLogger);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 	
-	var myMiddlewares = [_feed_middleware2.default, _player_middleware2.default];
-	
+	var myMiddlewares = [_feed_middleware2.default, _player_middleware2.default, _user_middleware2.default];
 	
 	if (process.env['NODE_ENV'] !== 'production') {
 	  myMiddlewares.push((0, _reduxLogger2.default)());
 	}
-	
 	
 	var masterMiddleware = _redux.applyMiddleware.apply(undefined,
 	myMiddlewares);exports.default =
@@ -93193,6 +93134,88 @@
 	
 	exports.default = GoZap;
 	module.exports = exports['default'];
+
+/***/ },
+/* 1127 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.getFBUser = exports.connectFB = undefined;var _jquery = __webpack_require__(1);var _jquery2 = _interopRequireDefault(_jquery);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+	
+	var connectFB = exports.connectFB = function connectFB() {
+	  _jquery2.default.ajax({
+	    url: window.location.protocol + '//connect.facebook.net/en_US/all.js',
+	    dataType: 'script',
+	    cache: true });
+	
+	};
+	
+	var getFBUser = exports.getFBUser = function getFBUser(_success) {
+	  FB.api('/me', { fields: 'first_name,last_name,email' }, function (response) {
+	    var data = {};
+	    data['last_name'] = response.last_name;
+	    data['first_name'] = response.first_name;
+	    data['id'] = response.id;
+	    data['email'] = response.email;
+	
+	    _jquery2.default.ajax({
+	      url: 'http://localhost:3000/yo',
+	      method: 'POST',
+	      xhrFields: {
+	        withCredentials: true },
+	
+	      data: data,
+	      success: function success(user) {
+	        _success(user);
+	      },
+	      error: function error(err) {
+	        console.log(err);
+	      } });
+	
+	  });
+	};
+
+/***/ },
+/* 1128 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _user_actions = __webpack_require__(933);
+	
+	
+	
+	
+	var _login_api = __webpack_require__(1127);
+	
+	var UserMiddleware = function UserMiddleware(_ref) {var getState = _ref.getState,dispatch = _ref.dispatch;return function (next) {return function (action) {
+	      switch (action.type) {
+	        case _user_actions.userConstants.INIT_FB:
+	          window.fbAsyncInit = function () {
+	            FB.init({
+	              appId: '156389341554296',
+	              cookie: true });
+	
+	
+	            FB.getLoginStatus(function (response) {
+	              if (response.status === 'connected') {
+	                (0, _login_api.getFBUser)(function (user) {return dispatch((0, _user_actions.receiveCurrentUser)(user));});
+	              }
+	              dispatch((0, _user_actions.setFBDidInit)());
+	            });
+	
+	          };
+	          return next(action);
+	        case _user_actions.userConstants.LOGIN_FB:
+	          FB.login(function (response) {
+	            if (response.authResponse.accessToken) {
+	              (0, _login_api.getFBUser)(function (user) {return dispatch((0, _user_actions.receiveCurrentUser)(user));});
+	            }
+	          });
+	          return next(action);
+	        default:
+	          return next(action);}
+	
+	    };};};exports.default =
+	
+	UserMiddleware;
 
 /***/ }
 /******/ ]);
