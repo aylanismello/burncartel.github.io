@@ -4,62 +4,56 @@ import React from 'react';
 const TopNav = () => {
 
 	let fbButton = null;
-	
+
 // https://github.com/mkdynamic/omniauth-facebook/blob/3b084957c0e8fd8a59dd9c44293a02d4ca77835a/lib/omniauth/strategies/facebook.rb
 	const loginFB = () =>  {
-		FB.getLoginStatus((response) => {
-		  if (response.status === 'connected') {
-		    console.log('Logged in.');
-				let data = {};
-
-				FB.api('/me', {fields: 'first_name,last_name,email'}, (response) => {
-					console.log(response);
-					debugger;
-					data['last_name'] = response.last_name;
-					data['first_name'] = response.first_name;
-					data['id'] = response.id;
-					data['email'] = response.email;
-
-					$.ajax({
-						url: 'http://localhost:3000/yo',
-						method: 'POST',
-						xhrFields: {
-							withCredentials: true
-						},
-						data,
-						success: (sux) => {
-							debugger;
-							// set your state here
-							console.log(sux);
-						},
-						error: (err) => {
-							debugger;
-							console.log(err);
-						}
-					});
-
-
-				});
-		  } else {
-				FB.login(response => {
-					if(response.authResponse.accessToken) {
-						// let data = {}
-						FB.api('/me', {fields: 'last_name,email'}, function(response) {
-							console.log(response);
-							data['last_name'] = response.last_name
-
-
-
-						});
-
-
-						console.log('logged in');
-					} else {
-						console.log('not logged in');
-					}
-				}, {scope: 'public_profile,email'});
-		  }
-		});
+		// FB.getLoginStatus((response) => {
+		//   if (response.status === 'connected') {
+		//     console.log('Logged in.');
+		// 		let data = {};
+		//
+		// 		FB.api('/me', {fields: 'first_name,last_name,email'}, (response) => {
+		// 			console.log(response);
+		// 			data['last_name'] = response.last_name;
+		// 			data['first_name'] = response.first_name;
+		// 			data['id'] = response.id;
+		// 			data['email'] = response.email;
+		//
+		// 			$.ajax({
+		// 				url: 'http://localhost:3000/yo',
+		// 				method: 'POST',
+		// 				xhrFields: {
+		// 					withCredentials: true
+		// 				},
+		// 				data,
+		// 				success: (sux) => {
+		// 					debugger;
+		// 					// set your state here
+		// 					console.log(sux);
+		// 				},
+		// 				error: (err) => {
+		// 					debugger;
+		// 					console.log(err);
+		// 				}
+		// 			});
+		//
+		//
+		// 		});
+		//   } else {
+		// 		FB.login(response => {
+		// 			if(response.authResponse.accessToken) {
+		// 				// let data = {}
+		// 				FB.api('/me', {fields: 'last_name,email'}, function(response) {
+		// 					console.log(response);
+		// 					data['last_name'] = response.last_name
+		// 				});
+		// 				console.log('logged in');
+		// 			} else {
+		// 				console.log('not logged in');
+		// 			}
+		// 		}, {scope: 'public_profile,email'});
+		//   }
+		// });
 	}
 
 

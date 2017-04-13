@@ -3,10 +3,19 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Root from './components/root';
 import configureStore from './store/store';
+import { receiveCurrentUser } from './actions/user_actions';
 
 document.addEventListener('DOMContentLoaded', () => {
-  $('body').prepend('<div id="fb-root"></div>');
 
+
+
+  const store = configureStore();
+  const root = document.getElementById('root');
+  ReactDOM.render(<Root store={store} />, root);
+
+
+
+  $('body').prepend('<div id="fb-root"></div>');
   $.ajax({
     url: `${window.location.protocol}//connect.facebook.net/en_US/all.js`,
     dataType: 'script',
@@ -18,12 +27,54 @@ document.addEventListener('DOMContentLoaded', () => {
       appId: '156389341554296',
       cookie: true
     });
-    
-    const root = document.getElementById('root');
-    ReactDOM.render(<Root store={store} />, root);
+
+
+    FB.getLoginStatus((response) => {
+      if (response.status === 'connected') {
+        console.log('Logged in.');
+        let data = {};
+
+        FB.api('/me', {fields: 'first_name,last_name,email'}, (response) => {
+          console.log(response);
+          data['last_name'] = response.last_name;
+          data['first_name'] = response.first_name;
+          data['id'] = response.id;
+          data['email'] = response.email;
+
+          $.ajax({
+            url: 'http://localhost:3000/yo',
+            method: 'POST',
+            xhrFields: {
+              withCredentials: true
+            },
+            data,
+            success: (sux) => {
+
+              store.dispatch(receiveCurrentUser(sux));
+              debugger;
+              // set your state here
+
+              console.log(sux);
+            },
+            error: (err) => {
+              debugger;
+              console.log(err);
+            }
+          });
+
+
+        });
+      } else {
+        // logged out
+        debugger;
+
+      }
+    });
+
   };
 
 
-  const store = configureStore();
+
+
 
 });
