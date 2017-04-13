@@ -39749,21 +39749,8 @@
 									_react2.default.createElement(_go.GoFlame, {
 										size: 50,
 										color: 'orange',
-										className: 'track-item-icon' })),
+										className: 'track-item-icon' }))))))));
 	
-	
-	
-	
-	
-	
-	
-	
-	
-								_react2.default.createElement('div', { className: 'track-item-icon' },
-									_react2.default.createElement('a', { href: track.permalink_url, target: '_blank' },
-										_react2.default.createElement('img', {
-											className: 'soundcloud-png',
-											src: 'https://developers.soundcloud.com/assets/logo_big_black-4fbe88aa0bf28767bbfc65a08c828c76.png' })))))))));
 	
 	
 	
@@ -39899,7 +39886,6 @@
 	var TrackBanner = function TrackBanner(_ref) {var track = _ref.track;
 	
 		return (
-	
 			_react2.default.createElement("div", {
 					className: "thumbnail track-banner" },
 	

@@ -3,7 +3,6 @@ import React from 'react';
 const TrackBanner = ({ track }) => {
 
 	return (
-
 		<div
 			className="thumbnail track-banner"
 		>

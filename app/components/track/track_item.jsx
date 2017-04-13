@@ -57,19 +57,6 @@ const TrackItem = ({ track, handleTrackClick, playing, trackId, trackLoaded, tra
 									/>
 								</div>
 
-								{/* <div onClick={() => alert('u have decreed this sick af')} className="track-item-icon-container">
-									<img
-									className="track-item-icon"
-									src="http://pix.iemoji.com/images/emoji/apple/ios-9/256/fire.png"/>
-								</div> */}
-
-								<div className="track-item-icon">
-									<a href={track.permalink_url} target="_blank">
-										<img
-											className="soundcloud-png"
-											src="https://developers.soundcloud.com/assets/logo_big_black-4fbe88aa0bf28767bbfc65a08c828c76.png"/>
-									</a>
-								</div>
 						</div>
 
 						</div>
