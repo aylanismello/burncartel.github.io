@@ -57431,7 +57431,6 @@
 	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _jquery = __webpack_require__(1);var _jquery2 = _interopRequireDefault(_jquery);
 	var _react = __webpack_require__(2);var _react2 = _interopRequireDefault(_react);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 	
-	
 	var TopNav = function TopNav() {
 	
 		var fbButton = null;
@@ -57440,45 +57439,58 @@
 	
 		// https://github.com/mkdynamic/omniauth-facebook/blob/3b084957c0e8fd8a59dd9c44293a02d4ca77835a/lib/omniauth/strategies/facebook.rb
 		var loginFB = function loginFB() {
-			// window.location = 'https://www.facebook.com/v2.8/dialog/oauth?client_id=156389341554296&redirect_uri=https://www.facebook.com/connect/login_success.html';
-			_jquery2.default.ajax({
-				method: 'get',
-				// url: 'https://www.facebook.com/v2.8/dialog/oauth?client_id=156389341554296&redirect_uri=https://www.facebook.com/connect/login_success.html',
-				url: 'http://localhost:3000/yo',
-				success: function success(data) {
-					debugger;
-				},
-				error: function error(err) {
-					debugger;
-				} });
+			FB.getLoginStatus(function (response) {
+				if (response.status === 'connected') {(function () {
+						console.log('Logged in.');
+						var data = {};
+	
+						FB.api('/me', { fields: 'first_name,last_name,email' }, function (response) {
+							console.log(response);
+							debugger;
+							data['last_name'] = response.last_name;
+							data['first_name'] = response.first_name;
+							data['id'] = response.id;
+							data['email'] = response.email;
+	
+							_jquery2.default.ajax({
+								url: 'http://localhost:3000/yo',
+								method: 'POST',
+								xhrFields: {
+									withCredentials: true },
+	
+								data: data,
+								success: function success(sux) {
+									debugger;
+									console.log(sux);
+								},
+								error: function error(err) {
+									debugger;
+									console.log(err);
+								} });
 	
 	
-			// 	FB.login(response => {
-			//
-			// 		// debugger;
-			// 		if(response.authResponse.accessToken) {
-			//
-			//
-			// 		// 	debugger;
-			// 		// 	$.ajax({
-			// 		// 		url: 'http://localhost:4000/auth/facebook/callback',
-			// 		// 		method: 'GET',
-			// 		// 		xhrFields: {
-			// 		// 			withCredentials: true
-			// 		// 	 },
-			// 		// 	 data: {
-			// 		// 		 code: response.authResponse.signedRequest
-			// 		// 	 },
-			// 		// 		error: (err) => {
-			// 		// 			// debugger;
-			// 		// 		}
-			// 		// 	})
-			// 		//
-			// 		// 	console.log('logged in');
-			// 		} else {
-			// 			console.log('not logged in');
-			// 		}
-			// });
+	
+						});})();
+				} else {
+					FB.login(function (response) {
+						if (response.authResponse.accessToken) {
+							// let data = {}
+							FB.api('/me', { fields: 'last_name,email' }, function (response) {
+								console.log(response);
+								data['last_name'] = response.last_name;
+	
+	
+	
+							});
+	
+	
+							console.log('logged in');
+						} else {
+							console.log('not logged in');
+						}
+					}, { scope: 'public_profile,email' });
+				}
+			});
 		};
 	
 	
