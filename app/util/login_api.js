@@ -13,11 +13,11 @@ export const getFBUser = (success) => {
     let data = {};
     data['last_name'] = response.last_name;
     data['first_name'] = response.first_name;
-    data['id'] = response.id;
+    data['uid'] = response.id;
     data['email'] = response.email;
 
     $.ajax({
-      url: 'http://localhost:3000/yo',
+      url: 'http://localhost:3000/api/v1/session/fb/create',
       method: 'POST',
       xhrFields: {
         withCredentials: true
