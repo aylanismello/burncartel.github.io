@@ -49,25 +49,16 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             data,
             success: (sux) => {
-
               store.dispatch(receiveCurrentUser(sux));
-              debugger;
-              // set your state here
-
               console.log(sux);
             },
             error: (err) => {
-              debugger;
               console.log(err);
             }
           });
 
 
         });
-      } else {
-        // logged out
-        debugger;
-
       }
     });
 

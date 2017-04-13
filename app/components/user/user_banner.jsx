@@ -7,8 +7,9 @@ const UserBanner = ({ user }) => {
 		>
 			<h2> {user.name}</h2>
 			<img src={user.avatar_url} />
+
 		</div>
 	);
 };
 
-export default UserBanner;1
+export default UserBanner;

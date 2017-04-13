@@ -37,11 +37,6 @@ class BurnCartelPlayer extends React.Component {
 
     let currentTime = 0;
 
-
-
-    debugger;
-
-
     this.scAudio.on('timeupdate', () => {
 
       if(!this.props.trackLoaded && this.scAudio.audio.currentTime > 0) {

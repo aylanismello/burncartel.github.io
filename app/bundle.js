@@ -95,25 +95,16 @@
 	
 	              data: data,
 	              success: function success(sux) {
-	
 	                store.dispatch((0, _user_actions.receiveCurrentUser)(sux));
-	                debugger;
-	                // set your state here
-	
 	                console.log(sux);
 	              },
 	              error: function error(err) {
-	                debugger;
 	                console.log(err);
 	              } });
 	
 	
 	
 	          });})();
-	      } else {
-	        // logged out
-	        debugger;
-	
 	      }
 	    });
 	
@@ -39704,8 +39695,8 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _react = __webpack_require__(2);var _react2 = _interopRequireDefault(_react);
-	var _reactRouter = __webpack_require__(211);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
-	
+	var _reactRouter = __webpack_require__(211);
+	var _go = __webpack_require__(949);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 	
 	var TrackItem = function TrackItem(_ref) {var track = _ref.track,handleTrackClick = _ref.handleTrackClick,playing = _ref.playing,trackId = _ref.trackId,trackLoaded = _ref.trackLoaded,trackIdx = _ref.trackIdx;
 		var numCurators = track.curators.length;
@@ -39753,10 +39744,19 @@
 							_react2.default.createElement('span', null, 'Selected by ', curatorsStr, ' '),
 	
 							_react2.default.createElement('div', { className: 'track-item-icons' },
-								_react2.default.createElement('div', { onClick: function onClick() {return alert('u have decreed this sick af');}, className: 'track-item-icon-container' },
-									_react2.default.createElement('img', {
-										className: 'track-item-icon',
-										src: 'http://pix.iemoji.com/images/emoji/apple/ios-9/256/fire.png' })),
+								_react2.default.createElement('div', { onClick: function onClick() {return console.log('u have decreed this sick af');},
+										className: 'track-item-icon-container' },
+									_react2.default.createElement(_go.GoFlame, {
+										size: 50,
+										color: 'orange',
+										className: 'track-item-icon' })),
+	
+	
+	
+	
+	
+	
+	
 	
 	
 								_react2.default.createElement('div', { className: 'track-item-icon' },
@@ -39904,6 +39904,13 @@
 					className: "thumbnail track-banner" },
 	
 				_react2.default.createElement("h2", null, " ", track.name, " - ", track.publisher.name),
+				_react2.default.createElement("div", { className: "track-item-icon" },
+					_react2.default.createElement("a", { href: track.permalink_url, target: "_blank" },
+						_react2.default.createElement("img", {
+							className: "soundcloud-png",
+							src: "https://developers.soundcloud.com/assets/logo_big_black-4fbe88aa0bf28767bbfc65a08c828c76.png" }))),
+	
+	
 				_react2.default.createElement("img", { src: track.artwork_url })));
 	
 	
@@ -57318,6 +57325,7 @@
 	var _feed_actions = __webpack_require__(273);
 	var _user_show = __webpack_require__(293);var _user_show2 = _interopRequireDefault(_user_show);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 	
+	
 	// maybe use selectors here? this is weird.
 	var mapStateToProps = function mapStateToProps(state, ownProps) {
 		return {
@@ -57404,9 +57412,10 @@
 				_react2.default.createElement("img", { src: user.avatar_url })));
 	
 	
+	
 	};exports.default =
 	
-	UserBanner;1;
+	UserBanner;
 
 /***/ },
 /* 295 */
@@ -57493,17 +57502,17 @@
 	var TopNav = function TopNav(_ref) {var currentUser = _ref.currentUser,logoutCurrentUser = _ref.logoutCurrentUser,receiveCurrentUser = _ref.receiveCurrentUser;
 	
 		var fbButton = null;
-		var buttonText = void 0;
+		var buttonImgSrc = void 0;
 		var facebookLoginOut = void 0;
 	
 		if (currentUser.uid) {
-			buttonText = 'LOGOUT';
+			buttonImgSrc = '../../assets/logout_button.png';
 			facebookLoginOut = function facebookLoginOut() {
 				FB.logout();
 				logoutCurrentUser();
 			};
 		} else {(function () {
-				buttonText = 'LOGIN';
+				buttonImgSrc = '../../assets/fb_login.png';
 				var data = {};
 				facebookLoginOut = function facebookLoginOut() {
 					FB.login(function (response) {
@@ -57524,15 +57533,9 @@
 	
 									data: data,
 									success: function success(sux) {
-	
 										receiveCurrentUser(sux);
-										debugger;
-										// set your state here
-	
-										console.log(sux);
 									},
 									error: function error(err) {
-										debugger;
 										console.log(err);
 									} });
 	
@@ -57563,32 +57566,12 @@
 	
 	
 	
-				_react2.default.createElement('div', { id: 'user-widget' },
+				_react2.default.createElement('div', { className: 'login-out-container' },
 	
-					_react2.default.createElement('button', {
-							onClick: function onClick() {return facebookLoginOut();} },
-	
-						buttonText)),
-	
-	
-	
-	
-				_react2.default.createElement('div', { className: 'collapse navbar-collapse', id: 'navbarCollapse' })));
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+					_react2.default.createElement('img', {
+						className: 'login-out-img',
+						onClick: function onClick() {return facebookLoginOut();},
+						src: buttonImgSrc }))));
 	
 	
 	
@@ -84207,11 +84190,6 @@
 	
 	      var currentTime = 0;
 	
-	
-	
-	      debugger;
-	
-	
 	      this.scAudio.on('timeupdate', function () {
 	
 	        if (!_this2.props.trackLoaded && _this2.scAudio.audio.currentTime > 0) {
@@ -85780,6 +85758,7454 @@
 	  // Deprecated options
 	  transformer: undefined
 	};
+	module.exports = exports['default'];
+
+/***/ },
+/* 949 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.GoZap = exports.GoX = exports.GoVersions = exports.GoUnmute = exports.GoUnfold = exports.GoTriangleUp = exports.GoTriangleRight = exports.GoTriangleLeft = exports.GoTriangleDown = exports.GoTrashcan = exports.GoTools = exports.GoThreeBars = exports.GoTerminal = exports.GoTelescope = exports.GoTag = exports.GoSync = exports.GoStop = exports.GoSteps = exports.GoStar = exports.GoSquirrel = exports.GoSplit = exports.GoSignOut = exports.GoSignIn = exports.GoSettings = exports.GoServer = exports.GoSearch = exports.GoScreenNormal = exports.GoScreenFull = exports.GoRuby = exports.GoRss = exports.GoRocket = exports.GoRepo = exports.GoRepoPush = exports.GoRepoPull = exports.GoRepoForked = exports.GoRepoForcePush = exports.GoRepoClone = exports.GoRadioTower = exports.GoQuote = exports.GoQuestion = exports.GoPuzzle = exports.GoPulse = exports.GoPrimitiveSquare = exports.GoPrimitiveDot = exports.GoPodium = exports.GoPlus = exports.GoPlug = exports.GoPlaybackRewind = exports.GoPlaybackPlay = exports.GoPlaybackPause = exports.GoPlaybackFastForward = exports.GoPin = exports.GoPerson = exports.GoPencil = exports.GoPaintcan = exports.GoPackage = exports.GoOrganization = exports.GoOctoface = exports.GoNoNewline = exports.GoMute = exports.GoMoveUp = exports.GoMoveRight = exports.GoMoveLeft = exports.GoMoveDown = exports.GoMortarBoard = exports.GoMirror = exports.GoMilestone = exports.GoMicroscope = exports.GoMention = exports.GoMegaphone = exports.GoMarkdown = exports.GoMarkGithub = exports.GoMail = exports.GoMailReply = exports.GoMailRead = exports.GoLogoGithub = exports.GoLock = exports.GoLocation = exports.GoListUnordered = exports.GoListOrdered = exports.GoLink = exports.GoLinkExternal = exports.GoLightBulb = exports.GoLaw = exports.GoKeyboard = exports.GoKey = exports.GoJumpUp = exports.GoJumpRight = exports.GoJumpLeft = exports.GoJumpDown = exports.GoJersey = exports.GoIssueReopened = exports.GoIssueOpened = exports.GoIssueClosed = exports.GoInfo = exports.GoInbox = exports.GoHubot = exports.GoHourglass = exports.GoHorizontalRule = exports.GoHome = exports.GoHistory = exports.GoHeart = exports.GoGraph = exports.GoGlobe = exports.GoGitPullRequest = exports.GoGitMerge = exports.GoGitCompare = exports.GoGitCommit = exports.GoGitBranch = exports.GoGist = exports.GoGistSecret = exports.GoGift = exports.GoGear = exports.GoFold = exports.GoFlame = exports.GoFileZip = exports.GoFileText = exports.GoFileSymlinkFile = exports.GoFileSymlinkDirectory = exports.GoFileSubmodule = exports.GoFilePdf = exports.GoFileMedia = exports.GoFileDirectory = exports.GoFileCode = exports.GoFileBinary = exports.GoEye = exports.GoEllipsis = exports.GoDiff = exports.GoDiffRenamed = exports.GoDiffRemoved = exports.GoDiffModified = exports.GoDiffIgnored = exports.GoDiffAdded = exports.GoDeviceMobile = exports.GoDeviceDesktop = exports.GoDeviceCamera = exports.GoDeviceCameraVideo = exports.GoDatabase = exports.GoDashboard = exports.GoDash = exports.GoCreditCard = exports.GoComment = exports.GoCommentDiscussion = exports.GoColorMode = exports.GoCode = exports.GoCloudUpload = exports.GoCloudDownload = exports.GoClock = exports.GoClippy = exports.GoCircuitBoard = exports.GoCircleSlash = exports.GoChevronUp = exports.GoChevronRight = exports.GoChevronLeft = exports.GoChevronDown = exports.GoChecklist = exports.GoCheck = exports.GoCalendar = exports.GoBug = exports.GoBrowser = exports.GoBroadcast = exports.GoBriefcase = exports.GoBookmark = exports.GoBook = exports.GoBeer = exports.GoArrowUp = exports.GoArrowSmallUp = exports.GoArrowSmallRight = exports.GoArrowSmallLeft = exports.GoArrowSmallDown = exports.GoArrowRight = exports.GoArrowLeft = exports.GoArrowDown = exports.GoAlignmentUnalign = exports.GoAlignmentAlignedTo = exports.GoAlignmentAlign = exports.GoAlert = undefined;
+	
+	var _alert = __webpack_require__(950);
+	
+	var _alert2 = _interopRequireDefault(_alert);
+	
+	var _alignmentAlign = __webpack_require__(951);
+	
+	var _alignmentAlign2 = _interopRequireDefault(_alignmentAlign);
+	
+	var _alignmentAlignedTo = __webpack_require__(952);
+	
+	var _alignmentAlignedTo2 = _interopRequireDefault(_alignmentAlignedTo);
+	
+	var _alignmentUnalign = __webpack_require__(953);
+	
+	var _alignmentUnalign2 = _interopRequireDefault(_alignmentUnalign);
+	
+	var _arrowDown = __webpack_require__(954);
+	
+	var _arrowDown2 = _interopRequireDefault(_arrowDown);
+	
+	var _arrowLeft = __webpack_require__(955);
+	
+	var _arrowLeft2 = _interopRequireDefault(_arrowLeft);
+	
+	var _arrowRight = __webpack_require__(956);
+	
+	var _arrowRight2 = _interopRequireDefault(_arrowRight);
+	
+	var _arrowSmallDown = __webpack_require__(957);
+	
+	var _arrowSmallDown2 = _interopRequireDefault(_arrowSmallDown);
+	
+	var _arrowSmallLeft = __webpack_require__(958);
+	
+	var _arrowSmallLeft2 = _interopRequireDefault(_arrowSmallLeft);
+	
+	var _arrowSmallRight = __webpack_require__(959);
+	
+	var _arrowSmallRight2 = _interopRequireDefault(_arrowSmallRight);
+	
+	var _arrowSmallUp = __webpack_require__(960);
+	
+	var _arrowSmallUp2 = _interopRequireDefault(_arrowSmallUp);
+	
+	var _arrowUp = __webpack_require__(961);
+	
+	var _arrowUp2 = _interopRequireDefault(_arrowUp);
+	
+	var _beer = __webpack_require__(962);
+	
+	var _beer2 = _interopRequireDefault(_beer);
+	
+	var _book = __webpack_require__(963);
+	
+	var _book2 = _interopRequireDefault(_book);
+	
+	var _bookmark = __webpack_require__(964);
+	
+	var _bookmark2 = _interopRequireDefault(_bookmark);
+	
+	var _briefcase = __webpack_require__(965);
+	
+	var _briefcase2 = _interopRequireDefault(_briefcase);
+	
+	var _broadcast = __webpack_require__(966);
+	
+	var _broadcast2 = _interopRequireDefault(_broadcast);
+	
+	var _browser = __webpack_require__(967);
+	
+	var _browser2 = _interopRequireDefault(_browser);
+	
+	var _bug = __webpack_require__(968);
+	
+	var _bug2 = _interopRequireDefault(_bug);
+	
+	var _calendar = __webpack_require__(969);
+	
+	var _calendar2 = _interopRequireDefault(_calendar);
+	
+	var _check = __webpack_require__(970);
+	
+	var _check2 = _interopRequireDefault(_check);
+	
+	var _checklist = __webpack_require__(971);
+	
+	var _checklist2 = _interopRequireDefault(_checklist);
+	
+	var _chevronDown = __webpack_require__(972);
+	
+	var _chevronDown2 = _interopRequireDefault(_chevronDown);
+	
+	var _chevronLeft = __webpack_require__(973);
+	
+	var _chevronLeft2 = _interopRequireDefault(_chevronLeft);
+	
+	var _chevronRight = __webpack_require__(974);
+	
+	var _chevronRight2 = _interopRequireDefault(_chevronRight);
+	
+	var _chevronUp = __webpack_require__(975);
+	
+	var _chevronUp2 = _interopRequireDefault(_chevronUp);
+	
+	var _circleSlash = __webpack_require__(976);
+	
+	var _circleSlash2 = _interopRequireDefault(_circleSlash);
+	
+	var _circuitBoard = __webpack_require__(977);
+	
+	var _circuitBoard2 = _interopRequireDefault(_circuitBoard);
+	
+	var _clippy = __webpack_require__(978);
+	
+	var _clippy2 = _interopRequireDefault(_clippy);
+	
+	var _clock = __webpack_require__(979);
+	
+	var _clock2 = _interopRequireDefault(_clock);
+	
+	var _cloudDownload = __webpack_require__(980);
+	
+	var _cloudDownload2 = _interopRequireDefault(_cloudDownload);
+	
+	var _cloudUpload = __webpack_require__(981);
+	
+	var _cloudUpload2 = _interopRequireDefault(_cloudUpload);
+	
+	var _code = __webpack_require__(982);
+	
+	var _code2 = _interopRequireDefault(_code);
+	
+	var _colorMode = __webpack_require__(983);
+	
+	var _colorMode2 = _interopRequireDefault(_colorMode);
+	
+	var _commentDiscussion = __webpack_require__(984);
+	
+	var _commentDiscussion2 = _interopRequireDefault(_commentDiscussion);
+	
+	var _comment = __webpack_require__(985);
+	
+	var _comment2 = _interopRequireDefault(_comment);
+	
+	var _creditCard = __webpack_require__(986);
+	
+	var _creditCard2 = _interopRequireDefault(_creditCard);
+	
+	var _dash = __webpack_require__(987);
+	
+	var _dash2 = _interopRequireDefault(_dash);
+	
+	var _dashboard = __webpack_require__(988);
+	
+	var _dashboard2 = _interopRequireDefault(_dashboard);
+	
+	var _database = __webpack_require__(989);
+	
+	var _database2 = _interopRequireDefault(_database);
+	
+	var _deviceCameraVideo = __webpack_require__(990);
+	
+	var _deviceCameraVideo2 = _interopRequireDefault(_deviceCameraVideo);
+	
+	var _deviceCamera = __webpack_require__(991);
+	
+	var _deviceCamera2 = _interopRequireDefault(_deviceCamera);
+	
+	var _deviceDesktop = __webpack_require__(992);
+	
+	var _deviceDesktop2 = _interopRequireDefault(_deviceDesktop);
+	
+	var _deviceMobile = __webpack_require__(993);
+	
+	var _deviceMobile2 = _interopRequireDefault(_deviceMobile);
+	
+	var _diffAdded = __webpack_require__(994);
+	
+	var _diffAdded2 = _interopRequireDefault(_diffAdded);
+	
+	var _diffIgnored = __webpack_require__(995);
+	
+	var _diffIgnored2 = _interopRequireDefault(_diffIgnored);
+	
+	var _diffModified = __webpack_require__(996);
+	
+	var _diffModified2 = _interopRequireDefault(_diffModified);
+	
+	var _diffRemoved = __webpack_require__(997);
+	
+	var _diffRemoved2 = _interopRequireDefault(_diffRemoved);
+	
+	var _diffRenamed = __webpack_require__(998);
+	
+	var _diffRenamed2 = _interopRequireDefault(_diffRenamed);
+	
+	var _diff = __webpack_require__(999);
+	
+	var _diff2 = _interopRequireDefault(_diff);
+	
+	var _ellipsis = __webpack_require__(1000);
+	
+	var _ellipsis2 = _interopRequireDefault(_ellipsis);
+	
+	var _eye = __webpack_require__(1001);
+	
+	var _eye2 = _interopRequireDefault(_eye);
+	
+	var _fileBinary = __webpack_require__(1002);
+	
+	var _fileBinary2 = _interopRequireDefault(_fileBinary);
+	
+	var _fileCode = __webpack_require__(1003);
+	
+	var _fileCode2 = _interopRequireDefault(_fileCode);
+	
+	var _fileDirectory = __webpack_require__(1004);
+	
+	var _fileDirectory2 = _interopRequireDefault(_fileDirectory);
+	
+	var _fileMedia = __webpack_require__(1005);
+	
+	var _fileMedia2 = _interopRequireDefault(_fileMedia);
+	
+	var _filePdf = __webpack_require__(1006);
+	
+	var _filePdf2 = _interopRequireDefault(_filePdf);
+	
+	var _fileSubmodule = __webpack_require__(1007);
+	
+	var _fileSubmodule2 = _interopRequireDefault(_fileSubmodule);
+	
+	var _fileSymlinkDirectory = __webpack_require__(1008);
+	
+	var _fileSymlinkDirectory2 = _interopRequireDefault(_fileSymlinkDirectory);
+	
+	var _fileSymlinkFile = __webpack_require__(1009);
+	
+	var _fileSymlinkFile2 = _interopRequireDefault(_fileSymlinkFile);
+	
+	var _fileText = __webpack_require__(1010);
+	
+	var _fileText2 = _interopRequireDefault(_fileText);
+	
+	var _fileZip = __webpack_require__(1011);
+	
+	var _fileZip2 = _interopRequireDefault(_fileZip);
+	
+	var _flame = __webpack_require__(1012);
+	
+	var _flame2 = _interopRequireDefault(_flame);
+	
+	var _fold = __webpack_require__(1013);
+	
+	var _fold2 = _interopRequireDefault(_fold);
+	
+	var _gear = __webpack_require__(1014);
+	
+	var _gear2 = _interopRequireDefault(_gear);
+	
+	var _gift = __webpack_require__(1015);
+	
+	var _gift2 = _interopRequireDefault(_gift);
+	
+	var _gistSecret = __webpack_require__(1016);
+	
+	var _gistSecret2 = _interopRequireDefault(_gistSecret);
+	
+	var _gist = __webpack_require__(1017);
+	
+	var _gist2 = _interopRequireDefault(_gist);
+	
+	var _gitBranch = __webpack_require__(1018);
+	
+	var _gitBranch2 = _interopRequireDefault(_gitBranch);
+	
+	var _gitCommit = __webpack_require__(1019);
+	
+	var _gitCommit2 = _interopRequireDefault(_gitCommit);
+	
+	var _gitCompare = __webpack_require__(1020);
+	
+	var _gitCompare2 = _interopRequireDefault(_gitCompare);
+	
+	var _gitMerge = __webpack_require__(1021);
+	
+	var _gitMerge2 = _interopRequireDefault(_gitMerge);
+	
+	var _gitPullRequest = __webpack_require__(1022);
+	
+	var _gitPullRequest2 = _interopRequireDefault(_gitPullRequest);
+	
+	var _globe = __webpack_require__(1023);
+	
+	var _globe2 = _interopRequireDefault(_globe);
+	
+	var _graph = __webpack_require__(1024);
+	
+	var _graph2 = _interopRequireDefault(_graph);
+	
+	var _heart = __webpack_require__(1025);
+	
+	var _heart2 = _interopRequireDefault(_heart);
+	
+	var _history = __webpack_require__(1026);
+	
+	var _history2 = _interopRequireDefault(_history);
+	
+	var _home = __webpack_require__(1027);
+	
+	var _home2 = _interopRequireDefault(_home);
+	
+	var _horizontalRule = __webpack_require__(1028);
+	
+	var _horizontalRule2 = _interopRequireDefault(_horizontalRule);
+	
+	var _hourglass = __webpack_require__(1029);
+	
+	var _hourglass2 = _interopRequireDefault(_hourglass);
+	
+	var _hubot = __webpack_require__(1030);
+	
+	var _hubot2 = _interopRequireDefault(_hubot);
+	
+	var _inbox = __webpack_require__(1031);
+	
+	var _inbox2 = _interopRequireDefault(_inbox);
+	
+	var _info = __webpack_require__(1032);
+	
+	var _info2 = _interopRequireDefault(_info);
+	
+	var _issueClosed = __webpack_require__(1033);
+	
+	var _issueClosed2 = _interopRequireDefault(_issueClosed);
+	
+	var _issueOpened = __webpack_require__(1034);
+	
+	var _issueOpened2 = _interopRequireDefault(_issueOpened);
+	
+	var _issueReopened = __webpack_require__(1035);
+	
+	var _issueReopened2 = _interopRequireDefault(_issueReopened);
+	
+	var _jersey = __webpack_require__(1036);
+	
+	var _jersey2 = _interopRequireDefault(_jersey);
+	
+	var _jumpDown = __webpack_require__(1037);
+	
+	var _jumpDown2 = _interopRequireDefault(_jumpDown);
+	
+	var _jumpLeft = __webpack_require__(1038);
+	
+	var _jumpLeft2 = _interopRequireDefault(_jumpLeft);
+	
+	var _jumpRight = __webpack_require__(1039);
+	
+	var _jumpRight2 = _interopRequireDefault(_jumpRight);
+	
+	var _jumpUp = __webpack_require__(1040);
+	
+	var _jumpUp2 = _interopRequireDefault(_jumpUp);
+	
+	var _key = __webpack_require__(1041);
+	
+	var _key2 = _interopRequireDefault(_key);
+	
+	var _keyboard = __webpack_require__(1042);
+	
+	var _keyboard2 = _interopRequireDefault(_keyboard);
+	
+	var _law = __webpack_require__(1043);
+	
+	var _law2 = _interopRequireDefault(_law);
+	
+	var _lightBulb = __webpack_require__(1044);
+	
+	var _lightBulb2 = _interopRequireDefault(_lightBulb);
+	
+	var _linkExternal = __webpack_require__(1045);
+	
+	var _linkExternal2 = _interopRequireDefault(_linkExternal);
+	
+	var _link = __webpack_require__(1046);
+	
+	var _link2 = _interopRequireDefault(_link);
+	
+	var _listOrdered = __webpack_require__(1047);
+	
+	var _listOrdered2 = _interopRequireDefault(_listOrdered);
+	
+	var _listUnordered = __webpack_require__(1048);
+	
+	var _listUnordered2 = _interopRequireDefault(_listUnordered);
+	
+	var _location = __webpack_require__(1049);
+	
+	var _location2 = _interopRequireDefault(_location);
+	
+	var _lock = __webpack_require__(1050);
+	
+	var _lock2 = _interopRequireDefault(_lock);
+	
+	var _logoGithub = __webpack_require__(1051);
+	
+	var _logoGithub2 = _interopRequireDefault(_logoGithub);
+	
+	var _mailRead = __webpack_require__(1052);
+	
+	var _mailRead2 = _interopRequireDefault(_mailRead);
+	
+	var _mailReply = __webpack_require__(1053);
+	
+	var _mailReply2 = _interopRequireDefault(_mailReply);
+	
+	var _mail = __webpack_require__(1054);
+	
+	var _mail2 = _interopRequireDefault(_mail);
+	
+	var _markGithub = __webpack_require__(1055);
+	
+	var _markGithub2 = _interopRequireDefault(_markGithub);
+	
+	var _markdown = __webpack_require__(1056);
+	
+	var _markdown2 = _interopRequireDefault(_markdown);
+	
+	var _megaphone = __webpack_require__(1057);
+	
+	var _megaphone2 = _interopRequireDefault(_megaphone);
+	
+	var _mention = __webpack_require__(1058);
+	
+	var _mention2 = _interopRequireDefault(_mention);
+	
+	var _microscope = __webpack_require__(1059);
+	
+	var _microscope2 = _interopRequireDefault(_microscope);
+	
+	var _milestone = __webpack_require__(1060);
+	
+	var _milestone2 = _interopRequireDefault(_milestone);
+	
+	var _mirror = __webpack_require__(1061);
+	
+	var _mirror2 = _interopRequireDefault(_mirror);
+	
+	var _mortarBoard = __webpack_require__(1062);
+	
+	var _mortarBoard2 = _interopRequireDefault(_mortarBoard);
+	
+	var _moveDown = __webpack_require__(1063);
+	
+	var _moveDown2 = _interopRequireDefault(_moveDown);
+	
+	var _moveLeft = __webpack_require__(1064);
+	
+	var _moveLeft2 = _interopRequireDefault(_moveLeft);
+	
+	var _moveRight = __webpack_require__(1065);
+	
+	var _moveRight2 = _interopRequireDefault(_moveRight);
+	
+	var _moveUp = __webpack_require__(1066);
+	
+	var _moveUp2 = _interopRequireDefault(_moveUp);
+	
+	var _mute = __webpack_require__(1067);
+	
+	var _mute2 = _interopRequireDefault(_mute);
+	
+	var _noNewline = __webpack_require__(1068);
+	
+	var _noNewline2 = _interopRequireDefault(_noNewline);
+	
+	var _octoface = __webpack_require__(1069);
+	
+	var _octoface2 = _interopRequireDefault(_octoface);
+	
+	var _organization = __webpack_require__(1070);
+	
+	var _organization2 = _interopRequireDefault(_organization);
+	
+	var _package = __webpack_require__(1071);
+	
+	var _package2 = _interopRequireDefault(_package);
+	
+	var _paintcan = __webpack_require__(1072);
+	
+	var _paintcan2 = _interopRequireDefault(_paintcan);
+	
+	var _pencil = __webpack_require__(1073);
+	
+	var _pencil2 = _interopRequireDefault(_pencil);
+	
+	var _person = __webpack_require__(1074);
+	
+	var _person2 = _interopRequireDefault(_person);
+	
+	var _pin = __webpack_require__(1075);
+	
+	var _pin2 = _interopRequireDefault(_pin);
+	
+	var _playbackFastForward = __webpack_require__(1076);
+	
+	var _playbackFastForward2 = _interopRequireDefault(_playbackFastForward);
+	
+	var _playbackPause = __webpack_require__(1077);
+	
+	var _playbackPause2 = _interopRequireDefault(_playbackPause);
+	
+	var _playbackPlay = __webpack_require__(1078);
+	
+	var _playbackPlay2 = _interopRequireDefault(_playbackPlay);
+	
+	var _playbackRewind = __webpack_require__(1079);
+	
+	var _playbackRewind2 = _interopRequireDefault(_playbackRewind);
+	
+	var _plug = __webpack_require__(1080);
+	
+	var _plug2 = _interopRequireDefault(_plug);
+	
+	var _plus = __webpack_require__(1081);
+	
+	var _plus2 = _interopRequireDefault(_plus);
+	
+	var _podium = __webpack_require__(1082);
+	
+	var _podium2 = _interopRequireDefault(_podium);
+	
+	var _primitiveDot = __webpack_require__(1083);
+	
+	var _primitiveDot2 = _interopRequireDefault(_primitiveDot);
+	
+	var _primitiveSquare = __webpack_require__(1084);
+	
+	var _primitiveSquare2 = _interopRequireDefault(_primitiveSquare);
+	
+	var _pulse = __webpack_require__(1085);
+	
+	var _pulse2 = _interopRequireDefault(_pulse);
+	
+	var _puzzle = __webpack_require__(1086);
+	
+	var _puzzle2 = _interopRequireDefault(_puzzle);
+	
+	var _question = __webpack_require__(1087);
+	
+	var _question2 = _interopRequireDefault(_question);
+	
+	var _quote = __webpack_require__(1088);
+	
+	var _quote2 = _interopRequireDefault(_quote);
+	
+	var _radioTower = __webpack_require__(1089);
+	
+	var _radioTower2 = _interopRequireDefault(_radioTower);
+	
+	var _repoClone = __webpack_require__(1090);
+	
+	var _repoClone2 = _interopRequireDefault(_repoClone);
+	
+	var _repoForcePush = __webpack_require__(1091);
+	
+	var _repoForcePush2 = _interopRequireDefault(_repoForcePush);
+	
+	var _repoForked = __webpack_require__(1092);
+	
+	var _repoForked2 = _interopRequireDefault(_repoForked);
+	
+	var _repoPull = __webpack_require__(1093);
+	
+	var _repoPull2 = _interopRequireDefault(_repoPull);
+	
+	var _repoPush = __webpack_require__(1094);
+	
+	var _repoPush2 = _interopRequireDefault(_repoPush);
+	
+	var _repo = __webpack_require__(1095);
+	
+	var _repo2 = _interopRequireDefault(_repo);
+	
+	var _rocket = __webpack_require__(1096);
+	
+	var _rocket2 = _interopRequireDefault(_rocket);
+	
+	var _rss = __webpack_require__(1097);
+	
+	var _rss2 = _interopRequireDefault(_rss);
+	
+	var _ruby = __webpack_require__(1098);
+	
+	var _ruby2 = _interopRequireDefault(_ruby);
+	
+	var _screenFull = __webpack_require__(1099);
+	
+	var _screenFull2 = _interopRequireDefault(_screenFull);
+	
+	var _screenNormal = __webpack_require__(1100);
+	
+	var _screenNormal2 = _interopRequireDefault(_screenNormal);
+	
+	var _search = __webpack_require__(1101);
+	
+	var _search2 = _interopRequireDefault(_search);
+	
+	var _server = __webpack_require__(1102);
+	
+	var _server2 = _interopRequireDefault(_server);
+	
+	var _settings = __webpack_require__(1103);
+	
+	var _settings2 = _interopRequireDefault(_settings);
+	
+	var _signIn = __webpack_require__(1104);
+	
+	var _signIn2 = _interopRequireDefault(_signIn);
+	
+	var _signOut = __webpack_require__(1105);
+	
+	var _signOut2 = _interopRequireDefault(_signOut);
+	
+	var _split = __webpack_require__(1106);
+	
+	var _split2 = _interopRequireDefault(_split);
+	
+	var _squirrel = __webpack_require__(1107);
+	
+	var _squirrel2 = _interopRequireDefault(_squirrel);
+	
+	var _star = __webpack_require__(1108);
+	
+	var _star2 = _interopRequireDefault(_star);
+	
+	var _steps = __webpack_require__(1109);
+	
+	var _steps2 = _interopRequireDefault(_steps);
+	
+	var _stop = __webpack_require__(1110);
+	
+	var _stop2 = _interopRequireDefault(_stop);
+	
+	var _sync = __webpack_require__(1111);
+	
+	var _sync2 = _interopRequireDefault(_sync);
+	
+	var _tag = __webpack_require__(1112);
+	
+	var _tag2 = _interopRequireDefault(_tag);
+	
+	var _telescope = __webpack_require__(1113);
+	
+	var _telescope2 = _interopRequireDefault(_telescope);
+	
+	var _terminal = __webpack_require__(1114);
+	
+	var _terminal2 = _interopRequireDefault(_terminal);
+	
+	var _threeBars = __webpack_require__(1115);
+	
+	var _threeBars2 = _interopRequireDefault(_threeBars);
+	
+	var _tools = __webpack_require__(1116);
+	
+	var _tools2 = _interopRequireDefault(_tools);
+	
+	var _trashcan = __webpack_require__(1117);
+	
+	var _trashcan2 = _interopRequireDefault(_trashcan);
+	
+	var _triangleDown = __webpack_require__(1118);
+	
+	var _triangleDown2 = _interopRequireDefault(_triangleDown);
+	
+	var _triangleLeft = __webpack_require__(1119);
+	
+	var _triangleLeft2 = _interopRequireDefault(_triangleLeft);
+	
+	var _triangleRight = __webpack_require__(1120);
+	
+	var _triangleRight2 = _interopRequireDefault(_triangleRight);
+	
+	var _triangleUp = __webpack_require__(1121);
+	
+	var _triangleUp2 = _interopRequireDefault(_triangleUp);
+	
+	var _unfold = __webpack_require__(1122);
+	
+	var _unfold2 = _interopRequireDefault(_unfold);
+	
+	var _unmute = __webpack_require__(1123);
+	
+	var _unmute2 = _interopRequireDefault(_unmute);
+	
+	var _versions = __webpack_require__(1124);
+	
+	var _versions2 = _interopRequireDefault(_versions);
+	
+	var _x = __webpack_require__(1125);
+	
+	var _x2 = _interopRequireDefault(_x);
+	
+	var _zap = __webpack_require__(1126);
+	
+	var _zap2 = _interopRequireDefault(_zap);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.GoAlert = _alert2.default;
+	exports.GoAlignmentAlign = _alignmentAlign2.default;
+	exports.GoAlignmentAlignedTo = _alignmentAlignedTo2.default;
+	exports.GoAlignmentUnalign = _alignmentUnalign2.default;
+	exports.GoArrowDown = _arrowDown2.default;
+	exports.GoArrowLeft = _arrowLeft2.default;
+	exports.GoArrowRight = _arrowRight2.default;
+	exports.GoArrowSmallDown = _arrowSmallDown2.default;
+	exports.GoArrowSmallLeft = _arrowSmallLeft2.default;
+	exports.GoArrowSmallRight = _arrowSmallRight2.default;
+	exports.GoArrowSmallUp = _arrowSmallUp2.default;
+	exports.GoArrowUp = _arrowUp2.default;
+	exports.GoBeer = _beer2.default;
+	exports.GoBook = _book2.default;
+	exports.GoBookmark = _bookmark2.default;
+	exports.GoBriefcase = _briefcase2.default;
+	exports.GoBroadcast = _broadcast2.default;
+	exports.GoBrowser = _browser2.default;
+	exports.GoBug = _bug2.default;
+	exports.GoCalendar = _calendar2.default;
+	exports.GoCheck = _check2.default;
+	exports.GoChecklist = _checklist2.default;
+	exports.GoChevronDown = _chevronDown2.default;
+	exports.GoChevronLeft = _chevronLeft2.default;
+	exports.GoChevronRight = _chevronRight2.default;
+	exports.GoChevronUp = _chevronUp2.default;
+	exports.GoCircleSlash = _circleSlash2.default;
+	exports.GoCircuitBoard = _circuitBoard2.default;
+	exports.GoClippy = _clippy2.default;
+	exports.GoClock = _clock2.default;
+	exports.GoCloudDownload = _cloudDownload2.default;
+	exports.GoCloudUpload = _cloudUpload2.default;
+	exports.GoCode = _code2.default;
+	exports.GoColorMode = _colorMode2.default;
+	exports.GoCommentDiscussion = _commentDiscussion2.default;
+	exports.GoComment = _comment2.default;
+	exports.GoCreditCard = _creditCard2.default;
+	exports.GoDash = _dash2.default;
+	exports.GoDashboard = _dashboard2.default;
+	exports.GoDatabase = _database2.default;
+	exports.GoDeviceCameraVideo = _deviceCameraVideo2.default;
+	exports.GoDeviceCamera = _deviceCamera2.default;
+	exports.GoDeviceDesktop = _deviceDesktop2.default;
+	exports.GoDeviceMobile = _deviceMobile2.default;
+	exports.GoDiffAdded = _diffAdded2.default;
+	exports.GoDiffIgnored = _diffIgnored2.default;
+	exports.GoDiffModified = _diffModified2.default;
+	exports.GoDiffRemoved = _diffRemoved2.default;
+	exports.GoDiffRenamed = _diffRenamed2.default;
+	exports.GoDiff = _diff2.default;
+	exports.GoEllipsis = _ellipsis2.default;
+	exports.GoEye = _eye2.default;
+	exports.GoFileBinary = _fileBinary2.default;
+	exports.GoFileCode = _fileCode2.default;
+	exports.GoFileDirectory = _fileDirectory2.default;
+	exports.GoFileMedia = _fileMedia2.default;
+	exports.GoFilePdf = _filePdf2.default;
+	exports.GoFileSubmodule = _fileSubmodule2.default;
+	exports.GoFileSymlinkDirectory = _fileSymlinkDirectory2.default;
+	exports.GoFileSymlinkFile = _fileSymlinkFile2.default;
+	exports.GoFileText = _fileText2.default;
+	exports.GoFileZip = _fileZip2.default;
+	exports.GoFlame = _flame2.default;
+	exports.GoFold = _fold2.default;
+	exports.GoGear = _gear2.default;
+	exports.GoGift = _gift2.default;
+	exports.GoGistSecret = _gistSecret2.default;
+	exports.GoGist = _gist2.default;
+	exports.GoGitBranch = _gitBranch2.default;
+	exports.GoGitCommit = _gitCommit2.default;
+	exports.GoGitCompare = _gitCompare2.default;
+	exports.GoGitMerge = _gitMerge2.default;
+	exports.GoGitPullRequest = _gitPullRequest2.default;
+	exports.GoGlobe = _globe2.default;
+	exports.GoGraph = _graph2.default;
+	exports.GoHeart = _heart2.default;
+	exports.GoHistory = _history2.default;
+	exports.GoHome = _home2.default;
+	exports.GoHorizontalRule = _horizontalRule2.default;
+	exports.GoHourglass = _hourglass2.default;
+	exports.GoHubot = _hubot2.default;
+	exports.GoInbox = _inbox2.default;
+	exports.GoInfo = _info2.default;
+	exports.GoIssueClosed = _issueClosed2.default;
+	exports.GoIssueOpened = _issueOpened2.default;
+	exports.GoIssueReopened = _issueReopened2.default;
+	exports.GoJersey = _jersey2.default;
+	exports.GoJumpDown = _jumpDown2.default;
+	exports.GoJumpLeft = _jumpLeft2.default;
+	exports.GoJumpRight = _jumpRight2.default;
+	exports.GoJumpUp = _jumpUp2.default;
+	exports.GoKey = _key2.default;
+	exports.GoKeyboard = _keyboard2.default;
+	exports.GoLaw = _law2.default;
+	exports.GoLightBulb = _lightBulb2.default;
+	exports.GoLinkExternal = _linkExternal2.default;
+	exports.GoLink = _link2.default;
+	exports.GoListOrdered = _listOrdered2.default;
+	exports.GoListUnordered = _listUnordered2.default;
+	exports.GoLocation = _location2.default;
+	exports.GoLock = _lock2.default;
+	exports.GoLogoGithub = _logoGithub2.default;
+	exports.GoMailRead = _mailRead2.default;
+	exports.GoMailReply = _mailReply2.default;
+	exports.GoMail = _mail2.default;
+	exports.GoMarkGithub = _markGithub2.default;
+	exports.GoMarkdown = _markdown2.default;
+	exports.GoMegaphone = _megaphone2.default;
+	exports.GoMention = _mention2.default;
+	exports.GoMicroscope = _microscope2.default;
+	exports.GoMilestone = _milestone2.default;
+	exports.GoMirror = _mirror2.default;
+	exports.GoMortarBoard = _mortarBoard2.default;
+	exports.GoMoveDown = _moveDown2.default;
+	exports.GoMoveLeft = _moveLeft2.default;
+	exports.GoMoveRight = _moveRight2.default;
+	exports.GoMoveUp = _moveUp2.default;
+	exports.GoMute = _mute2.default;
+	exports.GoNoNewline = _noNewline2.default;
+	exports.GoOctoface = _octoface2.default;
+	exports.GoOrganization = _organization2.default;
+	exports.GoPackage = _package2.default;
+	exports.GoPaintcan = _paintcan2.default;
+	exports.GoPencil = _pencil2.default;
+	exports.GoPerson = _person2.default;
+	exports.GoPin = _pin2.default;
+	exports.GoPlaybackFastForward = _playbackFastForward2.default;
+	exports.GoPlaybackPause = _playbackPause2.default;
+	exports.GoPlaybackPlay = _playbackPlay2.default;
+	exports.GoPlaybackRewind = _playbackRewind2.default;
+	exports.GoPlug = _plug2.default;
+	exports.GoPlus = _plus2.default;
+	exports.GoPodium = _podium2.default;
+	exports.GoPrimitiveDot = _primitiveDot2.default;
+	exports.GoPrimitiveSquare = _primitiveSquare2.default;
+	exports.GoPulse = _pulse2.default;
+	exports.GoPuzzle = _puzzle2.default;
+	exports.GoQuestion = _question2.default;
+	exports.GoQuote = _quote2.default;
+	exports.GoRadioTower = _radioTower2.default;
+	exports.GoRepoClone = _repoClone2.default;
+	exports.GoRepoForcePush = _repoForcePush2.default;
+	exports.GoRepoForked = _repoForked2.default;
+	exports.GoRepoPull = _repoPull2.default;
+	exports.GoRepoPush = _repoPush2.default;
+	exports.GoRepo = _repo2.default;
+	exports.GoRocket = _rocket2.default;
+	exports.GoRss = _rss2.default;
+	exports.GoRuby = _ruby2.default;
+	exports.GoScreenFull = _screenFull2.default;
+	exports.GoScreenNormal = _screenNormal2.default;
+	exports.GoSearch = _search2.default;
+	exports.GoServer = _server2.default;
+	exports.GoSettings = _settings2.default;
+	exports.GoSignIn = _signIn2.default;
+	exports.GoSignOut = _signOut2.default;
+	exports.GoSplit = _split2.default;
+	exports.GoSquirrel = _squirrel2.default;
+	exports.GoStar = _star2.default;
+	exports.GoSteps = _steps2.default;
+	exports.GoStop = _stop2.default;
+	exports.GoSync = _sync2.default;
+	exports.GoTag = _tag2.default;
+	exports.GoTelescope = _telescope2.default;
+	exports.GoTerminal = _terminal2.default;
+	exports.GoThreeBars = _threeBars2.default;
+	exports.GoTools = _tools2.default;
+	exports.GoTrashcan = _trashcan2.default;
+	exports.GoTriangleDown = _triangleDown2.default;
+	exports.GoTriangleLeft = _triangleLeft2.default;
+	exports.GoTriangleRight = _triangleRight2.default;
+	exports.GoTriangleUp = _triangleUp2.default;
+	exports.GoUnfold = _unfold2.default;
+	exports.GoUnmute = _unmute2.default;
+	exports.GoVersions = _versions2.default;
+	exports.GoX = _x2.default;
+	exports.GoZap = _zap2.default;
+
+/***/ },
+/* 950 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoAlert = function GoAlert(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm39.3 31.3l-17.1-30c-0.5-0.8-1.3-1.3-2.2-1.3s-1.7 0.5-2.2 1.3l-17.1 30c-0.4 0.7-0.4 1.7 0 2.5s1.3 1.2 2.2 1.2h34.2c0.9 0 1.7-0.5 2.2-1.2s0.4-1.8 0-2.5z m-16.8-1.3h-5v-5h5v5z m0-7.5h-5v-10h5v10z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoAlert;
+	module.exports = exports['default'];
+
+/***/ },
+/* 951 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoAlignmentAlign = function GoAlignmentAlign(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm8.5 2.5c-4.1 0-7.5 3.4-7.5 7.5s3.4 7.5 7.5 7.5 7.5-3.4 7.5-7.5-3.4-7.5-7.5-7.5z m18.8 21.3l6.2-6.3h-17.5v17.5l6.3-6.2 11.2 11.2 5-5-11.2-11.2z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoAlignmentAlign;
+	module.exports = exports['default'];
+
+/***/ },
+/* 952 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoAlignmentAlignedTo = function GoAlignmentAlignedTo(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm16 22.5l5-5 11.3 11.3 6.2-6.3v17.5h-17.5l6.3-6.2-11.3-11.3z m-7.5-5c-4.1 0-7.5-3.4-7.5-7.5s3.4-7.5 7.5-7.5 7.5 3.4 7.5 7.5-3.4 7.5-7.5 7.5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoAlignmentAlignedTo;
+	module.exports = exports['default'];
+
+/***/ },
+/* 953 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoAlignmentUnalign = function GoAlignmentUnalign(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm22.5 7.5l-5 5-10-10-5 5 10 10-5 5 2.5 2.5 15-15-2.5-2.5z m5 15l5-5-2.5-2.5-15 15 2.5 2.5 5-5 10 10 5-5-10-10z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoAlignmentUnalign;
+	module.exports = exports['default'];
+
+/***/ },
+/* 954 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoArrowDown = function GoArrowDown(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm25 17.5v-10h-10v10h-7.5l12.5 15 12.5-15h-7.5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoArrowDown;
+	module.exports = exports['default'];
+
+/***/ },
+/* 955 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoArrowLeft = function GoArrowLeft(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm22.5 15v-7.5l-15 12.5 15 12.5v-7.5h10v-10h-10z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoArrowLeft;
+	module.exports = exports['default'];
+
+/***/ },
+/* 956 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoArrowRight = function GoArrowRight(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm32.5 20l-15-12.5v7.5h-10v10h10v7.5l15-12.5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoArrowRight;
+	module.exports = exports['default'];
+
+/***/ },
+/* 957 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoArrowSmallDown = function GoArrowSmallDown(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm22.5 17.5v-5h-5v5h-5l7.5 10 7.5-10h-5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoArrowSmallDown;
+	module.exports = exports['default'];
+
+/***/ },
+/* 958 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoArrowSmallLeft = function GoArrowSmallLeft(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm22.5 17.5v-5l-10 7.5 10 7.5v-5h5v-5h-5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoArrowSmallLeft;
+	module.exports = exports['default'];
+
+/***/ },
+/* 959 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoArrowSmallRight = function GoArrowSmallRight(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm27.5 20l-10-7.5v5h-5v5h5v5l10-7.5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoArrowSmallRight;
+	module.exports = exports['default'];
+
+/***/ },
+/* 960 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoArrowSmallUp = function GoArrowSmallUp(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm20 12.5l-7.5 10h5v5h5v-5h5l-7.5-10z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoArrowSmallUp;
+	module.exports = exports['default'];
+
+/***/ },
+/* 961 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoArrowUp = function GoArrowUp(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm20 7.5l-12.5 15h7.5v10h10v-10h7.5l-12.5-15z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoArrowUp;
+	module.exports = exports['default'];
+
+/***/ },
+/* 962 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoBeer = function GoBeer(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm35 10h-7.5v-5c0-2.8-6.2-5-13.7-5s-13.8 2.2-13.8 5v30c0 2.8 6.2 5 13.8 5s13.7-2.2 13.7-5v-5h7.5s2.5-1.2 2.5-2.5v-15s-1.1-2.5-2.5-2.5z m-27.5 22.5h-2.5v-20h2.5v20z m7.5 2.5h-2.5v-20h2.5v20z m7.5-2.5h-2.5v-20h2.5v20z m-8.7-25c-4.9 0-8.8-1.1-8.8-2.5s3.9-2.5 8.8-2.5 8.7 1.1 8.7 2.5-3.9 2.5-8.7 2.5z m18.7 17.5h-5v-10h5v10z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoBeer;
+	module.exports = exports['default'];
+
+/***/ },
+/* 963 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoBook = function GoBook(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm30 22.5h-5c-1.3 0-2.5 1.3-2.5 2.5h10c0-1.3-1.2-2.5-2.5-2.5z m-2.1-16.2c-6.6 0-8.2 1.2-9.1 2.1-1-0.9-2.6-2.1-9.2-2.1s-9.6 1.7-9.6 3v22.9c1.1-0.6 4.6-1.9 8.4-2.2 4.4-0.4 9.1 0.4 9.1 1.2 0 0.7 0.3 1.3 1.2 1.3h0.1c0.9 0 1.2-0.6 1.2-1.2 0-0.9 4.6-1.7 9.1-1.3 3.7 0.3 7.3 1.6 8.4 2.2v-22.9c0-1.3-3.1-3-9.6-3z m-10.4 22.3c-1.2-0.6-4-1.1-7.5-1.1s-6.6 0.5-7.5 1.1v-17.3s2.5-2.4 7.5-2.4 7.5 1.1 7.5 2.4v17.3z m17.5 0c-0.9-0.6-4-1.1-7.5-1.1s-6.3 0.5-7.5 1.1v-17.3s2.5-2.4 7.5-2.4 7.5 1.1 7.5 2.4v17.3z m-5-11.1h-5c-1.3 0-2.5 1.3-2.5 2.5h10c0-1.3-1.2-2.5-2.5-2.5z m0-5h-5c-1.3 0-2.5 1.3-2.5 2.5h10c0-1.3-1.2-2.5-2.5-2.5z m-17.5 5h-5c-1.2 0-2.5 1.2-2.5 2.5h10c0-1.2-1.2-2.5-2.5-2.5z m0 5h-5c-1.2 0-2.5 1.2-2.5 2.5h10c0-1.2-1.2-2.5-2.5-2.5z m0-10h-5c-1.2 0-2.5 1.2-2.5 2.5h10c0-1.2-1.2-2.5-2.5-2.5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoBook;
+	module.exports = exports['default'];
+
+/***/ },
+/* 964 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoBookmark = function GoBookmark(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm12.5 5v30l7.5-5 7.5 5v-30h-15z m12.4 7.7l-2.9 2 1.1 3.3c0.1 0.3 0 0.4-0.3 0.2l-2.8-2-2.8 2c-0.3 0.2-0.4 0.1-0.3-0.2l1.1-3.3-2.9-2c-0.2-0.2-0.1-0.4 0.2-0.4l3.4 0 1.1-3.2c0.1-0.4 0.3-0.4 0.4 0l1.1 3.2 3.4 0c0.4 0 0.4 0.2 0.2 0.4z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoBookmark;
+	module.exports = exports['default'];
+
+/***/ },
+/* 965 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoBriefcase = function GoBriefcase(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm35 7.5h-10v-2.6c0-1.3-1.1-2.4-2.4-2.4h-5.2c-1.3 0-2.4 1.1-2.4 2.4v2.6h-10c-1.4 0-2.5 1.1-2.5 2.5v20c0 1.4 1.1 2.5 2.5 2.5h30c1.4 0 2.5-1.1 2.5-2.5v-20c0-1.4-1.1-2.5-2.5-2.5z m-17.5-1.9c0-0.3 0.3-0.6 0.6-0.6h3.8c0.3 0 0.6 0.3 0.6 0.6v1.9h-5v-1.9z m17.5 14.4h-12.5v2.5h-5v-2.5h-12.5v-10h2.5v7.5h25v-7.5h2.5v10z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoBriefcase;
+	module.exports = exports['default'];
+
+/***/ },
+/* 966 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoBroadcast = function GoBroadcast(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm20 7.5c5.5 0 10 4.5 10 10 0 2.7-1.1 5.2-2.8 7l-0.6 3.6c3.5-2.2 5.9-6.1 5.9-10.6 0-6.9-5.6-12.5-12.5-12.5s-12.5 5.6-12.5 12.5c0 4.5 2.4 8.4 5.9 10.6l-0.6-3.6c-1.7-1.8-2.8-4.3-2.8-7 0-5.5 4.5-10 10-10z m-2.5 12.5c-1.4 0-2.5 1.1-2.5 2.5v5c0 1.4 1.2 2.5 2.5 2.5v10h5v-10c1.3 0 2.5-1.1 2.5-2.5v-5c0-1.4-1.1-2.5-2.5-2.5h-5z m7.5-5c0-2.8-2.2-5-5-5s-5 2.2-5 5 2.2 5 5 5 5-2.2 5-5z m-5-15c-9.6 0-17.5 7.9-17.5 17.5 0 7.7 5 14.2 11.9 16.5l-0.5-2.8c-5.2-2.3-8.9-7.6-8.9-13.7 0-8.3 6.7-15 15-15s15 6.7 15 15c0 6.1-3.7 11.4-8.9 13.7l-0.5 2.8c6.9-2.3 11.9-8.8 11.9-16.5 0-9.6-7.9-17.5-17.5-17.5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoBroadcast;
+	module.exports = exports['default'];
+
+/***/ },
+/* 967 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoBrowser = function GoBrowser(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm15 7.5h2.5v2.5h-2.5v-2.5z m-5 0h2.5v2.5h-2.5v-2.5z m-5 0h2.5v2.5h-2.5v-2.5z m30 25h-30v-20h30v20z m0-22.5h-15v-2.5h15v2.5z m2.5-2.5c0-1.4-1.1-2.5-2.5-2.5h-30c-1.4 0-2.5 1.1-2.5 2.5v25c0 1.4 1.1 2.5 2.5 2.5h30c1.4 0 2.5-1.1 2.5-2.5v-25z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoBrowser;
+	module.exports = exports['default'];
+
+/***/ },
+/* 968 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoBug = function GoBug(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm15 6.1c-2 2.2-1.5 5.8-1.5 5.8s2.1 2.5 6.3 2.5c4.1 0 6.2-2.5 6.2-2.5s0.6-3.5-1.4-5.7c1.2-0.7 2-1.8 1.7-2.5-0.4-0.7-1.9-0.8-3.5-0.1-0.6 0.2-1.1 0.6-1.4 0.9-0.5-0.1-1-0.1-1.6-0.1-0.6 0-1.1 0-1.5 0.1-0.4-0.3-0.9-0.7-1.5-0.9-1.5-0.7-3.1-0.6-3.4 0.1-0.3 0.7 0.4 1.7 1.6 2.4z m15.7 16.2c-0.3-0.1-0.6-0.2-0.9-0.2 0-0.1 0-0.1 0-0.2 0-1.3-0.2-2.6-0.5-3.8 0.6 0.1 1.4-0.1 2.3-0.4 1.5-0.7 2.5-1.9 2.2-2.7-0.4-0.8-1.9-0.9-3.5-0.2-0.7 0.4-1.3 0.8-1.7 1.2-0.3-0.7-0.6-1.4-1-2-1.2 1-3.5 2.5-6.6 2.8v12.6s0 1.2-1.2 1.2-1.3-1.2-1.3-1.2v-12.6c-3.1-0.3-5.3-1.8-6.5-2.8-0.4 0.6-0.7 1.3-1 2-0.4-0.5-1-0.9-1.7-1.2-1.5-0.7-3.1-0.6-3.4 0.2-0.3 0.8 0.6 2 2.2 2.7 0.8 0.3 1.5 0.5 2.2 0.4-0.3 1.2-0.5 2.5-0.5 3.8 0 0.1 0 0.1 0 0.2-0.3 0.1-0.5 0.1-0.8 0.2-2.1 0.4-3.6 1.4-3.5 2.3 0.1 0.9 1.9 1.2 3.9 0.8 0.3-0.1 0.5-0.1 0.8-0.2 0.3 1.6 0.9 3.1 1.7 4.4-0.5 0.2-1 0.5-1.4 1-1.3 1.2-1.8 2.8-1.1 3.4s2.1 0.1 3.3-1.2c0.4-0.3 0.7-0.7 0.9-1.1 1.7 1.7 3.8 2.7 6.2 2.7 2.3 0 4.5-1 6.2-2.8 0.2 0.4 0.5 0.9 0.9 1.2 1.3 1.3 2.8 1.8 3.4 1.2s0.1-2.2-1.1-3.4c-0.5-0.5-1-0.9-1.5-1.1 0.8-1.3 1.3-2.7 1.7-4.3 0.3 0.1 0.6 0.1 0.9 0.2 2 0.4 3.7 0.1 3.9-0.8 0.1-0.9-1.5-1.9-3.5-2.3z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoBug;
+	module.exports = exports['default'];
+
+/***/ },
+/* 969 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoCalendar = function GoCalendar(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm27.5 20h-2.5v5h2.5v-5z m-5 0h-2.5v5h2.5v-5z m5-7.5h-2.5v5h2.5v-5z m5 7.5h-2.5v5h2.5v-5z m-10 7.5h-2.5v5h2.5v-5z m7.5-27.5h-2.5v5h2.5v-5z m-20 0h-2.5v5h2.5v-5z m22.5 12.5h-2.5v5h2.5v-5z m-10 0h-2.5v5h2.5v-5z m-10 15h-2.5v5h2.5v-5z m-5-7.5h-2.5v5h2.5v-5z m5 0h-2.5v5h2.5v-5z m20-17.5v5h-7.5v-5h-12.5v5h-7.5v-5h-5v35h37.5v-35h-5z m2.5 32.5h-32.5v-25h32.5v25z m-27.5-7.5h-2.5v5h2.5v-5z m10-15h-2.5v5h2.5v-5z m0 15h-2.5v5h2.5v-5z m-5-15h-2.5v5h2.5v-5z m5 7.5h-2.5v5h2.5v-5z m10 7.5h-2.5v5h2.5v-5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoCalendar;
+	module.exports = exports['default'];
+
+/***/ },
+/* 970 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoCheck = function GoCheck(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm30 7.5l-15 15-5-5-5 5 10 10 20-20-5-5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoCheck;
+	module.exports = exports['default'];
+
+/***/ },
+/* 971 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoChecklist = function GoChecklist(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm34.7 20.2l-1.9-2c-0.3-0.2-0.7-0.2-0.9 0l-4.1 4.1-4.7 4.7-3.7-3.6c-0.2-0.3-0.6-0.3-0.9 0l-1.9 1.9c-0.3 0.3-0.3 0.7 0 0.9l6 6.1c0.3 0.2 0.7 0.2 0.9 0l11.2-11.2c0.3-0.3 0.3-0.7 0-0.9z m-20.8 2.5l2-2c1.6-1.6 4.5-1.6 6.2 0l1 1 4.4-4.2v-12.5h-22.5v27.5h12.5l-3.6-3.6c-1.7-1.7-1.7-4.5 0-6.2z m-1.4-15.2h12.5v2.5h-12.5v-2.5z m0 5h12.5v2.5h-12.5v-2.5z m-2.5 7.5h-2.5v-2.5h2.5v2.5z m0-5h-2.5v-2.5h2.5v2.5z m0-5h-2.5v-2.5h2.5v2.5z m2.5 7.5h2.5v2.5h-2.5v-2.5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoChecklist;
+	module.exports = exports['default'];
+
+/***/ },
+/* 972 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoChevronDown = function GoChevronDown(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm27.5 12.5l-7.5 7.5-7.5-7.5-5 5 12.5 12.5 12.5-12.5-5-5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoChevronDown;
+	module.exports = exports['default'];
+
+/***/ },
+/* 973 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoChevronLeft = function GoChevronLeft(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm28.5 12.5l-5-5-12.5 12.5 12.5 12.5 5-5-7.5-7.5 7.5-7.5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoChevronLeft;
+	module.exports = exports['default'];
+
+/***/ },
+/* 974 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoChevronRight = function GoChevronRight(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm16 7.5l-5 5 7.5 7.5-7.5 7.5 5 5 12.5-12.5-12.5-12.5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoChevronRight;
+	module.exports = exports['default'];
+
+/***/ },
+/* 975 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoChevronUp = function GoChevronUp(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm20 10l-12.5 12.5 5 5 7.5-7.5 7.5 7.5 5-5-12.5-12.5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoChevronUp;
+	module.exports = exports['default'];
+
+/***/ },
+/* 976 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoCircleSlash = function GoCircleSlash(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm20 7.5c-6.9 0-12.5 5.6-12.5 12.5 0 6.9 5.6 12.5 12.5 12.5 6.9 0 12.5-5.6 12.5-12.5 0-6.9-5.6-12.5-12.5-12.5z m0 5c1.1 0 2.1 0.2 3 0.6l-9.9 9.9c-0.4-0.9-0.6-1.9-0.6-3 0-4.1 3.4-7.5 7.5-7.5z m0 15c-1.1 0-2.1-0.2-3.1-0.7l9.9-9.8c0.5 0.9 0.7 1.9 0.7 3 0 4.1-3.4 7.5-7.5 7.5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoCircleSlash;
+	module.exports = exports['default'];
+
+/***/ },
+/* 977 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoCircuitBoard = function GoCircuitBoard(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm12.5 10c1.4 0 2.5 1.1 2.5 2.5s-1.1 2.5-2.5 2.5-2.5-1.1-2.5-2.5 1.1-2.5 2.5-2.5z m25 20c0 4.1-3.4 7.5-7.5 7.5h-17.5l7.5-7.5h3.2c0.8 1.5 2.5 2.5 4.3 2.5 2.8 0 5-2.2 5-5s-2.2-5-5-5c-1.9 0-3.5 1-4.3 2.5h-5.7l-11.4 11.4c-2.2-1.3-3.6-3.7-3.6-6.4v-20c0-4.1 3.4-7.5 7.5-7.5v5.7c-1.5 0.8-2.5 2.5-2.5 4.3 0 2.8 2.2 5 5 5 1.8 0 3.5-1 4.3-2.5l6.4 0c0.8 1.5 2.5 2.5 4.3 2.5 2.8 0 5-2.2 5-5s-2.2-5-5-5c-1.9 0-3.5 1-4.3 2.5l-6.4 0c-0.4-0.8-1-1.4-1.8-1.8v-5.7h15c4.1 0 7.5 3.4 7.5 7.5v20z m-12.5-2.5c0-1.4 1.1-2.5 2.5-2.5s2.5 1.1 2.5 2.5-1.1 2.5-2.5 2.5-2.5-1.1-2.5-2.5z m0-15c0-1.4 1.1-2.5 2.5-2.5s2.5 1.1 2.5 2.5-1.1 2.5-2.5 2.5-2.5-1.1-2.5-2.5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoCircuitBoard;
+	module.exports = exports['default'];
+
+/***/ },
+/* 978 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoClippy = function GoClippy(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm30 35h-25v-22.5h25v7.5h2.5v-12.5c0-1.4-1.1-2.5-2.5-2.5h-7.5c0-2.8-2.2-5-5-5s-5 2.2-5 5h-7.5c-1.4 0-2.5 1.1-2.5 2.5v27.5c0 1.4 1.1 2.5 2.5 2.5h25c1.4 0 2.5-1.1 2.5-2.5v-5h-2.5v5z m-20-27.5h2.5s2.5-1.1 2.5-2.5 1.1-2.5 2.5-2.5 2.5 1.1 2.5 2.5 1.3 2.5 2.5 2.5h2.5s2.5 1.1 2.5 2.5h-20c0-1.5 1.1-2.5 2.5-2.5z m-2.5 20h5v-2.5h-5v2.5z m17.5-5v-5l-10 7.5 10 7.5v-5h12.5v-5h-12.5z m-17.5 10h7.5v-2.5h-7.5v2.5z m12.5-17.5h-12.5v2.5h12.5v-2.5z m-7.5 5h-5v2.5h5v-2.5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoClippy;
+	module.exports = exports['default'];
+
+/***/ },
+/* 979 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoClock = function GoClock(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm17.5 22.5h10l2.5-2.5-2.5-2.5h-5v-7.5l-2.5-2.5-2.5 2.5v12.5z m2.5-20c-9.7 0-17.5 7.8-17.5 17.5s7.8 17.5 17.5 17.5 17.5-7.8 17.5-17.5-7.8-17.5-17.5-17.5z m0 30c-6.9 0-12.5-5.6-12.5-12.5 0-6.9 5.6-12.5 12.5-12.5 6.9 0 12.5 5.6 12.5 12.5 0 6.9-5.6 12.5-12.5 12.5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoClock;
+	module.exports = exports['default'];
+
+/***/ },
+/* 980 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoCloudDownload = function GoCloudDownload(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm32.5 12.5c-0.3 0-0.7 0.1-1 0.1-1.9-4.5-6.3-7.6-11.5-7.6-5.2 0-9.6 3.1-11.5 7.6-0.3 0-0.7-0.1-1-0.1-4.1 0-7.5 3.4-7.5 7.5s3.4 7.5 7.5 7.5c0.8 0 1.6-0.2 2.3-0.4 1.3 1.5 3.1 2.5 5.2 2.8v-2.6c-1.9-0.4-3.6-1.7-4.4-3.4-0.8 0.7-1.9 1.1-3.1 1.1-2.8 0-5-2.2-5-5s2.2-5 5-5c1 0 1.9 0.3 2.7 0.8 0.8-4.7 4.9-8.3 9.8-8.3 4.9 0 9 3.6 9.8 8.3 0.8-0.5 1.7-0.8 2.7-0.8 2.8 0 5 2.2 5 5s-2.2 5-5 5c-0.4 0-0.8-0.1-1.2-0.1-1.1 1.6-2.9 2.6-5 2.6-0.5 0-0.9-0.1-1.3-0.2v2.6c0.4 0 0.8 0.1 1.3 0.1 2.3 0 4.5-1 6.1-2.5 0 0 0.1 0 0.1 0 4.1 0 7.5-3.4 7.5-7.5s-3.4-7.5-7.5-7.5z m-10 7.5h-5v12.5h-5l7.5 7.5 7.5-7.5h-5v-12.5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoCloudDownload;
+	module.exports = exports['default'];
+
+/***/ },
+/* 981 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoCloudUpload = function GoCloudUpload(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm20 15l-7.5 7.5h5v12.5h5v-12.5h5l-7.5-7.5z m12.5-2.5c-0.3 0-0.7 0.1-1 0.1-1.9-4.5-6.3-7.6-11.5-7.6-5.2 0-9.6 3.1-11.5 7.6-0.3 0-0.7-0.1-1-0.1-4.1 0-7.5 3.4-7.5 7.5 0 4.1 3.4 7.5 7.5 7.5 0.8 0 1.6-0.2 2.3-0.4 1.3 1.5 3.1 2.5 5.2 2.8v-2.6c-1.9-0.4-3.6-1.7-4.4-3.4-0.8 0.7-1.9 1.1-3.1 1.1-2.8 0-5-2.2-5-5 0-2.8 2.2-5 5-5 1 0 1.9 0.3 2.7 0.8 0.8-4.7 4.9-8.3 9.8-8.3 4.9 0 9 3.6 9.8 8.3 0.8-0.5 1.7-0.8 2.7-0.8 2.8 0 5 2.2 5 5 0 2.8-2.2 5-5 5-0.4 0-0.8-0.1-1.2-0.1-1.1 1.6-2.9 2.6-5 2.6-0.5 0-0.9-0.1-1.3-0.2v2.6c0.4 0 0.8 0.1 1.3 0.1 2.3 0 4.5-1 6.1-2.5 0 0 0.1 0 0.1 0 4.1 0 7.5-3.4 7.5-7.5 0-4.1-3.4-7.5-7.5-7.5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoCloudUpload;
+	module.exports = exports['default'];
+
+/***/ },
+/* 982 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoCode = function GoCode(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm26.3 7.5l-3.8 3.8 8.8 8.7-8.8 8.8 3.8 3.7 11.2-12.5-11.2-12.5z m-12.5 0l-11.3 12.5 11.3 12.5 3.7-3.7-8.7-8.8 8.7-8.7-3.7-3.8z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoCode;
+	module.exports = exports['default'];
+
+/***/ },
+/* 983 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoColorMode = function GoColorMode(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm5 5v30h30v-30h-30z m2.5 27.5v-25h25l-25 25z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoColorMode;
+	module.exports = exports['default'];
+
+/***/ },
+/* 984 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoCommentDiscussion = function GoCommentDiscussion(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm12.5 20v-7.5h-7.5s-2.5 1.3-2.5 2.5v12.5s1.3 2.5 2.5 2.5h2.5v7.5l7.6-7.5h7.5s2.4-1.2 2.4-2.5v-2.5h-7.5s-5-2.5-5-5z m22.5-15h-17.5s-2.5 1.3-2.5 2.5v12.5s1.3 2.5 2.5 2.5h7.4l7.6 7.5v-7.5h2.5s2.5-1.2 2.5-2.5v-12.5s-1.2-2.5-2.5-2.5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoCommentDiscussion;
+	module.exports = exports['default'];
+
+/***/ },
+/* 985 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoComment = function GoComment(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm32.5 5h-25c-2.4 0-5 2.5-5 5v15c0 5 5 5 5 5h2.5v10l10-10h12.5s5-2.7 5-5v-15c0-2.4-2.5-5-5-5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoComment;
+	module.exports = exports['default'];
+
+/***/ },
+/* 986 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoCreditCard = function GoCreditCard(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm5 27.5h5v-2.5h-5v2.5z m7.5 0h5v-2.5h-5v2.5z m2.5-7.5h-10v2.5h10v-2.5z m-5-2.5h2.5l5-5h-2.5l-5 5z m7.5 5h7.5v-2.5h-7.5v2.5z m20-15h-35s-2.5 1.3-2.5 2.5v20s1.3 2.5 2.5 2.5h35s2.5-1.2 2.5-2.5v-20s-1.2-2.5-2.5-2.5z m0 10v11.3s0 1.2-1.2 1.2h-32.5c-1.3 0-1.3-1.2-1.3-1.2v-11.3h2.5l5-5h-7.5v-1.2s0-1.3 1.3-1.3h32.5c1.2 0 1.2 1.3 1.2 1.3v1.2h-15l-5 5h20z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoCreditCard;
+	module.exports = exports['default'];
+
+/***/ },
+/* 987 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoDash = function GoDash(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm10 17.5v5h20v-5h-20z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoDash;
+	module.exports = exports['default'];
+
+/***/ },
+/* 988 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoDashboard = function GoDashboard(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm19.8 18.1c-2.5 0-4.4 2-4.4 4.4s1.9 4.4 4.4 4.4 4.3-2 4.3-4.4c0-0.3 0-0.7-0.1-1 3.2-3.7 8.1-9.5 10.8-12.7 0.9-1.2-0.1-2.2-1.3-1.3-3.3 2.7-9.1 7.6-12.8 10.8-0.3-0.1-0.6-0.2-0.9-0.2z m1.2-8.1c0-0.7-0.6-1.3-1.3-1.3s-1.2 0.6-1.2 1.3 0.6 1.2 1.2 1.2 1.3-0.5 1.3-1.2z m7.5 10c0 0.7 0.6 1.2 1.2 1.2s1.3-0.5 1.3-1.2-0.6-1.3-1.3-1.3-1.2 0.6-1.2 1.3z m-13.8-10c-0.6 0-1.2 0.6-1.2 1.2s0.6 1.3 1.2 1.3 1.3-0.6 1.3-1.3-0.6-1.2-1.3-1.2z m-2.5 5c0-0.7-0.5-1.3-1.2-1.3s-1.3 0.6-1.3 1.3 0.6 1.2 1.3 1.2 1.2-0.5 1.2-1.2z m-3.7 5c0 0.7 0.6 1.2 1.2 1.2s1.3-0.5 1.3-1.2-0.6-1.3-1.3-1.3-1.2 0.6-1.2 1.3z m17.5-8.8c0-0.6-0.6-1.2-1.3-1.2s-1.2 0.6-1.2 1.2 0.6 1.3 1.2 1.3 1.3-0.6 1.3-1.3z m8.5 2l-2.7 3.5c0.3 1 0.5 2.1 0.5 3.3 0 6.9-5.6 12.5-12.5 12.5s-12.5-5.6-12.5-12.5c0-6.9 5.5-12.5 12.5-12.5 2.5 0 4.9 0.8 6.9 2.1l3.1-2.4c-2.8-2.1-6.2-3.4-10-3.4-9 0-16.3 7.2-16.3 16.2s7.3 16.3 16.3 16.3 16.2-7.3 16.2-16.3c0-2.4-0.6-4.8-1.5-6.8z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoDashboard;
+	module.exports = exports['default'];
+
+/***/ },
+/* 989 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoDatabase = function GoDatabase(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm20 37.5c-8.3 0-15-2.2-15-5v-5c0-0.4 0.2-0.8 0.5-1.2 1.7 2.1 7.5 3.7 14.5 3.7s12.8-1.6 14.5-3.7c0.3 0.4 0.5 0.8 0.5 1.2v5c0 2.8-6.7 5-15 5z m0-10c-8.3 0-15-2.2-15-5v-5c0-0.3 0.1-0.5 0.2-0.8 0.1-0.1 0.2-0.3 0.3-0.4 1.7 2.1 7.5 3.7 14.5 3.7s12.8-1.6 14.5-3.7c0.1 0.1 0.2 0.3 0.3 0.4 0.1 0.3 0.2 0.5 0.2 0.8v5c0 2.8-6.7 5-15 5z m0-10c-8.3 0-15-2.2-15-5v-5c0-2.8 6.7-5 15-5 8.3 0 15 2.2 15 5v5c0 2.8-6.7 5-15 5z m0-12.5c-5.5 0-10 1.1-10 2.5s4.5 2.5 10 2.5 10-1.1 10-2.5-4.5-2.5-10-2.5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoDatabase;
+	module.exports = exports['default'];
+
+/***/ },
+/* 990 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoDeviceCameraVideo = function GoDeviceCameraVideo(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm22.5 7.5c-1.4 0-2.5 1.1-2.5 2.5s1.1 2.5 2.5 2.5 2.5-1.1 2.5-2.5-1.1-2.5-2.5-2.5z m12.5 7.5l-5 5v-2.5c0-1.2-0.8-2.2-2-2.4 1.3-1.4 2-3.2 2-5.1 0-4.1-3.4-7.5-7.5-7.5-3.9 0-7.2 3.1-7.5 6.9-1.3-1.2-3.1-1.9-5-1.9-4.1 0-7.5 3.4-7.5 7.5s3.4 7.5 7.5 7.5h-2.5v5h2.5v5c0 1.4 1.1 2.5 2.5 2.5h15c1.4 0 2.5-1.1 2.5-2.5v-2.5l5 5h2.5v-20h-2.5z m-25-2.5c-1.4 0-2.5 1.1-2.5 2.5s1.1 2.5 2.5 2.5v2.5c-2.8 0-5-2.2-5-5s2.2-5 5-5 5 2.2 5 5h-2.5c0-1.4-1.1-2.5-2.5-2.5z m12.5 15h-5v-5h5v5z m5-4.3l-2.9-2.8c-0.2-0.3-0.5-0.4-0.8-0.4h-7.5c-0.7 0-1.3 0.6-1.3 1.3v7.5c0 0.3 0.1 0.6 0.3 0.8 0 0 1.6 1.5 2.9 2.9h-4.4c-0.7 0-1.3-0.6-1.3-1.2v-12.5c0-0.7 0.6-1.3 1.3-1.3h12.5c0.6 0 1.2 0.6 1.2 1.3v4.4z m-5-8.2c-2.8 0-5-2.2-5-5s2.2-5 5-5 5 2.2 5 5-2.2 5-5 5z m12.5 12.5l-2.5-2.5 0-5 2.5-2.5v10z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoDeviceCameraVideo;
+	module.exports = exports['default'];
+
+/***/ },
+/* 991 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoDeviceCamera = function GoDeviceCamera(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm20 15c-2.8 0-5 2.2-5 5s2.2 5 5 5c0.2 0 0.4 0 0.7 0-1.9-0.3-3.2-1.9-3.2-3.8 0-2 1.7-3.7 3.7-3.7 1.9 0 3.5 1.4 3.8 3.2 0-0.3 0-0.5 0-0.7 0-2.8-2.2-5-5-5z m15-5h-5l-5-5h-10l-5 5h-5c-1.4 0-2.5 1.1-2.5 2.5v17.5c0 1.4 1.1 2.5 2.5 2.5h30c1.4 0 2.5-1.1 2.5-2.5v-17.5c0-1.4-1.1-2.5-2.5-2.5z m-18.7-2.5h7.5l2.5 2.5h-12.5l2.5-2.5z m-10 22.5c-0.7 0-1.3-0.6-1.3-1.3v-11.2h2.5v-2.5h-2.5v-1.2c0-0.7 0.6-1.3 1.3-1.3h7.1c-0.2 0.1-0.3 0.3-0.5 0.4-3.9 3.9-3.9 10.3 0 14.2l3 2.9h-9.6z m13.7-2.5c-4.1 0-7.5-3.4-7.5-7.5s3.4-7.5 7.5-7.5 7.5 3.4 7.5 7.5-3.4 7.5-7.5 7.5z m12.5-8.7l-5.9-6.3h5.9v6.3z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoDeviceCamera;
+	module.exports = exports['default'];
+
+/***/ },
+/* 992 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoDeviceDesktop = function GoDeviceDesktop(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm37.5 2.5h-35s-2.5 1.3-2.5 2.5v22.5s1.3 2.5 2.5 2.5h12.5s-7.5 2.5-7.5 5c0 1.3 1.3 2.5 2.5 2.5h20s2.5-1.2 2.5-2.5c0-2.5-7.5-5-7.5-5h12.5s2.5-1.2 2.5-2.5v-22.5s-1.2-2.5-2.5-2.5z m0 25h-35v-22.5h35v22.5z m-2.5-20h-7.5c-15 2.5-21.2 11.7-22.5 15v2.5h30v-17.5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoDeviceDesktop;
+	module.exports = exports['default'];
+
+/***/ },
+/* 993 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoDeviceMobile = function GoDeviceMobile(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm30 0h-20c-1.4 0-2.5 1.1-2.5 2.5v35c0 1.4 1.1 2.5 2.5 2.5h20c1.4 0 2.5-1.1 2.5-2.5v-35c0-1.4-1.1-2.5-2.5-2.5z m-11.2 2.5h2.5c0.6 0 1.2 0.6 1.2 1.3s-0.6 1.2-1.2 1.2h-2.5c-0.7 0-1.3-0.6-1.3-1.2s0.6-1.3 1.3-1.3z m2.5 35h-2.5c-0.7 0-1.3-0.6-1.3-1.2s0.6-1.3 1.3-1.3h2.5c0.6 0 1.2 0.6 1.2 1.3s-0.6 1.2-1.2 1.2z m8.7-5h-20v-25h20v25z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoDeviceMobile;
+	module.exports = exports['default'];
+
+/***/ },
+/* 994 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoDiffAdded = function GoDiffAdded(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm22.5 12.5h-5v5h-5v5h5v5h5v-5h5v-5h-5v-5z m12.5-10h-30s-2.5 1.3-2.5 2.5v30s1.3 2.5 2.5 2.5h30s2.5-1.2 2.5-2.5v-30s-1.2-2.5-2.5-2.5z m-2.5 28.8c0 0.6-0.7 1.2-1.2 1.2h-22.5s-1.3-0.5-1.3-1.2v-22.5s0.6-1.3 1.3-1.3h22.5s1.2 0.6 1.2 1.3v22.5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoDiffAdded;
+	module.exports = exports['default'];
+
+/***/ },
+/* 995 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoDiffIgnored = function GoDiffIgnored(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm35 2.5h-30c-1.2 0-2.5 1.3-2.5 2.5v30c0 1.3 1.3 2.5 2.5 2.5h30c1.3 0 2.5-1.2 2.5-2.5v-30c0-1.2-1.2-2.5-2.5-2.5z m-2.5 28.8c0 0.6-0.7 1.2-1.2 1.2h-22.5c-0.8 0-1.3-0.5-1.3-1.2v-22.5c0-0.7 0.6-1.3 1.3-1.3h22.5c0.5 0 1.2 0.6 1.2 1.3v22.5z m-20-7.6v3.8h3.8l11.2-11.2v-3.8h-3.8l-11.2 11.2z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoDiffIgnored;
+	module.exports = exports['default'];
+
+/***/ },
+/* 996 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoDiffModified = function GoDiffModified(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm35 2.5h-30c-1.2 0-2.5 1.3-2.5 2.5v30c0 1.3 1.3 2.5 2.5 2.5h30c1.3 0 2.5-1.2 2.5-2.5v-30c0-1.2-1.2-2.5-2.5-2.5z m-2.5 28.8c0 0.6-0.7 1.2-1.2 1.2h-22.5c-0.8 0-1.3-0.5-1.3-1.2v-22.5c0-0.7 0.6-1.3 1.3-1.3h22.5c0.5 0 1.2 0.6 1.2 1.3v22.5z m-12.5-16.3c-2.8 0-5 2.2-5 5s2.2 5 5 5 5-2.2 5-5-2.2-5-5-5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoDiffModified;
+	module.exports = exports['default'];
+
+/***/ },
+/* 997 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoDiffRemoved = function GoDiffRemoved(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm35 2.5h-30c-1.2 0-2.5 1.3-2.5 2.5v30c0 1.3 1.3 2.5 2.5 2.5h30c1.3 0 2.5-1.2 2.5-2.5v-30c0-1.2-1.2-2.5-2.5-2.5z m-2.5 28.8c0 0.6-0.7 1.2-1.2 1.2h-22.5c-0.8 0-1.3-0.5-1.3-1.2v-22.5c0-0.7 0.6-1.3 1.3-1.3h22.5c0.5 0 1.2 0.6 1.2 1.3v22.5z m-20-8.8h15v-5h-15v5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoDiffRemoved;
+	module.exports = exports['default'];
+
+/***/ },
+/* 998 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoDiffRenamed = function GoDiffRenamed(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm35 2.5h-30c-1.2 0-2.5 1.3-2.5 2.5v30c0 1.3 1.3 2.5 2.5 2.5h30c1.3 0 2.5-1.2 2.5-2.5v-30c0-1.2-1.2-2.5-2.5-2.5z m-2.5 28.8c0 0.6-0.7 1.2-1.2 1.2h-22.5c-0.8 0-1.3-0.5-1.3-1.2v-22.5c0-0.7 0.6-1.3 1.3-1.3h22.5c0.5 0 1.2 0.6 1.2 1.3v22.5z m-12.5-13.8h-7.5v5h7.5v5l10-7.5-10-7.5v5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoDiffRenamed;
+	module.exports = exports['default'];
+
+/***/ },
+/* 999 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoDiff = function GoDiff(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm20 10h-5v5h-5v5h5v5h5v-5h5v-5h-5v-5z m-10 25h15v-5h-15v5z m17.5-35h-20v2.5h18.8l8.7 8.8v23.7h2.5v-25l-10-10z m-25 5v35h30v-27.5l-7.5-7.5h-22.5z m27.5 32.5h-25v-30h18.8l6.2 6.3v23.7z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoDiff;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1000 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoEllipsis = function GoEllipsis(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm30 12.5h-20s-5 2.5-5 5v5s2.5 5 5 5h20s5-2.5 5-5v-5s-2.5-5-5-5z m-15 10h-5v-5h5v5z m7.5 0h-5v-5h5v5z m7.5 0h-5v-5h5v5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoEllipsis;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1001 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoEye = function GoEye(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm20 5c-7.5 0-16.2 5-20 15 3.8 7.5 11.3 12.5 20 12.5s16.3-5 20-12.5c-3.7-10-12.5-15-20-15z m0 25c-7.5 0-13.7-5-15-10 1.3-5 7.5-10 15-10s13.8 5 15 10c-1.2 5-7.5 10-15 10z m0-17.5c-0.8 0-1.5 0.2-2.2 0.4 1.3 0.5 2.2 1.8 2.2 3.4 0 2-1.7 3.7-3.7 3.7-1.6 0-2.9-0.9-3.4-2.2-0.2 0.7-0.4 1.4-0.4 2.2 0 4.1 3.4 7.5 7.5 7.5s7.5-3.4 7.5-7.5-3.4-7.5-7.5-7.5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoEye;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1002 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoFileBinary = function GoFileBinary(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm5 37.5v-35h22.5l7.5 7.5v27.5h-30z m27.5-25l-7.5-7.5h-17.5v30h25v-22.5z m-15 7.5h-7.5v-10h7.5v10z m-2.5-7.5h-2.5v5h2.5v-5z m0 17.5h2.5v2.5h-7.5v-2.5h2.5v-5h-2.5v-2.5h5v7.5z m10-12.5h2.5v2.5h-7.5v-2.5h2.5v-5h-2.5v-2.5h5v7.5z m2.5 15h-7.5v-10h7.5v10z m-2.5-7.5h-2.5v5h2.5v-5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoFileBinary;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1003 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoFileCode = function GoFileCode(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm16.3 15l-6.3 6.3 6.3 6.2 2.5-2.5-3.8-3.7 3.8-3.8-2.5-2.5z m5 2.5l3.7 3.8-3.7 3.7 2.5 2.5 6.2-6.2-6.2-6.3-2.5 2.5z m6.2-15h-22.5v35h30v-27.5l-7.5-7.5z m5 32.5h-25v-30h17.5l7.5 7.5v22.5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoFileCode;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1004 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoFileDirectory = function GoFileDirectory(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm35 7.5h-13.7s-1.3-0.6-1.3-1.2v-1.3s-1.2-2.5-2.5-2.5h-12.5s-2.5 1.3-2.5 2.5v27.5h35v-22.5s-1.2-2.5-2.5-2.5z m-17.5 0h-12.5v-1.2s0.6-1.3 1.3-1.3h10s1.2 0.6 1.2 1.3v1.2z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoFileDirectory;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1005 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoFileMedia = function GoFileMedia(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm27.5 2.5h-22.5v35h30v-27.5l-7.5-7.5z m5 32.5h-25v-30h17.5l7.5 7.5v22.5z m-22.5-25v20h5c0-2.8 2.2-5 5-5-2.8 0-5-2.2-5-5s2.2-5 5-5 5 2.2 5 5-2.2 5-5 5c2.8 0 5 2.2 5 5h5v-15l-5-5h-15z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoFileMedia;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1006 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoFilePdf = function GoFilePdf(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm27.5 2.5h-22.5v35h30v-27.5l-7.5-7.5z m-20 2.5h10c-0.5 0.2-1.1 0.6-1.4 1.7-0.5 1.9-0.2 5.1 0.7 8.2-1 3.1-4.8 10.8-5.1 11.2-0.6 0.2-2.6 0.9-4.2 2.3v-23.4z m11.1 12c2.2 5.9 3.7 5.9 5.2 6.6-3.2 0.5-5.7 0.8-9 2.3-0.2 0.2 2.9-5.7 3.8-8.9z m13.9 18l-25 0c0 0 0 0 0.1 0 1.3 0 3.3-0.8 7-7.1 1.5-0.6 2.8-1.1 3.1-1.2 2.3-0.5 4.9-1 7.3-1.3 2.1 1.1 5 1.8 6.6 1.9 0.3 0 0.6 0 0.9-0.1v7.8z m0-12.1c-0.9-0.6-2.1-1-3.5-1-0.9 0-2 0-3.1 0.2-1-0.5-3.6-1.3-5.7-7.5 0.7-4 0.5-6.8 0.5-6.8 0.3-2-0.9-2.8-2-2.8 0 0 0 0 0 0h6.3l7.5 7.5v10.4z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoFilePdf;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1007 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoFileSubmodule = function GoFileSubmodule(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm35 20h-7.5c0-1.2-1.2-2.5-2.5-2.5h-5s-2.5 1.3-2.5 2.5v12.5h20v-10s-1.2-2.5-2.5-2.5z m-10 2.5h-5v-1.2s0.6-1.3 1.3-1.3h2.5s1.2 0.6 1.2 1.3v1.2z m10-12.5h-13.7s-1.3-0.7-1.3-1.2v-1.3s-1.2-2.5-2.5-2.5h-12.5s-2.5 1.3-2.5 2.5v25h12.5v-15s1.3-2.5 2.5-2.5h10s2.5 1.3 2.5 2.5h7.5v-5s-1.2-2.5-2.5-2.5z m-17.5 0h-12.5v-1.2s0.6-1.3 1.3-1.3h10s1.2 0.7 1.2 1.3v1.2z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoFileSubmodule;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1008 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoFileSymlinkDirectory = function GoFileSymlinkDirectory(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm35 7.5h-13.7c-0.7 0-1.3-0.6-1.3-1.2v-1.3s-1.2-2.5-2.5-2.5h-12.5c-1.2 0-2.5 1.3-2.5 2.5v27.5h35v-22.5s-1.2-2.5-2.5-2.5z m-30-1.2c0-0.7 0.6-1.3 1.3-1.3h10c0.5 0 1.2 0.6 1.2 1.3v1.2h-12.5v-1.2z m15 21.2v-5c-4.9 0-8.7 2.2-10 7.5 0-8.2 4.2-12.5 10-12.5v-5l10 7.5-10 7.5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoFileSymlinkDirectory;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1009 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoFileSymlinkFile = function GoFileSymlinkFile(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm27.5 2.5h-22.5v35h30v-27.5l-7.5-7.5z m5 32.5h-25v-30h17.5l7.5 7.5v22.5z m-12.5-17.5c-5.8 0-10 4.3-10 12.5 1.3-5.3 5.1-7.5 10-7.5v5l10-7.5-10-7.5v5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoFileSymlinkFile;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1010 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoFileText = function GoFileText(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm22.5 10h-12.5v2.5h12.5v-2.5z m5-7.5h-22.5v35h30v-27.5l-7.5-7.5z m5 32.5h-25v-30h17.5l7.5 7.5v22.5z m-22.5-5h20v-2.5h-20v2.5z m0-5h20v-2.5h-20v2.5z m0-5h20v-2.5h-20v2.5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoFileText;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1011 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoFileZip = function GoFileZip(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm17.5 22.5v-2.5h-2.5v2.5h2.5z m0-5v-2.5h-2.5v2.5h2.5z m0-5v-2.5h-2.5v2.5h2.5z m-5 2.5h2.5v-2.5h-2.5v2.5z m15-12.5h-22.5v35h30v-27.5l-7.5-7.5z m5 32.5h-25v-30h7.5v2.5h2.5v-2.5h7.5l7.5 7.5v22.5z m-20-25h2.5v-2.5h-2.5v2.5z m0 10h2.5v-2.5h-2.5v2.5z m0 5l-2.5 2.5v5h10v-5l-2.5-2.5h-2.5v-2.5h-2.5v2.5z m5 2.5v2.5h-5v-2.5h5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoFileZip;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1012 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoFlame = function GoFlame(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm16.9 1.8c2 5.2 1 8-1.2 10.3-2.4 2.5-6.1 4.4-8.7 8.1-3.5 4.8-4.1 15.6 8.4 18.4-5.2-2.8-6.4-10.8-0.7-15.9-1.5 4.9 1.3 8 4.7 6.9 3.3-1.1 5.5 1.3 5.4 4 0 1.9-0.8 3.5-2.7 4.4 8.2-1.5 11.5-8.2 11.5-13.4 0-6.8-6.1-7.7-3.1-13.4-3.6 0.3-4.8 2.7-4.5 6.6 0.3 2.6-2.4 4.3-4.4 3.1-1.6-0.9-1.6-2.8-0.2-4.2 3-3 4.2-9.8-4.5-14.9z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoFlame;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1013 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoFold = function GoFold(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm37.5 10h-8.7l-2.5 2.5h7.5l-5 5h-17.5l-5-5h7.5l-2.5-2.5h-8.8v2.5l6.3 6.3-6.3 6.2v2.5h8.8l2.5-2.5h-7.5l5-5h17.5l5 5h-7.5l2.5 2.5h8.7v-2.5l-6.2-6.2 6.2-6.3v-2.5z m-10-2.5h-5v-7.5h-5v7.5h-5l7.5 7.5 7.5-7.5z m-15 22.5h5v7.5h5v-7.5h5l-7.5-7.5-7.5 7.5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoFold;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1014 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoGear = function GoGear(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm20 13.7c-3.5 0-6.3 2.8-6.3 6.3 0 3.5 2.8 6.3 6.3 6.3 3.5 0 6.3-2.8 6.3-6.3 0-3.5-2.8-6.3-6.3-6.3z m12.7 9.9l-1.2 2.8 2.3 4.5-2.8 2.8-4.6-2.2-2.7 1.2-1.4 4.2-0.2 0.6h-4l-1.7-4.8-2.8-1.2-4.5 2.3-2.8-2.8 2.2-4.6-1.2-2.7-4.8-1.6v-4l4.8-1.7 1.2-2.8-2.1-4-0.2-0.5 2.8-2.8 4.6 2.2 2.7-1.2 1.4-4.2 0.2-0.6h4l1.7 4.8 2.8 1.2 4.5-2.3 2.8 2.8-2.2 4.6 1.2 2.7 4.8 1.6v4l-4.8 1.7z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoGear;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1015 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoGift = function GoGift(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm20 37.5h12.5v-12.5h-12.5v12.5z m-15 0h12.5v-12.5h-12.5v12.5z m15-22.8l3.4-0.4c3.3-0.4 6.2-3.3 6.6-6.6 0.4-3.2-2-5.6-5.3-5.2-2.5 0.2-4.9 2.1-5.9 4.5-1.1-2.4-3.5-4.3-6-4.5-3.3-0.4-5.7 2-5.3 5.2 0.4 3.3 3.3 6.2 6.6 6.6 0.8 0.1 2.2 0.3 3.4 0.4 0 0.2 0 0.3 0 0.3h2.5s0-0.1 0-0.3z m4.2-9.2c1.8-0.2 3 1.1 2.8 2.8-0.2 1.8-1.7 3.4-3.5 3.6-1.8 0.2-3.1-1.1-2.9-2.8s1.8-3.4 3.6-3.6z m-10.2 6.4c-1.7-0.2-3.3-1.8-3.5-3.6s1-3 2.8-2.8c1.8 0.2 3.4 1.8 3.6 3.6s-1.1 3-2.9 2.8z m6 3.1v7.5h15v-7.5h-15z m-17.5 7.5h15v-7.5h-15v7.5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoGift;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1016 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoGistSecret = function GoGistSecret(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm10 27.5l5 7.5h-10l-2.5-10 10-2.5-2.5 5z m17.5-5l2.5 5-5 7.5h10l2.5-10-10-2.5z m-3.2 0h-8.5l1.7 4-2.5 8.5h10l-2.5-8.5 1.8-4z m3.2-7.5h-15l-5 2.5h25l-5-2.5z m-2.5-10l-5 2.5-5-2.5-2.5 7.5h15l-2.5-7.5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoGistSecret;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1017 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoGist = function GoGist(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm21.3 15l3.7 3.8-3.7 3.7 2.5 2.5 6.2-6.2-6.2-6.3-2.5 2.5z m-16.3-12.5v32.5h30v-32.5h-30z m27.5 30h-25v-27.5h25v27.5z m-13.7-10l-3.8-3.7 3.8-3.8-2.5-2.5-6.3 6.3 6.3 6.2 2.5-2.5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoGist;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1018 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoGitBranch = function GoGitBranch(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm27.5 7.5c-2.8 0-5 2.2-5 5 0 1.8 1 3.4 2.5 4.3v0.7c0 2.5-2.5 5-5 5-2.1 0-3.7 0.4-5 1.1v-11.8c1.5-0.9 2.5-2.5 2.5-4.3 0-2.8-2.2-5-5-5s-5 2.2-5 5c0 1.8 1 3.4 2.5 4.3v16.4c-1.5 0.8-2.5 2.4-2.5 4.3 0 2.7 2.2 5 5 5s5-2.3 5-5c0-1.4-0.5-2.5-1.3-3.4 0.7-0.9 1.9-1.6 3.8-1.6 5 0 10-5 10-10v-0.7c1.5-0.9 2.5-2.5 2.5-4.3 0-2.8-2.2-5-5-5z m-15-2.5c1.4 0 2.5 1.1 2.5 2.5s-1.1 2.5-2.5 2.5-2.5-1.1-2.5-2.5 1.1-2.5 2.5-2.5z m0 30c-1.4 0-2.5-1.1-2.5-2.5s1.1-2.5 2.5-2.5 2.5 1.1 2.5 2.5-1.1 2.5-2.5 2.5z m15-20c-1.4 0-2.5-1.1-2.5-2.5s1.1-2.5 2.5-2.5 2.5 1.1 2.5 2.5-1.1 2.5-2.5 2.5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoGitBranch;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1019 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoGitCommit = function GoGitCommit(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm29.6 17.5c-1.1-4.3-4.9-7.5-9.6-7.5-4.7 0-8.5 3.2-9.6 7.5h-7.9v5h7.9c1.1 4.3 4.9 7.5 9.6 7.5 4.7 0 8.5-3.2 9.6-7.5h7.9v-5h-7.9z m-9.6 7.5c-2.8 0-5-2.2-5-5s2.2-5 5-5 5 2.2 5 5-2.2 5-5 5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoGitCommit;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1020 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoGitCompare = function GoGitCompare(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm35 28.2v-15.7s-3.7-7.5-7.5-7.5h-2.5v-5l-7.5 7.5 7.5 7.5v-5h2.5s2.5 1.3 2.5 2.5v15.7c-1.5 0.9-2.5 2.5-2.5 4.3 0 2.8 2.2 5 5 5s5-2.2 5-5c0-1.8-1-3.4-2.5-4.3z m-2.5 6.8c-1.4 0-2.5-1.1-2.5-2.5s1.1-2.5 2.5-2.5 2.5 1.1 2.5 2.5-1.1 2.5-2.5 2.5z m-17.5-5h-2.5s-2.5-1.2-2.5-2.5v-15.7c1.5-0.9 2.5-2.5 2.5-4.3 0-2.8-2.2-5-5-5s-5 2.2-5 5c0 1.8 1 3.4 2.5 4.3v15.7s3.8 7.5 7.5 7.5h2.5v5l7.5-7.5-7.5-7.5v5z m-7.5-20c-1.4 0-2.5-1.1-2.5-2.5s1.1-2.5 2.5-2.5 2.5 1.1 2.5 2.5-1.1 2.5-2.5 2.5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoGitCompare;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1021 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoGitMerge = function GoGitMerge(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm30 17.5c-1.9 0-3.5 1-4.3 2.5-0.2 0-0.5 0-0.7 0-5.1 0-10-3.9-11.7-8.7 1-0.9 1.7-2.3 1.7-3.8 0-2.8-2.2-5-5-5s-5 2.2-5 5c0 1.8 1 3.4 2.5 4.3v16.4c-1.5 0.9-2.5 2.5-2.5 4.3 0 2.8 2.2 5 5 5s5-2.2 5-5c0-1.8-1-3.4-2.5-4.3v-9c3.3 3.5 7.8 5.8 12.5 5.8 0.3 0 0.5 0 0.7 0 0.8 1.5 2.4 2.5 4.3 2.5 2.8 0 5-2.2 5-5s-2.2-5-5-5z m-20 17.5c-1.4 0-2.5-1.1-2.5-2.5 0-1.4 1.1-2.5 2.5-2.5 1.4 0 2.5 1.1 2.5 2.5 0 1.4-1.1 2.5-2.5 2.5z m0-25c-1.4 0-2.5-1.1-2.5-2.5s1.1-2.5 2.5-2.5c1.4 0 2.5 1.1 2.5 2.5s-1.1 2.5-2.5 2.5z m20 15c-1.4 0-2.5-1.1-2.5-2.5 0-1.4 1.1-2.5 2.5-2.5 1.4 0 2.5 1.1 2.5 2.5 0 1.4-1.1 2.5-2.5 2.5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoGitMerge;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1022 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoGitPullRequest = function GoGitPullRequest(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm32.5 28.2v-15.7s-3.7-7.5-7.5-7.5h-2.5v-5l-7.5 7.5 7.5 7.5v-5h2.5s2.5 1.3 2.5 2.5v15.7c-1.5 0.9-2.5 2.5-2.5 4.3 0 2.8 2.2 5 5 5s5-2.2 5-5c0-1.8-1-3.4-2.5-4.3z m-2.5 6.8c-1.4 0-2.5-1.1-2.5-2.5s1.1-2.5 2.5-2.5 2.5 1.1 2.5 2.5-1.1 2.5-2.5 2.5z m-20-32.5c-2.8 0-5 2.2-5 5 0 1.8 1 3.4 2.5 4.3v16.4c-1.5 0.8-2.5 2.4-2.5 4.3 0 2.7 2.2 5 5 5s5-2.3 5-5c0-1.9-1-3.5-2.5-4.3v-16.4c1.5-0.9 2.5-2.5 2.5-4.3 0-2.8-2.2-5-5-5z m0 32.5c-1.4 0-2.5-1.1-2.5-2.5s1.1-2.5 2.5-2.5 2.5 1.1 2.5 2.5-1.1 2.5-2.5 2.5z m0-25c-1.4 0-2.5-1.1-2.5-2.5s1.1-2.5 2.5-2.5 2.5 1.1 2.5 2.5-1.1 2.5-2.5 2.5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoGitPullRequest;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1023 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoGlobe = function GoGlobe(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm20 5c-8.3 0-15 6.7-15 15s6.7 15 15 15c1 0 2-0.1 3-0.3-0.4-0.2-0.5-1.6-0.1-2.4 0.4-0.8 1.8-3.1 0.5-3.8s-1-1.1-1.8-2-0.5-0.9-0.5-1.2c-0.2-0.7 0.7-1.9 0.8-2s0-0.5 0-0.7-0.6-0.5-0.7-0.5-0.3 0.3-0.5 0.3-1.1-0.6-1.2-0.7-0.3-0.5-0.6-0.8-0.3 0-0.7-0.2-1.7-0.6-2.7-1.1-1.1-0.9-1.1-1.3-0.7-1-0.9-1.5c-0.3-0.4-0.4-1-0.5-0.8s0.6 1.6 0.5 1.7-0.4-0.5-0.7-0.8 0.3-0.2-0.6-2.1 0.3-2.7 0.4-3.7 0.7 0.3 0.4-0.3 0-1.9-0.3-2.3-2 0.5-2 0.5c0.1-0.5 1.5-1.2 2.5-2s1.7-0.1 2.5 0.1 0.9 0.2 0.6-0.1 0.1-0.3 0.8-0.2 0.8 0.8 1.8 0.8 0.1 0.2 0.2 0.4-0.1 0.2-0.8 0.7 0 0.4 1.2 1.2 0.8-0.5 0.6-1.1 0.9-0.2 0.9-0.2c0.7 0.5 0.6 0.1 1.1 0.2s1.9 1.4 1.9 1.4c-1.8 0.9-0.7 1-0.4 1.2s-0.6 0.7-0.6 0.7c-0.3-0.4-0.4 0-0.6 0.1s-0.1 0.5-0.1 0.5c-1.2 0.2-0.9 1.5-0.9 1.8s-0.8 0.7-1 1.2 0.6 1.4 0.2 1.4-0.8-1.4-2.8-0.9c-0.6 0.2-2 0.9-1.3 2.4s2-0.4 2.4-0.2-0.1 1.1-0.1 1.1 1.2 0.1 1.3 1.3 1.6 1.1 1.9 1.2 1.5-0.9 1.6-1 0.9-0.6 2.3 0.2 2.1 0.7 2.6 1.1 0.1 1 0.6 1.2 2.2-0.1 2.7 0.7-1.9 4.5-2.6 4.9-1.1 1.3-1.8 1.9-1.8 1.4-2.7 1.9c-0.9 0.5-1.1 1.5-1.4 1.7 6.7-1.5 11.7-7.4 11.7-14.6 0-8.3-6.7-15-15-15z m3.5 14.1c-0.2 0-0.6 0.4-1.7-0.2s-1.7-0.5-1.8-0.6c0 0-0.1-0.2 0.4-0.3 0.9-0.1 2.1 0.9 2.3 0.9s0.4-0.3 0.9-0.1c0.5 0.1 0.1 0.2-0.1 0.3z m-4.9-12.6c-0.1-0.1 0.1-0.2 0.2-0.3 0.1-0.1 0-0.2 0.1-0.3 0.2-0.2 1.3-0.5 1.1 0.1s-1.2 0.6-1.4 0.5z m2.6 1.9c-0.3 0-1.2-0.1-1-0.3 0.6-0.6-0.3-0.8-0.8-0.8s-0.7-0.3-0.5-0.4 1.3 0 1.5 0.2 1.1 0.5 1.2 0.8 0 0.5-0.4 0.5z m3.2-0.1c-0.3 0.2-1.8-0.8-2-1.1-1.3-1-1.9-0.7-2.2-0.9s-0.2-0.4 0.2-0.7 1.5 0.1 2.2 0.2 1.4 0.5 1.4 1.1c0 0.6 0.7 1.2 0.4 1.4z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoGlobe;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1024 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoGraph = function GoGraph(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm27.5 10h-7.5v25h7.5v-25z m10 7.5h-7.5v17.5h7.5v-17.5z m-35 20v-5h2.5v-2.5h-2.5v-5h2.5v-2.5h-2.5v-5h2.5v-2.5h-2.5v-5h2.5v-2.5h-2.5v-5h2.5v-2.5h-5v40h40v-2.5h-37.5z m15-15h-7.5v12.5h7.5v-12.5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoGraph;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1025 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoHeart = function GoHeart(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm20 33.8c15.6-12.3 15-16.7 15-20s-2.8-7.5-7.5-7.5-7.5 5-7.5 5-2.8-5-7.5-5-7.5 4.1-7.5 7.5-0.6 7.7 15 20z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoHeart;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1026 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoHistory = function GoHistory(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm20 2.5c-3.6 0-6.8 1.1-9.6 2.9l-2.9-2.9v10h10l-3.4-3.4c1.7-1 3.7-1.6 5.9-1.6 6.9 0 12.5 5.6 12.5 12.5 0 6.9-5.6 12.5-12.5 12.5-6.9 0-12.5-5.6-12.5-12.5 0-1.8 0.4-3.5 1.1-5h-3.6v-3.9c-1.5 2.6-2.5 5.6-2.5 8.9 0 9.7 7.8 17.5 17.5 17.5s17.5-7.8 17.5-17.5c0-9.7-7.8-17.5-17.5-17.5z m0 30l2.5-2.5v-7.5h5l2.5-2.5-2.5-2.5h-5l-2.5-2.5-5 5 2.5 2.5v7.5l2.5 2.5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoHistory;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1027 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoHome = function GoHome(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm7.5 22.5l2.5 15h7.5v-12.5h5v12.5h7.5l2.5-15-12.5-12.5-12.5 12.5z m25-7.5v-10h-5l0 5-7.5-7.5-20 20h5l15-15 15 15h5l-7.5-7.5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoHome;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1028 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoHorizontalRule = function GoHorizontalRule(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm10 17.5h5v5h2.5v-15h-2.5v7.5h-5v-7.5h-2.5v15h2.5v-5z m22.5 5v-5h-2.5v5h2.5z m0-7.5v-5h-2.5v5h2.5z m-7.5 0v-5h5v-2.5h-7.5v15h2.5v-5h5v-2.5h-5z m-17.5 17.5h25v-5h-25v5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoHorizontalRule;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1029 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoHourglass = function GoHourglass(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm27.3 20c4.6-3.3 7.7-9.4 7.7-15 0-2.8-6.7-5-15-5s-15 2.2-15 5c0 5.6 3.1 11.7 7.7 15-4.6 3.3-7.7 9.4-7.7 15 0 2.8 6.7 5 15 5s15-2.2 15-5c0-5.6-3.1-11.7-7.7-15z m-7.3-17.5c5.5 0 10 1.1 10 2.5s-4.5 2.5-10 2.5-10-1.1-10-2.5 4.5-2.5 10-2.5z m-2.5 27.6c-6 0.3-9.3 1.5-9.9 3.2 0.6-4.5 2.9-7.4 5.5-9.8 2.9-2.7 4.4-2.4 4.4-4v10.6z m-4.1-13.8c-2.7-2.1-4.8-5-5.6-8.4 2.8 1.3 7.2 2.1 12.2 2.1s9.4-0.8 12.1-2.1c-0.7 3.4-2.8 6.3-5.5 8.4-0.9-0.6-2.7-1.3-6.6-1.3s-5.7 0.7-6.6 1.3z m9.1 13.8v-10.7c0 1.7 1.5 1.4 4.4 4 2.6 2.5 4.9 5.4 5.5 9.8-0.6-1.6-3.9-2.9-9.9-3.2z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoHourglass;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1030 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoHubot = function GoHubot(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm20 2.5c-11.1 0-20 8.9-20 20v10s2.5 5 5 5h30s5-2.5 5-5v-10c0-11.1-8.9-20-20-20z m3.8 30h-7.5c-0.8 0-1.3-0.5-1.3-1.2s0.5-1.3 1.3-1.3h7.5c0.7 0 1.2 0.5 1.2 1.3s-0.5 1.2-1.2 1.2z m11.2-5c0 1.3-1.2 2.5-2.5 2.5h-5c0-1.2-1.2-2.5-2.5-2.5h-10s-2.5 1.3-2.5 2.5h-5s-2.5-1.2-2.5-2.5v-14.1c3-5 8.6-8.4 15-8.4s12 3.4 15 8.4v14.1z m-5-15h-20s-2.5 1.3-2.5 2.5v5s1.3 2.5 2.5 2.5h20s2.5-1.2 2.5-2.5v-5s-1.2-2.5-2.5-2.5z m0 5l-2.5 2.5h-5l-2.5-2.5-2.5 2.5h-5l-2.5-2.5v-2.5h2.5l2.5 2.5 2.5-2.5h5l2.5 2.5 2.5-2.5h2.5v2.5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoHubot;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1031 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoInbox = function GoInbox(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm32.5 7.5h-25l-2.5 15v10h30v-10l-2.5-15z m-5 15l-2.5 5h-10l-2.5-5h-4.4l1.9-12.5h20l1.9 12.5h-4.4z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoInbox;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1032 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoInfo = function GoInfo(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm20 15c1.4 0 2.5-1.1 2.5-2.5s-1.1-2.5-2.5-2.5-2.5 1.1-2.5 2.5 1.1 2.5 2.5 2.5z m0-12.5c-9.6 0-17.5 7.9-17.5 17.5s7.9 17.5 17.5 17.5 17.5-7.9 17.5-17.5-7.9-17.5-17.5-17.5z m0 30c-6.9 0-12.5-5.6-12.5-12.5s5.6-12.5 12.5-12.5 12.5 5.6 12.5 12.5-5.6 12.5-12.5 12.5z m2.5-12.5c0-1.2-1.2-2.5-2.5-2.5h-2.5s-2.5 1.3-2.5 2.5h2.5v7.5s1.3 2.5 2.5 2.5h2.5s2.5-1.2 2.5-2.5h-2.5v-7.5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoInfo;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1033 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoIssueClosed = function GoIssueClosed(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm27.5 12.3l-3.7 3.8 6.2 6.4 10-10-3.7-3.7-6.2 6.2-2.6-2.7z m-7.5 20.2c-6.9 0-12.5-5.6-12.5-12.5 0-6.9 5.6-12.5 12.5-12.5 3.5 0 6.6 1.4 8.8 3.7l3.6-3.6c-3.2-3.1-7.6-5.1-12.4-5.1-9.7 0-17.5 7.8-17.5 17.5s7.8 17.5 17.5 17.5c9.7 0 17.5-7.8 17.5-17.5l-7.8 7.8c0.3-0.4-2.9 4.7-9.7 4.7z m2.5-22.5h-5v12.5h5v-12.5z m-5 20h5v-5h-5v5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoIssueClosed;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1034 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoIssueOpened = function GoIssueOpened(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm20 2.5c-9.7 0-17.5 7.8-17.5 17.5s7.8 17.5 17.5 17.5 17.5-7.8 17.5-17.5-7.8-17.5-17.5-17.5z m0 30c-6.9 0-12.5-5.6-12.5-12.5 0-6.9 5.6-12.5 12.5-12.5 6.9 0 12.5 5.6 12.5 12.5 0 6.9-5.6 12.5-12.5 12.5z m-2.5-2.5h5v-5h-5v5z m0-7.5h5v-12.5h-5v12.5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoIssueOpened;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1035 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoIssueReopened = function GoIssueReopened(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm27.5 30c-2.1 1.5-4.7 2.5-7.5 2.5-6.9 0-12.5-5.6-12.5-12.5 0-1.8 0.4-3.5 1.1-5h-3.6v-3.9c-1.5 2.6-2.5 5.6-2.5 8.9 0 9.7 7.8 17.5 17.5 17.5 4.2 0 8-1.5 11-4l1.5 1.5v-7.5h-7.5l2.5 2.5z m-10 0h5v-5h-5v5z m5-20h-5v12.5h5v-12.5z m15 10c0-9.7-7.8-17.5-17.5-17.5-4.2 0-8 1.5-11 4l-1.5-1.5v7.5h7.5l-2.5-2.5c2.1-1.5 4.7-2.5 7.5-2.5 6.9 0 12.5 5.6 12.5 12.5 0 1.8-0.4 3.5-1.1 5h3.6v3.9c1.5-2.6 2.5-5.6 2.5-8.9z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoIssueReopened;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1036 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoJersey = function GoJersey(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm30 0h-7.5c0 1.3-1.3 2.5-3.8 2.5s-3.7-1.2-3.7-2.5h-7.5c0 5-0.1 15-5 15 0 0 0 21.3 0 22.5s1.2 2.5 2.5 2.5h27.5s2.5-1.2 2.5-2.5v-22.5c-5 0-5-10-5-15z m-23.8 37.5c-0.6 0-1.2-0.4-1.2-1.2v-18.8c4.6-2.5 5-7.5 5-15h2.5c0 3.8 1.3 7.5 6.3 7.5s6.2-3.7 6.2-7.5h2.5c0 7.3 1.3 10.8 2.5 13.2v21.8h-23.8z m15.1-22.5l-1.3 1.3v12.5l1.3 1.2h5l1.2-1.2v-12.5l-1.2-1.3h-5z m3.7 12.5h-2.5v-10h2.5v10z m-13.7-12.5l-1.3 1.3v12.5l1.3 1.2h5l1.2-1.2v-12.5l-1.2-1.3h-5z m3.7 12.5h-2.5v-10h2.5v10z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoJersey;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1037 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoJumpDown = function GoJumpDown(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm35 7.5h-30l15 15 15-15z m-30 20v5h30v-5h-30z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoJumpDown;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1038 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoJumpLeft = function GoJumpLeft(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm17.5 20l15 15v-30l-15 15z m-10 15h5v-30h-5v30z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoJumpLeft;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1039 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoJumpRight = function GoJumpRight(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm7.5 35l15-15-15-15v30z m20-30v30h5v-30h-5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoJumpRight;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1040 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoJumpUp = function GoJumpUp(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm5 32.5h30l-15-15-15 15z m0-25v5h30v-5h-30z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoJumpUp;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1041 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoKey = function GoKey(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm27.5 2.5c-5.5 0-10 4.5-10 10 0 0.8 0.1 1.5 0.3 2.2l-15.3 15.3v2.5l2.5 2.5h5l2.5-2.5v-2.5h2.5v-2.5h2.5v-2.5h5l2.8-2.8c0.7 0.2 1.5 0.3 2.2 0.3 5.6 0 10-4.5 10-10s-4.4-10-10-10z m-10 17.5l-12.5 12.5v-2.5l12.5-12.5v2.5z m12.5-7.5c-1.4 0-2.5-1.1-2.5-2.5s1.1-2.5 2.5-2.5 2.5 1.1 2.5 2.5-1.1 2.5-2.5 2.5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoKey;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1042 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoKeyboard = function GoKeyboard(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm25 22.5h2.5v-5h-2.5v5z m5-12.5h-2.5v5h2.5v-5z m-5 0h-2.5v5h2.5v-5z m-5 12.5h2.5v-5h-2.5v5z m-5 7.5h12.5v-5h-12.5v5z m15-7.5h5v-12.5h-2.5v7.5h-2.5v5z m-20 7.5h2.5v-5h-2.5v5z m20 0h5v-5h-5v5z m-10-20h-2.5v5h2.5v-5z m-12.5 7.5h-2.5v5h2.5v-5z m0 7.5h-2.5v5h2.5v-5z m-7.5-20v30h40v-30h-40z m37.5 27.5h-35v-25h35v25z m-22.5-10h2.5v-5h-2.5v5z m-5-12.5h-5v5h5v-5z m5 0h-2.5v5h2.5v-5z m-5 12.5h2.5v-5h-2.5v5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoKeyboard;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1043 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoLaw = function GoLaw(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm20.1 7.5c1.3 0 2.4-1.1 2.4-2.4 0-1.5-1.1-2.6-2.6-2.6-1.3 0-2.4 1.1-2.4 2.4 0 1.5 1.1 2.6 2.6 2.6z m18.1 15h-0.7l-5-9.6c0.7-0.1 1.4-0.4 2.1-0.6 0.9-0.5 1.1-1.7 0.4-2.5l0 0c-0.5-0.4-1.1-0.6-1.7-0.3-0.6 0.2-1.3 0.5-2.1 0.5-2.2 0-3.2-2.5-11.2-2.5s-9 2.5-11.2 2.5c-0.8 0-1.5-0.2-2.1-0.5-0.6-0.2-1.2-0.1-1.7 0.3l0 0c-0.7 0.8-0.5 2 0.4 2.5 0.7 0.3 1.4 0.5 2.1 0.6l-5 9.6h-0.7c-0.3 0-0.5 0.3-0.5 0.6 0.4 2.5 3.6 4.4 7.4 4.4s7.1-1.9 7.5-4.4c0-0.3-0.2-0.6-0.5-0.6h-0.7l-5-9.6c3.3-0.2 5-1.9 7.5-1.9v19c-1.4 0-2.5 1.1-2.5 2.5h-2.8c-1.1 0-2.2 1.1-2.2 2.5h20c0-1.4-1.1-2.5-2.8-2.5h-2.2c0-1.4-1.1-2.5-2.5-2.5v-19c2.5 0 4.2 1.7 7.5 1.9l-5 9.6h-0.7c-0.3 0-0.5 0.3-0.5 0.6 0.4 2.5 3.6 4.4 7.4 4.4s7.1-1.9 7.5-4.4c0-0.3-0.2-0.6-0.5-0.6z m-25.7 0h-7.5l3.8-7 3.7 7z m15 0l3.8-7 3.7 7h-7.5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoLaw;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1044 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoLightBulb = function GoLightBulb(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm20 2.5c-6.9 0-12.5 5.6-12.5 12.5 0 4.1 2 7.7 5 10v7.5c0 1.4 1.1 2.5 2.5 2.5 0 1.4 1.1 2.5 2.5 2.5h5c1.4 0 2.5-1.1 2.5-2.5 1.4 0 2.5-1.1 2.5-2.5v-7.5c3-2.3 5-5.9 5-10 0-6.9-5.6-12.5-12.5-12.5z m5 28.8c0 0.6-0.6 1.2-1.2 1.2h-7.5c-0.7 0-1.3-0.6-1.3-1.2v-1.3h10v1.3z m2.5-9.7c-1.3 1.3-2.5 1.7-2.5 4.9v1h-2.5v-5l5-5v-2.5l-2.5-2.5-2.5 2.5-2.5-2.5-2.5 2.5-2.5-2.5-2.5 2.5v2.5l5 5v5h-2.5v-1c0-3.2-1.2-3.6-2.5-4.9-1.6-1.7-2.5-4.1-2.5-6.6 0-5.5 4.5-10 10-10s10 4.5 10 10c0 2.5-0.9 4.9-2.5 6.6z m-7.5 0.9l-5-5v-2.5l2.5 2.5 2.5-2.5 2.5 2.5 2.5-2.5v2.5l-5 5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoLightBulb;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1045 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoLinkExternal = function GoLinkExternal(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm30 30h-20v-19.9l5-0.1v-5h-10v30h30v-12.5h-5v7.5z m-10-25l5 5-7.5 7.5 5 5 7.5-7.5 5 5v-15h-15z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoLinkExternal;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1046 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoLink = function GoLink(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm30 10h-5.4c1.9 1.3 3.6 3.5 4.2 5h1.2c2.5 0 5 2.5 5 5s-2.6 5-5 5h-7.5c-2.5 0-5-2.5-5-5 0-0.9 0.2-1.8 0.7-2.5h-5.4c-0.2 0.8-0.3 1.6-0.3 2.5 0 5 5 10 10 10h7.5s10-5 10-10-5-10-10-10z m-18.8 15h-1.2c-2.5 0-5-2.5-5-5s2.6-5 5-5h7.5c2.5 0 5 2.5 5 5 0 0.9-0.2 1.8-0.7 2.5h5.4c0.2-0.8 0.3-1.6 0.3-2.5 0-5-5-10-10-10h-7.5s-10 5-10 10 5 10 10 10h5.4c-1.9-1.2-3.6-3.5-4.2-5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoLink;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1047 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoListOrdered = function GoListOrdered(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm17.5 22.5h17.5v-5h-17.5v5z m0 10h17.5v-5h-17.5v5z m0-25v5h17.5v-5h-17.5z m-9.4 10h3v-10h-1.4l-3.3 0.9v2l1.7-0.1v7.2z m4.3 8c0-1.4-0.5-3-3.8-3-1.3 0-2.5 0.2-3.2 0.6l0 2.6c0.9-0.4 1.7-0.6 2.6-0.6s1.3 0.4 1.3 1.1c0 1-1.2 2.3-4.3 4.4v1.9h7.5v-2.6l-3.6 0.1c2-1.2 3.4-2.6 3.4-4.4l0.1-0.1z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoListOrdered;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1048 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoListUnordered = function GoListUnordered(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm5 22.5h5v-5h-5v5z m0-10h5v-5h-5v5z m0 20h5v-5h-5v5z m10-10h20v-5h-20v5z m0-10h20v-5h-20v5z m0 20h20v-5h-20v5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoListUnordered;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1049 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoLocation = function GoLocation(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm20 0c-6.9 0-12.5 5.6-12.5 12.5s6.3 16.3 12.5 27.5c6.3-11.2 12.5-20.6 12.5-27.5s-5.6-12.5-12.5-12.5z m0 17.5c-2.8 0-5-2.2-5-5s2.2-5 5-5 5 2.2 5 5-2.2 5-5 5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoLocation;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1050 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoLock = function GoLock(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm32.5 17.5h-2.5v-7.5s-5-10-10-10-10 5-10 10v7.5h-2.5s-2.5 1.3-2.5 2.5v17.5s1.3 2.5 2.5 2.5h25s2.5-1.2 2.5-2.5v-17.5s-1.2-2.5-2.5-2.5z m-7.5 5h-15v2.5h15v2.5h-15v2.5h15v2.5h-15v2.5h15v2.5h-17.5v-17.5h17.5v2.5z m0-5h-10v-7.5s2.5-5 5-5 5 2.5 5 5v7.5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoLock;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1051 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoLogoGithub = function GoLogoGithub(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm7.7 17.5h-3.4c0 0-0.1 0.1-0.1 0.1v1.7c0 0.1 0.1 0.2 0.1 0.2h1.4v2s-0.3 0.1-1.1 0.1c-1 0-2.4-0.4-2.4-3.3 0-3 1.4-3.4 2.8-3.4 1.1 0 1.6 0.2 1.9 0.3 0.1 0.1 0.2 0 0.2-0.1l0.4-1.6c0 0-0.1-0.1-0.1-0.1-0.1-0.1-0.9-0.5-2.8-0.5-2.3 0-4.6 0.9-4.6 5.5 0 4.6 2.6 5.3 4.9 5.3 1.8 0 2.9-0.8 2.9-0.8 0.1 0 0.1-0.1 0.1-0.1v-5.2c0 0-0.1-0.1-0.2-0.1z m17-4.2h-1.9c-0.1 0-0.1 0-0.1 0.1v3.7h-3v-3.7c0-0.1 0-0.1-0.1-0.1h-1.9c-0.1 0-0.2 0-0.2 0.1v9.9c0 0.1 0.1 0.2 0.2 0.2h1.9c0.1 0 0.1-0.1 0.1-0.2v-4.2h3l0 4.2c0 0.1 0 0.2 0.1 0.2h1.9c0.1 0 0.2-0.1 0.2-0.2l0-9.9c0-0.1-0.1-0.2-0.2-0.2z m-14.7 0.2c-0.7 0-1.2 0.5-1.2 1.2s0.5 1.2 1.2 1.2 1.2-0.5 1.2-1.2c0-0.7-0.6-1.2-1.2-1.2z m1.1 3.2c0-0.1-0.1-0.2-0.2-0.2h-1.9c-0.1 0-0.1 0.1-0.1 0.2v6.5c0 0.2 0.1 0.3 0.2 0.3h1.7c0.2 0 0.3-0.1 0.3-0.3 0-0.3 0-1.7 0-2 0-0.2 0-4.5 0-4.5z m21-0.2h-1.9c-0.1 0-0.2 0.1-0.2 0.2v4.8s-0.5 0.4-1.1 0.4c-0.7 0-0.9-0.3-0.9-1v-4.2c0-0.1-0.1-0.2-0.1-0.2h-2c0 0-0.1 0.1-0.1 0.2v4.5s1.1 2.5 2.6 2.5c1.2 0 2.2-0.7 2.2-0.7s0.1 0.4 0.1 0.4c0 0 0.1 0.1 0.2 0.1h1.2c0 0 0.1-0.1 0.1-0.2l0-6.6c0-0.1-0.1-0.2-0.1-0.2z m5.1-0.2c-1.1 0-1.8 0.5-1.8 0.5v-3.4c0-0.1-0.1-0.1-0.1-0.1h-1.9c-0.1 0-0.2 0-0.2 0.1l0 9.9c0 0.1 0.1 0.2 0.2 0.2h1.3c0 0 0.1-0.1 0.1-0.1 0-0.1 0.1-0.5 0.1-0.5s0.8 0.8 2.2 0.8c1.8 0 2.8-0.9 2.8-4 0-3-1.6-3.4-2.7-3.4z m-0.7 5.6c-0.7 0-1.1-0.3-1.1-0.3v-3.2s0.4-0.3 0.9-0.3c0.7-0.1 1.4 0.1 1.4 1.8 0 1.7-0.3 2-1.2 2z m-20-0.1c0 0-0.3 0.1-0.5 0.1-0.7 0-0.9-0.4-0.9-0.8v-2.8h1.4c0.1 0 0.2 0 0.2-0.1v-1.5c0-0.1-0.1-0.2-0.2-0.2h-1.4l0-1.9c0-0.1-0.1-0.1-0.1-0.1h-2c0 0-0.1 0-0.1 0.1v2s-1 0.2-1 0.2c-0.1 0-0.1 0.1-0.1 0.2v1.2c0 0.1 0 0.1 0.1 0.1h1v3c0 2.1 1.5 2.4 2.6 2.4 0.4 0 1-0.2 1.1-0.2 0.1 0 0.1-0.1 0.1-0.2l0-1.3c0-0.1-0.1-0.2-0.2-0.2z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoLogoGithub;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1052 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoMailRead = function GoMailRead(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm25 15h-12.5v2.5h12.5v-2.5z m-7.5-5h-5v2.5h5v-2.5z m15-1.1v-3.9h-5.5l-7-5-7 5h-5.5v3.9l-5 3.6v25h35v-25l-5-3.6z m-22.5-1.4h20v9.6l-10 8.2-10-8.2v-9.6z m-5 10l9.8 7.5-9.8 7.5v-15z m2.5 17.5l9.9-8.1 2.6 2 2.6-2 9.9 8.1h-25z m27.5-2.5l-9.9-7.5 9.9-7.5v15z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoMailRead;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1053 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoMailReply = function GoMailReply(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm20 6.3l-15 11.2 15 11.3v-7.5c4.3 0 12.9 2.3 15 10.9 0-11.4-7.7-17.6-15-18.4v-7.5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoMailReply;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1054 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoMail = function GoMail(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm2.5 7.5v25h35v-25h-35z m30 2.5l-12.5 10.3-12.5-10.3h25z m-27.5 2.5l9.8 7.5-9.8 7.5v-15z m2.5 17.5l9.9-8.1 2.6 2 2.6-2 9.9 8.1h-25z m27.5-2.5l-9.9-7.5 9.9-7.5v15z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoMail;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1055 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoMarkGithub = function GoMarkGithub(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm20 0c-11 0-20 9-20 20 0 8.8 5.7 16.3 13.7 19 1 0.2 1.3-0.5 1.3-1 0-0.5 0-2 0-3.7-5.5 1.2-6.7-2.4-6.7-2.4-0.9-2.3-2.2-2.9-2.2-2.9-1.9-1.2 0.1-1.2 0.1-1.2 2 0.1 3.1 2.1 3.1 2.1 1.7 3 4.6 2.1 5.8 1.6 0.2-1.3 0.7-2.2 1.3-2.7-4.5-0.5-9.2-2.2-9.2-9.8 0-2.2 0.8-4 2.1-5.4-0.2-0.5-0.9-2.6 0.2-5.3 0 0 1.7-0.5 5.5 2 1.6-0.4 3.3-0.6 5-0.6 1.7 0 3.4 0.2 5 0.7 3.8-2.6 5.5-2.1 5.5-2.1 1.1 2.8 0.4 4.8 0.2 5.3 1.3 1.4 2.1 3.2 2.1 5.4 0 7.6-4.7 9.3-9.2 9.8 0.7 0.6 1.4 1.9 1.4 3.7 0 2.7 0 4.9 0 5.5 0 0.6 0.3 1.2 1.3 1 8-2.7 13.7-10.2 13.7-19 0-11-9-20-20-20z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoMarkGithub;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1056 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoMarkdown = function GoMarkdown(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm37.1 7.5h-34.2c-1.6 0-2.9 1.3-2.9 2.9v19.2c0 1.6 1.3 2.9 2.9 2.9h34.2c1.6 0 2.9-1.3 2.9-2.9v-19.2c0-1.6-1.3-2.9-2.9-2.9z m-14.6 20l-5 0v-7.5l-3.7 4.8-3.8-4.8v7.5h-5v-15h5l3.8 5 3.7-5 5 0v15z m7.5 1.2l-6.2-8.7h3.7v-7.5h5v7.5h3.8l-6.3 8.7z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoMarkdown;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1057 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoMegaphone = function GoMegaphone(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm32.5 1.3c-5.1 0-4.8 5-27.5 5-2.8 0-5 4.4-5 10s2.2 10 5 10c0.9 0 1.7 0 2.5 0l2.5 11.2 7.5 1.3 2.5-3.8-1.8-7.9c9.5 1.4 10.5 4.2 14.3 4.2 4.1 0 7.5-6.8 7.5-15 0-8.3-3.4-15-7.5-15z m-24.8 17.6c-1.5-0.1-3.2-0.1-5-0.1-0.1-0.8-0.2-1.7-0.2-2.6 0-3.4 1.1-7.5 2.5-7.5 1.5 0.1 2.9 0 4.3 0-1.1 1.8-1.8 4.5-1.8 7.6 0 0.9 0.1 1.7 0.2 2.6z m2.5 0.1c-0.1-0.9-0.2-1.8-0.2-2.7 0-3.2 0.7-5.9 1.8-7.7 6.1-0.3 9.9-1.1 12.5-2-1.1 2.6-1.8 6-1.8 9.7 0 1.5 0.1 3 0.4 4.4-2.8-0.7-6.8-1.4-12.7-1.7z m22.3 8.5c-0.5 0-0.9-0.2-1.4-0.5-0.6-2.6-3.2-16.3 4.6-19.3 1.1 2.1 1.8 5.1 1.8 8.6 0 6.2-2.2 11.2-5 11.2z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoMegaphone;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1058 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoMention = function GoMention(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm21.7 3.9c-8.9-1.1-17 5.2-18.1 14.1s5.3 17 14.2 18.1c2.8 0.4 5.6 0 8.3-1.1 1-0.4 1.4-1.5 1-2.5s-1.5-1.4-2.5-1c-2 0.9-4.2 1.2-6.4 0.9-6.8-0.8-11.7-7.1-10.9-13.9s7.1-11.7 14-10.9c6.8 0.8 11.7 7.1 10.9 13.9-0.2 1.4-0.9 2.2-2.5 2.2-1.6 0-2.5-1.8-2.5-3.2v-4.9c0-1-0.8-1.8-1.8-1.8-0.4 0-0.8 0.1-1.1 0.3-1-0.8-2.2-1.4-3.6-1.5-4.1-0.5-7.9 2.4-8.4 6.5s2.4 7.8 6.5 8.3c2.3 0.3 4.6-0.5 6.2-2 1 1.1 2.3 1.8 3.9 2 3.4 0.4 6.6-2 7-5.4 1.1-8.9-5.3-17-14.2-18.1z m1.8 16.6c-0.3 2-2.2 3.5-4.2 3.2s-3.5-2.1-3.3-4.2c0.3-2 2.2-3.5 4.2-3.2s3.5 2.1 3.3 4.2z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoMention;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1059 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoMicroscope = function GoMicroscope(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm29.1 35c3.4-0.7 5.9-3.9 5.9-7.5 0-2.3-1-4.3-2.6-5.7 0-0.6 0.1-1.2 0.1-1.8 0-4.1-1.9-7.7-5-10l2.5-2.5v-2.5l2.5-2.5-2.5-2.5-2.5 2.5h-2.5l-10 10-5 2.5v5l2.5 2.5h5l2.5-5 3.8-3.7c2.1 1.3 3.7 3.5 3.7 6.2-4.1 0-7.5 3.4-7.5 7.5h-15v2.5h7.5c0.7 0.6 1.6 0.9 2.5 1.3v3.7h-5l-5 5h30l-5-5h-0.9z m-4.1-7.5c0-1.4 1.1-2.5 2.5-2.5s2.5 1.1 2.5 2.5c0 1.4-1.1 2.5-2.5 2.5s-2.5-1.1-2.5-2.5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoMicroscope;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1060 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoMilestone = function GoMilestone(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm31 7.5h-27.5v10h27.5l5-5-5-5z m-10 7.5h-5v-5h5v5z m0-15h-5v5h5v-5z m-5 40h5v-20h-5v20z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoMilestone;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1061 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoMirror = function GoMirror(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm12.5 12.5l-7.5 7.5 7.5 7.5v-5h15v5l7.5-7.5-7.5-7.5v5h-15v-5z m7.5-12.5l-20 12.5v27.5l20-10 20 10v-27.5l-20-12.5z m17.5 35l-15-7.5v-2.5h-5v2.5l-15 7.5v-20l15-10v10h5v-10l15 10v20z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoMirror;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1062 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoMortarBoard = function GoMortarBoard(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm19.6 23l-9.6-3v6.3s4.5 3.7 10 3.7 10-1.2 10-3.7v-6.3l-9.6 3c-0.2 0-0.6 0-0.9 0h0.1z m0.7-16c-0.2 0-0.4 0-0.5 0l-19.1 5.9c-0.9 0.3-0.9 1.4 0 1.7l4.3 1.4v4.4c-0.7 0.4-1.2 1.2-1.2 2.1 0 0.5 0.1 0.9 0.3 1.3-0.2 0.3-0.4 0.8-0.4 1.2v6.5c0 1.4 5.1 1.4 5.1 0v-6.5c0-0.4-0.2-0.9-0.4-1.2 0.2-0.4 0.3-0.8 0.3-1.3 0-0.9-0.5-1.7-1.2-2.1v-3.6l12.2 3.8c0.2 0 0.4 0 0.5 0l19.1-5.9c0.9-0.3 0.9-1.5 0-1.7l-19-6z m-0.3 8c-1.3 0-2.5-0.5-2.5-1.2s1.2-1.3 2.5-1.3 2.5 0.5 2.5 1.3-1.1 1.2-2.5 1.2z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoMortarBoard;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1063 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoMoveDown = function GoMoveDown(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm32.5 12.5h-7.5v-12.5h-10v12.5h-7.5l12.5 15 12.5-15z m-25 27.5h25v-7.5h-25v7.5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoMoveDown;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1064 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoMoveLeft = function GoMoveLeft(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm0 32.5h7.5v-25h-7.5v25z m27.5-17.5v-7.5l-15 12.5 15 12.5v-7.5h12.5v-10h-12.5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoMoveLeft;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1065 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoMoveRight = function GoMoveRight(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm32.5 7.5v25h7.5v-25h-7.5z m-20 7.5h-12.5v10h12.5v7.5l15-12.5-15-12.5v7.5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoMoveRight;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1066 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoMoveUp = function GoMoveUp(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm7.5 27.5h7.5v12.5h10v-12.5h7.5l-12.5-15-12.5 15z m0-27.5v7.5h25v-7.5h-25z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoMoveUp;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1067 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoMute = function GoMute(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm7.5 15h-5v10h5l10 7.5h2.5v-25h-2.5l-10 7.5z m28.8 1.3l-2.5-2.5-3.8 3.7-3.7-3.7-2.5 2.4 3.7 3.8-3.7 3.8 2.5 2.5 3.7-3.8 3.8 3.8 2.5-2.5-3.8-3.8 3.8-3.7z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoMute;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1068 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoNoNewline = function GoNoNewline(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm35 12.5v5h-5v-5l-7.5 7.5 7.5 7.5v-5h7.5s2.5 0 2.5-2.5v-7.5h-5z m-26.2-1.2c-4.9 0-8.8 3.9-8.8 8.7 0 4.8 3.9 8.8 8.8 8.8s8.7-4 8.7-8.8c0-4.8-3.9-8.7-8.7-8.7z m-5 8.7c0-2.8 2.2-5 5-5 0.7 0 1.4 0.2 2 0.4l-6.6 6.6c-0.3-0.6-0.4-1.3-0.4-2z m5 5c-0.8 0-1.5-0.2-2.1-0.4l6.6-6.6c0.3 0.6 0.5 1.3 0.5 2 0 2.8-2.3 5-5 5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoNoNewline;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1069 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoOctoface = function GoOctoface(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm36.8 10.8c0.3-0.7 1.3-3.9-0.4-8.2 0 0-2.6-0.9-8.6 3.2-2.5-0.7-5.1-0.8-7.8-0.8-2.7 0-5.3 0.1-7.8 0.8-6-4.1-8.6-3.2-8.6-3.2-1.7 4.3-0.7 7.5-0.4 8.2-2 2.2-3.2 5-3.2 8.4 0 12.9 8.3 15.8 20 15.8 11.6 0 20-2.9 20-15.8 0-3.4-1.2-6.2-3.2-8.4z m-16.8 21.7c-8.3 0-15-0.3-15-8.3 0-2 1-3.7 2.6-5.2 2.7-2.5 7.2-1.2 12.4-1.2 5.2 0 9.7-1.3 12.4 1.2 1.6 1.5 2.6 3.2 2.6 5.1 0 8.1-6.7 8.4-15 8.4z m-6.3-12.5c-1.6 0-3 2-3 4.5s1.4 4.4 3 4.4c1.7 0 3-2 3-4.4s-1.3-4.5-3-4.5z m12.6 0c-1.7 0-3 2-3 4.5s1.3 4.4 3 4.4 3-2 3-4.4c0-2.5-1.4-4.5-3-4.5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoOctoface;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1070 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoOrganization = function GoOrganization(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm32.5 15h-25c-2.8 0-5 2.2-5 5v2.5c0 1.8 1 3.4 2.5 4.3v8.2h10v5h10v-5h10v-8.2c1.5-0.9 2.5-2.5 2.5-4.3v-2.5c0-2.8-2.2-5-5-5z m-20 17.5h-5v-10h-2.5v-2.5c0-1.4 1.1-2.5 2.5-2.5h3.2c-0.4 0.7-0.7 1.6-0.7 2.5v5c0 1.8 1 3.4 2.5 4.3v3.2z m12.5-5v-5h-2.5v15h-5v-15h-2.5v5c-1.4 0-2.5-1.1-2.5-2.5v-5c0-1.4 1.1-2.5 2.5-2.5h10c1.4 0 2.5 1.1 2.5 2.5v5c0 1.4-1.1 2.5-2.5 2.5z m10-5h-2.5v10h-5v-3.2c1.5-0.9 2.5-2.5 2.5-4.3v-5c0-0.9-0.3-1.8-0.7-2.5h3.2c1.4 0 2.5 1.1 2.5 2.5v2.5z m-20.6-10.1c1.3 1.6 3.3 2.6 5.6 2.6 2.3 0 4.3-1 5.6-2.6 0.9 1.5 2.5 2.6 4.4 2.6 2.8 0 5-2.2 5-5s-2.2-5-5-5c-1 0-1.9 0.3-2.7 0.8-0.8-3.3-3.7-5.8-7.3-5.8s-6.5 2.5-7.3 5.8c-0.8-0.5-1.7-0.8-2.7-0.8-2.8 0-5 2.2-5 5s2.2 5 5 5c1.9 0 3.5-1.1 4.4-2.6z m15.6-4.9c1.4 0 2.5 1.1 2.5 2.5s-1.1 2.5-2.5 2.5c-1.4 0-2.5-1.1-2.5-2.5s1.1-2.5 2.5-2.5z m-10-5c2.8 0 5 2.2 5 5s-2.2 5-5 5-5-2.2-5-5 2.2-5 5-5z m-10 10c-1.4 0-2.5-1.1-2.5-2.5s1.1-2.5 2.5-2.5c1.4 0 2.5 1.1 2.5 2.5s-1.1 2.5-2.5 2.5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoOrganization;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1071 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoPackage = function GoPackage(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm18.8 2.5l-18.8 5v22.5l18.8 5 18.7-5v-22.5l-18.7-5z m-16.3 25.7l0-16.9 15 4v16.9l-15-4z m0-19.4l6.2-1.7 16.3 4.3-6.2 1.7-16.3-4.3z m32.5 19.4l-15 4v-16.9l5-1.4v6.1l5-1.3v-6.1l5-1.4 0 17z m-5-18.1v0l-16.3-4.4 5.1-1.3 16.2 4.4-5 1.3z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoPackage;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1072 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoPaintcan = function GoPaintcan(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm20 0c-8.3 0-15 6.7-15 15v2.5c0 1.4 1.1 2.5 2.5 2.5v12.5c0 2.8 5.6 5 12.5 5s12.5-2.2 12.5-5v-12.5c1.4 0 2.5-1.1 2.5-2.5v-2.5c0-8.3-6.7-15-15-15z m7.5 25v1.3c0 0.6-0.6 1.2-1.2 1.2s-1.3-0.6-1.3-1.2v-1.3c0-0.7-0.6-1.2-1.2-1.2s-1.3 0.5-1.3 1.2v6.3c0 0.6-0.6 1.2-1.2 1.2s-1.3-0.6-1.3-1.2v-5c0-0.7-0.6-1.3-1.2-1.3s-1.3 0.6-1.3 1.3v1.2c0 1.4-1.1 2.5-2.5 2.5s-2.5-1.1-2.5-2.5v-2.5c-1.4 0-2.5-1.1-2.5-2.5v-4.5c2.3 1.2 5.9 2 10 2s7.7-0.8 10-2v4.5c0 1.4-1.1 2.5-2.5 2.5z m-7.5-7.5c-4.2 0-7.8-1-9.3-2.5 1.5-1.5 5.1-2.5 9.3-2.5s7.8 1 9.3 2.5c-1.5 1.5-5.1 2.5-9.3 2.5z m0-7.5c-6.9 0-12.5 2.2-12.5 5 0-6.9 5.6-12.5 12.5-12.5 6.9 0 12.5 5.6 12.5 12.5 0-2.8-5.6-5-12.5-5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoPaintcan;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1073 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoPencil = function GoPencil(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm30 2.5l-5 5 7.5 7.5 5-5-7.5-7.5z m-27.5 27.5l0 7.5 7.5 0 20-20-7.5-7.5-20 20z m7.5 5h-5v-5h2.5v2.5h2.5v2.5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoPencil;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1074 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoPerson = function GoPerson(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm27.5 7.5c0-4.1-3.4-7.5-7.5-7.5s-7.5 3.4-7.5 7.5c0 4.1 3.4 7.5 7.5 7.5s7.5-3.4 7.5-7.5z m-7.5 5c-2.8 0-5-2.2-5-5s2.2-5 5-5 5 2.2 5 5-2.2 5-5 5z m5 2.5h-10c-2.8 0-5 2.2-5 5v5c0 2.8 2.2 5 5 5v10h10v-10c2.8 0 5-2.2 5-5v-5c0-2.8-2.2-5-5-5z m2.5 10c0 1.4-1.1 2.5-2.5 2.5v-5h-2.5v15h-5v-15h-2.5v5c-1.4 0-2.5-1.1-2.5-2.5v-5c0-1.4 1.1-2.5 2.5-2.5h10c1.4 0 2.5 1.1 2.5 2.5v5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoPerson;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1075 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoPin = function GoPin(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm17.7 27.5l2.5 12.5 2.5-12.5c-0.8 0.1-1.7 0.1-2.5 0.1s-1.8 0-2.5-0.1z m9.9-11.7c-1.3-0.6-2.4-2.3-2.4-3.3v-2.5c0-0.9 0.4-1.5 0.9-2 0.5-0.5 0.9-1.2 0.9-1.8 0-2.1-2.4-3.7-6.8-3.7s-6.9 1.6-6.9 3.7c0 0.6 0.4 1.3 1 1.8 0.4 0.5 0.9 1.1 0.9 2v2.5c0 1-1.2 2.7-2.5 3.3-1.4 0.8-2.7 2.1-2.7 3.5 0 2.8 3.9 5.7 10.2 5.7s10.1-2.8 10.1-5.7c0-1.3-1.2-2.7-2.7-3.5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoPin;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1076 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoPlaybackFastForward = function GoPlaybackFastForward(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm5 30l15-10-15-10v20z m30-10l-15-10v20l15-10z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoPlaybackFastForward;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1077 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoPlaybackPause = function GoPlaybackPause(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm10 32.5h7.5v-25h-7.5v25z m12.5-25v25h7.5v-25h-7.5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoPlaybackPause;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1078 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoPlaybackPlay = function GoPlaybackPlay(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm10 7.5l20 12.5-20 12.5v-25z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoPlaybackPlay;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1079 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoPlaybackRewind = function GoPlaybackRewind(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm20 20l15 10v-20l-15 10z m-15 0l15 10v-20l-15 10z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoPlaybackRewind;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1080 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoPlug = function GoPlug(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm39.2 8l0 0c-1-1-2.6-1-3.5 0l-1.8 1.7-3.6-3.5 1.8-1.8c1-0.9 1-2.5 0-3.5l0 0c-1-1-2.5-1-3.5 0l-1.9 1.9c-2.4-1.6-5.7-1.4-7.9 0.8l-0.9 0.9c-4.3 4.3-4.8 10.9-1.5 15.7l-0.2 0.2c-2.4 2.4-2.4 6.3 0 8.8 0.5 0.5 0.5 1.3 0 1.8s-1.3 0.4-1.8 0l-3.5-3.5c-2.4-2.5-6.4-2.5-8.8-0.1-2.5 2.5-2.5 6.4 0 8.9l0.3 0.3c1 1 2.5 1 3.5 0l0 0c1-1 1-2.6 0-3.5l-0.3-0.4c-0.5-0.4-0.5-1.2 0-1.7 0.5-0.5 1.3-0.5 1.8 0l3.4 3.4c2.5 2.5 6.5 2.5 9 0.1 2.4-2.5 2.4-6.4-0.1-8.8-0.5-0.5-0.5-1.3 0-1.8l0.2-0.2c4.8 3.3 11.4 2.8 15.7-1.5l0.9-1c2.2-2.1 2.4-5.4 0.8-7.8l1.9-1.9c1-1 1-2.5 0-3.5z m-4.4 11.5c-1.5 1.4-3.9 1.4-5.3 0l-8.9-8.9c-1.4-1.4-1.4-3.8 0-5.3 1.2-1.1 2.9-1.4 4.3-0.7l-1.6 1.6c-1 1-1 2.6 0 3.5l0 0.1c1 0.9 2.5 0.9 3.5 0l1.8-1.8 3.5 3.5-1.8 1.8c-0.9 1-0.9 2.5 0 3.5l0.1 0c0.9 1 2.5 1 3.5 0l1.6-1.6c0.7 1.4 0.4 3.1-0.7 4.3z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoPlug;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1081 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoPlus = function GoPlus(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm22.5 17.5v-10h-5v10h-10v5h10v10h5v-10h10v-5h-10z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoPlus;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1082 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoPodium = function GoPodium(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm17.5 0c-1.2 0-2.5 1.3-2.5 2.5v2.5h-2.5l-7.5 7.5v5h7.5l2.5 15-5 2.5v2.5h20v-2.5l-5-2.5 2.5-15h7.5v-5l-7.5-7.5h-10v-2.5h1.3s1.2-0.7 1.2-1.2-0.6-1.3-1.2-1.3h-1.3z m0 32.5l-2.1-12.5h4.6l0 12.5h-2.5z m-8.7-20l5-5h1.2v2.5h2.5v-2.5h8.8l5 5h-22.5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoPodium;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1083 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoPrimitiveDot = function GoPrimitiveDot(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm10 20c0-5.5 4.5-10 10-10 5.5 0 10 4.5 10 10s-4.5 10-10 10c-5.5 0-10-4.5-10-10z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoPrimitiveDot;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1084 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoPrimitiveSquare = function GoPrimitiveSquare(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm30 30h-20v-20h20v20z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoPrimitiveSquare;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1085 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoPulse = function GoPulse(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm31.3 20l-6.8-6.5-5.5 7.8-2.7-17.3-7.8 16h-6v5h9l2.3-4.5 2.2 13.5 9-12.8 4 3.8h8.5v-5h-6.2z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoPulse;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1086 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoPuzzle = function GoPuzzle(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm29.5 22.5c-0.5-0.4-1.1-0.7-1.7-0.8-0.3-0.1-0.7-0.1-1.1-0.1-0.3 0-0.6 0.1-1 0.2-0.2 0-0.4 0.1-0.7 0.2-0.7 0.3-1.3 0.7-1.8 1.2-0.5 0.5-0.9 1.1-1.2 1.8-0.1 0.3-0.2 0.5-0.2 0.7-0.1 0.4-0.2 0.7-0.2 1 0 0.4 0 0.8 0.1 1.1 0.1 0.6 0.4 1.2 0.8 1.7 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 1.7 1.2 2.9 1.3 0.4 0.1 0.7 0.1 1 0.2 0.2 0.1 0.4 0.2 0.5 0.3 0.3 0.2 0.3 0.6 0.1 1-0.1 0.3-0.3 0.6-0.5 0.8l-0.1 0.1-0.3 0.3-0.3 0.3-0.1 0.1c-0.5 0.5-0.9 0.9-1.3 1.3l-2.7 2.6-0.8 0.9c-0.2 0.2-0.3 0.3-0.5 0.4 0 0-0.1 0.1-0.2 0.1-0.7 0.4-1.6 0.2-2.3-0.5l-0.6-0.6c-1.2-1.2-2.4-2.4-3.5-3.5l-1-1c-0.3-0.3-0.5-0.5-0.8-0.7-0.2-0.2-0.5-0.3-0.7-0.4-0.8-0.3-1.6-0.1-2.1 0.5-0.2 0.2-0.3 0.4-0.4 0.7-0.1 0.4-0.2 0.8-0.2 1.1-0.2 1.5-1 2.7-2.2 3.3-0.3 0.1-0.6 0.2-0.9 0.3-0.4 0-0.7 0-1 0-1 0-1.9-0.5-2.7-1.3l0-0.1c-0.8-0.7-1.3-1.6-1.3-2.6 0-0.3 0-0.6 0-1 0.1-0.3 0.2-0.6 0.3-0.9 0.6-1.2 1.8-2 3.3-2.2 0.3 0 0.7-0.1 1.1-0.2 0.3-0.1 0.5-0.2 0.7-0.4 0.6-0.5 0.8-1.3 0.5-2.1-0.1-0.2-0.2-0.5-0.4-0.7-0.2-0.3-0.4-0.5-0.7-0.8-0.3-0.3-0.6-0.6-1-1-1-1-2.1-2.1-3.1-3.1l-0.4-0.4-0.6-0.6c-0.7-0.7-0.9-1.6-0.5-2.3 0-0.1 0.1-0.2 0.1-0.2 0.1-0.2 0.2-0.3 0.4-0.5l0.9-0.8c0.8-0.9 1.7-1.8 2.6-2.7 0.4-0.4 0.8-0.8 1.3-1.2l0.1-0.2 0.3-0.3 0.3-0.3 0.1-0.1c0.2-0.2 0.5-0.4 0.8-0.5 0.4-0.2 0.8-0.2 1 0.1 0.1 0.1 0.2 0.3 0.3 0.5 0.1 0.3 0.1 0.7 0.2 1 0.1 1.2 0.5 2.2 1.3 2.9 0.2 0.2 0.4 0.4 0.6 0.5 0.5 0.4 1.1 0.7 1.7 0.8 0.3 0.1 0.7 0.1 1.1 0.1 0.3 0 0.6-0.1 1-0.2 0.2 0 0.4-0.1 0.7-0.2 0.7-0.3 1.3-0.7 1.8-1.2 0.5-0.5 0.9-1.1 1.2-1.8 0.1-0.3 0.2-0.5 0.2-0.7 0.1-0.4 0.2-0.7 0.2-1 0-0.4 0-0.8-0.1-1.1-0.1-0.6-0.4-1.2-0.8-1.7-0.1-0.2-0.3-0.4-0.5-0.6-0.7-0.8-1.7-1.2-2.9-1.3-0.3-0.1-0.7-0.1-1-0.2-0.2-0.1-0.4-0.2-0.5-0.3-0.3-0.2-0.3-0.6-0.1-1 0.1-0.3 0.3-0.6 0.5-0.8l0.1-0.1 0.3-0.3 0.3-0.3 0.2-0.1c0.4-0.4 0.8-0.9 1.2-1.3l2.7-2.6 0.8-0.9c0.2-0.2 0.3-0.3 0.5-0.4 0 0 0.1-0.1 0.2-0.1 0.7-0.4 1.6-0.2 2.3 0.5l0.6 0.6c1.2 1.2 2.4 2.4 3.5 3.5l1 1c0.3 0.3 0.5 0.5 0.8 0.7 0.2 0.2 0.5 0.3 0.7 0.4 0.8 0.3 1.6 0.1 2.1-0.5 0.2-0.2 0.3-0.4 0.4-0.7 0.1-0.4 0.2-0.8 0.2-1.1 0.2-1.5 1-2.7 2.2-3.3 0.3-0.1 0.6-0.2 0.9-0.3 0.4 0 0.7 0 1 0 1 0 1.9 0.5 2.7 1.3l0.1 0.1c0.7 0.7 1.2 1.6 1.2 2.6 0 0.3 0 0.6 0 1-0.1 0.3-0.2 0.6-0.3 0.9-0.6 1.2-1.8 2-3.3 2.2-0.3 0-0.7 0.1-1.1 0.2-0.3 0.1-0.5 0.2-0.7 0.4-0.6 0.5-0.8 1.3-0.5 2.1 0.1 0.2 0.2 0.5 0.4 0.7 0.2 0.3 0.4 0.5 0.7 0.8 0.3 0.3 0.6 0.6 1 1 1.1 1.1 2.3 2.3 3.5 3.5l0.6 0.6c0.7 0.7 0.9 1.6 0.5 2.3 0 0.1-0.1 0.2-0.1 0.2-0.1 0.2-0.2 0.3-0.4 0.5l-0.9 0.8c-0.8 0.9-1.7 1.8-2.6 2.7-0.4 0.4-0.8 0.8-1.3 1.2l-0.1 0.2-0.3 0.3-0.3 0.3-0.1 0.1c-0.2 0.2-0.5 0.4-0.8 0.5-0.4 0.2-0.8 0.2-1-0.1-0.1-0.1-0.2-0.3-0.3-0.5-0.1-0.3-0.1-0.6-0.2-1-0.1-1.2-0.5-2.2-1.3-2.9-0.2-0.2-0.4-0.4-0.6-0.5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoPuzzle;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1087 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoQuestion = function GoQuestion(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm17.5 30h5v-5h-5v5z m2.5-20c-3.7 0-7.5 3.8-7.5 7.5h5c0-1.2 1.3-2.5 2.5-2.5s2.5 1.3 2.5 2.5c0 2.5-5 2.5-5 5h5c2.5-0.9 5-2.5 5-6.2s-3.7-6.3-7.5-6.3z m0-10c-11.1 0-20 8.9-20 20s8.9 20 20 20 20-8.9 20-20-8.9-20-20-20z m0 35c-8.3 0-15-6.7-15-15s6.7-15 15-15 15 6.7 15 15-6.7 15-15 15z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoQuestion;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1088 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoQuote = function GoQuote(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm7.5 20v10h10v-10h-5s0-5 5-5v-5s-10 0-10 10z m25-5v-5s-10 0-10 10v10h10v-10h-5s0-5 5-5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoQuote;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1089 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoRadioTower = function GoRadioTower(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm12 15.3c0.6-0.7 0.6-1.7 0-2.3-0.8-0.9-1.2-1.9-1.2-3 0-1.1 0.4-2.2 1.2-3 0.6-0.6 0.6-1.7 0-2.3-0.3-0.3-0.7-0.5-1.1-0.5-0.4 0-0.8 0.2-1.2 0.5-1.4 1.5-2.1 3.4-2.1 5.3 0 1.9 0.7 3.8 2.1 5.3 0.7 0.6 1.7 0.6 2.3 0z m-6.2-14c-0.3-0.3-0.7-0.5-1.1-0.5-0.4 0-0.8 0.2-1.2 0.5-2.3 2.4-3.5 5.5-3.5 8.7 0 3.1 1.2 6.3 3.5 8.7 0.7 0.6 1.7 0.6 2.3 0 0.7-0.7 0.7-1.7 0-2.4-1.7-1.7-2.5-4-2.5-6.3s0.8-4.6 2.5-6.4c0.7-0.6 0.7-1.7 0-2.3z m14.2 12.8c2.3 0 4.1-1.9 4.1-4.1s-1.8-4.1-4.1-4.1c-2.2 0-4 1.9-4 4.1s1.8 4.1 4 4.1z m16.5-12.8c-0.7-0.6-1.7-0.6-2.3 0-0.6 0.7-0.6 1.7 0 2.4 1.7 1.7 2.5 4 2.5 6.3 0 2.3-0.8 4.6-2.5 6.3-0.7 0.7-0.7 1.7 0 2.4 0.3 0.3 0.7 0.5 1.1 0.5 0.4 0 0.8-0.2 1.2-0.5 2.3-2.4 3.5-5.6 3.5-8.7 0-3.1-1.2-6.3-3.5-8.7z m-16.4 16c-1.1 0-2.1-0.3-3.1-0.8l-7.8 21h3.7l2.1-2.5h10l2.1 2.5h3.8l-7.9-21c-0.9 0.5-1.9 0.8-3 0.8z m-0.1 1.2l2.5 9h-5l2.5-9z m-5 14l2.5-2.5h5l2.5 2.5h-10z m13-27.8c-0.6 0.7-0.6 1.7 0 2.3 0.8 0.9 1.2 1.9 1.2 3 0 1.1-0.4 2.2-1.2 3-0.6 0.6-0.6 1.7 0 2.3 0.3 0.3 0.7 0.5 1.1 0.5 0.4 0 0.8-0.2 1.2-0.5 1.4-1.5 2.1-3.4 2.1-5.3 0-1.9-0.7-3.8-2.1-5.3-0.7-0.6-1.7-0.6-2.3 0z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoRadioTower;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1090 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoRepoClone = function GoRepoClone(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm12.5 15h-2.5v2.5h2.5v-2.5z m-5-12.5h10v-2.5h-15s-2.5 1.3-2.5 2.5v30s1.3 2.5 2.5 2.5h5v5l3.8-3.7 3.7 3.7v-5h12.5s2.5-1.2 2.5-2.5v-7.5h-22.5v-22.5z m20 25v3.8s-0.5 1.2-1.2 1.2h-11.3v-2.5h-7.5v2.5h-3.7s-1.3-0.6-1.3-1.2v-3.8h25z m-15-17.5h-2.5v2.5h2.5v-2.5z m-2.5 12.5h2.5v-2.5h-2.5v2.5z m27.5-22.5h-12.5s-2.5 1.3-2.5 2.5v15s1.3 2.5 2.5 2.5h2.5v2.5l1.3-1.2 1.2 1.2v-2.5h7.5s2.5-1.2 2.5-2.5v-15s-1.2-2.5-2.5-2.5z m-10 17.5h-1.2s-1.3-0.6-1.3-1.2v-1.3h2.5v2.5z m10-1.2c0 0.6-0.6 1.2-1.2 1.2h-6.3v-2.5h7.5v1.3z m0-3.8h-10v-10h8.8s1.2 0 1.2 1.3v8.7z m-25-7.5h-2.5v2.5h2.5v-2.5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoRepoClone;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1091 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoRepoForcePush = function GoRepoForcePush(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm35 2.5c0-1.2-1.2-2.5-2.5-2.5h-25s-2.5 1.3-2.5 2.5v30s0-1.2 0 0 1.3 2.5 2.5 2.5h5v5l5-5v-5h-5v2.5h-3.7s-1.3-0.6-1.3-1.2v-3.8h10v-2.5h-5v-22.5h20v22.5h-5v2.5h5v3.8s-0.6 1.2-1.2 1.2h-3.8v2.5h5s2.5-1.2 2.5-2.5v-30z m-10.6 12.5h5.6l-7.5-10-7.5 10h5.6l-5.6 7.5h5v17.5h5v-17.5h5l-5.6-7.5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoRepoForcePush;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1092 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoRepoForked = function GoRepoForked(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm35 5c0-2.8-2.2-5-5-5s-5 2.2-5 5c0 1.8 1 3.5 2.5 4.3v4.2l-7.5 8.3-7.5-8.3v-4.2c1.5-0.8 2.5-2.4 2.5-4.3 0-2.8-2.2-5-5-5s-5 2.2-5 5c0 1.8 1 3.5 2.5 4.3v6.1l10 11v4.3c-1.5 0.9-2.5 2.5-2.5 4.3 0 2.8 2.2 5 5 5s5-2.2 5-5c0-1.8-1-3.4-2.5-4.3v-4.3l10-11v-6.1c1.5-0.8 2.5-2.4 2.5-4.3z m-25-2.5c1.3 0 2.4 1.1 2.4 2.5s-1.1 2.4-2.4 2.4-2.4-1.1-2.4-2.4 1.1-2.5 2.4-2.5z m10 34.8c-1.3 0-2.4-1-2.4-2.4s1.1-2.4 2.4-2.4 2.4 1.1 2.4 2.4-1.1 2.4-2.4 2.4z m10-34.8c1.3 0 2.4 1.1 2.4 2.5s-1.1 2.4-2.4 2.4-2.4-1.1-2.4-2.4 1.1-2.5 2.4-2.5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoRepoForked;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1093 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoRepoPull = function GoRepoPull(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm40 12.5l-7.5-7.5v5h-15v5h15v5l7.5-7.5z m-12.5 12.5h-20v-22.5h20v5h2.5v-5s-1.2-2.5-2.5-2.5h-25s-2.5 1.3-2.5 2.5v30s1.3 2.5 2.5 2.5h5v5l3.8-3.7 3.7 3.7v-5h12.5s2.5-1.2 2.5-2.5v-15h-2.5v7.5z m0 6.3c0 0.5-0.6 1.2-1.2 1.2h-11.3v-2.5h-7.5v2.5h-3.7s-1.3-0.6-1.3-1.2v-3.8h25v3.8z m-15-21.3h-2.5v2.5h2.5v-2.5z m0-5h-2.5v2.5h2.5v-2.5z m0 10h-2.5v2.5h2.5v-2.5z m-2.5 7.5h2.5v-2.5h-2.5v2.5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoRepoPull;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1094 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoRepoPush = function GoRepoPush(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm22.5 12.5l-7.5 10h5v17.5h5v-17.5h5l-7.5-10z m-7.5 0h2.5v-2.5h-2.5v2.5z m2.5-7.5h-2.5v2.5h2.5v-2.5z m15-5h-25s-2.5 1.3-2.5 2.5v30s1.3 2.5 2.5 2.5h5v5l5-5v-5h-5v2.5h-3.7s-1.3-0.5-1.3-1.2v-3.8h10v-2.5h-5v-22.5h20l0 22.5h-5v2.5h5v3.8s-0.6 1.2-1.2 1.2h-3.8v2.5h5s2.5-1.2 2.5-2.5v-30s-1.2-2.5-2.5-2.5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoRepoPush;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1095 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoRepo = function GoRepo(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm17.5 10h-2.5v2.5h2.5v-2.5z m0-5h-2.5v2.5h2.5v-2.5z m15-5h-25s-2.5 1.3-2.5 2.5v30s1.3 2.5 2.5 2.5h5v5l3.8-3.7 3.7 3.7v-5h12.5s2.5-1.2 2.5-2.5v-30s-1.2-2.5-2.5-2.5z m0 31.3c0 0.6-0.6 1.2-1.2 1.2h-11.3v-2.5h-7.5v2.5h-3.7s-1.3-0.7-1.3-1.2v-3.8h25v3.8z m0-6.3h-20v-22.5h20l0 22.5z m-15-5h-2.5v2.5h2.5v-2.5z m0-5h-2.5v2.5h2.5v-2.5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoRepo;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1096 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoRocket = function GoRocket(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm28 4.8c-2.8 1.7-5.8 3.8-8.5 6.6-1.8 1.7-3.2 3.4-4.3 5l-7 1.3-8.2 8.2 7.3 0.2 5.1-5.1c-1.8 3.7-1.9 6.2-1.9 6.2l2.3 2.3s2.5-0.2 6.3-2l-5.2 5.2 0.2 7.3 8.2-8.2 1.3-7c1.6-1.1 3.3-2.5 5-4.3 2.8-2.7 4.9-5.7 6.6-8.5-1.8-0.4-3.5-1.1-4.8-2.4-1.3-1.3-2-3-2.4-4.8z m2.7-1.4c0.2 1.8 0.8 3.2 1.8 4.1 0.9 1 2.3 1.6 4.1 1.8 2.6-5.2 3.4-9.3 3.4-9.3s-4.1 0.8-9.3 3.4z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoRocket;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1097 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoRss = function GoRss(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm10 25c-2.8 0-5 2.2-5 5s2.2 5 5 5 5-2.2 5-5-2.2-5-5-5z m0-10s-2.5 0.1-2.5 2.5 2.5 2.5 2.5 2.5c5.5 0 10 4.5 10 10 0 0 0 2.5 2.5 2.5s2.5-2.5 2.5-2.5c0-8.3-6.7-15-15-15z m0-10s-2.5 0-2.5 2.5 2.5 2.5 2.5 2.5c11 0 20 9 20 20 0 0 0 2.5 2.5 2.5s2.5-2.5 2.5-2.5c0-13.8-11.2-25-25-25z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoRss;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1098 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoRuby = function GoRuby(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm30 5h-20l-10 10 20 20 20-20-10-10z m-25 10l7.5-7.5h15l7.5 7.5-15 15-15-15z m22.5-5h-7.5v17.5l12.5-12.5-5-5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoRuby;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1099 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoScreenFull = function GoScreenFull(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm7.5 30h25v-20h-25v20z m5-15h15v10h-15v-10z m-7.5-7.5h7.5v-2.5h-10v10h2.5v-7.5z m0 17.5h-2.5v10h10v-2.5h-7.5v-7.5z m22.5-20v2.5h7.5v7.5h2.5v-10h-10z m7.5 27.5h-7.5v2.5h10v-10h-2.5v7.5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoScreenFull;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1100 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoScreenNormal = function GoScreenNormal(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm7.5 7.5h-5v2.5h7.5v-7.5h-2.5v5z m-5 25h5v5h2.5v-7.5h-7.5v2.5z m30-25v-5h-2.5v7.5h7.5v-2.5h-5z m-2.5 30h2.5v-5h5v-2.5h-7.5v7.5z m-20-10h20v-15h-20v15z m5-10h10v5h-10v-5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoScreenNormal;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1101 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoSearch = function GoSearch(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm38.5 32.5l-9.7-9.7c1.4-2.3 2.2-4.9 2.2-7.8 0-8.3-6.7-15-15-15-8.3 0-15 6.7-15 15 0 8.3 6.7 15 15 15 2.9 0 5.5-0.8 7.8-2.2l9.7 9.7c0.7 0.7 1.8 0.7 2.5 0l2.5-2.5c0.7-0.7 0.7-1.8 0-2.5z m-22.5-7.5c-5.5 0-10-4.5-10-10s4.5-10 10-10 10 4.5 10 10-4.5 10-10 10z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoSearch;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1102 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoServer = function GoServer(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm32.5 15h-25c-1.4 0-2.5 1.3-2.5 2.5v5c0 1.3 1.3 2.5 2.5 2.5h25c1.3 0 2.5-1.2 2.5-2.5v-5c0-1.2-1.2-2.5-2.5-2.5z m-22.5 7.5h-2.5v-5h2.5v5z m5 0h-2.5v-5h2.5v5z m5 0h-2.5v-5h2.5v5z m5 0h-2.5v-5h2.5v5z m7.5 5h-25c-1.4 0-2.5 1.3-2.5 2.5v5c0 1.3 1.3 2.5 2.5 2.5h25c1.3 0 2.5-1.2 2.5-2.5v-5c0-1.2-1.2-2.5-2.5-2.5z m-22.5 7.5h-2.5v-5h2.5v5z m5 0h-2.5v-5h2.5v5z m5 0h-2.5v-5h2.5v5z m5 0h-2.5v-5h2.5v5z m7.5-32.5h-25c-1.4 0-2.5 1.3-2.5 2.5v5c0 1.3 1.3 2.5 2.5 2.5h25c1.3 0 2.5-1.2 2.5-2.5v-5c0-1.2-1.2-2.5-2.5-2.5z m-22.5 7.5h-2.5v-5h2.5v5z m5 0h-2.5v-5h2.5v5z m5 0h-2.5v-5h2.5v5z m5 0h-2.5v-5h2.5v5z m7.5-2.5h-2.5v-2.5h2.5v2.5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoServer;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1103 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoSettings = function GoSettings(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm5 35h5v-7.5h-5v7.5z m5-30h-5v12.5h5v-12.5z m12.5 0h-5v5h5v-5z m-20 20h10v-5h-10v5z m15 10h5v-15h-5v15z m-2.5-17.5h10v-5h-10v5z m20-12.5h-5v15h5v-15z m-7.5 17.5v5h10v-5h-10z m2.5 12.5h5v-5h-5v5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoSettings;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1104 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoSignIn = function GoSignIn(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm27.5 22.5v-5h10v-5h-10v-5l-7.5 5.6v-5.6l-10-5h20v7.5h2.5v-10h-27.5v32.5l15 7.5v-7.5h12.5v-12.5h-2.5v10h-10v-13.1z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoSignIn;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1105 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoSignOut = function GoSignOut(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm25 30h-10v-22.5l-10-5h20v7.5h2.5v-10h-27.5v32.5l15 7.5v-7.5h12.5v-12.5h-2.5v10z m15-15l-10-7.5v5h-10v5h10v5l10-7.5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoSignOut;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1106 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoSplit = function GoSplit(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm17.5 10l-10-10-7.5 7.5 12.1 11.7c0.6-3.1 1.7-5.3 5.2-9l0.2-0.2z m5-10l5.2 5.2-7.7 7.7c-3.9 3.9-5 6.3-5 12.1v15h10v-15c0-2.1 0.7-3.7 2.1-5l7.7-7.7 5.2 5.2v-17.5h-17.5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoSplit;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1107 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoSquirrel = function GoSquirrel(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm30 2.5c-5.5 0-10 3.3-10 7.3 0 4.8 1.3 7.6 0 15.2 0-11.2-6.9-15.8-10-15.8 0.1-1.3-1.2-1.7-1.2-1.7s-0.6 0.3-0.8 0.8c-0.6-0.7-1.4-0.6-1.4-0.6l-0.3 1.4s-4.6 1.6-4.6 8.1c0.5 0.8 3.8 1.5 6.2 1 2.2 0.2 1.7 2 1.2 2.5-2.1 2.1-4.1-0.7-6.6-0.7s-2.5 2.5 0 2.5 2.5 2.5 7.5 2.5c-7.7 3 0 10 0 10h-2.5c-2.5 0-2.5 2.5-2.5 2.5h15c7.5 0 12.5-2.5 12.5-8.7 0-2.1-1.1-4.5-2.5-6.3-2.8-3.7 0.6-6.7 2.5-5s7.5 2.5 7.5-5c0-5.5-4.5-10-10-10z m-23.7 12.5c-0.7 0-1.3-0.6-1.3-1.2s0.6-1.3 1.3-1.3 1.2 0.6 1.2 1.3-0.6 1.2-1.2 1.2z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoSquirrel;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1108 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoStar = function GoStar(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm37.5 15l-12.2-1.6-5.3-10.9-5.3 10.9-12.2 1.6 9 8.2-2.3 11.8 10.8-5.8 10.8 5.8-2.3-11.8 9-8.2z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoStar;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1109 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoSteps = function GoSteps(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm12.8 2.5c-2.9 0-5.3 3.9-5.3 8.8 0 2.6 0.7 5.5 1.3 9.9 0.5 3.4 1.8 6.3 4 6.3s3.7-1.9 3.7-5.4c0-1.2-1-3.1-1-4.7-0.1-2.9 1.9-4 1.9-6.7 0-4.9-1.7-8.2-4.6-8.2z m14.3 10c-2.9 0-4.6 3.3-4.6 8.2 0 2.7 2.1 3.8 2 6.7-0.1 1.6-1 3.5-1 4.7 0 3.5 1.4 5.4 3.6 5.4s3.5-2.9 4-6.3c0.7-4.4 1.4-7.3 1.4-9.9 0-4.9-2.4-8.8-5.4-8.8z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoSteps;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1110 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoStop = function GoStop(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm27.5 0h-15l-12.5 12.5v15l12.5 12.5h15l12.5-12.5v-15l-12.5-12.5z m7.5 25l-10 10h-10l-10-10v-10l10-10h10l10 10v10z m-17.5-2.5h5v-12.5h-5v12.5z m0 7.5h5v-5h-5v5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoStop;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1111 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoSync = function GoSync(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm30.6 18.5c0.5 3.2-0.5 6.5-3 9-3.7 3.6-9.4 4.1-13.5 1.4l2.9-2.9-10.7-1.5 1.5 10.5 3.2-3.1c5.9 4.3 14.3 3.9 19.6-1.4 3.1-3.1 4.6-7.1 4.4-11.1l-4.4-0.9z m-18.2-6c3.7-3.6 9.4-4.1 13.5-1.3l-2.9 2.8 10.8 1.5-1.5-10.5-3.3 3.2c-5.9-4.4-14.3-4-19.6 1.3-3.1 3.1-4.6 7.1-4.4 11.1l4.4 0.9c-0.5-3.2 0.5-6.5 3-9z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoSync;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1112 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoTag = function GoTag(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm17.5 2.5h-10l-5 5v10l20 20 15-15-20-20z m-12.5 13.8v-7.5l3.8-3.8h7.5l17.5 17.5-11.3 11.3-17.5-17.5z m15-3.8l-7.5 7.5 10 10 7.5-7.5-10-10z m-3.7 7.5l3.7-3.7 6.3 6.2-3.8 3.8-6.2-6.3z m-1.3-8.7c0-2.1-1.7-3.8-3.7-3.8s-3.8 1.7-3.8 3.8 1.7 3.7 3.8 3.7 3.7-1.7 3.7-3.7z m-3.7 1.2c-0.7 0-1.3-0.6-1.3-1.2s0.6-1.3 1.3-1.3 1.2 0.6 1.2 1.3-0.6 1.2-1.2 1.2z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoTag;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1113 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoTelescope = function GoTelescope(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm5 16.5c1.2-0.3 8.9-2.3 8.9-2.3 0 0.3-0.1 0.8-0.1 0.8 0 2.7 2 5 5 5s5-2.3 5-5c0-0.5-0.3-0.9-0.7-1.3l1.9 0.1s0.3-0.1 1.2-0.3c-2 0.6-4.2-1.2-4.9-3.9s0.3-5.2 2.3-5.8c-0.9 0.3-1.2 0.3-1.2 0.3l-6.5 4.3c-1.4 0.4-2.2 1.8-1.8 3.2 0 0.3 0.2 0.6 0.4 0.9-0.2 0.4-0.4 1-0.5 1.5-1.1 0-2-0.7-2.4-1.8-0.3-1.3 0.5-2.7 1.8-3l-9.6 2.5c-1.3 0.4-2.1 1.7-1.7 3s1.6 2.1 2.8 1.8z m16.3 6h-5v2.5l-12.5 12.5h5l7.5-5v5h5v-5l7.5 5h5l-12.5-12.5v-2.5z m16.8-17.5c-0.7-2.7-2.7-4.3-4.8-3.7-2.7 0.7-3.8 1-7.2 1.9-2 0.6-3.1 3.2-2.4 5.8s2.9 4.5 4.9 4c3.4-0.9 4.5-1.3 7.2-2 2-0.5 3-3.3 2.3-6z m-2.7 3.5c-0.7 0.2-1.7-0.6-2-2s-0.2-2.6 0.5-2.7 1.6 0.7 2 2 0.1 2.6-0.5 2.7z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoTelescope;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1114 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoTerminal = function GoTerminal(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm35 5h-30c-1.4 0-2.5 1.1-2.5 2.5v25c0 1.3 1.1 2.5 2.5 2.5h30c1.3 0 2.5-1.2 2.5-2.5v-25c0-1.4-1.2-2.5-2.5-2.5z m-27.5 17.5l5-5-5-5 2.5-2.5 7.5 7.5-7.5 7.5-2.5-2.5z m20 2.5h-10v-2.5h10v2.5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoTerminal;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1115 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoThreeBars = function GoThreeBars(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm5 7.5v5h30v-5h-30z m0 15h30v-5h-30v5z m0 10h30v-5h-30v5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoThreeBars;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1116 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoTools = function GoTools(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm11.2 18.2c0.7 0.6 3.2 3.3 3.2 3.3l1.4-1.5-2.2-2.2 4.2-4.5s-1.9-1.9-1.1-1.1c0.8-3 0.1-6.3-2.1-8.6-2.3-2.4-5.4-3.1-8.3-2.3l4.8 5-1.2 4.9-4.8 1.3-4.8-5c-0.8 2.9 0 6.2 2.2 8.5 2.4 2.4 5.7 3.2 8.7 2.2z m16.1 4.8l-5.8 5.8 9.6 9.9c0.8 0.8 1.8 1.2 2.8 1.2 1 0 2.1-0.4 2.9-1.2 1.5-1.6 1.5-4.2 0-5.9l-9.5-9.8z m12.7-16.7l-6.1-6.3-18.1 18.6 2.2 2.3-10.8 11.2-2.4 1.3-3.5 5.7 0.9 0.9 5.5-3.6 1.3-2.6 10.8-11.1 2.2 2.3 18-18.7z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoTools;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1117 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoTrashcan = function GoTrashcan(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm32.5 5h-10v-1.2c0-0.7-0.6-1.3-1.2-1.3s-1.3 0.6-1.3 1.3v1.2h-10c-1.4 0-2.5 1.1-2.5 2.5v2.5c0 1.4 1.1 2.5 2.5 2.5v22.5c0 1.4 1.1 2.5 2.5 2.5h17.5c1.4 0 2.5-1.1 2.5-2.5v-22.5c1.4 0 2.5-1.1 2.5-2.5v-2.5c0-1.4-1.1-2.5-2.5-2.5z m-2.5 28.8c0 0.6-0.6 1.2-1.2 1.2h-15c-0.7 0-1.3-0.6-1.3-1.2v-21.3h2.5v18.8c0 0.6 0.6 1.2 1.3 1.2s1.2-0.6 1.2-1.2l0-18.8h2.5v18.8c0 0.6 0.6 1.2 1.3 1.2s1.2-0.6 1.2-1.2l0-18.8h2.5l0 18.8c0 0.6 0.6 1.2 1.3 1.2s1.2-0.6 1.2-1.2v-18.8h2.5v21.3z m2.5-24.4c0 0.3-0.3 0.6-0.6 0.6h-21.3c-0.3 0-0.6-0.3-0.6-0.6v-1.3c0-0.3 0.3-0.6 0.6-0.6h21.3c0.3 0 0.6 0.3 0.6 0.6v1.3z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoTrashcan;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1118 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoTriangleDown = function GoTriangleDown(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm5 15l15 15 15-15h-30z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoTriangleDown;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1119 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoTriangleLeft = function GoTriangleLeft(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm12.5 20l15 15v-30l-15 15z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoTriangleLeft;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1120 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoTriangleRight = function GoTriangleRight(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm12.5 5l15 15-15 15v-30z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoTriangleRight;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1121 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoTriangleUp = function GoTriangleUp(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm20 10l-15 15h30l-15-15z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoTriangleUp;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1122 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoUnfold = function GoUnfold(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm17.5 15h5v-7.5h5l-7.5-7.5-7.5 7.5h5v7.5z m7.5-5v2.5h8.8l-5 5h-17.5l-5-5h8.7v-2.5h-12.5v2.5l6.3 6.3-6.3 6.2v2.5h12.5v-2.5h-8.7l5-5h17.5l5 5h-8.8v2.5h12.5v-2.5l-6.2-6.2 6.2-6.3v-2.5h-12.5z m-2.5 12.5h-5v7.5h-5l7.5 7.5 7.5-7.5h-5v-7.5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoUnfold;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1123 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoUnmute = function GoUnmute(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm7.5 15h-5v10h5l10 7.5h2.5v-25h-2.5l-10 7.5z m16 1.5c-0.5-0.5-1.2-0.5-1.7 0s-0.5 1.2 0 1.7c0.9 1 0.9 2.6 0 3.6-0.5 0.5-0.5 1.2 0 1.7s1.2 0.5 1.7 0c2-1.9 2-5.1 0-7z m3.6-3.6c-0.5-0.5-1.3-0.5-1.8 0s-0.5 1.3 0 1.8c2.9 2.9 2.9 7.7 0 10.6-0.5 0.5-0.5 1.3 0 1.8s1.3 0.5 1.8 0c3.9-3.9 3.9-10.3 0-14.2z m3.5-3.5c-0.5-0.5-1.3-0.5-1.8 0s-0.4 1.3 0 1.8c4.9 4.8 4.9 12.8 0 17.6-0.4 0.5-0.4 1.3 0 1.8s1.3 0.5 1.8 0c5.9-5.9 5.9-15.3 0-21.2z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoUnmute;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1124 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoVersions = function GoVersions(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm2.5 27.5h5v-2.5h-2.5v-10h2.5v-2.5h-5v15z m15-20v25h20v-25h-20z m15 20h-10v-15h10v15z m-22.5 2.5h5v-2.5h-2.5v-15h2.5v-2.5h-5v20z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoVersions;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1125 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoX = function GoX(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm32.5 12.5l-5-5-7.5 7.5-7.5-7.5-5 5 7.5 7.5-7.5 7.5 5 5 7.5-7.5 7.5 7.5 5-5-7.5-7.5 7.5-7.5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoX;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1126 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactIconBase = __webpack_require__(301);
+	
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var GoZap = function GoZap(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm32.5 17.5h-10l7.5-17.5-22.5 22.5h10l-7.5 17.5 22.5-22.5z' })
+	        )
+	    );
+	};
+	
+	exports.default = GoZap;
 	module.exports = exports['default'];
 
 /***/ }

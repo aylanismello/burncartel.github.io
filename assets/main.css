@@ -1,6 +1,13 @@
 body {
   background: whitesmoke; }
 
+.login-out-container {
+  width: 200px; }
+  .login-out-container .login-out-img {
+    width: 100%;
+    height: auto;
+    max-height: 35px; }
+
 .navbar-brand .logo-container {
   width: 7em; }
   .navbar-brand .logo-container img {

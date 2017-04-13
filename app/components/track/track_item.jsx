@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
-
+import { GoFlame } from 'react-icons/lib/go';
 
 const TrackItem = ({ track, handleTrackClick, playing, trackId, trackLoaded, trackIdx }) => {
 	const numCurators = track.curators.length;
@@ -48,11 +48,20 @@ const TrackItem = ({ track, handleTrackClick, playing, trackId, trackLoaded, tra
 							<span>Selected by {curatorsStr} </span>
 
 							<div className="track-item-icons">
-								<div onClick={() => alert('u have decreed this sick af')} className="track-item-icon-container">
+								<div onClick={() => console.log('u have decreed this sick af')}
+									className="track-item-icon-container">
+									<GoFlame
+										size={50}
+										color='orange'
+										className='track-item-icon'
+									/>
+								</div>
+
+								{/* <div onClick={() => alert('u have decreed this sick af')} className="track-item-icon-container">
 									<img
 									className="track-item-icon"
 									src="http://pix.iemoji.com/images/emoji/apple/ios-9/256/fire.png"/>
-								</div>
+								</div> */}
 
 								<div className="track-item-icon">
 									<a href={track.permalink_url} target="_blank">

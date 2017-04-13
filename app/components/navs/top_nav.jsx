@@ -4,17 +4,17 @@ import React from 'react';
 const TopNav = ({ currentUser, logoutCurrentUser, receiveCurrentUser }) => {
 
 	let fbButton = null;
-	let buttonText;
+	let buttonImgSrc;
 	let facebookLoginOut;
 
 	if(currentUser.uid) {
-		buttonText = 'LOGOUT';
+		buttonImgSrc = '../../assets/logout_button.png';
 		facebookLoginOut = () => {
 			FB.logout();
 			logoutCurrentUser();
 		};
 	} else {
-		buttonText = 'LOGIN';
+		buttonImgSrc = '../../assets/fb_login.png';
 		let data = {};
 		facebookLoginOut = () => {
 			FB.login(response => {
@@ -35,15 +35,9 @@ const TopNav = ({ currentUser, logoutCurrentUser, receiveCurrentUser }) => {
 	            },
 	            data,
 	            success: (sux) => {
-
 	              receiveCurrentUser(sux);
-	              debugger;
-	              // set your state here
-
-	              console.log(sux);
 	            },
 	            error: (err) => {
-	              debugger;
 	              console.log(err);
 	            }
 	          });
@@ -74,36 +68,16 @@ const TopNav = ({ currentUser, logoutCurrentUser, receiveCurrentUser }) => {
 
 
 
-			<div id="user-widget">
+			<div className="login-out-container">
 
-				<button
+				<img
+					className="login-out-img"
 					onClick={() => facebookLoginOut()}
-					>
-						{ buttonText }
-					</button>
+					src={buttonImgSrc}
+				/>
 
 			</div>
 
-			<div className="collapse navbar-collapse" id="navbarCollapse">
-
-					{/* <ul className="navbar-nav mr-auto">
-					<li className="nav-item active">
-						<a className="nav-link" href="#">Home <span className="sr-only">(current)</span></a>
-					</li>
-					<li className="nav-item">
-						<a className="nav-link" href="#">Link</a>
-					</li>
-					<li className="nav-item">
-						<a className="nav-link disabled" href="#">Disabled</a>
-					</li>
-				</ul> */}
-
-				{/* <form className="form-inline mt-2 mt-md-0">
-					<input className="form-control mr-sm-2" type="text" placeholder="Search"/>
-					<button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-				</form> */}
-
-			</div>
 
 		</nav>
 

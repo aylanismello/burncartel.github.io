@@ -3,12 +3,13 @@ import { getUserFromTracks } from '../../selectors/user_selector';
 import { updateFilters } from '../../actions/feed_actions';
 import UserShow from './user_show';
 
+
 // maybe use selectors here? this is weird.
 const mapStateToProps = (state, ownProps) => {
 	return {
 		id: ownProps.params.id,
 		user: getUserFromTracks(state)
-	}
+	};
 };
 
 const mapDispatchToProps = (dispatch) => ({
