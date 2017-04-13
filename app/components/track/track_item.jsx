@@ -2,7 +2,8 @@ import React from 'react';
 import { Link } from 'react-router';
 import { GoFlame } from 'react-icons/lib/go';
 
-const TrackItem = ({ track, handleTrackClick, playing, trackId, trackLoaded, trackIdx }) => {
+const TrackItem = ({ track, handleTrackClick, playing,
+	trackId, trackLoaded, trackIdx, isLoggedIn, loginFB }) => {
 	const numCurators = track.curators.length;
 	const curatorWord = (numCurators <= 1 ? 'curator' : 'curators');
 	const curatorsStr = `${numCurators} ${curatorWord}`
@@ -48,7 +49,16 @@ const TrackItem = ({ track, handleTrackClick, playing, trackId, trackLoaded, tra
 							<span>Selected by {curatorsStr} </span>
 
 							<div className="track-item-icons">
-								<div onClick={() => console.log('u have decreed this sick af')}
+								<div onClick={() => {
+									if(!isLoggedIn) {
+										loginFB();
+										// on successful login, like track!
+										// ah but state will change, this will rerender
+										// and other condition here's code will probs run
+									} else {
+										console.log('redux cycle POST request to like track!');
+									}
+								}}
 									className="track-item-icon-container">
 									<GoFlame
 										size={50}

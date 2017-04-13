@@ -53,7 +53,6 @@
 	
 	document.addEventListener('DOMContentLoaded', function () {
 	  (0, _login_api.connectFB)();
-	  debugger;
 	  var store = (0, _store2.default)();
 	  var root = document.getElementById('root');
 	  _reactDom2.default.render(_react2.default.createElement(_root2.default, { store: store }), root);
@@ -39203,7 +39202,8 @@
 
 	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _reactRedux = __webpack_require__(180);
 	var _feed = __webpack_require__(276);var _feed2 = _interopRequireDefault(_feed);
-	var _feed_actions = __webpack_require__(273);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+	var _feed_actions = __webpack_require__(273);
+	var _user_actions = __webpack_require__(933);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 	
 	var mapStateToProps = function mapStateToProps(state, ownProps) {return {
 			tracks: state.feed.tracks,
@@ -39212,14 +39212,16 @@
 			loadingFeed: state.feed.loadingFeed,
 			trackId: state.feed.trackId,
 			playing: state.player.playing,
-			trackLoaded: state.player.trackLoaded };};
+			trackLoaded: state.player.trackLoaded,
+			isLoggedIn: state.user.currentUser.uid ? true : false };};
 	
 	
 	var mapDispatchToProps = function mapDispatchToProps(dispatch) {return {
 			fetchTracks: function fetchTracks(filters, isNewpage) {return dispatch((0, _feed_actions.fetchTracks)(filters, isNewpage));},
 			handleTrackClick: function handleTrackClick(trackId) {
 				dispatch((0, _feed_actions.handleTrackClick)(trackId));
-			} };};exports.default =
+			},
+			loginFB: function loginFB() {return dispatch((0, _user_actions.loginFB)());} };};exports.default =
 	
 	
 	(0, _reactRedux.connect)(
@@ -39236,7 +39238,9 @@
 	var _track_item = __webpack_require__(279);var _track_item2 = _interopRequireDefault(_track_item);
 	var _loading = __webpack_require__(280);var _loading2 = _interopRequireDefault(_loading);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 	
-	var Feed = function Feed(_ref) {var tracks = _ref.tracks,filters = _ref.filters,trackLoaded = _ref.trackLoaded,handleTrackClick = _ref.handleTrackClick,loadingFeed = _ref.loadingFeed,trackId = _ref.trackId,playing = _ref.playing,fetchTracks = _ref.fetchTracks;
+	var Feed = function Feed(_ref)
+	
+	{var tracks = _ref.tracks,filters = _ref.filters,trackLoaded = _ref.trackLoaded,handleTrackClick = _ref.handleTrackClick,loadingFeed = _ref.loadingFeed,trackId = _ref.trackId,playing = _ref.playing,fetchTracks = _ref.fetchTracks,isLoggedIn = _ref.isLoggedIn,loginFB = _ref.loginFB;
 		var childElements = void 0;
 	
 		if (loadingFeed) {
@@ -39251,6 +39255,8 @@
 						playing: playing,
 						trackLoaded: trackLoaded,
 						handleTrackClick: handleTrackClick,
+						isLoggedIn: isLoggedIn,
+						loginFB: loginFB,
 						key: idx }));});
 	
 	
@@ -39641,7 +39647,8 @@
 	var _reactRouter = __webpack_require__(211);
 	var _go = __webpack_require__(949);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 	
-	var TrackItem = function TrackItem(_ref) {var track = _ref.track,handleTrackClick = _ref.handleTrackClick,playing = _ref.playing,trackId = _ref.trackId,trackLoaded = _ref.trackLoaded,trackIdx = _ref.trackIdx;
+	var TrackItem = function TrackItem(_ref)
+	{var track = _ref.track,handleTrackClick = _ref.handleTrackClick,playing = _ref.playing,trackId = _ref.trackId,trackLoaded = _ref.trackLoaded,trackIdx = _ref.trackIdx,isLoggedIn = _ref.isLoggedIn,loginFB = _ref.loginFB;
 		var numCurators = track.curators.length;
 		var curatorWord = numCurators <= 1 ? 'curator' : 'curators';
 		var curatorsStr = numCurators + ' ' + curatorWord;
@@ -39687,7 +39694,16 @@
 							_react2.default.createElement('span', null, 'Selected by ', curatorsStr, ' '),
 	
 							_react2.default.createElement('div', { className: 'track-item-icons' },
-								_react2.default.createElement('div', { onClick: function onClick() {return console.log('u have decreed this sick af');},
+								_react2.default.createElement('div', { onClick: function onClick() {
+											if (!isLoggedIn) {
+												loginFB();
+												// on successful login, like track!
+												// ah but state will change, this will rerender
+												// and other condition here's code will probs run
+											} else {
+												console.log('redux cycle POST request to like track!');
+											}
+										},
 										className: 'track-item-icon-container' },
 									_react2.default.createElement(_go.GoFlame, {
 										size: 50,

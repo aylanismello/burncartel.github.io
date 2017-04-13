@@ -7,7 +7,6 @@ import { receiveCurrentUser } from './actions/user_actions';
 
 document.addEventListener('DOMContentLoaded', () => {
   connectFB();
-  debugger;
   const store = configureStore();
   const root = document.getElementById('root');
   ReactDOM.render(<Root store={store} />, root);

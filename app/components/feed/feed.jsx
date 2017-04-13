@@ -4,7 +4,9 @@ import VisibilitySensor from 'react-visibility-sensor';
 import TrackItem from '../track/track_item';
 import Loading from '../loading';
 
-const Feed = ({ tracks, filters, trackLoaded, handleTrackClick, loadingFeed, trackId, playing, fetchTracks  }) => {
+const Feed = ({ tracks, filters, trackLoaded,
+	handleTrackClick, loadingFeed, trackId,
+	playing, fetchTracks, isLoggedIn, loginFB  }) => {
 	let childElements;
 
 	if(loadingFeed) {
@@ -19,6 +21,8 @@ const Feed = ({ tracks, filters, trackLoaded, handleTrackClick, loadingFeed, tra
 				playing={playing}
 				trackLoaded={trackLoaded}
 				handleTrackClick={handleTrackClick}
+				isLoggedIn={isLoggedIn}
+				loginFB={loginFB}
 				key={idx}
 			/>
 		));
