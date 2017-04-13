@@ -48,8 +48,8 @@
 	var _react = __webpack_require__(2);var _react2 = _interopRequireDefault(_react);
 	var _reactDom = __webpack_require__(33);var _reactDom2 = _interopRequireDefault(_reactDom);
 	var _root = __webpack_require__(179);var _root2 = _interopRequireDefault(_root);
-	var _store = __webpack_require__(933);var _store2 = _interopRequireDefault(_store);
-	var _user_actions = __webpack_require__(948);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+	var _store = __webpack_require__(934);var _store2 = _interopRequireDefault(_store);
+	var _user_actions = __webpack_require__(933);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 	
 	document.addEventListener('DOMContentLoaded', function () {
 	
@@ -57414,16 +57414,20 @@
 
 	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _reactRedux = __webpack_require__(180);
 	var _app = __webpack_require__(296);var _app2 = _interopRequireDefault(_app);
-	var _feed_actions = __webpack_require__(273);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+	var _feed_actions = __webpack_require__(273);
+	var _user_actions = __webpack_require__(933);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 	
 	
 	var mapStateToProps = function mapStateToProps(state, ownProps) {return {
 			feed: state.feed,
-			filters: state.feed.filters };};
+			filters: state.feed.filters,
+			currentUser: state.user };};
 	
 	
 	var mapDispatchToProps = function mapDispatchToProps(dispatch) {return {
-			fetchTracks: function fetchTracks(filters) {return dispatch((0, _feed_actions.fetchTracks)(filters));} };};exports.default =
+			fetchTracks: function fetchTracks(filters) {return dispatch((0, _feed_actions.fetchTracks)(filters));},
+			logoutCurrentUser: function logoutCurrentUser() {return dispatch((0, _user_actions.logoutCurrentUser)());},
+			receiveCurrentUser: function receiveCurrentUser(currentUser) {return dispatch((0, _user_actions.receiveCurrentUser)(currentUser));} };};exports.default =
 	
 	
 	(0, _reactRedux.connect)(
@@ -57461,7 +57465,11 @@
 	      return (
 	        _react2.default.createElement('div', null,
 	
-	          _react2.default.createElement(_top_nav2.default, null),
+	          _react2.default.createElement(_top_nav2.default, {
+	            currentUser: this.props.currentUser,
+	            logoutCurrentUser: this.props.logoutCurrentUser,
+	            receiveCurrentUser: this.props.receiveCurrentUser }),
+	
 	          _react2.default.createElement('div', { className: 'container' },
 	            this.props.children),
 	
@@ -57482,60 +57490,63 @@
 	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _jquery = __webpack_require__(1);var _jquery2 = _interopRequireDefault(_jquery);
 	var _react = __webpack_require__(2);var _react2 = _interopRequireDefault(_react);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 	
-	var TopNav = function TopNav() {
+	var TopNav = function TopNav(_ref) {var currentUser = _ref.currentUser,logoutCurrentUser = _ref.logoutCurrentUser,receiveCurrentUser = _ref.receiveCurrentUser;
 	
 		var fbButton = null;
+		var buttonText = void 0;
+		var facebookLoginOut = void 0;
 	
-		// https://github.com/mkdynamic/omniauth-facebook/blob/3b084957c0e8fd8a59dd9c44293a02d4ca77835a/lib/omniauth/strategies/facebook.rb
-		var loginFB = function loginFB() {
-			// FB.getLoginStatus((response) => {
-			//   if (response.status === 'connected') {
-			//     console.log('Logged in.');
-			// 		let data = {};
-			//
-			// 		FB.api('/me', {fields: 'first_name,last_name,email'}, (response) => {
-			// 			console.log(response);
-			// 			data['last_name'] = response.last_name;
-			// 			data['first_name'] = response.first_name;
-			// 			data['id'] = response.id;
-			// 			data['email'] = response.email;
-			//
-			// 			$.ajax({
-			// 				url: 'http://localhost:3000/yo',
-			// 				method: 'POST',
-			// 				xhrFields: {
-			// 					withCredentials: true
-			// 				},
-			// 				data,
-			// 				success: (sux) => {
-			// 					debugger;
-			// 					// set your state here
-			// 					console.log(sux);
-			// 				},
-			// 				error: (err) => {
-			// 					debugger;
-			// 					console.log(err);
-			// 				}
-			// 			});
-			//
-			//
-			// 		});
-			//   } else {
-			// 		FB.login(response => {
-			// 			if(response.authResponse.accessToken) {
-			// 				// let data = {}
-			// 				FB.api('/me', {fields: 'last_name,email'}, function(response) {
-			// 					console.log(response);
-			// 					data['last_name'] = response.last_name
-			// 				});
-			// 				console.log('logged in');
-			// 			} else {
-			// 				console.log('not logged in');
-			// 			}
-			// 		}, {scope: 'public_profile,email'});
-			//   }
-			// });
-		};
+		if (currentUser.uid) {
+			buttonText = 'LOGOUT';
+			facebookLoginOut = function facebookLoginOut() {
+				FB.logout();
+				logoutCurrentUser();
+			};
+		} else {(function () {
+				buttonText = 'LOGIN';
+				var data = {};
+				facebookLoginOut = function facebookLoginOut() {
+					FB.login(function (response) {
+						if (response.authResponse.accessToken) {
+							// let data = {}
+							FB.api('/me', { fields: 'first_name,last_name,email' }, function (response) {
+								console.log(response);
+								data['last_name'] = response.last_name;
+								data['first_name'] = response.first_name;
+								data['id'] = response.id;
+								data['email'] = response.email;
+	
+								_jquery2.default.ajax({
+									url: 'http://localhost:3000/yo',
+									method: 'POST',
+									xhrFields: {
+										withCredentials: true },
+	
+									data: data,
+									success: function success(sux) {
+	
+										receiveCurrentUser(sux);
+										debugger;
+										// set your state here
+	
+										console.log(sux);
+									},
+									error: function error(err) {
+										debugger;
+										console.log(err);
+									} });
+	
+							});
+	
+							console.log('logged in');
+						} else {
+							console.log('not logged in');
+						}
+	
+					});
+					// });
+				};})();
+		}
 	
 	
 		return (
@@ -57555,9 +57566,9 @@
 				_react2.default.createElement('div', { id: 'user-widget' },
 	
 					_react2.default.createElement('button', {
-							onClick: function onClick() {return loginFB();} }, 'LOGIN')),
+							onClick: function onClick() {return facebookLoginOut();} },
 	
-	
+						buttonText)),
 	
 	
 	
@@ -84612,11 +84623,28 @@
 
 /***/ },
 /* 933 */
+/***/ function(module, exports) {
+
+	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var userConstants = exports.userConstants = {
+	  RECEIVE_CURRENT_USER: 'RECEIVE_CURRENT_USER',
+	  LOGOUT_CURRENT_USER: 'LOGOUT_CURRENT_USER' };
+	
+	
+	var receiveCurrentUser = exports.receiveCurrentUser = function receiveCurrentUser(currentUser) {return {
+	    type: userConstants.RECEIVE_CURRENT_USER,
+	    currentUser: currentUser };};
+	
+	
+	var logoutCurrentUser = exports.logoutCurrentUser = function logoutCurrentUser() {return {
+	    type: userConstants.LOGOUT_CURRENT_USER };};
+
+/***/ },
+/* 934 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _redux = __webpack_require__(187);
-	var _root_reducer = __webpack_require__(934);var _root_reducer2 = _interopRequireDefault(_root_reducer);
-	var _master_middleware = __webpack_require__(938);var _master_middleware2 = _interopRequireDefault(_master_middleware);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+	var _root_reducer = __webpack_require__(935);var _root_reducer2 = _interopRequireDefault(_root_reducer);
+	var _master_middleware = __webpack_require__(939);var _master_middleware2 = _interopRequireDefault(_master_middleware);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 	
 	var configureStore = function configureStore() {var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};return (
 	    (0, _redux.createStore)(_root_reducer2.default,
@@ -84629,13 +84657,13 @@
 	configureStore;
 
 /***/ },
-/* 934 */
+/* 935 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _redux = __webpack_require__(187);
-	var _feed_reducer = __webpack_require__(935);var _feed_reducer2 = _interopRequireDefault(_feed_reducer);
-	var _player_reducer = __webpack_require__(936);var _player_reducer2 = _interopRequireDefault(_player_reducer);
-	var _user_reducer = __webpack_require__(937);var _user_reducer2 = _interopRequireDefault(_user_reducer);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+	var _feed_reducer = __webpack_require__(936);var _feed_reducer2 = _interopRequireDefault(_feed_reducer);
+	var _player_reducer = __webpack_require__(937);var _player_reducer2 = _interopRequireDefault(_player_reducer);
+	var _user_reducer = __webpack_require__(938);var _user_reducer2 = _interopRequireDefault(_user_reducer);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 	
 	var RootReducer = (0, _redux.combineReducers)({
 	  feed: _feed_reducer2.default,
@@ -84646,7 +84674,7 @@
 	RootReducer;
 
 /***/ },
-/* 935 */
+/* 936 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {return typeof obj;} : function (obj) {return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;};var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};var _feed_actions = __webpack_require__(273);function _toConsumableArray(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;} else {return Array.from(arr);}}
@@ -84700,7 +84728,7 @@
 	FeedReducer;
 
 /***/ },
-/* 936 */
+/* 937 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};var _player_actions = __webpack_require__(932);
@@ -84735,10 +84763,10 @@
 	PlayerReducer;
 
 /***/ },
-/* 937 */
+/* 938 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _user_actions = __webpack_require__(948);
+	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _user_actions = __webpack_require__(933);
 	
 	var initialState = Object.freeze({
 	  handle: null,
@@ -84761,13 +84789,13 @@
 	UserReducer;
 
 /***/ },
-/* 938 */
+/* 939 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(process) {'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _feed_middleware = __webpack_require__(939);var _feed_middleware2 = _interopRequireDefault(_feed_middleware);
-	var _player_middleware = __webpack_require__(941);var _player_middleware2 = _interopRequireDefault(_player_middleware);
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _feed_middleware = __webpack_require__(940);var _feed_middleware2 = _interopRequireDefault(_feed_middleware);
+	var _player_middleware = __webpack_require__(942);var _player_middleware2 = _interopRequireDefault(_player_middleware);
 	var _redux = __webpack_require__(187);
-	var _reduxLogger = __webpack_require__(942);var _reduxLogger2 = _interopRequireDefault(_reduxLogger);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+	var _reduxLogger = __webpack_require__(943);var _reduxLogger2 = _interopRequireDefault(_reduxLogger);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 	
 	var myMiddlewares = [_feed_middleware2.default, _player_middleware2.default];
 	
@@ -84785,7 +84813,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 939 */
+/* 940 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};var _feed_actions = __webpack_require__(273);
@@ -84801,7 +84829,7 @@
 	
 	
 	
-	var _bc_api = __webpack_require__(940);
+	var _bc_api = __webpack_require__(941);
 	
 	var FeedMiddleware = function FeedMiddleware(_ref) {var getState = _ref.getState,dispatch = _ref.dispatch;return function (next) {return function (action) {
 				switch (action.type) {
@@ -84845,7 +84873,7 @@
 	FeedMiddleware;
 
 /***/ },
-/* 940 */
+/* 941 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.getTracks = undefined;var _jquery = __webpack_require__(1);var _jquery2 = _interopRequireDefault(_jquery);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
@@ -84872,7 +84900,7 @@
 	};
 
 /***/ },
-/* 941 */
+/* 942 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _player_actions = __webpack_require__(932);
@@ -84896,7 +84924,7 @@
 	PlayerMiddleware;
 
 /***/ },
-/* 942 */
+/* 943 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -84907,11 +84935,11 @@
 	  value: true
 	});
 	
-	var _core = __webpack_require__(943);
+	var _core = __webpack_require__(944);
 	
-	var _helpers = __webpack_require__(944);
+	var _helpers = __webpack_require__(945);
 	
-	var _defaults = __webpack_require__(947);
+	var _defaults = __webpack_require__(948);
 	
 	var _defaults2 = _interopRequireDefault(_defaults);
 	
@@ -85014,7 +85042,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 943 */
+/* 944 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -85024,9 +85052,9 @@
 	});
 	exports.printBuffer = printBuffer;
 	
-	var _helpers = __webpack_require__(944);
+	var _helpers = __webpack_require__(945);
 	
-	var _diff = __webpack_require__(945);
+	var _diff = __webpack_require__(946);
 	
 	var _diff2 = _interopRequireDefault(_diff);
 	
@@ -85155,7 +85183,7 @@
 	}
 
 /***/ },
-/* 944 */
+/* 945 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -85179,7 +85207,7 @@
 	var timer = exports.timer = typeof performance !== "undefined" && performance !== null && typeof performance.now === "function" ? performance : Date;
 
 /***/ },
-/* 945 */
+/* 946 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -85189,7 +85217,7 @@
 	});
 	exports.default = diffLogger;
 	
-	var _deepDiff = __webpack_require__(946);
+	var _deepDiff = __webpack_require__(947);
 	
 	var _deepDiff2 = _interopRequireDefault(_deepDiff);
 	
@@ -85275,7 +85303,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 946 */
+/* 947 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(global) {/*!
@@ -85704,7 +85732,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 947 */
+/* 948 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -85753,23 +85781,6 @@
 	  transformer: undefined
 	};
 	module.exports = exports['default'];
-
-/***/ },
-/* 948 */
-/***/ function(module, exports) {
-
-	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var userConstants = exports.userConstants = {
-	  RECEIVE_CURRENT_USER: 'RECEIVE_CURRENT_USER',
-	  LOGOUT_CURRENT_USER: 'LOGOUT_CURRENT_USER' };
-	
-	
-	var receiveCurrentUser = exports.receiveCurrentUser = function receiveCurrentUser(currentUser) {return {
-	    type: userConstants.RECEIVE_CURRENT_USER,
-	    currentUser: currentUser };};
-	
-	
-	var logoutCurrentUser = exports.logoutCurrentUser = function logoutCurrentUser() {return {
-	    type: userConstants.LOGOUT_CURRENT_USER };};
 
 /***/ }
 /******/ ]);

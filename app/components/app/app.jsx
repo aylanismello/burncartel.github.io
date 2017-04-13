@@ -25,7 +25,11 @@ class App extends React.Component {
   	return (
   		<div>
 
-      <TopNav />
+      <TopNav
+        currentUser={this.props.currentUser}
+        logoutCurrentUser={this.props.logoutCurrentUser}
+        receiveCurrentUser={this.props.receiveCurrentUser}
+      />
         <div className="container">
           {this.props.children}
         </div>
