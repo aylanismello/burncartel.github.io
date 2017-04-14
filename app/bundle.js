@@ -28977,7 +28977,8 @@
 	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _reactRedux = __webpack_require__(179);
 	var _feed = __webpack_require__(275);var _feed2 = _interopRequireDefault(_feed);
 	var _feed_actions = __webpack_require__(272);
-	var _user_actions = __webpack_require__(459);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+	var _user_actions = __webpack_require__(459);
+	var _track_selector = __webpack_require__(467);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 	
 	var mapStateToProps = function mapStateToProps(state, ownProps) {return {
 			tracks: state.feed.tracks,
@@ -28987,6 +28988,7 @@
 			trackId: state.feed.trackId,
 			playing: state.player.playing,
 			trackLoaded: state.player.trackLoaded,
+			userLikes: (0, _track_selector.getUserTracksHash)(state),
 			isLoggedIn: state.user.currentUser.uid ? true : false };};
 	
 	
@@ -29015,7 +29017,8 @@
 	
 	var Feed = function Feed(_ref)
 	
-	{var tracks = _ref.tracks,filters = _ref.filters,trackLoaded = _ref.trackLoaded,handleTrackClick = _ref.handleTrackClick,loadingFeed = _ref.loadingFeed,trackId = _ref.trackId,playing = _ref.playing,fetchTracks = _ref.fetchTracks,isLoggedIn = _ref.isLoggedIn,loginFB = _ref.loginFB,likeUnlikeTrack = _ref.likeUnlikeTrack;
+	
+	{var tracks = _ref.tracks,filters = _ref.filters,trackLoaded = _ref.trackLoaded,handleTrackClick = _ref.handleTrackClick,loadingFeed = _ref.loadingFeed,trackId = _ref.trackId,playing = _ref.playing,fetchTracks = _ref.fetchTracks,isLoggedIn = _ref.isLoggedIn,loginFB = _ref.loginFB,likeUnlikeTrack = _ref.likeUnlikeTrack,userLikes = _ref.userLikes;
 		var childElements = void 0;
 	
 		if (loadingFeed) {
@@ -29033,7 +29036,8 @@
 						isLoggedIn: isLoggedIn,
 						loginFB: loginFB,
 						key: idx,
-						likeUnlikeTrack: likeUnlikeTrack }));});
+						likeUnlikeTrack: likeUnlikeTrack,
+						isUserLike: userLikes[track.id] === undefined ? false : true }));});
 	
 	
 	
@@ -29424,7 +29428,8 @@
 	var _go = __webpack_require__(279);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 	
 	var TrackItem = function TrackItem(_ref)
-	{var track = _ref.track,handleTrackClick = _ref.handleTrackClick,playing = _ref.playing,trackId = _ref.trackId,trackLoaded = _ref.trackLoaded,trackIdx = _ref.trackIdx,isLoggedIn = _ref.isLoggedIn,loginFB = _ref.loginFB,likeUnlikeTrack = _ref.likeUnlikeTrack;
+	
+	{var track = _ref.track,handleTrackClick = _ref.handleTrackClick,playing = _ref.playing,trackId = _ref.trackId,trackLoaded = _ref.trackLoaded,trackIdx = _ref.trackIdx,isLoggedIn = _ref.isLoggedIn,loginFB = _ref.loginFB,likeUnlikeTrack = _ref.likeUnlikeTrack,isUserLike = _ref.isUserLike;
 		var numCurators = track.curators.length;
 		var curatorWord = numCurators <= 1 ? 'curator' : 'curators';
 		var curatorsStr = numCurators + ' ' + curatorWord;
@@ -29470,7 +29475,8 @@
 							_react2.default.createElement('span', null, 'Selected by ', curatorsStr, ' '),
 	
 							_react2.default.createElement('div', { className: 'track-item-icons' },
-								_react2.default.createElement('div', { onClick: function onClick() {
+								_react2.default.createElement('div', {
+										onClick: function onClick() {
 											if (!isLoggedIn) {
 												loginFB();
 	
@@ -29483,13 +29489,12 @@
 											} else {
 												// assuming track has not already been liked
 												likeUnlikeTrack(track.id);
-												console.log('redux cycle POST request to like track!');
 											}
 										},
 										className: 'track-item-icon-container' },
 									_react2.default.createElement(_go.GoFlame, {
 										size: 50,
-										color: 'orange',
+										color: isUserLike ? 'orange' : 'gray',
 										className: 'track-item-icon' }))))))));
 	
 	

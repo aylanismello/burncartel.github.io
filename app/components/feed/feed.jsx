@@ -6,7 +6,8 @@ import Loading from '../loading';
 
 const Feed = ({ tracks, filters, trackLoaded,
 	handleTrackClick, loadingFeed, trackId,
-	playing, fetchTracks, isLoggedIn, loginFB, likeUnlikeTrack }) => {
+	playing, fetchTracks, isLoggedIn, loginFB,
+	likeUnlikeTrack, userLikes }) => {
 	let childElements;
 
 	if(loadingFeed) {
@@ -25,6 +26,7 @@ const Feed = ({ tracks, filters, trackLoaded,
 				loginFB={loginFB}
 				key={idx}
 				likeUnlikeTrack={likeUnlikeTrack}
+				isUserLike={userLikes[track.id] === undefined ? false : true }
 			/>
 		));
 
