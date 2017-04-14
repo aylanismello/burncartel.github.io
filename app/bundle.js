@@ -23261,6 +23261,7 @@
 	var _burn_cartel_curated = __webpack_require__(462);var _burn_cartel_curated2 = _interopRequireDefault(_burn_cartel_curated);
 	var _track_show_container = __webpack_require__(463);var _track_show_container2 = _interopRequireDefault(_track_show_container);
 	var _user_show_container = __webpack_require__(470);var _user_show_container2 = _interopRequireDefault(_user_show_container);
+	var _likes_show_container = __webpack_require__(1130);var _likes_show_container2 = _interopRequireDefault(_likes_show_container);
 	var _app_container = __webpack_require__(474);var _app_container2 = _interopRequireDefault(_app_container);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}var
 	
 	
@@ -23274,6 +23275,7 @@
 	            _react2.default.createElement(_reactRouter.IndexRoute, { component: _home_container2.default }),
 	            _react2.default.createElement(_reactRouter.Route, { path: '/tracks/:id', component: _track_show_container2.default }),
 	            _react2.default.createElement(_reactRouter.Route, { path: '/users/:id', component: _user_show_container2.default }),
+	            _react2.default.createElement(_reactRouter.Route, { path: '/likes/:id', component: _likes_show_container2.default }),
 	            _react2.default.createElement(_reactRouter.Route, { path: '/curated', component: _burn_cartel_curated2.default }))));
 	
 	
@@ -54840,7 +54842,9 @@
 	
 	
 	
-	          _react2.default.createElement(_bottom_nav2.default, null)));
+	          _react2.default.createElement(_bottom_nav2.default, {
+	            currentUserId: this.props.currentUser.id })));
+	
 	
 	
 	    } }]);return App;}(_react2.default.Component);exports.default =
@@ -65141,50 +65145,46 @@
 	
 	
 	
-	var BottomNavIcons = function BottomNavIcons() {return (
-			_react2.default.createElement('div', { className: 'bottom-nav-icons' },
-				_react2.default.createElement(FontAwesome.FaSoundcloud, {
-					size: 30,
-					color: 'aliceblue',
-					className: 'bc-icon' }),
 	
-				_react2.default.createElement(FontAwesome.FaGlobe, {
-					size: 30,
-					color: 'aliceblue',
-					className: 'bc-icon' }),
+	var BottomNav = function BottomNav(_ref) {var currentUserId = _ref.currentUserId;
+		debugger;
 	
-				_react2.default.createElement(FontAwesome.FaHeart, {
-					size: 30,
-					color: 'aliceblue',
-					className: 'bc-icon' }),
+		var BottomNavIcons = function BottomNavIcons() {return (
+				_react2.default.createElement('div', { className: 'bottom-nav-icons' },
+					_react2.default.createElement(FontAwesome.FaSoundcloud, {
+						size: 30,
+						color: 'aliceblue',
+						className: 'bc-icon' }),
 	
-				_react2.default.createElement(FontAwesome.FaSearch, {
-					size: 30,
-					color: 'aliceblue',
-					className: 'bc-icon' })));};
+					_react2.default.createElement(FontAwesome.FaGlobe, {
+						size: 30,
+						color: 'aliceblue',
+						className: 'bc-icon' }),
+	
+					_react2.default.createElement(_reactRouter.Link, {
+							to: '/likes/' + currentUserId },
+	
+						_react2.default.createElement(FontAwesome.FaHeart, {
+							size: 30,
+							color: 'aliceblue',
+							className: 'bc-icon' })),
+	
+	
+					_react2.default.createElement(FontAwesome.FaSearch, {
+						size: 30,
+						color: 'aliceblue',
+						className: 'bc-icon' })));};
 	
 	
 	
 	
-	var BottomNav = function BottomNav() {
 		return (
 			_react2.default.createElement('nav', { className: 'navbar navbar-toggleable-md navbar-inverse fixed-bottom bg-inverse bc-menu' },
 	
 	
 				_react2.default.createElement(_burn_cartel_player_container2.default, null),
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 				_react2.default.createElement(BottomNavIcons, null)));
-	
 	
 	
 	
@@ -92171,9 +92171,6 @@
 					// for some reason the last tracks from old tracks and new tracks double up
 					return { v: _extends({}, state, { tracks: [].concat(_toConsumableArray(state.tracks), _toConsumableArray(action.tracks.slice(1))) }) };
 				case _feed_actions.feedConstants.UPDATE_FILTERS:
-					// const newFilters = { ...state.filters, ...action.filters } ;
-					// this is because we aren't combining filters!!!
-					// but might break users track feed view...
 					var newFilters = _extends({}, initialState.filters, action.filters);
 					var newState = _extends({}, state, { filters: newFilters });
 					return { v: newState };
@@ -93418,6 +93415,54 @@
 	  transformer: undefined
 	};
 	module.exports = exports['default'];
+
+/***/ },
+/* 1130 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _reactRedux = __webpack_require__(179);
+	var _feed_actions = __webpack_require__(272);
+	var _likes_show = __webpack_require__(1131);var _likes_show2 = _interopRequireDefault(_likes_show);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+	
+	
+	var mapStateToProps = function mapStateToProps(state, ownProps) {
+		debugger;
+		if (ownProps.params.id === undefined) {
+			console.log('SHIT WE DONT HAVE SOMEONE LOGGED IN');
+		}
+	
+		return {};
+	
+	
+	};
+	
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {return {
+			updateFilters: function updateFilters() {return dispatch((0, _feed_actions.updateFilters)());} };};exports.default =
+	
+	
+	(0, _reactRedux.connect)(
+	mapStateToProps,
+	mapDispatchToProps)(_likes_show2.default);
+
+/***/ },
+/* 1131 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _react = __webpack_require__(1);var _react2 = _interopRequireDefault(_react);
+	var _feed_container = __webpack_require__(274);var _feed_container2 = _interopRequireDefault(_feed_container);
+	var _loading = __webpack_require__(458);var _loading2 = _interopRequireDefault(_loading);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+	
+	var LikesShow = function LikesShow(_ref) {var updateFilters = _ref.updateFilters;
+	  return (
+	    _react2.default.createElement('div', { className: 'container user-show' },
+	      _react2.default.createElement(UserBanner, { user: user }),
+	      _react2.default.createElement('h2', null, ' Latest selections '),
+	      _react2.default.createElement(_feed_container2.default, null)));
+	
+	
+	};exports.default =
+	
+	LikesShow;
 
 /***/ }
 /******/ ]);

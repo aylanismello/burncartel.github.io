@@ -44,9 +44,6 @@ const FeedReducer = (state = initialState, action) => {
 			// for some reason the last tracks from old tracks and new tracks double up
 			return { ...state, tracks: [ ...state.tracks, ...action.tracks.slice(1) ] };
 		case feedConstants.UPDATE_FILTERS:
-			// const newFilters = { ...state.filters, ...action.filters } ;
-			// this is because we aren't combining filters!!!
-			// but might break users track feed view...
 			const newFilters = { ...initialState.filters, ...action.filters } ;
 			const newState = { ...state, filters: newFilters };
 			return newState;

@@ -41,7 +41,9 @@ class App extends React.Component {
         </div>
 
 
-      <BottomNav />
+      <BottomNav
+        currentUserId={this.props.currentUser.id}
+      />
 			</div>
       );
     }
