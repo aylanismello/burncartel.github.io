@@ -28989,7 +28989,8 @@
 			playing: state.player.playing,
 			trackLoaded: state.player.trackLoaded,
 			userLikes: (0, _track_selector.getUserTracksHash)(state),
-			isLoggedIn: state.user.currentUser.uid ? true : false };};
+			isLoggedIn: state.user.currentUser.uid ? true : false,
+			likePostInProgress: state.user.likePostInProgress };};
 	
 	
 	var mapDispatchToProps = function mapDispatchToProps(dispatch) {return {
@@ -29018,7 +29019,7 @@
 	var Feed = function Feed(_ref)
 	
 	
-	{var tracks = _ref.tracks,filters = _ref.filters,trackLoaded = _ref.trackLoaded,handleTrackClick = _ref.handleTrackClick,loadingFeed = _ref.loadingFeed,trackId = _ref.trackId,playing = _ref.playing,fetchTracks = _ref.fetchTracks,isLoggedIn = _ref.isLoggedIn,loginFB = _ref.loginFB,likeUnlikeTrack = _ref.likeUnlikeTrack,userLikes = _ref.userLikes;
+	{var tracks = _ref.tracks,filters = _ref.filters,trackLoaded = _ref.trackLoaded,handleTrackClick = _ref.handleTrackClick,loadingFeed = _ref.loadingFeed,trackId = _ref.trackId,playing = _ref.playing,fetchTracks = _ref.fetchTracks,isLoggedIn = _ref.isLoggedIn,loginFB = _ref.loginFB,likeUnlikeTrack = _ref.likeUnlikeTrack,userLikes = _ref.userLikes,likePostInProgress = _ref.likePostInProgress;
 		var childElements = void 0;
 	
 		if (loadingFeed) {
@@ -29036,6 +29037,7 @@
 						isLoggedIn: isLoggedIn,
 						loginFB: loginFB,
 						key: idx,
+						likePostInProgress: likePostInProgress,
 						likeUnlikeTrack: likeUnlikeTrack,
 						isUserLike: userLikes[track.id] === undefined ? false : true }));});
 	
@@ -29429,7 +29431,7 @@
 	
 	var TrackItem = function TrackItem(_ref)
 	
-	{var track = _ref.track,handleTrackClick = _ref.handleTrackClick,playing = _ref.playing,trackId = _ref.trackId,trackLoaded = _ref.trackLoaded,trackIdx = _ref.trackIdx,isLoggedIn = _ref.isLoggedIn,loginFB = _ref.loginFB,likeUnlikeTrack = _ref.likeUnlikeTrack,isUserLike = _ref.isUserLike;
+	{var track = _ref.track,handleTrackClick = _ref.handleTrackClick,playing = _ref.playing,trackId = _ref.trackId,trackLoaded = _ref.trackLoaded,trackIdx = _ref.trackIdx,isLoggedIn = _ref.isLoggedIn,loginFB = _ref.loginFB,likeUnlikeTrack = _ref.likeUnlikeTrack,isUserLike = _ref.isUserLike,likePostInProgress = _ref.likePostInProgress;
 		var numCurators = track.curators.length;
 		var curatorWord = numCurators <= 1 ? 'curator' : 'curators';
 		var curatorsStr = numCurators + ' ' + curatorWord;
@@ -29444,6 +29446,14 @@
 			} else {
 				playIcon = 'https://cdn1.iconfinder.com/data/icons/loading-wait-time/256/loading_wait_time_02-128.png';
 			}
+		}
+	
+		var flameColor = void 0;
+	
+		if (isUserLike) {
+			flameColor = 'orange';
+		} else {
+			flameColor = 'black';
 		}
 	
 		return (
@@ -29479,22 +29489,22 @@
 										onClick: function onClick() {
 											if (!isLoggedIn) {
 												loginFB();
-	
-	
 												// on success callback, like or unlike song
 	
 												// on successful login, like track!
 												// ah but state will change, this will rerender
 												// and other condition here's code will probs run
-											} else {
+											} else if (likePostInProgress) {
 												// assuming track has not already been liked
+												console.log('wait for other like create/detroy action to finish!');
+											} else {
 												likeUnlikeTrack(track.id);
 											}
 										},
 										className: 'track-item-icon-container' },
 									_react2.default.createElement(_go.GoFlame, {
 										size: 50,
-										color: isUserLike ? 'orange' : 'gray',
+										color: flameColor,
 										className: 'track-item-icon' }))))))));
 	
 	
@@ -37050,7 +37060,17 @@
 	  LIKE_TRACK: 'LIKE_TRACK',
 	  UNLIKE_TRACK: 'UNLIKE_TRACK',
 	  UPDATE_LIKED_TRACKS: 'UPDATE_LIKED_TRACKS',
-	  RECEIVE_UNLIKE: 'RECEIVE_UNLIKE' };
+	  RECEIVE_UNLIKE: 'RECEIVE_UNLIKE',
+	  START_LIKE_POST: 'START_LIKE_POST',
+	  END_LIKE_POST: 'END_LIKE_POST' };
+	
+	
+	var endLikePost = exports.endLikePost = function endLikePost() {return {
+	    type: userConstants.END_LIKE_POST };};
+	
+	
+	var startLikePost = exports.startLikePost = function startLikePost() {return {
+	    type: userConstants.START_LIKE_POST };};
 	
 	
 	var updateLikedTracks = exports.updateLikedTracks = function updateLikedTracks(tracks) {return {
@@ -92196,7 +92216,8 @@
 	    name: null,
 	    provider: null },
 	
-	  fbDidInit: false });
+	  fbDidInit: false,
+	  likePostInProgress: false });
 	
 	
 	var UserReducer = function UserReducer() {var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;var action = arguments[1];
@@ -92205,6 +92226,10 @@
 	      return _extends({}, state, { currentUser: _extends({}, state.currentUser, { tracks: action.tracks }) });
 	    case _user_actions.userConstants.SET_FB_DID_INIT:
 	      return _extends({}, state, { fbDidInit: true });
+	    case _user_actions.userConstants.START_LIKE_POST:
+	      return _extends({}, state, { likePostInProgress: true });
+	    case _user_actions.userConstants.END_LIKE_POST:
+	      return _extends({}, state, { likePostInProgress: false });
 	    case _user_actions.userConstants.RECEIVE_CURRENT_USER:
 	      return _extends({}, state, { currentUser: action.currentUser });
 	    case _user_actions.userConstants.LOGOUT_CURRENT_USER:
@@ -92363,6 +92388,8 @@
 	
 	
 	
+	
+	
 	var _login_api = __webpack_require__(1122);
 	var _track_selector = __webpack_require__(467);
 	var _like_api = __webpack_require__(1129);
@@ -92380,8 +92407,11 @@
 	          }
 	          return next(action);
 	        case _user_actions.userConstants.LIKE_TRACK:
+	          dispatch((0, _user_actions.startLikePost)());
+	
 	          (0, _like_api.postLike)({ create: true }, action.trackId, getState().user.currentUser.id, function (createdLike) {
 	            dispatch((0, _user_actions.updateLikedTracks)(createdLike.tracks));
+	            dispatch((0, _user_actions.endLikePost)());
 	          }, function (err) {
 	            debugger;
 	            throw 'omg hit this error creating like ' + err;
@@ -92389,8 +92419,11 @@
 	
 	          return next(action);
 	        case _user_actions.userConstants.UNLIKE_TRACK:
+	          dispatch((0, _user_actions.startLikePost)());
+	
 	          (0, _like_api.postLike)({ create: false }, action.trackId, getState().user.currentUser.id, function (createdLike) {
 	            dispatch((0, _user_actions.updateLikedTracks)(createdLike.tracks));
+	            dispatch((0, _user_actions.endLikePost)());
 	          }, function (err) {
 	            debugger;
 	            throw 'omg hit this error destroying like ' + err;

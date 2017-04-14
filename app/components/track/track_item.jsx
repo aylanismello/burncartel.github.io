@@ -4,7 +4,7 @@ import { GoFlame } from 'react-icons/lib/go';
 
 const TrackItem = ({ track, handleTrackClick, playing,
 	trackId, trackLoaded, trackIdx, isLoggedIn, loginFB,
-	likeUnlikeTrack, isUserLike }) => {
+	likeUnlikeTrack, isUserLike, likePostInProgress }) => {
 	const numCurators = track.curators.length;
 	const curatorWord = (numCurators <= 1 ? 'curator' : 'curators');
 	const curatorsStr = `${numCurators} ${curatorWord}`
@@ -19,6 +19,14 @@ const TrackItem = ({ track, handleTrackClick, playing,
 		} else {
 			playIcon = 'https://cdn1.iconfinder.com/data/icons/loading-wait-time/256/loading_wait_time_02-128.png';
 		}
+	}
+
+	let flameColor;
+
+ 	if(isUserLike) {
+		flameColor = 'orange';
+	} else {
+		flameColor = 'black';
 	}
 
 	return (
@@ -54,24 +62,24 @@ const TrackItem = ({ track, handleTrackClick, playing,
 									onClick={() => {
 										if(!isLoggedIn) {
 											loginFB();
-
-
 											// on success callback, like or unlike song
 
 											// on successful login, like track!
 											// ah but state will change, this will rerender
 											// and other condition here's code will probs run
-										} else {
+										} else if (likePostInProgress){
 											// assuming track has not already been liked
+											console.log('wait for other like create/detroy action to finish!');
+										} else {
 											likeUnlikeTrack(track.id);
 										}
 									}}
 								className="track-item-icon-container">
-										<GoFlame
-											size={50}
-											color={isUserLike ? 'orange' : 'gray'}
-											className='track-item-icon'
-										/>
+									<GoFlame
+										size={50}
+										color={flameColor}
+										className='track-item-icon'
+									/>
 								</div>
 
 						</div>

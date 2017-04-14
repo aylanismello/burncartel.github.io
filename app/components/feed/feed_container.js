@@ -13,7 +13,8 @@ const mapStateToProps = (state, ownProps) => ({
 	playing: state.player.playing,
 	trackLoaded: state.player.trackLoaded,
 	userLikes: getUserTracksHash(state),
-	isLoggedIn: ( state.user.currentUser.uid ? true : false)
+	isLoggedIn: ( state.user.currentUser.uid ? true : false),
+	likePostInProgress: state.user.likePostInProgress
 });
 
 const mapDispatchToProps = dispatch => ({

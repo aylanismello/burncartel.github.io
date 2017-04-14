@@ -8,8 +8,18 @@ export const userConstants = {
   LIKE_TRACK: 'LIKE_TRACK',
   UNLIKE_TRACK: 'UNLIKE_TRACK',
   UPDATE_LIKED_TRACKS: 'UPDATE_LIKED_TRACKS',
-  RECEIVE_UNLIKE: 'RECEIVE_UNLIKE'
+  RECEIVE_UNLIKE: 'RECEIVE_UNLIKE',
+  START_LIKE_POST: 'START_LIKE_POST',
+  END_LIKE_POST: 'END_LIKE_POST'
 };
+
+export const endLikePost = () => ({
+  type: userConstants.END_LIKE_POST
+});
+
+export const startLikePost = () => ({
+  type: userConstants.START_LIKE_POST
+});
 
 export const updateLikedTracks = (tracks) => ({
   type: userConstants.UPDATE_LIKED_TRACKS,

@@ -5,7 +5,9 @@ import {
   likeTrack,
   unlikeTrack,
   updateLikedTracks,
-  receiveUnlike
+  receiveUnlike,
+  startLikePost,
+  endLikePost
 } from '../actions/user_actions';
 import { getFBUser } from '../util/login_api';
 import { getUserTracksHash } from '../selectors/track_selector';
@@ -24,8 +26,11 @@ const UserMiddleware = ({ getState, dispatch }) => next => action => {
       }
       return next(action);
     case userConstants.LIKE_TRACK:
+      dispatch(startLikePost());
+
       postLike({ create: true }, action.trackId, getState().user.currentUser.id, (createdLike) => {
         dispatch(updateLikedTracks(createdLike.tracks));
+        dispatch(endLikePost());
       }, (err) => {
         debugger;
         throw `omg hit this error creating like ${err}`;
@@ -33,8 +38,11 @@ const UserMiddleware = ({ getState, dispatch }) => next => action => {
 
       return next(action);
     case userConstants.UNLIKE_TRACK:
+      dispatch(startLikePost());
+
       postLike({ create: false }, action.trackId, getState().user.currentUser.id, (createdLike) => {
         dispatch(updateLikedTracks(createdLike.tracks));
+        dispatch(endLikePost());
       }, (err) => {
         debugger;
         throw `omg hit this error destroying like ${err}`;
