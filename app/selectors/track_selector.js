@@ -1,5 +1,6 @@
 import { createSelector } from 'reselect';
 
+const getUserTracks = state => state.user.currentUser.tracks
 const getTracks = state => state.feed.tracks;
 const getCurrentTrackId = state => state.feed.trackId;
 
@@ -14,6 +15,18 @@ export const getTracksHash = createSelector(
 			return tracksObject;
 		}
 );
+
+export const getUserTracksHash = createSelector(
+	[getUserTracks],
+	(tracks) => {
+		let tracksObject = {};
+
+		for(const track of tracks) {
+			tracksObject[track.id] = track;
+		}
+		return tracksObject;
+	}
+)
 
 export const getNextTrackId = createSelector(
 	[getTracks, getCurrentTrackId],

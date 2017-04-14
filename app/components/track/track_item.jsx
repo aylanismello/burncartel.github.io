@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import { GoFlame } from 'react-icons/lib/go';
 
 const TrackItem = ({ track, handleTrackClick, playing,
-	trackId, trackLoaded, trackIdx, isLoggedIn, loginFB }) => {
+	trackId, trackLoaded, trackIdx, isLoggedIn, loginFB, likeUnlikeTrack }) => {
 	const numCurators = track.curators.length;
 	const curatorWord = (numCurators <= 1 ? 'curator' : 'curators');
 	const curatorsStr = `${numCurators} ${curatorWord}`
@@ -52,10 +52,16 @@ const TrackItem = ({ track, handleTrackClick, playing,
 								<div onClick={() => {
 									if(!isLoggedIn) {
 										loginFB();
+
+
+										// on success callback, like or unlike song
+
 										// on successful login, like track!
 										// ah but state will change, this will rerender
 										// and other condition here's code will probs run
 									} else {
+										// assuming track has not already been liked
+										likeUnlikeTrack(track.id);
 										console.log('redux cycle POST request to like track!');
 									}
 								}}
