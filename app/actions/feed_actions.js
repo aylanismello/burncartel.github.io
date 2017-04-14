@@ -9,8 +9,15 @@ export const feedConstants = {
 	LOADING_STOP: 'LOADING_STOP',
 	HANDLE_TRACK_CLICK: 'HANDLE_TRACK_CLICK',
 	INCREMENT_PAGE: 'INCREMENT_PAGE',
-	RESET_PAGE: 'RESET_PAGE'
+	RESET_PAGE: 'RESET_PAGE',
+	UPDATE_TRACK_LIKE_COUNT: 'UPDATE_TRACK_LIKE_COUNT'
 };
+
+export const updateTrackLikeCount = (trackId, likeCount) => ({
+	type: feedConstants.UPDATE_TRACK_LIKE_COUNT,
+	trackId,
+	likeCount
+});
 
 export const resetTracks = () => ({
 	type: feedConstants.RESET_TRACKS

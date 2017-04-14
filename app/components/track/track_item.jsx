@@ -80,6 +80,7 @@ const TrackItem = ({ track, handleTrackClick, playing,
 										color={flameColor}
 										className='track-item-icon'
 									/>
+									{track.num_likes}
 								</div>
 
 						</div>

@@ -9,8 +9,11 @@ import {
   startLikePost,
   endLikePost
 } from '../actions/user_actions';
+import {
+  updateTrackLikeCount
+} from '../actions/feed_actions';
 import { getFBUser } from '../util/login_api';
-import { getUserTracksHash } from '../selectors/track_selector';
+import { getUserTracksHash, getFeedTracksHash } from '../selectors/track_selector';
 import { postLike } from '../util/like_api';
 
 
@@ -30,6 +33,10 @@ const UserMiddleware = ({ getState, dispatch }) => next => action => {
 
       postLike({ create: true }, action.trackId, getState().user.currentUser.id, (createdLike) => {
         dispatch(updateLikedTracks(createdLike.tracks));
+
+        const oneMoreLike = getFeedTracksHash(getState())[action.trackId].num_likes + 1;
+        dispatch(updateTrackLikeCount(action.trackId, oneMoreLike));
+
         dispatch(endLikePost());
       }, (err) => {
         debugger;
@@ -42,6 +49,10 @@ const UserMiddleware = ({ getState, dispatch }) => next => action => {
 
       postLike({ create: false }, action.trackId, getState().user.currentUser.id, (createdLike) => {
         dispatch(updateLikedTracks(createdLike.tracks));
+
+        const oneLessLike = getFeedTracksHash(getState())[action.trackId].num_likes - 1;
+        dispatch(updateTrackLikeCount(action.trackId, oneLessLike));
+
         dispatch(endLikePost());
       }, (err) => {
         debugger;

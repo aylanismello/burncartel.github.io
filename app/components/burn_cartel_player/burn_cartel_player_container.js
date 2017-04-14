@@ -6,12 +6,12 @@ import { togglePlay,
 	setTrackNotLoaded,
 	updateCurrentTime,
  	toggleRepeat } from '../../actions/player_actions';
-import { getTracksHash, getNextTrackId } from '../../selectors/track_selector';
+import { getFeedTracksHash, getNextTrackId } from '../../selectors/track_selector';
 
 
 const mapStateToProps = (state) => {
 
-	const tracksHash = getTracksHash(state);
+	const tracksHash = getFeedTracksHash(state);
 	const track = tracksHash[state.feed.trackId];
 	const nextTrackId = getNextTrackId(state);
 	// console.log(`next track id is ${nextTrackId}`);

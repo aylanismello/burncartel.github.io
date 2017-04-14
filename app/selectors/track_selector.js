@@ -4,7 +4,7 @@ const getUserTracks = state => state.user.currentUser.tracks
 const getTracks = state => state.feed.tracks;
 const getCurrentTrackId = state => state.feed.trackId;
 
-export const getTracksHash = createSelector(
+export const getFeedTracksHash = createSelector(
 		[getTracks],
 		(tracks) => {
 			let tracksObject = {};

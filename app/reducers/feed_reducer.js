@@ -1,4 +1,8 @@
 import { feedConstants } from '../actions/feed_actions';
+import { getFeedTracksHash, getTrackIdx } from '../selectors/track_selector';
+import * as _ from 'lodash';
+
+
 const initialState = {
 	tracks: [],
 	filters: {
@@ -12,6 +16,17 @@ const initialState = {
 
 const FeedReducer = (state = initialState, action) => {
 	switch(action.type) {
+		case feedConstants.UPDATE_TRACK_LIKE_COUNT:
+
+			let updateTracksWithLikeCount = state.tracks.map((track, idx) => {
+				if(track.id === action.trackId) {
+					return { ...track, num_likes: action.likeCount };
+				} else {
+					return track;
+				}
+			});
+
+			return { ...state, tracks: updateTracksWithLikeCount };
 		case feedConstants.INCREMENT_PAGE:
 			return { ...state, page: (state.page + 1) }
 		case feedConstants.RESET_PAGE:
