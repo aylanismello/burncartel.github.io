@@ -11,7 +11,10 @@ import {
 	togglePlay
 } from '../actions/player_actions';
 import { FEEDS } from '../reducers/feed_reducer';
-import { getTracks } from '../util/bc_api';
+import {
+	getTracks,
+	getLikes
+} from '../util/bc_api';
 
 const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 	switch(action.type) {
@@ -36,10 +39,19 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 					console.log(`ERROR FETCHING TRACKS: got ${error}`);
 				}, getState().feed.page);
 			} else if(getState().feed.feedType === FEEDS.LIKES) {
-				const userTracks = getState().user.currentUser.tracks;
-				debugger;
-				dispatch(loadingStop());
-				dispatch(receiveTracks(getState().user.currentUser.tracks));
+
+				getLikes(getState().feed.userLikeId, (tracks) => {
+					dispatch(loadingStop());
+					dispatch(receiveTracks(tracks));
+				}, (error) => {
+					console.log(`ERORR GETTING ${error}`);
+				});
+
+				// dispatch(loadingStop());
+				// dispatch(receiveTracks(getState().user.currentUser.tracks));
+
+
+
 			}
 
 
