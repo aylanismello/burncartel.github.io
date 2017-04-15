@@ -6,11 +6,13 @@ import { feedConstants,
 	resetPage,
 	incrementPage,
 	resetTracks,
-	fetchTracks
+	fetchTracks,
+	updatePageTitle
 } from '../actions/feed_actions';
 import {
 	togglePlay
 } from '../actions/player_actions';
+import { getFeedTracksHash } from '../selectors/track_selector';
 import { FEEDS } from '../reducers/feed_reducer';
 import {
 	getTracks,
@@ -58,6 +60,10 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 		case feedConstants.HANDLE_TRACK_CLICK:
 			// GOING TO NEW TRACK
 			if(getState().feed.trackId !== action.trackId) {
+				// change this to .real_name when that story is completed
+				const newTrackName = getFeedTracksHash(getState())[action.trackId].name;
+				dispatch(updatePageTitle(newTrackName));
+
 				dispatch(updateTrackId(action.trackId));
 				if(!getState().player.playing) {
 					dispatch(togglePlay());
@@ -67,6 +73,9 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 			}
 				// what if you're coming from a paused song?
 				return next(action);
+		case feedConstants.UPDATE_PAGE_TITLE:
+			document.title = `${action.trackName} | Fire Feed`;
+			return next(action);
 		default:
 			return next(action);
 	}

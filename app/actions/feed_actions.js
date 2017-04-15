@@ -13,9 +13,15 @@ export const feedConstants = {
 	UPDATE_TRACK_LIKE_COUNT: 'UPDATE_TRACK_LIKE_COUNT',
 	SET_FEED_TYPE: 'SET_FEED_TYPE',
 	SET_LIKE_FEED_USER_ID: 'SET_LIKE_FEED_USER_ID',
-	PAGINATE_TRACKS: 'PAGINATE_TRACKS'
+	PAGINATE_TRACKS: 'PAGINATE_TRACKS',
+	UPDATE_PAGE_TITLE: 'UPDATE_PAGE_TITLE'
 };
 
+
+export const updatePageTitle = (trackName) => ({
+	type: feedConstants.UPDATE_PAGE_TITLE,
+	trackName
+});
 
 export const paginateTracks = () => ({
 	type: feedConstants.PAGINATE_TRACKS
