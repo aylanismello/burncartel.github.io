@@ -150,36 +150,42 @@ class BurnCartelPlayer extends React.Component {
       )
     }
 
-    return (
-      <div className="burn-cartel-player-container">
 
-        <div className='burn-cartel-player-details'>
-          {details}
-        </div>
+    if(this.props.playerInitialized) {
+      return (
+        <div className="burn-cartel-player-container">
 
-        <div className='burn-cartel-player-control'>
-
-          <FontAwesome.FaStepBackward
-            size={50}
-            color='aliceblue'
-            className='bc-icon'/>
-          <div onClick={this.toggle}> {this.playIcon} </div>
-
-          <FontAwesome.FaStepForward
-            size={50}
-            color='aliceblue'
-            className='bc-icon'/>
-
-          <div onClick={this.props.toggleRepeat}>
-            <FontAwesome.FaRepeat
-               size={50}
-               color={this.props.repeating? 'green' : 'red'}
-              className='bc-icon'/>
+          <div className='burn-cartel-player-details'>
+            {details}
           </div>
 
-        </div>
-      </div>
-		);
+          <div className='burn-cartel-player-control'>
+
+            <FontAwesome.FaStepBackward
+              size={50}
+              color='aliceblue'
+              className='bc-icon'/>
+              <div onClick={this.toggle}> {this.playIcon} </div>
+
+              <FontAwesome.FaStepForward
+                size={50}
+                color='aliceblue'
+                className='bc-icon'/>
+
+                {/* <div onClick={this.props.toggleRepeat}>
+                  <FontAwesome.FaRepeat
+                  size={50}
+                  color={this.props.repeating? 'green' : 'red'}
+                  className='bc-icon'/>
+                </div> */}
+
+              </div>
+            </div>
+
+          );
+    } else {
+      return <div></div>
+    }
   }
 }
 

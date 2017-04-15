@@ -26,7 +26,8 @@ const mapStateToProps = (state) => {
 		playing: state.player.playing,
 		repeating: state.player.repeating,
 		currentTime: state.player.currentTime,
-		filters: state.feed.filters
+		filters: state.feed.filters,
+		playerInitialized: state.player.playerInitialized
 	};
 };
 
