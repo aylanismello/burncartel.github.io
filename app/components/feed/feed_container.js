@@ -4,6 +4,8 @@ import { fetchTracks, updateTrackId, handleTrackClick } from '../../actions/feed
 import { loginFB, likeUnlikeTrack } from '../../actions/user_actions';
 import { getUserTracksHash } from '../../selectors/track_selector';
 
+
+// add userTracks here if we need to re-render their likes feed as they update it
 const mapStateToProps = (state, ownProps) => ({
 	tracks: state.feed.tracks,
 	elements: ownProps.elements,

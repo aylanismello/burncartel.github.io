@@ -18,7 +18,8 @@ const mapStateToProps = (state, ownProps) => {
 	}
 
 	return {
-		ffUserId: ownProps.params.id
+		ffUserId: ownProps.params.id,
+		userLikes: state.user.currentUser.tracks
 	}
 };
 
