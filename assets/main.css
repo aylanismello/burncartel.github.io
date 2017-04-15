@@ -1,6 +1,9 @@
 body {
   background: whitesmoke; }
 
+.pagination-button-container {
+  margin-bottom: 3em; }
+
 .login-out-container {
   width: 200px; }
   .login-out-container:hover {
@@ -27,7 +30,7 @@ body {
     display: flex; }
 
 .feed-container {
-  margin-bottom: 5em;
+  margin-bottom: 10em;
   margin-top: 1.5em; }
   .feed-container .track-container {
     background: white;

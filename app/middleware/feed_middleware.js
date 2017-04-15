@@ -5,7 +5,8 @@ import { feedConstants,
 	updateTrackId,
 	resetPage,
 	incrementPage,
-	resetTracks
+	resetTracks,
+	fetchTracks
 } from '../actions/feed_actions';
 import {
 	togglePlay
@@ -18,6 +19,10 @@ import {
 
 const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 	switch(action.type) {
+
+		case feedConstants.PAGINATE_TRACKS:
+			dispatch(fetchTracks(getState().feed.filters, true));
+			return next(action);
 		case feedConstants.FETCH_TRACKS:
 			dispatch(loadingStart());
 
@@ -47,15 +52,7 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 					console.log(`ERORR GETTING ${error}`);
 				});
 
-				// dispatch(loadingStop());
-				// dispatch(receiveTracks(getState().user.currentUser.tracks));
-
-
-
 			}
-
-
-
 
 			return next(action);
 		case feedConstants.HANDLE_TRACK_CLICK:

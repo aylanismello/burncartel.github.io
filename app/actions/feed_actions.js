@@ -12,8 +12,14 @@ export const feedConstants = {
 	RESET_PAGE: 'RESET_PAGE',
 	UPDATE_TRACK_LIKE_COUNT: 'UPDATE_TRACK_LIKE_COUNT',
 	SET_FEED_TYPE: 'SET_FEED_TYPE',
-	SET_LIKE_FEED_USER_ID: 'SET_LIKE_FEED_USER_ID'
+	SET_LIKE_FEED_USER_ID: 'SET_LIKE_FEED_USER_ID',
+	PAGINATE_TRACKS: 'PAGINATE_TRACKS'
 };
+
+
+export const paginateTracks = () => ({
+	type: feedConstants.PAGINATE_TRACKS
+});
 
 export const setLikeFeedUserId = (userId) => ({
 	type: feedConstants.SET_LIKE_FEED_USER_ID,

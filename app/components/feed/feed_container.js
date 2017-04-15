@@ -1,6 +1,11 @@
 import { connect } from 'react-redux';
 import Feed from './feed';
-import { fetchTracks, updateTrackId, handleTrackClick } from '../../actions/feed_actions';
+import {
+	fetchTracks,
+	updateTrackId,
+	handleTrackClick,
+	paginateTracks
+} from '../../actions/feed_actions';
 import { loginFB, likeUnlikeTrack } from '../../actions/user_actions';
 import { getUserTracksHash } from '../../selectors/track_selector';
 
@@ -16,7 +21,8 @@ const mapStateToProps = (state, ownProps) => ({
 	trackLoaded: state.player.trackLoaded,
 	userLikes: getUserTracksHash(state),
 	isLoggedIn: ( state.user.currentUser.uid ? true : false),
-	likePostInProgress: state.user.likePostInProgress
+	likePostInProgress: state.user.likePostInProgress,
+	page: state.feed.page
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -25,7 +31,8 @@ const mapDispatchToProps = dispatch => ({
 		dispatch(handleTrackClick(trackId))
 	},
 	loginFB: () => dispatch(loginFB()),
-	likeUnlikeTrack: (trackId) => dispatch(likeUnlikeTrack(trackId))
+	likeUnlikeTrack: (trackId) => dispatch(likeUnlikeTrack(trackId)),
+	paginateTracks: () => dispatch(paginateTracks())
 });
 
 export default connect(

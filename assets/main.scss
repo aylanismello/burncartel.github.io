@@ -3,6 +3,10 @@ body {
 }
 
 
+.pagination-button-container {
+	margin-bottom: 3em;
+}
+
 .login-out-container {
 	width: 200px;
 	&:hover {
@@ -40,7 +44,7 @@ body {
 }
 
 .feed-container {
-	margin-bottom: 5em;
+	margin-bottom: 10em;
 	margin-top: 1.5em;
 	.track-container{
 		background: white;
