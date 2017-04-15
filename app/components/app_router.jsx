@@ -7,6 +7,7 @@ import {
   hashHistory,
   Switch
 } from 'react-router-dom';
+import ScrollToTop from './scroll_to_top';
 import HomeContainer from './home/home_container';
 import BurnCartelCurated from './curated/burn_cartel_curated';
 import TrackShowContainer from './track/track_show_container';
@@ -16,14 +17,17 @@ import NoMatch from './no_match';
 import AppContainer from './app/app_container';
 
 
+
+
 class AppRouter extends React.Component{
 
   render() {
+  // <Router onUpdate={() => window.scrollTo(0, 0)} history={hashHistory}>
   	return (
-      // hurray! this onUpdate func fixes that stupid glitch
-  		// <Router onUpdate={() => window.scrollTo(0, 0)} history={hashHistory}>
   		<Router>
-        <AppContainer>
+        <div>
+          <ScrollToTop/>
+          <AppContainer theLocation={location}/>
           <Switch>
             <Route exact path="/" component={HomeContainer} />
             <Route path="/tracks/:id" component={TrackShowContainer} />
@@ -32,7 +36,8 @@ class AppRouter extends React.Component{
             <Route path="/curated" component={BurnCartelCurated} />
             <Route component={NoMatch}/>
           </Switch>
-        </AppContainer>
+        {/* </ScrollToTop> */}
+        </div>
   		</Router>
   	);
   }
