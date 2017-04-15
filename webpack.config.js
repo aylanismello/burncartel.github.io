@@ -1,3 +1,5 @@
+var WebpackNotifierPlugin = require('webpack-notifier');
+
 const path = require('path');
   module.exports = {
     context: __dirname,
@@ -5,29 +7,32 @@ const path = require('path');
     output: {
       path: './',
       filename: './app/bundle.js'
-  },
-  resolve: {
-    extensions: ['', '.js', '.jsx']
-  },
-  module: {
-    loaders: [
-      {
-        test: /.jsx?$/,
-        exclude: /(node_modules|bower_components)/,
-        loaders: [
-          'babel?presets[]=es2015,presets[]=react,plugins[]=transform-object-rest-spread&retainLines=true',
-          'ng-annotate-loader'
-        ]
-      },
-      {
-        test: /.node$/,
-        loader: 'node-loader'
-      },
-      {
-        test: [/.css?$/],
-        loader: 'style-loader!css-loader'
-      }
-    ]
-  },
-  devtool: 'source-maps'
+    },
+    resolve: {
+      extensions: ['', '.js', '.jsx']
+    },
+    plugins: [
+      new WebpackNotifierPlugin()
+    ],
+    module: {
+      loaders: [
+        {
+          test: /.jsx?$/,
+          exclude: /(node_modules|bower_components)/,
+          loaders: [
+            'babel?presets[]=es2015,presets[]=react,plugins[]=transform-object-rest-spread&retainLines=true',
+            'ng-annotate-loader'
+          ]
+        },
+        {
+          test: /.node$/,
+          loader: 'node-loader'
+        },
+        {
+          test: [/.css?$/],
+          loader: 'style-loader!css-loader'
+        }
+      ]
+    },
+    devtool: 'source-maps'
 };

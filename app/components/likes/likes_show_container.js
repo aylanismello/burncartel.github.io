@@ -1,5 +1,9 @@
 import { connect } from 'react-redux';
-import { updateFilters } from '../../actions/feed_actions';
+import {
+	updateFilters,
+ 	setFeedType,
+	setLikesUser
+} from '../../actions/feed_actions';
 import LikesShow from './likes_show';
 
 
@@ -13,16 +17,15 @@ const mapStateToProps = (state, ownProps) => {
 		// TODO: return 404!
 	}
 
-
-
-
 	return {
 		ffUserId: ownProps.params.id
 	}
 };
 
 const mapDispatchToProps = dispatch => ({
-	updateFilters: () => dispatch(updateFilters())
+	updateFilters: () => dispatch(updateFilters()),
+	setFeedType: (feedType) => dispatch(setFeedType(feedType)),
+	setLikesUser: (userId) => dispatch(setLikesUser(userId))
 });
 
 export default connect(

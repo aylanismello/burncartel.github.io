@@ -2,12 +2,9 @@ import React from 'react';
 import { Link } from 'react-router';
 import * as FontAwesome from 'react-icons/lib/fa/';
 import BurnCartelPlayerContainer from '../burn_cartel_player/burn_cartel_player_container';
-
-
-
+import { FEEDS } from '../../reducers/feed_reducer';
 
 const BottomNav = ({ currentUserId }) => {
-	debugger;
 
 	const BottomNavIcons = () => (
 		<div className='bottom-nav-icons'>

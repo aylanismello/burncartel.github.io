@@ -52,6 +52,7 @@
     "babel-plugin-transform-export-extensions": "^6.8.0",
     "babel-preset-es2016": "^6.22.0",
     "babel-preset-es2017": "^6.22.0",
-    "redux-logger": "^2.7.4"
+    "redux-logger": "^2.7.4",
+    "webpack-notifier": "^1.5.0"
   }
 }

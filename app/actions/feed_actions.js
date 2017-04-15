@@ -10,8 +10,20 @@ export const feedConstants = {
 	HANDLE_TRACK_CLICK: 'HANDLE_TRACK_CLICK',
 	INCREMENT_PAGE: 'INCREMENT_PAGE',
 	RESET_PAGE: 'RESET_PAGE',
-	UPDATE_TRACK_LIKE_COUNT: 'UPDATE_TRACK_LIKE_COUNT'
+	UPDATE_TRACK_LIKE_COUNT: 'UPDATE_TRACK_LIKE_COUNT',
+	SET_FEED_TYPE: 'SET_FEED_TYPE',
+	SET_LIKES_USER: 'SET_LIKES_USER'
 };
+
+export const setLikesUser = (userId) => ({
+	type: feedConstants.SET_LIKES_USER,
+	userId
+})
+
+export const setFeedType = (feedType) => ({
+	type: feedConstants.SET_FEED_TYPE,
+	feedType
+});
 
 export const updateTrackLikeCount = (trackId, likeCount) => ({
 	type: feedConstants.UPDATE_TRACK_LIKE_COUNT,
