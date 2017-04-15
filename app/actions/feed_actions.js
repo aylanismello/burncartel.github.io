@@ -12,11 +12,11 @@ export const feedConstants = {
 	RESET_PAGE: 'RESET_PAGE',
 	UPDATE_TRACK_LIKE_COUNT: 'UPDATE_TRACK_LIKE_COUNT',
 	SET_FEED_TYPE: 'SET_FEED_TYPE',
-	SET_LIKES_USER: 'SET_LIKES_USER'
+	SET_LIKE_FEED_USER_ID: 'SET_LIKE_FEED_USER_ID'
 };
 
-export const setLikesUser = (userId) => ({
-	type: feedConstants.SET_LIKES_USER,
+export const setLikeFeedUserId = (userId) => ({
+	type: feedConstants.SET_LIKE_FEED_USER_ID,
 	userId
 })
 

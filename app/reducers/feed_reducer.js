@@ -22,7 +22,7 @@ const initialState = {
 
 const FeedReducer = (state = initialState, action) => {
 	switch(action.type) {
-		case feedConstants.SET_LIKES_USER:
+		case feedConstants.SET_LIKE_FEED_USER_ID:
 			return { ...state, userLikeId: action.userId };
 		case feedConstants.SET_FEED_TYPE:
 			return { ...state, feedType: action.feedType };

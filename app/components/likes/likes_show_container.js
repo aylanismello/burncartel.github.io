@@ -2,7 +2,8 @@ import { connect } from 'react-redux';
 import {
 	updateFilters,
  	setFeedType,
-	setLikesUser
+	setLikeFeedUserId,
+	receiveTracks
 } from '../../actions/feed_actions';
 import LikesShow from './likes_show';
 
@@ -13,18 +14,22 @@ const mapStateToProps = (state, ownProps) => {
 		// TODO: return 404!
 	}
 
+	const userId = ownProps.match.params.id;
+	const isOfCurrentUser = ( userId === "me" ? true : false);
+
 	return {
 		ffUserId: ownProps.match.params.id,
 		userLikes: state.user.currentUser.tracks,
-		location: ownProps.location
-
+		isOfCurrentUser,
+		currentUserId: state.user.currentUser.id
 	}
 };
 
 const mapDispatchToProps = dispatch => ({
 	updateFilters: () => dispatch(updateFilters()),
 	setFeedType: (feedType) => dispatch(setFeedType(feedType)),
-	setLikesUser: (userId) => dispatch(setLikesUser(userId))
+	setLikeFeedUserId: (userId) => dispatch(setLikeFeedUserId(userId)),
+	receiveTracks: (tracks) => dispatch(receiveTracks(tracks))
 });
 
 export default connect(
