@@ -1,9 +1,9 @@
 import React from 'react';
-import UserBanner from './user_banner';
+import CuratorBanner from './curator_banner';
 import FeedContainer from '../feed/feed_container';
 import Loading from '../loading';
 
-const UserShow = ({ user, id, updateFilters }) => {
+const CuratorShow = ({ user, id, updateFilters }) => {
 
 	if(!user) {
 		updateFilters({curator: id});
@@ -14,7 +14,7 @@ const UserShow = ({ user, id, updateFilters }) => {
 	} else {
 		return (
 			<div className="container user-show">
-				<UserBanner user={user} />
+				<CuratorBanner user={user} />
 				<h2> Latest selections </h2>
 				<FeedContainer />
 			</div>
@@ -22,4 +22,4 @@ const UserShow = ({ user, id, updateFilters }) => {
 	}
 };
 
-export default UserShow;
+export default CuratorShow;

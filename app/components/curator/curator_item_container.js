@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { updateFilters } from '../../actions/feed_actions';
-import UserItem from './user_item';
+import CuratorItem from './curator_item';
 
 
 const mapStateToProps = (state, ownProps) => {
@@ -17,4 +17,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(UserItem);
+)(CuratorItem);

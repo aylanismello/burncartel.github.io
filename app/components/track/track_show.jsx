@@ -1,6 +1,6 @@
 import React from 'react';
 import TrackBanner from './track_banner';
-import UserList from '../user/user_list';
+import CuratorList from '../curator/curator_list';
 import Loading from '../loading';
 
 // There are two scenarios here. One is that
@@ -31,7 +31,7 @@ const TrackShow = ({ id, track, updateFilters, updateTrackId }) => {
 		return (
 			<div className="container track-show">
 				<TrackBanner track={track} />
-				<UserList
+				<CuratorList
 					track={track}
 				/>
 			</div>

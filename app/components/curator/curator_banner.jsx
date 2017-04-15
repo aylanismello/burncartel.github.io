@@ -1,6 +1,6 @@
 import React from 'react';
 
-const UserBanner = ({ user }) => {
+const CuratorBanner = ({ user }) => {
 	return (
 		<div
 			className="thumbnail user-banner"
@@ -12,4 +12,4 @@ const UserBanner = ({ user }) => {
 	);
 };
 
-export default UserBanner;
+export default CuratorBanner;
