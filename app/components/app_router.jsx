@@ -4,6 +4,7 @@ import HomeContainer from './home/home_container';
 import BurnCartelCurated from './curated/burn_cartel_curated';
 import TrackShowContainer from './track/track_show_container';
 import UserShowContainer from './user/user_show_container';
+import LikesShowContainer from './likes/likes_show_container';
 import AppContainer from './app/app_container';
 
 
@@ -17,6 +18,7 @@ class AppRouter extends React.Component{
           <IndexRoute component={HomeContainer} />
           <Route path="/tracks/:id" component={TrackShowContainer} />
           <Route path="/users/:id" component={UserShowContainer} />
+          <Route path="/likes/:id" component={LikesShowContainer} />
           <Route path="/curated" component={BurnCartelCurated} />
         </Route>
   		</Router>

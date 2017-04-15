@@ -39,7 +39,6 @@ const UserMiddleware = ({ getState, dispatch }) => next => action => {
 
         dispatch(endLikePost());
       }, (err) => {
-        debugger;
         throw `omg hit this error creating like ${err}`;
       });
 
@@ -55,7 +54,6 @@ const UserMiddleware = ({ getState, dispatch }) => next => action => {
 
         dispatch(endLikePost());
       }, (err) => {
-        debugger;
         throw `omg hit this error destroying like ${err}`;
       });
 

@@ -1,5 +1,7 @@
 import React from 'react';
 import FeedContainer from '../feed/feed_container';
+import { FEEDS } from '../../reducers/feed_reducer';
+
 
 class Home extends React.Component {
 	constructor(props) {
@@ -12,13 +14,13 @@ class Home extends React.Component {
 
 	componentWillMount() {
 		// this.props.updateFilters({curator: -1, sort: 'influential'});
+		this.props.setFeedType(FEEDS.FIRE);
 		this.props.updateFilters({sort: 'influential'});
 	}
 
 	handleFilterChange(newFilter) {
 		this.props.updateFilters(newFilter);
 	}
-
 
 	render() {
 

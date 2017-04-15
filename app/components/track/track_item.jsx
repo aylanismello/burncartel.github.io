@@ -55,6 +55,9 @@ const TrackItem = ({ track, handleTrackClick, playing,
 								<h3 className="track-title" onClick={() => handleTrackClick(track.id)}>{track.name}</h3>
 							</Link>
 
+							<div>
+								<span> By {track.publisher.name} </span>
+							</div>
 							<span>Selected by {curatorsStr} </span>
 
 							<div className="track-item-icons">

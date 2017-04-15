@@ -36,13 +36,15 @@ const Feed = ({ tracks, filters, trackLoaded,
 	return (
 		<div className="feed-container">
 			{childElements}
-			<VisibilitySensor onChange={(isVisible) => {
+			{/* <VisibilitySensor onChange={(isVisible) => {
 				 if(!loadingFeed) {
 					 if(isVisible) {
 						 fetchTracks(filters, true);
 					 }
 				 }
-			}} />
+			}} /> */}
+
+
 		</div>
 	);
 };

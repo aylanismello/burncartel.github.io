@@ -10,8 +10,11 @@ import { feedConstants,
 import {
 	togglePlay
 } from '../actions/player_actions';
-
-import { getTracks } from '../util/bc_api';
+import { FEEDS } from '../reducers/feed_reducer';
+import {
+	getTracks,
+	getLikes
+} from '../util/bc_api';
 
 const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 	switch(action.type) {
@@ -27,13 +30,33 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 				dispatch(resetTracks());
 			}
 
-			getTracks({ sort: 'influential', ...action.filters}, (tracks) => {
-				dispatch(loadingStop());
-				dispatch(receiveTracks(tracks));
-			}, (error) => {
-				// make error reducer here
-				console.log(`ERROR FETCHING TRACKS: got ${error}`);
-			}, getState().feed.page);
+			if(getState().feed.feedType === FEEDS.FIRE) {
+				getTracks({ sort: 'influential', ...action.filters}, (tracks) => {
+					dispatch(loadingStop());
+					dispatch(receiveTracks(tracks));
+				}, (error) => {
+					// make error reducer here
+					console.log(`ERROR FETCHING TRACKS: got ${error}`);
+				}, getState().feed.page);
+			} else if(getState().feed.feedType === FEEDS.LIKES) {
+
+				getLikes(getState().feed.userLikeId, (tracks) => {
+					dispatch(loadingStop());
+					dispatch(receiveTracks(tracks));
+				}, (error) => {
+					console.log(`ERORR GETTING ${error}`);
+				});
+
+				// dispatch(loadingStop());
+				// dispatch(receiveTracks(getState().user.currentUser.tracks));
+
+
+
+			}
+
+
+
+
 			return next(action);
 		case feedConstants.HANDLE_TRACK_CLICK:
 			// GOING TO NEW TRACK
