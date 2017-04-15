@@ -1,5 +1,4 @@
 import React from 'react';
-// import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 import {
   HashRouter as Router,
   Route,
@@ -16,18 +15,13 @@ import LikesShowContainer from './likes/likes_show_container';
 import NoMatch from './no_match';
 import AppContainer from './app/app_container';
 
-
-
-
 class AppRouter extends React.Component{
 
   render() {
-  // <Router onUpdate={() => window.scrollTo(0, 0)} history={hashHistory}>
   	return (
   		<Router>
-        <div>
-          <ScrollToTop/>
-          <AppContainer theLocation={location}/>
+        <ScrollToTop>
+          <AppContainer/>
           <Switch>
             <Route exact path="/" component={HomeContainer} />
             <Route path="/tracks/:id" component={TrackShowContainer} />
@@ -36,8 +30,7 @@ class AppRouter extends React.Component{
             <Route path="/curated" component={BurnCartelCurated} />
             <Route component={NoMatch}/>
           </Switch>
-        {/* </ScrollToTop> */}
-        </div>
+        </ScrollToTop>
   		</Router>
   	);
   }
