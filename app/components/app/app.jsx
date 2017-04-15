@@ -1,5 +1,4 @@
 import React from 'react';
-import {Link} from 'react-router';
 import {withRouter} from 'react-router';
 import TopNav from '../navs/top_nav';
 import BottomNav from '../navs/bottom_nav';
@@ -21,6 +20,7 @@ class App extends React.Component {
     // you also have to check for pagination being invoked here.
     // so maybe if this.props.feed.length !=== nextProps.feed.length
     // wait what...
+
     if(!_.isEqual(this.props.filters, nextProps.filters)) {
       this.props.fetchTracks(nextProps.filters);
     }
@@ -28,8 +28,6 @@ class App extends React.Component {
     if(!_.isEqual(this.props.feedType, nextProps.feedType)) {
       if(nextProps.feedType === FEEDS.LIKES) {
         this.props.fetchTracks();
-        debugger;
-
       }
     }
 

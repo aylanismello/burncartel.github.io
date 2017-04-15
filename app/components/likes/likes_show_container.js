@@ -8,18 +8,16 @@ import LikesShow from './likes_show';
 
 
 const mapStateToProps = (state, ownProps) => {
-	// if(state.user.currentUser.id === undefined) {
-	// 	console.log('SHIT WE DONT HAVE SOMEONE LOGGED IN');
-	// }
-
-	if(ownProps.params.id === undefined) {
+	if(ownProps.match.params.id === undefined) {
 		console.log('we do not have the necessary param.');
 		// TODO: return 404!
 	}
 
 	return {
-		ffUserId: ownProps.params.id,
-		userLikes: state.user.currentUser.tracks
+		ffUserId: ownProps.match.params.id,
+		userLikes: state.user.currentUser.tracks,
+		location: ownProps.location
+
 	}
 };
 

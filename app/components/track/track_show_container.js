@@ -7,10 +7,10 @@ import * as _ from 'lodash';
 
 const mapStateToProps = (state, ownProps) => {
 	const tracksHash = getFeedTracksHash(state);
-	const track = tracksHash[ownProps.params.id];
+	const track = tracksHash[ownProps.match.params.id];
 
 	return {
-		id: ownProps.params.id,
+		id: ownProps.match.params.id,
 		track
 	};
 };

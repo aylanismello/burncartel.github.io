@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import VisibilitySensor from 'react-visibility-sensor';
 import TrackItem from '../track/track_item';
 import Loading from '../loading';

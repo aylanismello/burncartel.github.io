@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import { GoFlame } from 'react-icons/lib/go';
 
 const TrackItem = ({ track, handleTrackClick, playing,

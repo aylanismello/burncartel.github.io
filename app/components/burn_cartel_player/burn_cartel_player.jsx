@@ -1,6 +1,6 @@
 // https://github.com/voronianski/soundcloud-audio.js
 import React from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import * as FontAwesome from 'react-icons/lib/fa/';
 import SoundCloudAudio from 'soundcloud-audio';
 
@@ -13,6 +13,7 @@ class BurnCartelPlayer extends React.Component {
     this.pauseTrack = this.pauseTrack.bind(this);
     this.playTrack = this.playTrack.bind(this);
     this.scAudio = new SoundCloudAudio(props.clientId);
+    window.sc = this.scAudio;
     this.secondsToMinutes = this.secondsToMinutes.bind(this);
     this.track = null;
     this.playIcon = null;

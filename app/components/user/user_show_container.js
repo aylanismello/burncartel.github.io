@@ -7,7 +7,7 @@ import UserShow from './user_show';
 // maybe use selectors here? this is weird.
 const mapStateToProps = (state, ownProps) => {
 	return {
-		id: ownProps.params.id,
+		id: ownProps.match.params.id,
 		user: getUserFromTracks(state)
 	};
 };
