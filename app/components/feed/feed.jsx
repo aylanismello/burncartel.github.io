@@ -30,7 +30,7 @@ const Feed = ({ tracks, filters, trackLoaded,
 				key={idx}
 				likePostInProgress={likePostInProgress}
 				likeUnlikeTrack={likeUnlikeTrack}
-				isUserLike={userLikes[track.id] === undefined ? false : true }
+				isLikedByUser={userLikes[track.id] === undefined ? false : true }
 			/>
 		));
 

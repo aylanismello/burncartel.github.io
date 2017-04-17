@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { GoFlame } from 'react-icons/lib/go';
+import FireLike from '../likes/fire_like';
+
 
 const TrackItem = ({ track, handleTrackClick, playing,
 	trackId, trackLoaded, trackIdx, isLoggedIn, loginFB,
-	likeUnlikeTrack, isUserLike, likePostInProgress }) => {
+	likeUnlikeTrack, isLikedByUser, likePostInProgress }) => {
 	const numCurators = track.curators.length;
 	const curatorWord = (numCurators <= 1 ? 'curator' : 'curators');
 	const curatorsStr = `${numCurators} ${curatorWord}`
@@ -23,7 +25,7 @@ const TrackItem = ({ track, handleTrackClick, playing,
 
 	let flameColor;
 
- 	if(isUserLike) {
+ 	if(isLikedByUser) {
 		flameColor = 'orange';
 	} else {
 		flameColor = 'black';
@@ -60,31 +62,20 @@ const TrackItem = ({ track, handleTrackClick, playing,
 							</div>
 							<span>Selected by {curatorsStr} </span>
 
-							<div className="track-item-icons">
-								<div
-									onClick={() => {
-										if(!isLoggedIn) {
-											loginFB();
-											// on success callback, like or unlike song
 
-											// on successful login, like track!
-											// ah but state will change, this will rerender
-											// and other condition here's code will probs run
-										} else if (likePostInProgress){
-											// assuming track has not already been liked
-											console.log('wait for other like create/detroy action to finish!');
-										} else {
-											likeUnlikeTrack(track.id);
-										}
-									}}
-								className="track-item-icon-container">
-									<GoFlame
-										size={50}
-										color={flameColor}
-										className='track-item-icon'
-									/>
-									{track.num_likes}
-								</div>
+
+
+							<div className="track-item-icons">
+
+								<FireLike
+									isLoggedIn={isLoggedIn}
+									loginFB={loginFB}
+									likePostInProgress={likePostInProgress}
+									likeUnlikeTrack={likeUnlikeTrack}
+									numLikes={track.num_likes}
+									isLikedByUser={isLikedByUser}
+									trackId={track.id}
+								/>
 
 						</div>
 

@@ -1,6 +1,17 @@
 body {
   background: whitesmoke; }
 
+.like-icon-container {
+  width: 50px;
+  height: 50px;
+  background: whitesmoke;
+  border-radius: 10px; }
+  .like-icon-container:hover {
+    cursor: pointer; }
+  .like-icon-container .like-icon {
+    width: 100%;
+    height: 100%; }
+
 .pagination-button-container {
   margin-bottom: 3em; }
 

@@ -1,8 +1,10 @@
 // https://github.com/voronianski/soundcloud-audio.js
 import React from 'react';
 import { Link } from 'react-router-dom';
-import * as FontAwesome from 'react-icons/lib/fa/';
 import SoundCloudAudio from 'soundcloud-audio';
+import * as FontAwesome from 'react-icons/lib/fa/';
+import FireLike from '../likes/fire_like';
+
 
 class BurnCartelPlayer extends React.Component {
 
@@ -152,6 +154,9 @@ class BurnCartelPlayer extends React.Component {
 
 
     if(this.props.playerInitialized) {
+      const { isLoggedIn, loginFB, likePostInProgress,
+        likeUnlikeTrack, numLikes, trackId, track, userLikes } = this.props;
+
       return (
         <div className="burn-cartel-player-container">
 
@@ -160,6 +165,16 @@ class BurnCartelPlayer extends React.Component {
           </div>
 
           <div className='burn-cartel-player-control'>
+
+            <FireLike
+              isLoggedIn={isLoggedIn}
+              loginFB={loginFB}
+              likePostInProgress={likePostInProgress}
+              likeUnlikeTrack={likeUnlikeTrack}
+              isLikedByUser={userLikes[trackId] === undefined ? false : true }
+              trackId={trackId}
+            />
+
 
             <FontAwesome.FaStepBackward
               size={50}
