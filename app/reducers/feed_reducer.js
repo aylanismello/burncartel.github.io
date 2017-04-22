@@ -10,8 +10,6 @@ export const FEEDS = {
 const initialState = {
 	tracks: [],
 	filters: {
-		// sort: 'influential',
-		curator: -1
 	},
 	userLikeId: -1,
 	feedType: FEEDS.FIRE,
