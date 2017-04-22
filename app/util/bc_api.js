@@ -19,4 +19,14 @@ export const getTracks = (filters, success = suc, error = err, page = 1) => {
 		success,
 		error
 	});
+
+};
+
+export const getLikes = (userId, success = suc, error = err) => {
+	$.ajax({
+		url: `http://localhost:3000/api/v1/users/${userId}/likes`,
+		method: 'GET',
+		success,
+		error
+	});
 };

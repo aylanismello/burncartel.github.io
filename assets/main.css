@@ -1,6 +1,29 @@
 body {
   background: whitesmoke; }
 
+.like-icon-container {
+  width: 50px;
+  height: 50px;
+  background: whitesmoke;
+  border-radius: 10px; }
+  .like-icon-container:hover {
+    cursor: pointer; }
+  .like-icon-container .like-icon {
+    width: 100%;
+    height: 100%; }
+
+.pagination-button-container {
+  margin-bottom: 3em; }
+
+.login-out-container {
+  width: 200px; }
+  .login-out-container:hover {
+    cursor: pointer; }
+  .login-out-container .login-out-img {
+    width: 100%;
+    height: auto;
+    max-height: 35px; }
+
 .navbar-brand .logo-container {
   width: 7em; }
   .navbar-brand .logo-container img {
@@ -18,7 +41,7 @@ body {
     display: flex; }
 
 .feed-container {
-  margin-bottom: 5em;
+  margin-bottom: 10em;
   margin-top: 1.5em; }
   .feed-container .track-container {
     background: white;

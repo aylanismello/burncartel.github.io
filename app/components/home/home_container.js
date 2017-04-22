@@ -1,5 +1,8 @@
 import { connect } from 'react-redux';
-import { updateFilters } from '../../actions/feed_actions';
+import {
+	updateFilters,
+	setFeedType
+ } from '../../actions/feed_actions';
 import Home from './home';
 
 
@@ -7,7 +10,8 @@ import Home from './home';
 const mapStateToProps = (state) => ({});
 
 const mapDispatchToProps = dispatch => ({
-	updateFilters: (filters) => dispatch(updateFilters(filters))
+	updateFilters: (filters) => dispatch(updateFilters(filters)),
+	setFeedType: (feedType) => dispatch(setFeedType(feedType))
 });
 
 export default connect(

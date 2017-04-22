@@ -1,14 +1,14 @@
 import React from 'react';
-import UserItemContainer from './user_item_container';
+import CuratorItemContainer from './curator_item_container';
 
 const style = {
 	background: 'green'
 };
 
-const UserList = ({ track }) => {
+const CuratorList = ({ track }) => {
 
 	const childElements = track.curators.map((curator, idx) => (
-		<UserItemContainer
+		<CuratorItemContainer
 			user={curator}
 			key={idx}
 		/>
@@ -22,4 +22,4 @@ const UserList = ({ track }) => {
 	);
 };
 
-export default UserList;
+export default CuratorList;

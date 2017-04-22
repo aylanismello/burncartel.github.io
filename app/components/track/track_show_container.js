@@ -2,15 +2,15 @@ import { connect } from 'react-redux';
 import TrackShow from './track_show';
 import { updateTrackId,
  	updateFilters } from '../../actions/feed_actions';
-import { getTracksHash } from '../../selectors/track_selector';
+import { getFeedTracksHash } from '../../selectors/track_selector';
 import * as _ from 'lodash';
 
 const mapStateToProps = (state, ownProps) => {
-	const tracksHash = getTracksHash(state);
-	const track = tracksHash[ownProps.params.id];
+	const tracksHash = getFeedTracksHash(state);
+	const track = tracksHash[ownProps.match.params.id];
 
 	return {
-		id: ownProps.params.id,
+		id: ownProps.match.params.id,
 		track
 	};
 };

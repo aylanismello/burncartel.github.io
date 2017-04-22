@@ -1,11 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 
 const style = {
 	border: '5px solid black'
 };
 
-const UserItem = ({ user, handleUserChange }) => {
+const CuratorItem = ({ user, handleUserChange }) => {
 	// the thing we're going to print out here is actually
 	// the location data we've found using geocode api and more
 	const userLocation = (user.city ? user.city : 'nowhere, usa');
@@ -52,4 +52,4 @@ const UserItem = ({ user, handleUserChange }) => {
 	);
 };
 
-export default UserItem;
+export default CuratorItem;

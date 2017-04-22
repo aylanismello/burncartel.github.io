@@ -1,8 +1,10 @@
 // https://github.com/voronianski/soundcloud-audio.js
 import React from 'react';
-import { Link } from 'react-router';
-import * as FontAwesome from 'react-icons/lib/fa/';
+import { Link } from 'react-router-dom';
 import SoundCloudAudio from 'soundcloud-audio';
+import * as FontAwesome from 'react-icons/lib/fa/';
+import FireLike from '../likes/fire_like';
+
 
 class BurnCartelPlayer extends React.Component {
 
@@ -13,6 +15,7 @@ class BurnCartelPlayer extends React.Component {
     this.pauseTrack = this.pauseTrack.bind(this);
     this.playTrack = this.playTrack.bind(this);
     this.scAudio = new SoundCloudAudio(props.clientId);
+    window.sc = this.scAudio;
     this.secondsToMinutes = this.secondsToMinutes.bind(this);
     this.track = null;
     this.playIcon = null;
@@ -36,11 +39,6 @@ class BurnCartelPlayer extends React.Component {
     this.playTrack();
 
     let currentTime = 0;
-
-
-
-    debugger;
-
 
     this.scAudio.on('timeupdate', () => {
 
@@ -154,36 +152,55 @@ class BurnCartelPlayer extends React.Component {
       )
     }
 
-    return (
-      <div className="burn-cartel-player-container">
 
-        <div className='burn-cartel-player-details'>
-          {details}
-        </div>
+    if(this.props.playerInitialized) {
+      const { isLoggedIn, loginFB, likePostInProgress,
+        likeUnlikeTrack, numLikes, trackId, track, userLikes } = this.props;
 
-        <div className='burn-cartel-player-control'>
+      return (
+        <div className="burn-cartel-player-container">
 
-          <FontAwesome.FaStepBackward
-            size={50}
-            color='aliceblue'
-            className='bc-icon'/>
-          <div onClick={this.toggle}> {this.playIcon} </div>
-
-          <FontAwesome.FaStepForward
-            size={50}
-            color='aliceblue'
-            className='bc-icon'/>
-
-          <div onClick={this.props.toggleRepeat}>
-            <FontAwesome.FaRepeat
-               size={50}
-               color={this.props.repeating? 'green' : 'red'}
-              className='bc-icon'/>
+          <div className='burn-cartel-player-details'>
+            {details}
           </div>
 
-        </div>
-      </div>
-		);
+          <div className='burn-cartel-player-control'>
+
+            <FireLike
+              isLoggedIn={isLoggedIn}
+              loginFB={loginFB}
+              likePostInProgress={likePostInProgress}
+              likeUnlikeTrack={likeUnlikeTrack}
+              isLikedByUser={userLikes[trackId] === undefined ? false : true }
+              trackId={trackId}
+            />
+
+
+            <FontAwesome.FaStepBackward
+              size={50}
+              color='aliceblue'
+              className='bc-icon'/>
+              <div onClick={this.toggle}> {this.playIcon} </div>
+
+              <FontAwesome.FaStepForward
+                size={50}
+                color='aliceblue'
+                className='bc-icon'/>
+
+                {/* <div onClick={this.props.toggleRepeat}>
+                  <FontAwesome.FaRepeat
+                  size={50}
+                  color={this.props.repeating? 'green' : 'red'}
+                  className='bc-icon'/>
+                </div> */}
+
+              </div>
+            </div>
+
+          );
+    } else {
+      return <div></div>
+    }
   }
 }
 

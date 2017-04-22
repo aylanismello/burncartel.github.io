@@ -1,8 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
+import { GoFlame } from 'react-icons/lib/go';
+import FireLike from '../likes/fire_like';
 
 
-const TrackItem = ({ track, handleTrackClick, playing, trackId, trackLoaded, trackIdx }) => {
+const TrackItem = ({ track, handleTrackClick, playing,
+	trackId, trackLoaded, trackIdx, isLoggedIn, loginFB,
+	likeUnlikeTrack, isLikedByUser, likePostInProgress }) => {
 	const numCurators = track.curators.length;
 	const curatorWord = (numCurators <= 1 ? 'curator' : 'curators');
 	const curatorsStr = `${numCurators} ${curatorWord}`
@@ -17,6 +21,14 @@ const TrackItem = ({ track, handleTrackClick, playing, trackId, trackLoaded, tra
 		} else {
 			playIcon = 'https://cdn1.iconfinder.com/data/icons/loading-wait-time/256/loading_wait_time_02-128.png';
 		}
+	}
+
+	let flameColor;
+
+ 	if(isLikedByUser) {
+		flameColor = 'orange';
+	} else {
+		flameColor = 'black';
 	}
 
 	return (
@@ -45,22 +57,26 @@ const TrackItem = ({ track, handleTrackClick, playing, trackId, trackLoaded, tra
 								<h3 className="track-title" onClick={() => handleTrackClick(track.id)}>{track.name}</h3>
 							</Link>
 
+							<div>
+								<span> By {track.publisher.name} </span>
+							</div>
 							<span>Selected by {curatorsStr} </span>
 
-							<div className="track-item-icons">
-								<div onClick={() => alert('u have decreed this sick af')} className="track-item-icon-container">
-									<img
-									className="track-item-icon"
-									src="http://pix.iemoji.com/images/emoji/apple/ios-9/256/fire.png"/>
-								</div>
 
-								<div className="track-item-icon">
-									<a href={track.permalink_url} target="_blank">
-										<img
-											className="soundcloud-png"
-											src="https://developers.soundcloud.com/assets/logo_big_black-4fbe88aa0bf28767bbfc65a08c828c76.png"/>
-									</a>
-								</div>
+
+
+							<div className="track-item-icons">
+
+								<FireLike
+									isLoggedIn={isLoggedIn}
+									loginFB={loginFB}
+									likePostInProgress={likePostInProgress}
+									likeUnlikeTrack={likeUnlikeTrack}
+									numLikes={track.num_likes}
+									isLikedByUser={isLikedByUser}
+									trackId={track.id}
+								/>
+
 						</div>
 
 						</div>

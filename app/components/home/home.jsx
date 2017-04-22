@@ -1,17 +1,18 @@
 import React from 'react';
 import FeedContainer from '../feed/feed_container';
+import { FEEDS } from '../../reducers/feed_reducer';
+
 
 class Home extends React.Component {
 	constructor(props) {
 		super(props);
-		// this.handleFilterChange = this.handleFilterChange.bind(this);
 		this.state = {
 			selected: 0
 		};
 	}
 
 	componentWillMount() {
-		// this.props.updateFilters({curator: -1, sort: 'influential'});
+		this.props.setFeedType(FEEDS.FIRE);
 		this.props.updateFilters({sort: 'influential'});
 	}
 
@@ -19,11 +20,10 @@ class Home extends React.Component {
 		this.props.updateFilters(newFilter);
 	}
 
-
 	render() {
 
 		return (
-			<div className="home-page-container">
+			<div className="container home-page-container">
 				<div className="btn-group btn-group-justified" role="group" aria-label="Justified button group" >
 					<button className="btn btn-default"
 					onClick={this.handleFilterChange.bind(this, {sort: 'influential'})}
