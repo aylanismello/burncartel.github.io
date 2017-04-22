@@ -4,14 +4,21 @@ A modern-ish React/Redux Single Page App, build mobile-first to provide an engag
 listening experience for most, and an engaging exploration mode for some.
 #### Fire Feed Web Client
 ***Note:***
-This page gets served locally with "http-server" (listed in the package.json as a dependency). We therefore **need to connect to a local Rails server running the BC FIRE API**, [BC Fire Feed](www.github.com/aylanismello/bc-fire-api). See installation instructions for that separately.
+This page gets served locally with the node package "http-server". We therefore **need to connect to a local Rails server running the BC FIRE API**, [BC Fire Feed](www.github.com/aylanismello/bc-fire-api). See installation instructions for that separately.
 
 
 ## Getting started
 
 `git clone ${repo_name}`
 
+Follow the installation instructions to install NVM.
+(not necessary, but very nice moving forward)
+https://github.com/creationix/nvm
+
 `gem install foreman`
+
+`gem install sass`
+
 
 **OSX**
 
