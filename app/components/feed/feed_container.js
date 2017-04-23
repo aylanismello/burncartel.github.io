@@ -27,8 +27,9 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = dispatch => ({
 	fetchTracks: (filters, isNewpage) => dispatch(fetchTracks(filters, isNewpage)),
-	handleTrackClick: (trackId) => {
-		dispatch(handleTrackClick(trackId))
+	handleTrackClick: (trackId, clickType = 'play') => {
+		dispatch(handleTrackClick(trackId, clickType))
+
 	},
 	loginFB: () => dispatch(loginFB()),
 	likeUnlikeTrack: (trackId) => dispatch(likeUnlikeTrack(trackId)),

@@ -17,6 +17,16 @@ const initialState = {
 		trackId: -1,
 		loadingFeed: true,
 		page: 1
+	},
+	playingFeed: {
+		tracks: [],
+		filters: {
+		},
+		userLikeId: -1,
+		feedType: FEEDS.FIRE,
+		trackId: -1,
+		loadingFeed: true,
+		page: 1
 	}
 };
 
@@ -45,25 +55,17 @@ const FeedReducer = (state = initialState, action) => {
 			return { ...state, focusedFeed: {...state.focusedFeed,  tracks: [] } };
 		case feedConstants.RECEIVE_TRACKS:
 			const newTracks = {};
-			// why is this even still here?
-			// doesn't the track selector do this for us?
-
-				// MIGHT NEED THIS
-			// action.tracks.forEach((track) => {
-			// 	newTracks[track.id] = track;
-			// });
-
-			// for some reason the last tracks from old tracks and new tracks double up
-			// return { ...state, tracks: [ ...state.tracks, ...action.tracks.slice(1) ] };
 			return { ...state, focusedFeed: {...state.focusedFeed, tracks: [ ...state.focusedFeed.tracks, ...action.tracks ] } };
-			// return { ...state, tracks: action.tracks  };
-			// return { ...state, tracks: [ ...state.tracks ] };
 		case feedConstants.UPDATE_FILTERS:
 			const newFilters = { ...initialState.focusedFeed.filters, ...action.filters } ;
 			const newState = { ...state, focusedFeed: {...state.focusedFeed, filters: newFilters } };
 			return newState;
 		case feedConstants.UPDATE_TRACK_ID:
 			return { ...state, focusedFeed: {...state.focusedFeed, trackId: action.trackId } };
+		case feedConstants.UPDATE_FOCUSED_TRACK_ID:
+			return { ...state, focusedFeed: {...state.focusedFeed, trackId: action.trackId } };
+		case feedConstants.UPDATE_PLAYING_TRACK_ID:
+			return { ...state, focusedFeed: {...state.playingFeed, trackId: action.trackId } };
 		case feedConstants.LOADING_START:
 			return { ...state, focusedFeed: {...state.focusedFeed, loadingFeed: true } };
 		case feedConstants.LOADING_STOP:

@@ -7,7 +7,9 @@ import { feedConstants,
 	incrementPage,
 	resetTracks,
 	fetchTracks,
-	updatePageTitle
+	updatePageTitle,
+	updateFocusedTrackId,
+	updatePlayingTrackId
 } from '../actions/feed_actions';
 import {
 	togglePlay
@@ -59,20 +61,30 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 			return next(action);
 		case feedConstants.HANDLE_TRACK_CLICK:
 			// GOING TO NEW TRACK
-			if(getState().feed.focusedFeed.trackId !== action.trackId) {
-				// change this to .real_name when that story is completed
-				const newTrackName = getFeedTracksHash(getState())[action.trackId].name;
-				dispatch(updatePageTitle(newTrackName));
 
-				dispatch(updateTrackId(action.trackId));
-				if(!getState().player.playing) {
-					dispatch(togglePlay());
+
+			if(action.clickType === 'play') {
+				if(getState().feed.focusedFeed.trackId !== action.trackId) {
+					// change this to .real_name when that story is completed
+					const newTrackName = getFeedTracksHash(getState())[action.trackId].name;
+					dispatch(updatePageTitle(newTrackName));
+
+					dispatch(updateTrackId(action.trackId));
+					if(!getState().player.playing) {
+						dispatch(togglePlay());
+					}
+				} else {
+					dispatch(togglePlay()); 	// TOGGLING OLD TRACK
 				}
+					// what if you're coming from a paused song?
 			} else {
-				dispatch(togglePlay()); 	// TOGGLING OLD TRACK
+
+				dispatch(updateFocusedTrackId(action.trackId));
+				
+				debugger;
 			}
-				// what if you're coming from a paused song?
-				return next(action);
+
+			return next(action);
 		case feedConstants.UPDATE_PAGE_TITLE:
 			document.title = `${action.trackName} | Fire Feed`;
 			return next(action);
