@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { GoFlame } from 'react-icons/lib/go';
 import FireLike from '../likes/fire_like';
 
-
 const TrackItem = ({ track, handleTrackClick, playing,
 	trackId, trackLoaded, trackIdx, isLoggedIn, loginFB,
 	likeUnlikeTrack, isLikedByUser, likePostInProgress }) => {
@@ -13,13 +12,19 @@ const TrackItem = ({ track, handleTrackClick, playing,
 
 	const artwork_url = (track.artwork_url ? track.artwork_url : track.publisher.avatar_url);
 
-	let playIcon = 'https://cdn3.iconfinder.com/data/icons/seo-marketing-2-1/48/56-128.png';
+	const playIconUrl = 'https://cdn3.iconfinder.com/data/icons/seo-marketing-2-1/48/56-128.png';
+	const pauseIconUrl = 'https://cdn1.iconfinder.com/data/icons/media-volume-1/48/017-512.png';
+	const loadingIconUrl = 'https://cdn1.iconfinder.com/data/icons/loading-wait-time/256/loading_wait_time_02-128.png';
+
+	let playIcon = playIconUrl;
 
 	if(trackId === track.id) {
 		if(trackLoaded && playing) {
-			playIcon = 'https://cdn2.iconfinder.com/data/icons/general-22/1000/pause_button-128.png';
+			playIcon = pauseIconUrl;
+		} else if(trackLoaded && !playing) {
+			playIcon = playIconUrl;
 		} else {
-			playIcon = 'https://cdn1.iconfinder.com/data/icons/loading-wait-time/256/loading_wait_time_02-128.png';
+			playIcon = loadingIconUrl;
 		}
 	}
 
@@ -62,11 +67,7 @@ const TrackItem = ({ track, handleTrackClick, playing,
 							</div>
 							<span>Selected by {curatorsStr} </span>
 
-
-
-
 							<div className="track-item-icons">
-
 								<FireLike
 									isLoggedIn={isLoggedIn}
 									loginFB={loginFB}
@@ -76,7 +77,6 @@ const TrackItem = ({ track, handleTrackClick, playing,
 									isLikedByUser={isLikedByUser}
 									trackId={track.id}
 								/>
-
 						</div>
 
 						</div>
