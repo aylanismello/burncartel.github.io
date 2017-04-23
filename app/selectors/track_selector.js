@@ -1,8 +1,8 @@
 import { createSelector } from 'reselect';
 
 const getUserTracks = state => state.user.currentUser.tracks
-const getTracks = state => state.feed.tracks;
-const getCurrentTrackId = state => state.feed.trackId;
+const getTracks = state => state.feed.focusedFeed.tracks;
+const getCurrentTrackId = state => state.feed.focusedFeed.trackId;
 
 export const getFeedTracksHash = createSelector(
 		[getTracks],

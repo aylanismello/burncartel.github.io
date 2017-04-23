@@ -13,7 +13,7 @@ import { getFeedTracksHash, getNextTrackId, getUserTracksHash } from '../../sele
 const mapStateToProps = (state) => {
 
 	const tracksHash = getFeedTracksHash(state);
-	const track = tracksHash[state.feed.trackId];
+	const track = tracksHash[state.feed.focusedFeed.trackId];
 	const nextTrackId = getNextTrackId(state);
 	// console.log(`next track id is ${nextTrackId}`);
 	// replace this with reading from .env
@@ -23,12 +23,12 @@ const mapStateToProps = (state) => {
 		clientId: "282558e0e8cdcd8a9b3ba2b4917596b7",
 		track,
 		trackLoaded: state.player.trackLoaded,
-		trackId: state.feed.trackId,
+		trackId: state.feed.focusedFeed.trackId,
 		nextTrackId,
 		playing: state.player.playing,
 		repeating: state.player.repeating,
 		currentTime: state.player.currentTime,
-		filters: state.feed.filters,
+		filters: state.feed.focusedFeed.filters,
 		playerInitialized: state.player.playerInitialized,
 		isLoggedIn: ( state.user.currentUser.uid ? true : false),
 		likePostInProgress: state.user.likePostInProgress,

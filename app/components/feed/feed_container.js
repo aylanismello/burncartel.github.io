@@ -12,17 +12,17 @@ import { getUserTracksHash } from '../../selectors/track_selector';
 
 // add userTracks here if we need to re-render their likes feed as they update it
 const mapStateToProps = (state, ownProps) => ({
-	tracks: state.feed.tracks,
+	tracks: state.feed.focusedFeed.tracks,
 	elements: ownProps.elements,
-	filters: state.feed.filters,
-	loadingFeed: state.feed.loadingFeed,
-	trackId: state.feed.trackId,
+	filters: state.feed.focusedFeed.filters,
+	loadingFeed: state.feed.focusedFeed.loadingFeed,
+	trackId: state.feed.focusedFeed.trackId,
 	playing: state.player.playing,
 	trackLoaded: state.player.trackLoaded,
 	userLikes: getUserTracksHash(state),
 	isLoggedIn: ( state.user.currentUser.uid ? true : false),
 	likePostInProgress: state.user.likePostInProgress,
-	page: state.feed.page
+	page: state.feed.focusedFeed.page
 });
 
 const mapDispatchToProps = dispatch => ({

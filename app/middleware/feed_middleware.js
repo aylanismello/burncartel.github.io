@@ -23,7 +23,7 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 	switch(action.type) {
 
 		case feedConstants.PAGINATE_TRACKS:
-			dispatch(fetchTracks(getState().feed.filters, true));
+			dispatch(fetchTracks(getState().feed.focusedFeed.filters, true));
 			return next(action);
 		case feedConstants.FETCH_TRACKS:
 			dispatch(loadingStart());
@@ -32,22 +32,22 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 				dispatch(incrementPage());
 			} else {
 				// if not new page, we have a need feed load...
-				// might need to clear the feed.tracks here too
+				// might need to clear the feed.focusedFeed.tracks here too
 				dispatch(resetPage());
 				dispatch(resetTracks());
 			}
 
-			if(getState().feed.feedType === FEEDS.FIRE) {
+			if(getState().feed.focusedFeed.feedType === FEEDS.FIRE) {
 				getTracks({ sort: 'influential', ...action.filters}, (tracks) => {
 					dispatch(loadingStop());
 					dispatch(receiveTracks(tracks));
 				}, (error) => {
 					// make error reducer here
 					console.log(`ERROR FETCHING TRACKS: got ${error}`);
-				}, getState().feed.page);
-			} else if(getState().feed.feedType === FEEDS.LIKES) {
+				}, getState().feed.focusedFeed.page);
+			} else if(getState().feed.focusedFeed.feedType === FEEDS.LIKES) {
 
-				getLikes(getState().feed.userLikeId, (tracks) => {
+				getLikes(getState().feed.focusedFeed.userLikeId, (tracks) => {
 					dispatch(loadingStop());
 					dispatch(receiveTracks(tracks));
 				}, (error) => {
@@ -59,7 +59,7 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 			return next(action);
 		case feedConstants.HANDLE_TRACK_CLICK:
 			// GOING TO NEW TRACK
-			if(getState().feed.trackId !== action.trackId) {
+			if(getState().feed.focusedFeed.trackId !== action.trackId) {
 				// change this to .real_name when that story is completed
 				const newTrackName = getFeedTracksHash(getState())[action.trackId].name;
 				dispatch(updatePageTitle(newTrackName));

@@ -8,25 +8,27 @@ export const FEEDS = {
 }
 
 const initialState = {
-	tracks: [],
-	filters: {
-	},
-	userLikeId: -1,
-	feedType: FEEDS.FIRE,
-	trackId: -1,
-	loadingFeed: true,
-	page: 1
+	focusedFeed: {
+		tracks: [],
+		filters: {
+		},
+		userLikeId: -1,
+		feedType: FEEDS.FIRE,
+		trackId: -1,
+		loadingFeed: true,
+		page: 1
+	}
 };
 
 const FeedReducer = (state = initialState, action) => {
 	switch(action.type) {
 		case feedConstants.SET_LIKE_FEED_USER_ID:
-			return { ...state, userLikeId: action.userId };
+			return { ...state, focusedFeed: {...state.focusedFeed, userLikeId: action.userId }};
 		case feedConstants.SET_FEED_TYPE:
-			return { ...state, feedType: action.feedType };
+			return { ...state, focusedFeed: {...state.focusedFeed, feedType: action.feedType } };
 		case feedConstants.UPDATE_TRACK_LIKE_COUNT:
 
-			let updateTracksWithLikeCount = state.tracks.map((track, idx) => {
+			let updateTracksWithLikeCount = state.focusedFeed.tracks.map((track, idx) => {
 				if(track.id === action.trackId) {
 					return { ...track, num_likes: action.likeCount };
 				} else {
@@ -34,36 +36,38 @@ const FeedReducer = (state = initialState, action) => {
 				}
 			});
 
-			return { ...state, tracks: updateTracksWithLikeCount };
+			return { ...state, focusedFeed: {...state.focusedFeed, tracks: updateTracksWithLikeCount } };
 		case feedConstants.INCREMENT_PAGE:
-			return { ...state, page: (state.page + 1) }
+			return { ...state, focusedFeed: {...state.focusedFeed, page: (state.focusedFeed.page + 1) } };
 		case feedConstants.RESET_PAGE:
-			return { ...state, page: 1 };
+			return { ...state, focusedFeed: {...state.focusedFeed, page: 1 } };
 		case feedConstants.RESET_TRACKS:
-			return { ...state, tracks: [] };
+			return { ...state, focusedFeed: {...state.focusedFeed,  tracks: [] } };
 		case feedConstants.RECEIVE_TRACKS:
 			const newTracks = {};
 			// why is this even still here?
 			// doesn't the track selector do this for us?
-			action.tracks.forEach((track) => {
-				newTracks[track.id] = track;
-			});
+
+				// MIGHT NEED THIS
+			// action.tracks.forEach((track) => {
+			// 	newTracks[track.id] = track;
+			// });
 
 			// for some reason the last tracks from old tracks and new tracks double up
 			// return { ...state, tracks: [ ...state.tracks, ...action.tracks.slice(1) ] };
-			return { ...state, tracks: [ ...state.tracks, ...action.tracks ] };
+			return { ...state, focusedFeed: {...state.focusedFeed, tracks: [ ...state.focusedFeed.tracks, ...action.tracks ] } };
 			// return { ...state, tracks: action.tracks  };
 			// return { ...state, tracks: [ ...state.tracks ] };
 		case feedConstants.UPDATE_FILTERS:
-			const newFilters = { ...initialState.filters, ...action.filters } ;
-			const newState = { ...state, filters: newFilters };
+			const newFilters = { ...initialState.focusedFeed.filters, ...action.filters } ;
+			const newState = { ...state, focusedFeed: {...state.focusedFeed, filters: newFilters } };
 			return newState;
 		case feedConstants.UPDATE_TRACK_ID:
-			return { ...state, trackId: action.trackId };
+			return { ...state, focusedFeed: {...state.focusedFeed, trackId: action.trackId } };
 		case feedConstants.LOADING_START:
-			return { ...state, loadingFeed: true };
+			return { ...state, focusedFeed: {...state.focusedFeed, loadingFeed: true } };
 		case feedConstants.LOADING_STOP:
-			return { ...state, loadingFeed: false };
+			return { ...state, focusedFeed: {...state.focusedFeed, loadingFeed: false } };
 		default:
 			return state;
 	}
