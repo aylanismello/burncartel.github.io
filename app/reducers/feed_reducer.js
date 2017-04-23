@@ -4,7 +4,8 @@ import * as _ from 'lodash';
 
 export const FEEDS = {
 	FIRE: 'FIRE',
-	LIKES: 'LIKES'
+	LIKES: 'LIKES',
+	CURATOR: 'CURATOR'
 }
 
 const initialState = {
@@ -23,10 +24,11 @@ const initialState = {
 		filters: {
 		},
 		userLikeId: -1,
-		feedType: FEEDS.FIRE,
+		feedType: null,
 		trackId: -1,
 		loadingFeed: true,
-		page: 1
+		page: 1,
+		feedName: ""
 	}
 };
 
@@ -62,6 +64,8 @@ const FeedReducer = (state = initialState, action) => {
 			const newFilters = { ...initialState.focusedFeed.filters, ...action.filters } ;
 			const newState = { ...state, focusedFeed: {...state.focusedFeed, filters: newFilters } };
 			return newState;
+		case feedConstants.SET_PLAYING_FEED_NAME:
+			return { ...state, playingFeed: { ...state.playingFeed, feedName: action.feedName } };
 		case feedConstants.UPDATE_TRACK_ID:
 			return { ...state, focusedFeed: {...state.focusedFeed, trackId: action.trackId } };
 		case feedConstants.UPDATE_FOCUSED_TRACK_ID:

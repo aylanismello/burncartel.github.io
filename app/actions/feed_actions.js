@@ -17,8 +17,15 @@ export const feedConstants = {
 	SET_LIKE_FEED_USER_ID: 'SET_LIKE_FEED_USER_ID',
 	PAGINATE_TRACKS: 'PAGINATE_TRACKS',
 	UPDATE_PAGE_TITLE: 'UPDATE_PAGE_TITLE',
-	RECEIVE_PLAYING_TRACKS: 'RECEIVE_PLAYING_TRACKS'
+	RECEIVE_PLAYING_TRACKS: 'RECEIVE_PLAYING_TRACKS',
+	SET_PLAYING_FEED_NAME: 'SET_PLAYING_FEED_NAME'
 };
+
+
+export const setPlayingFeedName = (feedName) => ({
+	type: feedConstants.SET_PLAYING_FEED_NAME,
+	feedName
+});
 
 export const updatePageTitle = (trackName) => ({
 	type: feedConstants.UPDATE_PAGE_TITLE,

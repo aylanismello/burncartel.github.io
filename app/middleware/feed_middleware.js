@@ -10,7 +10,8 @@ import { feedConstants,
 	updatePageTitle,
 	updateFocusedTrackId,
 	updatePlayingTrackId,
-	receivePlayingTracks
+	receivePlayingTracks,
+	setPlayingFeedName
 } from '../actions/feed_actions';
 import {
 	togglePlay
@@ -58,7 +59,6 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 				}, (error) => {
 					console.log(`ERORR GETTING ${error}`);
 				});
-
 			}
 
 			return next(action);
@@ -69,17 +69,38 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 					// change this to .real_name when that story is completed
 					const newTrackName = getFeedTracksHash(getState())[action.trackId].name;
 					dispatch(updatePageTitle(newTrackName));
-
 					dispatch(updatePlayingTrackId(action.trackId));
 
 					// here we copy over feed.focusedFeed to feed.playingFeed if they are not equal
-
 					const tracksInFocus = getState().feed.focusedFeed.tracks;
 
 					if(!_.isEqual(getState().feed.playingFeed.tracks, tracksInFocus)) {
 						console.log('you just started playing a track from a new feed (one that is not focused)!');
 						// playingFeed = deepClone of currentFeed?
+						// also update name of feed for player!
 						dispatch(receivePlayingTracks(tracksInFocus));
+
+
+						let newFeedName;
+
+						const feedType = getState().feed.focusedFeed.feedType;
+
+						if(feedType === "LIKES") {
+							newFeedName = 'LIKES';
+						} else if(feedType === "FIRE") {
+							if(getState().feed.focusedFeed.filters['sort']) {
+								newFeedName = getState().feed.focusedFeed.filters['sort']; // fuck probs shouldn't call this a reserved keyword
+							} else {
+								newFeedName = 'some unknown fire'
+							}
+						} else if(feedType === "CURATOR"){
+							newFeedName = `CURATOR ${getState().feed.focusedFeed.filters.curator}'s`
+						}
+
+						dispatch(setPlayingFeedName(newFeedName));
+					} else { // if the focusedTracks and playingTracks are the same...
+						console.log('wtf');
+								// ???
 					}
 
 					if(!getState().player.playing) {

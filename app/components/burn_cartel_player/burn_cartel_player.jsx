@@ -11,6 +11,7 @@ class BurnCartelPlayer extends React.Component {
   constructor(props) {
     super(props);
     this.toggle = this.toggle.bind(this);
+    this.goToNextTrack = this.goToNextTrack.bind(this);
     this.playAndLoadTrack = this.playAndLoadTrack.bind(this);
     this.pauseTrack = this.pauseTrack.bind(this);
     this.playTrack = this.playTrack.bind(this);
@@ -55,10 +56,22 @@ class BurnCartelPlayer extends React.Component {
     });
 
     this.scAudio.on('ended', () => {
-      this.props.updateTrackId(this.props.nextTrackId);
+      if(this.props.nextTrackId) {
+        this.props.updateTrackId(this.props.nextTrackId);
+      } else {
+        console.log('out of tracks.. must paginate!');
+      }
       // maybe here we send a post request to increment play count of
       // this track and add to user's history
     });
+  }
+
+  goToNextTrack() {
+    if(this.props.nextTrackId) {
+      this.props.updateTrackId(this.props.nextTrackId);
+    } else {
+      console.log('out of tracks.. must paginate!');
+    }
   }
 
   pauseTrack() {
@@ -82,22 +95,6 @@ class BurnCartelPlayer extends React.Component {
         this.playTrack();
       }
     }
-
-
-    // repeat changed
-    // if (this.props.repeating !== nextProps.repeating) {
-    //   if(nextProps.repeating) {
-    //     this.scAudio.on('ended', () => {
-    //       this.scAudio.audio.currentTime = 0;
-    //     });
-    //   } else {
-    //     this.scAudio.on('ended', () => {
-    //       this.props.updateTrackId(this.props.nextTrackId);
-    //     });
-    //   }
-    //
-    // }
-
   }
 
   toggle() {
@@ -132,12 +129,14 @@ class BurnCartelPlayer extends React.Component {
               <Link
                 to={`/tracks/${this.track.id}`}
               >
-                {/* {this.track.name} */}
                 <h3 className="track-title" onClick={() => handleTrackClick(this.track.id)}>{this.track.name}</h3>
               </Link>
             </div>
             <div>
               by {this.track.publisher.name}
+            </div>
+            <div>
+              Playing from {this.props.feedName.toUpperCase()} feed
             </div>
             <div>
               {this.secondsToMinutes(this.props.currentTime)}
@@ -176,16 +175,22 @@ class BurnCartelPlayer extends React.Component {
             />
 
 
-            <FontAwesome.FaStepBackward
+            {/* <FontAwesome.FaStepBackward
               size={50}
               color='aliceblue'
-              className='bc-icon'/>
-              <div onClick={this.toggle}> {this.playIcon} </div>
+              className='bc-icon'/> */}
+
+              <div
+                onClick={this.toggle}>
+                {this.playIcon}
+              </div>
 
               <FontAwesome.FaStepForward
                 size={50}
                 color='aliceblue'
-                className='bc-icon'/>
+                className='bc-icon'
+                onClick={this.goToNextTrack}
+              />
 
                 {/* <div onClick={this.props.toggleRepeat}>
                   <FontAwesome.FaRepeat
