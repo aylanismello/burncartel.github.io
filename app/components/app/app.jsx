@@ -28,6 +28,8 @@ class App extends React.Component {
     if(!_.isEqual(this.props.feedType, nextProps.feedType)) {
       if(nextProps.feedType === FEEDS.LIKES) {
         this.props.fetchTracks();
+      } else if(nextProps.feedType === FEEDS.FIRE) {
+        this.props.fetchTracks();
       }
     }
 
