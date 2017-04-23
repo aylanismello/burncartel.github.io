@@ -5,7 +5,7 @@ import FireLike from '../likes/fire_like';
 
 const TrackItem = ({ track, handleTrackClick, playing,
 	trackId, trackLoaded, trackIdx, isLoggedIn, loginFB,
-	likeUnlikeTrack, isLikedByUser, likePostInProgress }) => {
+	likeUnlikeTrack, isLikedByUser, likePostInProgress, playingTrackId }) => {
 	const numCurators = track.curators.length;
 	const curatorWord = (numCurators <= 1 ? 'curator' : 'curators');
 	const curatorsStr = `${numCurators} ${curatorWord}`
@@ -18,7 +18,7 @@ const TrackItem = ({ track, handleTrackClick, playing,
 
 	let playIcon = playIconUrl;
 
-	if(trackId === track.id) {
+	if(playingTrackId === track.id) {
 		if(trackLoaded && playing) {
 			playIcon = pauseIconUrl;
 		} else if(trackLoaded && !playing) {

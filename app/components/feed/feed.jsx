@@ -10,7 +10,7 @@ const Feed = ({ tracks, filters, trackLoaded,
 	handleTrackClick, loadingFeed, trackId,
 	playing, fetchTracks, isLoggedIn, loginFB,
 	likeUnlikeTrack, userLikes, likePostInProgress,
- 	paginateTracks, page }) => {
+ 	paginateTracks, page, playingTrackId }) => {
 	let childElements;
 
 	if(loadingFeed && page === 1) {
@@ -22,6 +22,7 @@ const Feed = ({ tracks, filters, trackLoaded,
 				track={track}
 				trackIdx={idx}
 				trackId={trackId}
+				playingTrackId={playingTrackId}
 				playing={playing}
 				trackLoaded={trackLoaded}
 				handleTrackClick={handleTrackClick}

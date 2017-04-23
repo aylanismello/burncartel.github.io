@@ -56,6 +56,8 @@ const FeedReducer = (state = initialState, action) => {
 		case feedConstants.RECEIVE_TRACKS:
 			const newTracks = {};
 			return { ...state, focusedFeed: {...state.focusedFeed, tracks: [ ...state.focusedFeed.tracks, ...action.tracks ] } };
+		case feedConstants.RECEIVE_PLAYING_TRACKS:
+			return { ...state, playingFeed: { ...state.playingFeed, tracks: action.tracks } };
 		case feedConstants.UPDATE_FILTERS:
 			const newFilters = { ...initialState.focusedFeed.filters, ...action.filters } ;
 			const newState = { ...state, focusedFeed: {...state.focusedFeed, filters: newFilters } };
@@ -65,7 +67,7 @@ const FeedReducer = (state = initialState, action) => {
 		case feedConstants.UPDATE_FOCUSED_TRACK_ID:
 			return { ...state, focusedFeed: {...state.focusedFeed, trackId: action.trackId } };
 		case feedConstants.UPDATE_PLAYING_TRACK_ID:
-			return { ...state, focusedFeed: {...state.playingFeed, trackId: action.trackId } };
+			return { ...state, playingFeed: {...state.playingFeed, trackId: action.trackId } };
 		case feedConstants.LOADING_START:
 			return { ...state, focusedFeed: {...state.focusedFeed, loadingFeed: true } };
 		case feedConstants.LOADING_STOP:

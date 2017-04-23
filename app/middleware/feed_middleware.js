@@ -9,7 +9,8 @@ import { feedConstants,
 	fetchTracks,
 	updatePageTitle,
 	updateFocusedTrackId,
-	updatePlayingTrackId
+	updatePlayingTrackId,
+	receivePlayingTracks
 } from '../actions/feed_actions';
 import {
 	togglePlay
@@ -20,6 +21,8 @@ import {
 	getTracks,
 	getLikes
 } from '../util/bc_api';
+import * as _ from 'lodash';
+
 
 const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 	switch(action.type) {
@@ -61,15 +64,24 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 			return next(action);
 		case feedConstants.HANDLE_TRACK_CLICK:
 			// GOING TO NEW TRACK
-
-
 			if(action.clickType === 'play') {
-				if(getState().feed.focusedFeed.trackId !== action.trackId) {
+				if(getState().feed.playingFeed.trackId !== action.trackId) {
 					// change this to .real_name when that story is completed
 					const newTrackName = getFeedTracksHash(getState())[action.trackId].name;
 					dispatch(updatePageTitle(newTrackName));
 
-					dispatch(updateTrackId(action.trackId));
+					dispatch(updatePlayingTrackId(action.trackId));
+
+					// here we copy over feed.focusedFeed to feed.playingFeed if they are not equal
+
+					const tracksInFocus = getState().feed.focusedFeed.tracks;
+
+					if(!_.isEqual(getState().feed.playingFeed.tracks, tracksInFocus)) {
+						console.log('you just started playing a track from a new feed (one that is not focused)!');
+						// playingFeed = deepClone of currentFeed?
+						dispatch(receivePlayingTracks(tracksInFocus));
+					}
+
 					if(!getState().player.playing) {
 						dispatch(togglePlay());
 					}
@@ -78,10 +90,7 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 				}
 					// what if you're coming from a paused song?
 			} else {
-
 				dispatch(updateFocusedTrackId(action.trackId));
-				
-				debugger;
 			}
 
 			return next(action);

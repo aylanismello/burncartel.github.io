@@ -16,7 +16,8 @@ export const feedConstants = {
 	SET_FEED_TYPE: 'SET_FEED_TYPE',
 	SET_LIKE_FEED_USER_ID: 'SET_LIKE_FEED_USER_ID',
 	PAGINATE_TRACKS: 'PAGINATE_TRACKS',
-	UPDATE_PAGE_TITLE: 'UPDATE_PAGE_TITLE'
+	UPDATE_PAGE_TITLE: 'UPDATE_PAGE_TITLE',
+	RECEIVE_PLAYING_TRACKS: 'RECEIVE_PLAYING_TRACKS'
 };
 
 export const updatePageTitle = (trackName) => ({
@@ -72,6 +73,11 @@ export const loadingStop = () => ({
 
 export const receiveTracks = (tracks) => ({
 	type: feedConstants.RECEIVE_TRACKS,
+	tracks
+});
+
+export const receivePlayingTracks = (tracks) => ({
+	type: feedConstants.RECEIVE_PLAYING_TRACKS,
 	tracks
 });
 
