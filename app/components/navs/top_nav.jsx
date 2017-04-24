@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import $ from 'jquery';
 import React from 'react';
 
@@ -28,11 +29,11 @@ const TopNav = ({ currentUser, logoutCurrentUser,
 	return (
 		<nav className="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse bc-nav">
 
-			<a className="navbar-brand" href="#">
+			<Link to="/" className="navbar-brand">
 				<div className="logo-container">
 					<img src="../../assets/bc_small_1.png" alt="Burn Cartel"/>
 				</div>
-			</a>
+			</Link>
 
 			<div className="login-out-container">
 

@@ -17,11 +17,16 @@ class App extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if(nextProps.filters.resource ) {
+    if(nextProps.filters.resource) {
       if(!_.isEqual(this.props.filters, nextProps.filters)) {
         this.props.fetchFeed(nextProps.filters.resource, { id: nextProps.filters.id });
       }
     } else {
+      debugger;
+
+      // HERE is where the refactor begins. we need to map state/filters
+      // to routes, so that a / sets filter: {sort: fire} etc
+
       if(!_.isEqual(this.props.filters, nextProps.filters)) {
         this.props.fetchTracks(nextProps.filters);
       }

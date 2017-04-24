@@ -2,8 +2,8 @@ import React from 'react';
 
 
 const renderHandles = (handles) => {
-	return handles.map(handle => (
-		<div>
+	return handles.map((handle, idx) => (
+		<div key={idx}>
 			<a target="_" href={handle.url}>{handle.service}</a>
 		</div>
 	));
