@@ -1,4 +1,5 @@
 import React from 'react';
+import PublisherBanner from './publisher_banner';
 
 class PublisherShow extends React.Component {
   constructor(props) {
@@ -10,11 +11,17 @@ class PublisherShow extends React.Component {
   }
 
   render() {
-    return (
-      <div>
-        <h1>hello🌎</h1>
-      </div>
-    )
+    if(this.props.loadingFeed || Object.keys(this.props.publisher).length === 0) {
+      return <div>LOADING</div>
+    } else {
+      return (
+        <div className='container track-show'>
+          <PublisherBanner
+            user={this.props.publisher}
+          />
+        </div>
+      )
+    }
   }
 }
 

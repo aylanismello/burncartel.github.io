@@ -44,6 +44,7 @@ const initialState = {
 			// might need any number of metadatas here
 		feedName: ""
 	},
+	loadingFeed: true,
 	feedType: null,
 	filters: {}
 };

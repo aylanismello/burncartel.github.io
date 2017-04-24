@@ -133,7 +133,12 @@ class BurnCartelPlayer extends React.Component {
               </Link>
             </div>
             <div>
-              by {this.track.publisher.name}
+              by
+              <Link
+                to={`/publishers/${this.props.publisherId}`}
+              >
+                {this.track.publisher.name}
+              </Link>
             </div>
             <div>
               Playing from {this.props.feedName.toUpperCase()} feed
