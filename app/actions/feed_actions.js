@@ -18,9 +18,18 @@ export const feedConstants = {
 	PAGINATE_TRACKS: 'PAGINATE_TRACKS',
 	UPDATE_PAGE_TITLE: 'UPDATE_PAGE_TITLE',
 	RECEIVE_PLAYING_TRACKS: 'RECEIVE_PLAYING_TRACKS',
-	SET_PLAYING_FEED_NAME: 'SET_PLAYING_FEED_NAME'
+	SET_PLAYING_FEED_NAME: 'SET_PLAYING_FEED_NAME',
+	FETCH_FEED: 'FETCH_FEED',
+	// UPDATE_FEED: 'UPDATE_FEED'
 };
 
+
+
+export const fetchFeed = (resource, filters) => ({
+	type: feedConstants.FETCH_FEED,
+	resource,
+	filters
+});
 
 export const setPlayingFeedName = (feedName) => ({
 	type: feedConstants.SET_PLAYING_FEED_NAME,

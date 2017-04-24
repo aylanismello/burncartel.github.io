@@ -17,15 +17,23 @@ class App extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if(!_.isEqual(this.props.filters, nextProps.filters)) {
-      this.props.fetchTracks(nextProps.filters);
-    }
+    if(nextProps.filters.resource ) {
+      if(!_.isEqual(this.props.filters, nextProps.filters)) {
+        debugger;
+        this.props.fetchFeed(nextProps.filters.resource, { id: nextProps.filters.id });
+      }
+    } else {
+      debugger;
+      if(!_.isEqual(this.props.filters, nextProps.filters)) {
+        this.props.fetchTracks(nextProps.filters);
+      }
 
-    if(!_.isEqual(this.props.feedType, nextProps.feedType)) {
-      if(nextProps.feedType === FEEDS.LIKES) {
-        this.props.fetchTracks();
-      } else if(nextProps.feedType === FEEDS.FIRE) {
-        this.props.fetchTracks();
+      if(!_.isEqual(this.props.feedType, nextProps.feedType)) {
+        if(nextProps.feedType === FEEDS.LIKES) {
+          this.props.fetchTracks();
+        } else if(nextProps.feedType === FEEDS.FIRE) {
+          this.props.fetchTracks();
+        }
       }
     }
 

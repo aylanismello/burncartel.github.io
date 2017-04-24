@@ -63,7 +63,13 @@ const TrackItem = ({ track, handleTrackClick, playing,
 							</Link>
 
 							<div>
-								<span> By {track.publisher.name} </span>
+								<span> By
+									<Link
+										to={`/publishers/${track.publisher_id}`}
+										>
+											{track.publisher.name}
+									</Link>
+								</span>
 							</div>
 							<span>Selected by {curatorsStr} </span>
 

@@ -20,14 +20,32 @@ import { getFeedTracksHash } from '../selectors/track_selector';
 import { FEEDS } from '../reducers/feed_reducer';
 import {
 	getTracks,
-	getLikes
+	getLikes,
+	getFeed
 } from '../util/bc_api';
 import * as _ from 'lodash';
 
 
 const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 	switch(action.type) {
+		case feedConstants.FETCH_FEED:
+			debugger;
+			dispatch(loadingStart());
 
+			getFeed(action.resource, action.filters, (resource) => {
+
+				dispatch(loadingStop());
+				debugger;
+				if (action.resource == 'publishers') {
+					// receivePublisher(resource)
+				}
+			}, (error) => {
+				debugger;
+				console.log(`ERROR FETCHING TRACKS: got ${error}`);
+			});
+
+
+			return next(action);
 		case feedConstants.PAGINATE_TRACKS:
 			dispatch(fetchTracks(getState().feed.focusedFeed.filters, true));
 			return next(action);

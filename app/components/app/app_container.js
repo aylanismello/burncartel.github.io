@@ -1,6 +1,9 @@
 import { connect } from 'react-redux';
 import App from './app';
-import { fetchTracks } from '../../actions/feed_actions';
+import {
+	fetchTracks,
+	fetchFeed
+ } from '../../actions/feed_actions';
 import {
 	logoutCurrentUser,
 	receiveCurrentUser,
@@ -18,6 +21,7 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+	fetchFeed: (resource, filters) => dispatch(fetchFeed(resource, filters)),
 	fetchTracks: (filters) => dispatch(fetchTracks(filters)),
 	logoutCurrentUser: () => dispatch(logoutCurrentUser()),
 	receiveCurrentUser: (currentUser) => dispatch(receiveCurrentUser(currentUser)),
