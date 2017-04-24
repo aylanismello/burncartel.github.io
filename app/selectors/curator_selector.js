@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect';
 
 const getTracks = state => state.feed.focusedFeed.tracks;
-const getCuratorId = state => state.feed.focusedFeed.filters.curator;
+const getCuratorId = state => state.feed.filters.curator;
 
 export const getCuratorFromTracks = createSelector(
 	[getTracks, getCuratorId],

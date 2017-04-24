@@ -65,10 +65,8 @@ const FeedReducer = (state = initialState, action) => {
 		case feedConstants.SET_LIKE_FEED_USER_ID:
 			return { ...state, focusedFeed: {...state.focusedFeed, userLikeId: action.userId }};
 		case feedConstants.SET_FEED_TYPE:
-			// return { ...state, focusedFeed: {...state.focusedFeed, feedType: action.feedType } };
 			return { ...state, feedType: action.feedType };
 		case feedConstants.UPDATE_TRACK_LIKE_COUNT:
-
 			let updateTracksWithLikeCount = state.focusedFeed.tracks.map((track, idx) => {
 				if(track.id === action.trackId) {
 					return { ...track, num_likes: action.likeCount };
@@ -90,9 +88,7 @@ const FeedReducer = (state = initialState, action) => {
 		case feedConstants.RECEIVE_PLAYING_TRACKS:
 			return { ...state, playingFeed: { ...state.playingFeed, tracks: action.tracks } };
 		case feedConstants.UPDATE_FILTERS:
-			const newFilters = { ...initialState.focusedFeed.filters, ...action.filters } ;
-			const newState = { ...state, focusedFeed: {...state.focusedFeed, filters: newFilters } };
-			return newState;
+			return { ...state, filters: action.filters };
 		case feedConstants.SET_PLAYING_FEED_NAME:
 			return { ...state, playingFeed: { ...state.playingFeed, feedName: action.feedName } };
 		case feedConstants.UPDATE_TRACK_ID:

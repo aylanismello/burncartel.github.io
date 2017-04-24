@@ -14,7 +14,7 @@ import { getUserTracksHash } from '../../selectors/track_selector';
 const mapStateToProps = (state, ownProps) => ({
 	tracks: state.feed.focusedFeed.tracks,
 	elements: ownProps.elements,
-	filters: state.feed.focusedFeed.filters,
+	filters: state.feed.filters,
 	loadingFeed: state.feed.focusedFeed.loadingFeed,
 	trackId: state.feed.focusedFeed.trackId,
 	playingTrackId: state.feed.playingFeed.trackId,

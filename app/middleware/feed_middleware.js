@@ -59,7 +59,7 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 
 			return next(action);
 		case feedConstants.PAGINATE_TRACKS:
-			dispatch(fetchTracks(getState().feed.focusedFeed.filters, true));
+			dispatch(fetchTracks(getState().feed.filters, true));
 			return next(action);
 		case feedConstants.FETCH_TRACKS:
 			dispatch(loadingStart());
@@ -118,13 +118,13 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 						if(feedType === "LIKES") {
 							newFeedName = 'LIKES';
 						} else if(feedType === "FIRE") {
-							if(getState().feed.focusedFeed.filters['sort']) {
-								newFeedName = getState().feed.focusedFeed.filters['sort']; // fuck probs shouldn't call this a reserved keyword
+							if(getState().feed.filters['sort']) {
+								newFeedName = getState().feed.filters['sort']; // fuck probs shouldn't call this a reserved keyword
 							} else {
 								newFeedName = 'some unknown fire'
 							}
 						} else if(feedType === "CURATOR"){
-							newFeedName = `CURATOR ${getState().feed.focusedFeed.filters.curator}'s`
+							newFeedName = `CURATOR ${getState().feed.filters.curator}'s`
 						}
 
 						dispatch(setPlayingFeedName(newFeedName));

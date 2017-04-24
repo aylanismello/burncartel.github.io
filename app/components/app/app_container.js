@@ -14,7 +14,7 @@ import {
 
 const mapStateToProps = (state, ownProps) => ({
 	feed: state.feed.focusedFeed,
-	filters: state.feed.focusedFeed.filters,
+	filters: state.feed.filters,
 	currentUser: state.user.currentUser,
 	fbDidInit: state.user.fbDidInit,
 	feedType: state.feed.feedType
