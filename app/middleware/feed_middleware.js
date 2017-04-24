@@ -11,7 +11,10 @@ import { feedConstants,
 	updateFocusedTrackId,
 	updatePlayingTrackId,
 	receivePlayingTracks,
-	setPlayingFeedName
+	setPlayingFeedName,
+	receiveFeed,
+	receiveFeedMetadata,
+	setFeedType
 } from '../actions/feed_actions';
 import {
 	togglePlay
@@ -28,19 +31,28 @@ import * as _ from 'lodash';
 
 const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 	switch(action.type) {
+		case feedConstants.RECEIVE_FEED:
+
+			dispatch(receiveTracks(action.feed.sorted_tracks));
+			// we want to delete sorted_tracks since we're just sending
+			// over the feed metadata to the reducer now, we don't want
+			// tracks to come along
+			delete action.feed.sorted_tracks;
+			dispatch(receiveFeedMetadata(getState().feed.focusedFeed.feedType, action.feed))
+
+			// split this up into receiveTracks and receiveFeedMetadata
+			return next(action);
 		case feedConstants.FETCH_FEED:
-			debugger;
 			dispatch(loadingStart());
 
-			getFeed(action.resource, action.filters, (resource) => {
+			getFeed(action.resource, action.filters, (feed) => {
 
 				dispatch(loadingStop());
-				debugger;
 				if (action.resource == 'publishers') {
-					// receivePublisher(resource)
+					dispatch(setFeedType(action.resource));
+					dispatch(receiveFeed(feed));
 				}
 			}, (error) => {
-				debugger;
 				console.log(`ERROR FETCHING TRACKS: got ${error}`);
 			});
 

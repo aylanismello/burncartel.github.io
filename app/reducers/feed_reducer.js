@@ -5,7 +5,8 @@ import * as _ from 'lodash';
 export const FEEDS = {
 	FIRE: 'FIRE',
 	LIKES: 'LIKES',
-	CURATOR: 'CURATOR'
+	CURATORS: 'CURATORS',
+	PUBLISHERS: 'PUBLISHERS'
 }
 
 const initialState = {
@@ -19,21 +20,48 @@ const initialState = {
 		loadingFeed: true,
 		page: 1
 	},
+	FIRE: {
+
+	},
+	LIKES: {
+
+	},
+	PUBLISHERS: {
+		// name: null,
+		// permalink_url: null,
+		// track_count: null,
+		// followers_count: null,
+		// followings_count: null,
+		// num_curators: null,
+		// avatar_url: null,
+		// country: null,
+		// city: null,
+		// curators: [],
+		// handles: []
+		// sorted_tracks: [] this is just tracks in the outer state
+	}, //then these are mapped to /resources request from API
+	CURATORS: {
+
+	},
 	playingFeed: {
 		tracks: [],
 		filters: {
-		},
-		userLikeId: -1,
-		feedType: null,
-		trackId: -1,
-		loadingFeed: true,
-		page: 1,
-		feedName: ""
+	},
+	userLikeId: -1, // so this would go in LIKES
+	feedType: null,
+	trackId: -1,
+	loadingFeed: true,
+	page: 1,
+	feedName: ""
 	}
 };
 
 const FeedReducer = (state = initialState, action) => {
 	switch(action.type) {
+		case feedConstants.RECEIVE_FEED_METADATA:
+			const newMetadataState = _.cloneDeep(state);
+			newMetadataState[action.feedType.toUpperCase()] = action.metadata;
+			return newMetadataState;
 		case feedConstants.SET_LIKE_FEED_USER_ID:
 			return { ...state, focusedFeed: {...state.focusedFeed, userLikeId: action.userId }};
 		case feedConstants.SET_FEED_TYPE:

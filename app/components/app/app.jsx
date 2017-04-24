@@ -19,11 +19,9 @@ class App extends React.Component {
   componentWillReceiveProps(nextProps) {
     if(nextProps.filters.resource ) {
       if(!_.isEqual(this.props.filters, nextProps.filters)) {
-        debugger;
         this.props.fetchFeed(nextProps.filters.resource, { id: nextProps.filters.id });
       }
     } else {
-      debugger;
       if(!_.isEqual(this.props.filters, nextProps.filters)) {
         this.props.fetchTracks(nextProps.filters);
       }
@@ -36,7 +34,6 @@ class App extends React.Component {
         }
       }
     }
-
   }
 
   render() {

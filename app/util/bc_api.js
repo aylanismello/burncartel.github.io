@@ -10,8 +10,6 @@ const devUrl = 'https://bc-fire-api.herokuapp.com/api/v1/tracks/filter';
 
 
 export const getFeed = (resource, filters, success = suc, error = err, page = 1) => {
-	debugger;
-
 	if(!resource || !filters.id) {
 		throw 'ERROR! must have resource and filters.id passed to getFeed';
 	}

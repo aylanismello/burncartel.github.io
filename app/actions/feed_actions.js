@@ -20,10 +20,21 @@ export const feedConstants = {
 	RECEIVE_PLAYING_TRACKS: 'RECEIVE_PLAYING_TRACKS',
 	SET_PLAYING_FEED_NAME: 'SET_PLAYING_FEED_NAME',
 	FETCH_FEED: 'FETCH_FEED',
+	RECEIVE_FEED_METADATA: 'RECEIVE_FEED_METADATA',
+	RECEIVE_FEED: 'RECEIVE_FEED'
 	// UPDATE_FEED: 'UPDATE_FEED'
 };
 
+export const receiveFeed = (feed) => ({
+	type: feedConstants.RECEIVE_FEED,
+	feed
+});
 
+export const receiveFeedMetadata = (feedType, metadata) => ({
+	type: feedConstants.RECEIVE_FEED_METADATA,
+	feedType,
+	metadata
+});
 
 export const fetchFeed = (resource, filters) => ({
 	type: feedConstants.FETCH_FEED,
