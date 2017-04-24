@@ -38,7 +38,7 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 			// over the feed metadata to the reducer now, we don't want
 			// tracks to come along
 			delete action.feed.sorted_tracks;
-			dispatch(receiveFeedMetadata(getState().feed.focusedFeed.feedType, action.feed))
+			dispatch(receiveFeedMetadata(getState().feed.feedType, action.feed))
 
 			// split this up into receiveTracks and receiveFeedMetadata
 			return next(action);
@@ -73,7 +73,7 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 				dispatch(resetTracks());
 			}
 
-			if(getState().feed.focusedFeed.feedType === FEEDS.FIRE) {
+			if(getState().feed.feedType === FEEDS.FIRE) {
 				getTracks({ sort: 'influential', ...action.filters}, (tracks) => {
 					dispatch(loadingStop());
 					dispatch(receiveTracks(tracks));
@@ -81,7 +81,7 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 					// make error reducer here
 					console.log(`ERROR FETCHING TRACKS: got ${error}`);
 				}, getState().feed.focusedFeed.page);
-			} else if(getState().feed.focusedFeed.feedType === FEEDS.LIKES) {
+			} else if(getState().feed.feedType === FEEDS.LIKES) {
 
 				getLikes(getState().feed.focusedFeed.userLikeId, (tracks) => {
 					dispatch(loadingStop());
@@ -113,7 +113,7 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 
 						let newFeedName;
 
-						const feedType = getState().feed.focusedFeed.feedType;
+						const feedType = getState().feed.feedType;
 
 						if(feedType === "LIKES") {
 							newFeedName = 'LIKES';

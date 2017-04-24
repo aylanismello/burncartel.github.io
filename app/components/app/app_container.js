@@ -17,7 +17,7 @@ const mapStateToProps = (state, ownProps) => ({
 	filters: state.feed.focusedFeed.filters,
 	currentUser: state.user.currentUser,
 	fbDidInit: state.user.fbDidInit,
-	feedType: state.feed.focusedFeed.feedType
+	feedType: state.feed.feedType
 });
 
 const mapDispatchToProps = dispatch => ({
