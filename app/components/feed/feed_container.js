@@ -15,7 +15,7 @@ const mapStateToProps = (state, ownProps) => ({
 	tracks: state.feed.focusedFeed.tracks,
 	elements: ownProps.elements,
 	filters: state.feed.filters,
-	loadingFeed: state.feed.focusedFeed.loadingFeed,
+	loadingFeed: state.feed.loadingFeed,
 	trackId: state.feed.focusedFeed.trackId,
 	playingTrackId: state.feed.playingFeed.trackId,
 	playing: state.player.playing,

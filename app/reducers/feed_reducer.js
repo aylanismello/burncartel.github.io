@@ -12,12 +12,8 @@ export const FEEDS = {
 const initialState = {
 	focusedFeed: {
 		tracks: [],
-		filters: {
-		},
 		userLikeId: -1,
-		feedType: FEEDS.FIRE,
 		trackId: -1,
-		loadingFeed: true,
 		page: 1
 	},
 	FIRE: {
@@ -45,15 +41,11 @@ const initialState = {
 	},
 	playingFeed: {
 		tracks: [],
-		filters: {
+			// might need any number of metadatas here
+		feedName: ""
 	},
-	userLikeId: -1, // so this would go in LIKES
 	feedType: null,
-	trackId: -1,
-	loadingFeed: true,
-	page: 1,
-	feedName: ""
-	}
+	filters: {}
 };
 
 const FeedReducer = (state = initialState, action) => {
@@ -98,9 +90,9 @@ const FeedReducer = (state = initialState, action) => {
 		case feedConstants.UPDATE_PLAYING_TRACK_ID:
 			return { ...state, playingFeed: {...state.playingFeed, trackId: action.trackId } };
 		case feedConstants.LOADING_START:
-			return { ...state, focusedFeed: {...state.focusedFeed, loadingFeed: true } };
+			return { ...state, loadingFeed: true };
 		case feedConstants.LOADING_STOP:
-			return { ...state, focusedFeed: {...state.focusedFeed, loadingFeed: false } };
+			return { ...state, loadingFeed: false };
 		default:
 			return state;
 	}
