@@ -19,14 +19,13 @@ class App extends React.Component {
   componentWillReceiveProps(nextProps) {
     // if(nextProps.filters.resource) {
     if(!_.isEqual(this.props.filters, nextProps.filters)) {
-      debugger;
-      if(nextProps.filters.resource === 'tracks') {
+      if(nextProps.filters.resource === 'tracks') { //TRACKS
         if(nextProps.filters.isSingleTrack) {
           this.props.fetchFeed(nextProps.filters.resource, { id: nextProps.filters.id } );
         } else {
           this.props.fetchFeed(nextProps.filters.resource, { sortType: nextProps.filters.sortType } );
         }
-      } else {
+      } else { //LIKES, PUBLISHERS, CURATORS
         this.props.fetchFeed(nextProps.filters.resource, { id: nextProps.filters.id });
       }
     }

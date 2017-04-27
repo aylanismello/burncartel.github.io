@@ -29,8 +29,8 @@ const PublisherBanner = ({ user }) => {
 			<h2> {user.name}</h2>
 			<img src={user.avatar_url} />
 			{renderHandles(user.handles)}
-			<h3> Selected by </h3>
-			{renderCurators(user.uniq_curators)}
+			<h3> Most selected by </h3>
+			{renderCurators(user.top_curators)}
 		</div>
 	);
 };

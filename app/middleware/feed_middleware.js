@@ -1,4 +1,5 @@
-import { feedConstants,
+import {
+	feedConstants,
 	receiveTracks,
  	loadingStart,
 	loadingStop,
@@ -52,7 +53,6 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 			dispatch(receiveTracks([action.feed]));
 			dispatch(receiveFeedMetadata(getState().feed.feedType, { cool: 'Aylan Mello'}))
 
-			debugger;
 			return next(action);
 		case feedConstants.FETCH_FEED:
 			dispatch(loadingStart());
@@ -65,6 +65,8 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 					if(action.filters.id) {
 						dispatch(setFeedType('SINGLE_TRACK'));
 						dispatch(receiveSingleTrackFeed(feed))
+					} else if(action.resources === 'likes' ){
+
 					} else {
 						dispatch(setFeedType('FIRE'));
 						dispatch(receiveFireFeed(feed))

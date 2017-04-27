@@ -11,12 +11,15 @@ const devUrl = 'https://bc-fire-api.herokuapp.com/api/v1/tracks/filter';
 
 export const getFeed = (resource, filters, success = suc, error = err, page = 1) => {
 
+	// debugger;
 	let getUrl;
 
-	debugger;
-	if(filters.id) {
+	if(filters.id && resource !== 'likes') {
 		getUrl = `http://localhost:3000/api/v1/${resource}/${filters.id}`;
-	} else {
+	} else if (filters.id && resource === 'likes'){
+		getUrl = `http://localhost:3000/api/v1/users/${filters.id}`;
+		  // get "/:user_id/likes", root: :track do
+	}else {
 		// we are dealing with a fire feed
 		getUrl = `http://localhost:3000/api/v1/${resource}?sort_type=${filters.sortType}`;
 	}

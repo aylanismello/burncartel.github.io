@@ -14,7 +14,6 @@ class Home extends React.Component {
 	componentWillMount() {
 		// this.props.setFeedType(FEEDS.FIRE);
 		// this.props.updateFilters({sort: 'influential'});
-		// debugger;
 
 		const sortType = this.props.history.location.pathname.slice(1);
 
