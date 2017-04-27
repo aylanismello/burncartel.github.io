@@ -36,7 +36,9 @@ import Loading from '../loading';
 // }
 
 
-const TrackShow = ({ id, track, updateFilters, updateTrackId }) => {
+const TrackShow = ({ id, track, updateFilters,
+	updateTrackId, playing, trackLoaded,
+	playingTrackId, handleTrackClick }) => {
 	let childElements;
 
 	if(!track) {
@@ -55,7 +57,13 @@ const TrackShow = ({ id, track, updateFilters, updateTrackId }) => {
 
 		return (
 			<div className="container track-show">
-				<TrackBanner track={track} />
+				<TrackBanner
+					track={track}
+					playing={playing}
+					trackLoaded={trackLoaded}
+					playingTrackId={playingTrackId}
+					handleTrackClick={handleTrackClick}
+				 />
 				<CuratorList
 					track={track}
 				/>
