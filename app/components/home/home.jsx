@@ -70,14 +70,24 @@ class Home extends React.Component {
 						</button>
 					</Link>
 
-					{/* <button
-						className="btn btn-default"
-						onClick={this.handleFilterChange.bind(this, {remixed: 'remix'})}
-					> Remixes
-					</button>
-					<button className="btn btn-default"
-						onClick={this.handleFilterChange.bind(this, {track_type: 'mix'})}
-						> Mixes </button> */}
+					<Link to="/remix">
+						<button
+							className="btn btn-default"
+						>
+							Remixes
+						</button>
+					</Link>
+
+					<Link to="/mix">
+						<button
+							className="btn btn-default"
+						>
+							Mix
+						</button>
+					</Link>
+
+
+
 
 					<Link to="/not">
 						<button className="btn btn-default"

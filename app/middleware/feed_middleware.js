@@ -143,8 +143,8 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 						if(feedType === "LIKES") {
 							newFeedName = 'LIKES';
 						} else if(feedType === "FIRE") {
-							if(getState().feed.filters['sort']) {
-								newFeedName = getState().feed.filters['sort']; // fuck probs shouldn't call this a reserved keyword
+							if(getState().feed.filters['sortType']) {
+								newFeedName = getState().feed.filters['sortType']; // fuck probs shouldn't call this a reserved keyword
 							} else {
 								newFeedName = 'some unknown fire'
 							}
