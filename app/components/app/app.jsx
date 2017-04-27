@@ -17,27 +17,32 @@ class App extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if(nextProps.filters.resource) {
-      if(!_.isEqual(this.props.filters, nextProps.filters)) {
+    // if(nextProps.filters.resource) {
+    if(!_.isEqual(this.props.filters, nextProps.filters)) {
+      if(nextProps.filters.resource === 'tracks') {
+        this.props.fetchFeed(nextProps.filters.resource, { sortType: nextProps.filters.sortType } );
+      } else {
         this.props.fetchFeed(nextProps.filters.resource, { id: nextProps.filters.id });
       }
-    } else {
-
-      // HERE is where the refactor begins. we need to map state/filters
-      // to routes, so that a / sets filter: {sort: fire} etc
-
-      if(!_.isEqual(this.props.filters, nextProps.filters)) {
-        this.props.fetchTracks(nextProps.filters);
-      }
-
-      if(!_.isEqual(this.props.feedType, nextProps.feedType)) {
-        if(nextProps.feedType === FEEDS.LIKES) {
-          this.props.fetchTracks();
-        } else if(nextProps.feedType === FEEDS.FIRE) {
-          this.props.fetchTracks();
-        }
-      }
     }
+
+    // } else {
+    //
+    //   // HERE is where the refactor begins. we need to map state/filters
+    //   // to routes, so that a / sets filter: {sort: fire} etc
+    //
+    //   if(!_.isEqual(this.props.filters, nextProps.filters)) {
+    //     this.props.fetchTracks(nextProps.filters);
+    //   }
+    //
+    //   if(!_.isEqual(this.props.feedType, nextProps.feedType)) {
+    //     if(nextProps.feedType === FEEDS.LIKES) {
+    //       this.props.fetchTracks();
+    //     } else if(nextProps.feedType === FEEDS.FIRE) {
+    //       this.props.fetchTracks();
+    //     }
+    //   }
+    // }
   }
 
   render() {

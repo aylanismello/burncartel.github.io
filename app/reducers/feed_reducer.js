@@ -77,7 +77,9 @@ const FeedReducer = (state = initialState, action) => {
 			return { ...state, focusedFeed: {...state.focusedFeed,  tracks: [] } };
 		case feedConstants.RECEIVE_TRACKS:
 			const newTracks = {};
-			return { ...state, focusedFeed: {...state.focusedFeed, tracks: [ ...state.focusedFeed.tracks, ...action.tracks ] } };
+			// break pagination plz
+			// return { ...state, focusedFeed: {...state.focusedFeed, tracks: [ ...state.focusedFeed.tracks, ...action.tracks ] } };
+			return { ...state, focusedFeed: {...state.focusedFeed, tracks: action.tracks } };
 		case feedConstants.RECEIVE_PLAYING_TRACKS:
 			return { ...state, playingFeed: { ...state.playingFeed, tracks: action.tracks } };
 		case feedConstants.UPDATE_FILTERS:

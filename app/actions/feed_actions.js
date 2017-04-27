@@ -21,9 +21,17 @@ export const feedConstants = {
 	SET_PLAYING_FEED_NAME: 'SET_PLAYING_FEED_NAME',
 	FETCH_FEED: 'FETCH_FEED',
 	RECEIVE_FEED_METADATA: 'RECEIVE_FEED_METADATA',
-	RECEIVE_FEED: 'RECEIVE_FEED'
+	RECEIVE_FEED: 'RECEIVE_FEED',
+	RECEIVE_FIRE_FEED: 'RECEIVE_FIRE_FEED'
 	// UPDATE_FEED: 'UPDATE_FEED'
 };
+
+
+
+export const receiveFireFeed = (feed) => ({
+	type: feedConstants.RECEIVE_FIRE_FEED,
+	feed
+});
 
 export const receiveFeed = (feed) => ({
 	type: feedConstants.RECEIVE_FEED,

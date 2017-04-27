@@ -25,6 +25,11 @@ class AppRouter extends React.Component{
           <AppContainer/>
           <Switch>
             <Route exact path="/" component={HomeContainer} />
+            <Route exact path="/bc" component={HomeContainer} />
+            <Route exact path="/hot" component={HomeContainer} />
+            <Route exact path="/remix" component={HomeContainer} />
+            <Route exact path="/mix" component={HomeContainer} />
+            <Route exact path="/not" component={HomeContainer} />
             <Route path="/publishers/:id" component={PublisherShowContainer} />
             <Route path="/tracks/:id" component={TrackShowContainer} />
             <Route path="/curators/:id" component={CuratorShowContainer} />

@@ -10,11 +10,16 @@ const devUrl = 'https://bc-fire-api.herokuapp.com/api/v1/tracks/filter';
 
 
 export const getFeed = (resource, filters, success = suc, error = err, page = 1) => {
-	if(!resource || !filters.id) {
-		throw 'ERROR! must have resource and filters.id passed to getFeed';
+
+	let getUrl;
+
+	if(filters.id) {
+		getUrl = `http://localhost:3000/api/v1/${resource}/${filters.id}`;
+	} else {
+		// we are dealing with a fire feed
+		getUrl = `http://localhost:3000/api/v1/${resource}?sort_type=${filters.sortType}`;
 	}
 
-	const getUrl = `http://localhost:3000/api/v1/${resource}/${filters.id}`;
 
 	$.ajax({
 		url: getUrl,

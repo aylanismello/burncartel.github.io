@@ -14,7 +14,8 @@ import { feedConstants,
 	setPlayingFeedName,
 	receiveFeed,
 	receiveFeedMetadata,
-	setFeedType
+	setFeedType,
+	receiveFireFeed
 } from '../actions/feed_actions';
 import {
 	togglePlay
@@ -41,6 +42,11 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 
 			// split this up into receiveTracks and receiveFeedMetadata
 			return next(action);
+		case feedConstants.RECEIVE_FIRE_FEED:
+			dispatch(receiveTracks(action.feed));
+			dispatch(receiveFeedMetadata(getState().feed.feedType, { cool: 'Aylan Mello'}))
+
+			return next(action);
 		case feedConstants.FETCH_FEED:
 			dispatch(loadingStart());
 
@@ -48,8 +54,13 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 
 				dispatch(loadingStop());
 				// if (action.resource == 'publishers') {
-				dispatch(setFeedType(action.resource));
-				dispatch(receiveFeed(feed));
+				if(action.resource === 'tracks') {
+					dispatch(setFeedType('FIRE'));
+					dispatch(receiveFireFeed(feed))
+				} else {
+					dispatch(setFeedType(action.resource));
+					dispatch(receiveFeed(feed));
+				}
 				// }
 			}, (error) => {
 				console.log(`ERROR FETCHING TRACKS: got ${error}`);
