@@ -33,11 +33,11 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 	switch(action.type) {
 		case feedConstants.RECEIVE_FEED:
 
-			dispatch(receiveTracks(action.feed.sorted_tracks));
-			// we want to delete sorted_tracks since we're just sending
+			dispatch(receiveTracks(action.feed.sorted_serialized_tracks));
+			// we want to delete sorted_serialized_tracks since we're just sending
 			// over the feed metadata to the reducer now, we don't want
 			// tracks to come along
-			delete action.feed.sorted_tracks;
+			delete action.feed.sorted_serialized_tracks;
 			dispatch(receiveFeedMetadata(getState().feed.feedType, action.feed))
 
 			// split this up into receiveTracks and receiveFeedMetadata
@@ -113,7 +113,7 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 
 						let newFeedName;
 
-						const feedType = getState().feed.feedType;
+						const feedType = getState().feed.feedType.toUpperCase();
 
 						if(feedType === "LIKES") {
 							newFeedName = 'LIKES';
@@ -125,6 +125,8 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 							}
 						} else if(feedType === "CURATOR"){
 							newFeedName = `CURATOR ${getState().feed.filters.curator}'s`
+						} else if(feedType === 'PUBLISHERS') {
+							newFeedName = `${getState().feed.PUBLISHERS.name}'s`
 						}
 
 						dispatch(setPlayingFeedName(newFeedName));

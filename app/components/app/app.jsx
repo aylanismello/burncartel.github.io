@@ -22,7 +22,6 @@ class App extends React.Component {
         this.props.fetchFeed(nextProps.filters.resource, { id: nextProps.filters.id });
       }
     } else {
-      debugger;
 
       // HERE is where the refactor begins. we need to map state/filters
       // to routes, so that a / sets filter: {sort: fire} etc

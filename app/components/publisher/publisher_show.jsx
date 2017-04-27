@@ -1,5 +1,6 @@
 import React from 'react';
 import PublisherBanner from './publisher_banner';
+import FeedContainer from '../feed/feed_container';
 
 class PublisherShow extends React.Component {
   constructor(props) {
@@ -19,6 +20,8 @@ class PublisherShow extends React.Component {
           <PublisherBanner
             user={this.props.publisher}
           />
+
+          <FeedContainer />
         </div>
       )
     }
