@@ -32,7 +32,6 @@ import * as _ from 'lodash';
 const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 	switch(action.type) {
 		case feedConstants.RECEIVE_FEED:
-
 			dispatch(receiveTracks(action.feed.sorted_serialized_tracks));
 			// we want to delete sorted_serialized_tracks since we're just sending
 			// over the feed metadata to the reducer now, we don't want
@@ -48,10 +47,10 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 			getFeed(action.resource, action.filters, (feed) => {
 
 				dispatch(loadingStop());
-				if (action.resource == 'publishers') {
-					dispatch(setFeedType(action.resource));
-					dispatch(receiveFeed(feed));
-				}
+				// if (action.resource == 'publishers') {
+				dispatch(setFeedType(action.resource));
+				dispatch(receiveFeed(feed));
+				// }
 			}, (error) => {
 				console.log(`ERROR FETCHING TRACKS: got ${error}`);
 			});
@@ -123,8 +122,8 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 							} else {
 								newFeedName = 'some unknown fire'
 							}
-						} else if(feedType === "CURATOR"){
-							newFeedName = `CURATOR ${getState().feed.filters.curator}'s`
+						} else if(feedType === "CURATORS"){
+							newFeedName = `${getState().feed.CURATORS.name}'s`
 						} else if(feedType === 'PUBLISHERS') {
 							newFeedName = `${getState().feed.PUBLISHERS.name}'s`
 						}

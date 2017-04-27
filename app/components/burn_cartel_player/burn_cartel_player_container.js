@@ -15,11 +15,8 @@ const mapStateToProps = (state) => {
 	const track = tracksHash[state.feed.playingFeed.trackId];
 	const nextTrackId = getNextTrackId(state);
 
-	// let publisherId = "";
 	const publisherId = (track === undefined ? "" : track.publisher_id);
-	// if(track !== undefined) {
-		// publisherId = track.publisher_id;
-	// }
+
 
 	return {
 		// replace this with reading from .env ? it could be sniffed from the network traffic anyhow... hmm...

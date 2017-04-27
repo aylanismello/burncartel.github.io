@@ -10,7 +10,10 @@ import CuratorShow from './curator_show';
 const mapStateToProps = (state, ownProps) => {
 	return{
 	id: ownProps.match.params.id,
-	curator: getCuratorFromTracks(state)
+	curator: state.feed.CURATORS,
+	loadingFeed: state.feed.loadingFeed
+	// this.props.loadingFeed || Object.keys(this.props.publisher).length === 0
+	// curator: getCuratorFromTracks(state)
 }};
 
 const mapDispatchToProps = (dispatch) => ({

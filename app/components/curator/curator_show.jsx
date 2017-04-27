@@ -9,14 +9,11 @@ class CuratorShow extends React.Component {
 	}
 
 	componentWillMount() {
-		if(!this.props.curator) {
-			this.props.setFeedType('CURATOR');
-			this.props.updateFilters({ curator: this.props.id });
-		}
+		this.props.updateFilters({ resource: 'curators', id: this.props.id })
 	}
 
 	render() {
-		if(!this.props.curator) {
+		if(this.props.loadingFeed) {
 			return (
 				<Loading />
 			);
