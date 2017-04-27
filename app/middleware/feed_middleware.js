@@ -15,7 +15,8 @@ import { feedConstants,
 	receiveFeed,
 	receiveFeedMetadata,
 	setFeedType,
-	receiveFireFeed
+	receiveFireFeed,
+	receiveSingleTrackFeed
 } from '../actions/feed_actions';
 import {
 	togglePlay
@@ -47,6 +48,12 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 			dispatch(receiveFeedMetadata(getState().feed.feedType, { cool: 'Aylan Mello'}))
 
 			return next(action);
+		case feedConstants.RECEIVE_SINGLE_TRACK_FEED:
+			dispatch(receiveTracks([action.feed]));
+			dispatch(receiveFeedMetadata(getState().feed.feedType, { cool: 'Aylan Mello'}))
+
+			debugger;
+			return next(action);
 		case feedConstants.FETCH_FEED:
 			dispatch(loadingStart());
 
@@ -55,8 +62,13 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 				dispatch(loadingStop());
 				// if (action.resource == 'publishers') {
 				if(action.resource === 'tracks') {
-					dispatch(setFeedType('FIRE'));
-					dispatch(receiveFireFeed(feed))
+					if(action.filters.id) {
+						dispatch(setFeedType('SINGLE_TRACK'));
+						dispatch(receiveSingleTrackFeed(feed))
+					} else {
+						dispatch(setFeedType('FIRE'));
+						dispatch(receiveFireFeed(feed))
+					}
 				} else {
 					dispatch(setFeedType(action.resource));
 					dispatch(receiveFeed(feed));
@@ -68,6 +80,7 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 
 
 			return next(action);
+
 		case feedConstants.PAGINATE_TRACKS:
 			dispatch(fetchTracks(getState().feed.filters, true));
 			return next(action);
@@ -137,6 +150,10 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 							newFeedName = `${getState().feed.CURATORS.name}'s`
 						} else if(feedType === 'PUBLISHERS') {
 							newFeedName = `${getState().feed.PUBLISHERS.name}'s`
+						} else if(feedType === 'SINGLE_TRACK') {
+							newFeedName = 'track'
+						} else {
+							newFeedName = 'NO NAME SET, this means newFeedName wasnt set in HANDLE_TRACK_CLICK'
 						}
 
 						dispatch(setPlayingFeedName(newFeedName));

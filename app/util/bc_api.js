@@ -13,6 +13,7 @@ export const getFeed = (resource, filters, success = suc, error = err, page = 1)
 
 	let getUrl;
 
+	debugger;
 	if(filters.id) {
 		getUrl = `http://localhost:3000/api/v1/${resource}/${filters.id}`;
 	} else {

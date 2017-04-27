@@ -137,7 +137,7 @@ class BurnCartelPlayer extends React.Component {
               <Link
                 to={`/publishers/${this.props.publisherId}`}
               >
-                {this.track.publisher.name}
+                {` ${this.track.publisher.name}`}
               </Link>
             </div>
             <div>

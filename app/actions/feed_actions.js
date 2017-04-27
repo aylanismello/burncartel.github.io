@@ -22,11 +22,17 @@ export const feedConstants = {
 	FETCH_FEED: 'FETCH_FEED',
 	RECEIVE_FEED_METADATA: 'RECEIVE_FEED_METADATA',
 	RECEIVE_FEED: 'RECEIVE_FEED',
-	RECEIVE_FIRE_FEED: 'RECEIVE_FIRE_FEED'
+	RECEIVE_FIRE_FEED: 'RECEIVE_FIRE_FEED',
+	RECEIVE_SINGLE_TRACK_FEED: 'RECEIVE_SINGLE_TRACK_FEED'
 	// UPDATE_FEED: 'UPDATE_FEED'
 };
 
 
+
+export const receiveSingleTrackFeed = (feed) => ({
+	type: feedConstants.RECEIVE_SINGLE_TRACK_FEED,
+	feed
+});
 
 export const receiveFireFeed = (feed) => ({
 	type: feedConstants.RECEIVE_FIRE_FEED,

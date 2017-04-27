@@ -59,7 +59,10 @@ const TrackItem = ({ track, handleTrackClick, playing,
 							<Link
 								to={`/tracks/${track.id}`}
 							>
-								<h3 className="track-title" onClick={() => handleTrackClick(track.id, 'focus')}>{track.name}</h3>
+								{/* <h3 className="track-title" onClick={() => handleTrackClick(track.id, 'focus')}> */}
+								<h3 className="track-title">
+									{track.name}
+								</h3>
 							</Link>
 
 							<div>
@@ -67,7 +70,7 @@ const TrackItem = ({ track, handleTrackClick, playing,
 									<Link
 										to={`/publishers/${track.publisher_id}`}
 										>
-											{track.publisher.name}
+											{` ${track.publisher.name}`}
 									</Link>
 								</span>
 							</div>

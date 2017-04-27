@@ -6,7 +6,8 @@ export const FEEDS = {
 	FIRE: 'FIRE',
 	LIKES: 'LIKES',
 	CURATORS: 'CURATORS',
-	PUBLISHERS: 'PUBLISHERS'
+	PUBLISHERS: 'PUBLISHERS',
+	SINGLE_TRACK: 'SINGLE_TRACK'
 }
 
 const initialState = {
@@ -37,6 +38,9 @@ const initialState = {
 		// sorted_tracks: [] this is just tracks in the outer state
 	}, //then these are mapped to /resources request from API
 	CURATORS: {
+
+	},
+	SINGLE_TRACK: {
 
 	},
 	playingFeed: {

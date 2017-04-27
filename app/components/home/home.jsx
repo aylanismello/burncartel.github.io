@@ -54,21 +54,18 @@ class Home extends React.Component {
 
 					<Link to="/">
 						<button className="btn btn-default"
-						onClick={this.handleFilterChange.bind(this, {sort: 'influential'})}
 						> Influential </button>
 					</Link>
 
 					<Link to="/bc">
 						<button
 							className="btn btn-default"
-							onClick={this.handleFilterChange.bind(this, {sort: 'bc'})}
 						> BC Selected </button>
 					</Link>
 
 					<Link to="/hot">
 						<button
 							className="btn btn-default"
-							onClick={this.handleFilterChange.bind(this, {sort: 'hot'})}
 						>
 							Hot
 						</button>
@@ -85,7 +82,6 @@ class Home extends React.Component {
 
 					<Link to="/not">
 						<button className="btn btn-default"
-							onClick={this.handleFilterChange.bind(this, {sort: 'not'})}
 						> Unheard </button>
 					</Link>
 				</div>
