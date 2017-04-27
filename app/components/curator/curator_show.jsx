@@ -21,7 +21,7 @@ class CuratorShow extends React.Component {
 			return (
 				<div className="container user-show">
 					<CuratorBanner user={this.props.curator} />
-					<h2> Latest selections </h2>
+					<h2> Top selections </h2>
 					<FeedContainer />
 				</div>
 			);

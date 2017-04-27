@@ -11,6 +11,31 @@ import Loading from '../loading';
 // link or bookmark. In this case, we will have to hit the api
 // and add this song somehwo to our redux store
 
+// class TrackShow extends React.Component {
+//
+// 	componentWillMount() {
+// 		this.props.updateFilters({ resource: 'tracks', id: this.props.id })
+// 	}
+//
+//   render() {
+//     if(this.props.loadingFeed) {
+//       return <div>LOADING</div>
+//     } else {
+//       return (
+//         <div className='container track-show'>
+//           <PublisherBanner
+//             user={this.props.publisher}
+//           />
+//
+//           <FeedContainer />
+//         </div>
+//       )
+//     }
+//   }
+//
+// }
+
+
 const TrackShow = ({ id, track, updateFilters, updateTrackId }) => {
 	let childElements;
 

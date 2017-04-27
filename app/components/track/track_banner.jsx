@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const TrackBanner = ({ track }) => {
 
@@ -6,7 +7,8 @@ const TrackBanner = ({ track }) => {
 		<div
 			className="thumbnail track-banner"
 		>
-			<h2> {track.name} - {track.publisher.name}</h2>
+			<h2> {track.name} </h2>
+			<Link to={`/publishers/${track.publisher.id}`}> <h3> by {track.publisher.name } </h3> </Link>
 			<div className="track-item-icon">
 				<a href={track.permalink_url} target="_blank">
 					<img
