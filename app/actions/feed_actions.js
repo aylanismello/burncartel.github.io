@@ -22,21 +22,16 @@ export const feedConstants = {
 	FETCH_FEED: 'FETCH_FEED',
 	RECEIVE_FEED_METADATA: 'RECEIVE_FEED_METADATA',
 	RECEIVE_FEED: 'RECEIVE_FEED',
-	RECEIVE_FIRE_FEED: 'RECEIVE_FIRE_FEED',
-	RECEIVE_SINGLE_TRACK_FEED: 'RECEIVE_SINGLE_TRACK_FEED'
-	// UPDATE_FEED: 'UPDATE_FEED'
+	RECEIVE_PAGINATION_DATA: 'RECEIVE_PAGINATION_DATA'
 };
 
 
-
-export const receiveSingleTrackFeed = (feed) => ({
-	type: feedConstants.RECEIVE_SINGLE_TRACK_FEED,
-	feed
-});
-
-export const receiveFireFeed = (feed) => ({
-	type: feedConstants.RECEIVE_FIRE_FEED,
-	feed
+export const receivePaginationData = ({last_tracks_page,
+	next_tracks_page, tracks_page }) => ({
+	type: feedConstants.RECEIVE_PAGINATION_DATA,
+	last_tracks_page,
+	next_tracks_page,
+	tracks_page
 });
 
 export const receiveFeed = (feed) => ({
@@ -50,11 +45,16 @@ export const receiveFeedMetadata = (feedType, metadata) => ({
 	metadata
 });
 
-export const fetchFeed = (resource, filters) => ({
+export const fetchFeed = (filters) => ({
 	type: feedConstants.FETCH_FEED,
-	resource,
 	filters
 });
+
+// export const fetchFeed = (resource, filters) => ({
+// 	type: feedConstants.FETCH_FEED,
+// 	resource,
+// 	filters
+// });
 
 export const setPlayingFeedName = (feedName) => ({
 	type: feedConstants.SET_PLAYING_FEED_NAME,

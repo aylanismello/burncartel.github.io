@@ -19,13 +19,11 @@ class Home extends React.Component {
 
 		if(sortType === "") {
 			this.props.updateFilters({ resource: 'tracks',
-			sortType: 'influential',
-			isNewPage: true
+			sortType: 'influential'
 		 });
 		} else {
 			this.props.updateFilters({ resource: 'tracks',
-				sortType,
-				isNewPage: true
+				sortType
 			 });
 		}
 
@@ -39,13 +37,11 @@ class Home extends React.Component {
 
 			if(sortType === "") {
 				this.props.updateFilters({ resource: 'tracks',
-				 sortType: 'influential',
-				 isNewPage: true
+				 sortType: 'influential'
 			  });
 			} else {
 				this.props.updateFilters({ resource: 'tracks',
-					sortType,
-					isNewPage: true
+					sortType
 			 });
 			}
 

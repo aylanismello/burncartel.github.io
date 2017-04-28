@@ -50,11 +50,20 @@ const initialState = {
 	},
 	loadingFeed: true,
 	feedType: null,
-	filters: {}
+	filters: {},
+	pagination: {
+		next_tracks_page: null,
+		last_tracks_page: null,
+		tracks_page: null
+	}
 };
 
 const FeedReducer = (state = initialState, action) => {
 	switch(action.type) {
+		case feedConstants.RECEIVE_PAGINATION_DATA:
+			const {last_tracks_page, next_tracks_page, tracks_page } = action;
+
+			return { ...state, pagination: { last_tracks_page, next_tracks_page, tracks_page }};
 		case feedConstants.RECEIVE_FEED_METADATA:
 			const newMetadataState = _.cloneDeep(state);
 			newMetadataState[action.feedType.toUpperCase()] = action.metadata;
@@ -81,9 +90,7 @@ const FeedReducer = (state = initialState, action) => {
 			return { ...state, focusedFeed: {...state.focusedFeed,  tracks: [] } };
 		case feedConstants.RECEIVE_TRACKS:
 			const newTracks = {};
-			// break pagination plz
-			// return { ...state, focusedFeed: {...state.focusedFeed, tracks: [ ...state.focusedFeed.tracks, ...action.tracks ] } };
-			return { ...state, focusedFeed: {...state.focusedFeed, tracks: action.tracks } };
+			return { ...state, focusedFeed: {...state.focusedFeed, tracks: [ ...state.focusedFeed.tracks, ...action.tracks ] } };
 		case feedConstants.RECEIVE_PLAYING_TRACKS:
 			return { ...state, playingFeed: { ...state.playingFeed, tracks: action.tracks } };
 		case feedConstants.UPDATE_FILTERS:

@@ -16,9 +16,10 @@ import {
 	receiveFeed,
 	receiveFeedMetadata,
 	setFeedType,
-	receiveFireFeed,
 	receiveSingleTrackFeed,
-	fetchFeed
+	fetchFeed,
+	updateFilters,
+	receivePaginationData
 } from '../actions/feed_actions';
 import {
 	togglePlay
@@ -36,69 +37,51 @@ import * as _ from 'lodash';
 const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 	switch(action.type) {
 		case feedConstants.RECEIVE_FEED:
-			dispatch(receiveTracks(action.feed.sorted_serialized_tracks));
-			// we want to delete sorted_serialized_tracks since we're just sending
-			// over the feed metadata to the reducer now, we don't want
-			// tracks to come along
-			delete action.feed.sorted_serialized_tracks;
-			dispatch(receiveFeedMetadata(getState().feed.feedType, action.feed))
+			if(action.feed.sorted_serialized_tracks) { // if we have multiple tracks
 
-			// split this up into receiveTracks and receiveFeedMetadata
-			return next(action);
-		case feedConstants.RECEIVE_FIRE_FEED:
-			dispatch(receiveTracks(action.feed));
-			dispatch(receiveFeedMetadata(getState().feed.feedType, { cool: 'Aylan Mello'}))
+				dispatch(receivePaginationData(action.feed));
+				if(getState().feed.pagination.tracks_page === 1) {
+					dispatch(resetTracks());
+				}
 
-			return next(action);
-		case feedConstants.RECEIVE_SINGLE_TRACK_FEED:
-			dispatch(receiveTracks([action.feed]));
-			dispatch(receiveFeedMetadata(getState().feed.feedType, { cool: 'Aylan Mello'}))
 
+				dispatch(receiveTracks(action.feed.sorted_serialized_tracks));
+				delete action.feed.sorted_serialized_tracks;
+				dispatch(receiveFeedMetadata(getState().feed.feedType, action.feed))
+
+			} else { // if we have a single track
+				dispatch(receiveTracks(action.feed));
+				dispatch(receiveFeedMetadata(getState().feed.feedType, { cool: 'this guy'}))
+			}
 			return next(action);
 		case feedConstants.FETCH_FEED:
 			dispatch(loadingStart());
 
-
-			// isNewPage is TRUE
-			// reset feed.focusedFeed.page to 1
-
-			if(action.filters.isNewPage) {
-				dispatch(resetPage());
-				dispatch(resetTracks());
-			} else {
-				dispatch(incrementPage());
-			}
-
-			getFeed(action.resource, action.filters, (feed) => {
-
+			getFeed(action.filters.resource, action.filters, (feed) => {
 				dispatch(loadingStop());
-				// if (action.resource == 'publishers') {
-				if(action.resource === 'tracks') {
-					if(action.filters.id) {
-						dispatch(setFeedType('SINGLE_TRACK'));
-						dispatch(receiveSingleTrackFeed(feed))
-					} else {
-						dispatch(setFeedType('FIRE'));
-						dispatch(receiveFireFeed(feed))
-					}
+
+				if(action.filters.resource === 'tracks' && action.filters.id) {
+					dispatch(setFeedType('SINGLE_TRACK'));
+					dispatch(receiveFeed([feed]))
+				} else if(action.filters.resource === 'tracks') {
+					dispatch(setFeedType('FIRE'));
+					dispatch(receiveFeed(feed))
 				} else {
-					dispatch(setFeedType(action.resource));
+					dispatch(setFeedType(action.filters.resource));
 					dispatch(receiveFeed(feed));
 				}
-				// }
+
 			}, (error) => {
 				console.log(`ERROR FETCHING TRACKS: got ${error}`);
-			},
-			getState().feed.focusedFeed.page);
+			});
 
 
 			return next(action);
 
 		case feedConstants.PAGINATE_TRACKS:
+			const { last_tracks_page, next_tracks_page, tracks_page } = getState().feed.pagination;
+			dispatch(updateFilters({ ...getState().feed.filters, page: next_tracks_page }));
 
-			// dispatch(fetchTracks(getState().feed.filters, true));
-			dispatch(fetchFeed( getState().feed.filters.resource, {isNewPage: false } ));
-			// dispatch(fetchFeed(getState().feed.filters, false));
 			return next(action);
 		case feedConstants.FETCH_TRACKS:
 			dispatch(loadingStart());

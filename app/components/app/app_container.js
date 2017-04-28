@@ -21,7 +21,8 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-	fetchFeed: (resource, filters) => dispatch(fetchFeed(resource, filters)),
+	fetchFeed: (filters) => dispatch(fetchFeed(filters)),
+	// fetchFeed: (resource, filters) => dispatch(fetchFeed(resource, filters)),
 	fetchTracks: (filters) => dispatch(fetchTracks(filters)),
 	logoutCurrentUser: () => dispatch(logoutCurrentUser()),
 	receiveCurrentUser: (currentUser) => dispatch(receiveCurrentUser(currentUser)),

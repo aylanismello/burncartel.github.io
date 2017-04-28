@@ -21,13 +21,16 @@ class App extends React.Component {
     if(!_.isEqual(this.props.filters, nextProps.filters)) {
       if(nextProps.filters.resource === 'tracks') { //TRACKS
         if(nextProps.filters.isSingleTrack) {
-          this.props.fetchFeed(nextProps.filters.resource, { id: nextProps.filters.id } );
+          // this.props.fetchFeed(nextProps.filters.resource, { id: nextProps.filters.id } );
+          this.props.fetchFeed(nextProps.filters);
         } else {
-          this.props.fetchFeed(nextProps.filters.resource, { sortType: nextProps.filters.sortType, 
-            isNewPage: nextProps.filters.isNewPage } );
+          this.props.fetchFeed(nextProps.filters);
+          // this.props.fetchFeed(nextProps.filters.resource, { sortType: nextProps.filters.sortType,
+          //   isNewPage: nextProps.filters.isNewPage } );
         }
       } else { //LIKES, PUBLISHERS, CURATORS
-        this.props.fetchFeed(nextProps.filters.resource, { id: nextProps.filters.id });
+        this.props.fetchFeed(nextProps.filters);
+        // this.props.fetchFeed(nextProps.filters.resource, { id: nextProps.filters.id });
       }
     }
 

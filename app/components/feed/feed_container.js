@@ -12,6 +12,7 @@ import { getUserTracksHash } from '../../selectors/track_selector';
 
 // add userTracks here if we need to re-render their likes feed as they update it
 const mapStateToProps = (state, ownProps) => ({
+	canPaginate: state.feed.pagination.last_tracks_page !== state.feed.pagination.tracks_page,
 	tracks: state.feed.focusedFeed.tracks,
 	elements: ownProps.elements,
 	filters: state.feed.filters,
@@ -23,7 +24,8 @@ const mapStateToProps = (state, ownProps) => ({
 	userLikes: getUserTracksHash(state),
 	isLoggedIn: ( state.user.currentUser.uid ? true : false),
 	likePostInProgress: state.user.likePostInProgress,
-	page: state.feed.focusedFeed.page
+	page: state.feed.pagination.tracks_page,
+	nextPage: state.feed.pagination.new_tracks_page
 });
 
 const mapDispatchToProps = dispatch => ({
