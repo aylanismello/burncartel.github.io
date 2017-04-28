@@ -53,7 +53,9 @@ class TopNav extends React.Component {
 	      right                 : 'auto',
 	      bottom                : 'auto',
 	      marginRight           : '-50%',
-	      transform             : 'translate(-50%, -50%)'
+	      transform             : 'translate(-50%, -50%)',
+				height								: '300px',
+				width									: '300px'
 	    }
 	  };
 
@@ -76,6 +78,7 @@ class TopNav extends React.Component {
 					<Modal
 			      isOpen={this.state.open}
 			      onRequestClose={this.handleClose.bind(this)}
+						onAfterOpen={() => {}}
 			      contentLabel="Modal"
 			      style={style}
 						contentLabel="Example Modal">
