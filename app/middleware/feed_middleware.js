@@ -17,7 +17,8 @@ import {
 	receiveFeedMetadata,
 	setFeedType,
 	receiveFireFeed,
-	receiveSingleTrackFeed
+	receiveSingleTrackFeed,
+	fetchFeed
 } from '../actions/feed_actions';
 import {
 	togglePlay
@@ -57,6 +58,17 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 		case feedConstants.FETCH_FEED:
 			dispatch(loadingStart());
 
+
+			// isNewPage is TRUE
+			// reset feed.focusedFeed.page to 1
+
+			if(action.filters.isNewPage) {
+				dispatch(resetPage());
+				dispatch(resetTracks());
+			} else {
+				dispatch(incrementPage());
+			}
+
 			getFeed(action.resource, action.filters, (feed) => {
 
 				dispatch(loadingStop());
@@ -65,8 +77,6 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 					if(action.filters.id) {
 						dispatch(setFeedType('SINGLE_TRACK'));
 						dispatch(receiveSingleTrackFeed(feed))
-					} else if(action.resources === 'likes' ){
-
 					} else {
 						dispatch(setFeedType('FIRE'));
 						dispatch(receiveFireFeed(feed))
@@ -78,13 +88,17 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 				// }
 			}, (error) => {
 				console.log(`ERROR FETCHING TRACKS: got ${error}`);
-			});
+			},
+			getState().feed.focusedFeed.page);
 
 
 			return next(action);
 
 		case feedConstants.PAGINATE_TRACKS:
-			dispatch(fetchTracks(getState().feed.filters, true));
+
+			// dispatch(fetchTracks(getState().feed.filters, true));
+			dispatch(fetchFeed( getState().feed.filters.resource, {isNewPage: false } ));
+			// dispatch(fetchFeed(getState().feed.filters, false));
 			return next(action);
 		case feedConstants.FETCH_TRACKS:
 			dispatch(loadingStart());

@@ -18,9 +18,15 @@ class Home extends React.Component {
 		const sortType = this.props.history.location.pathname.slice(1);
 
 		if(sortType === "") {
-			this.props.updateFilters({ resource: 'tracks', sortType: 'influential' });
+			this.props.updateFilters({ resource: 'tracks',
+			sortType: 'influential',
+			isNewPage: true
+		 });
 		} else {
-			this.props.updateFilters({ resource: 'tracks', sortType });
+			this.props.updateFilters({ resource: 'tracks',
+				sortType,
+				isNewPage: true
+			 });
 		}
 
 
@@ -32,18 +38,21 @@ class Home extends React.Component {
 
 
 			if(sortType === "") {
-				this.props.updateFilters({ resource: 'tracks', sortType: 'influential' });
+				this.props.updateFilters({ resource: 'tracks',
+				 sortType: 'influential',
+				 isNewPage: true
+			  });
 			} else {
-				this.props.updateFilters({ resource: 'tracks', sortType });
+				this.props.updateFilters({ resource: 'tracks',
+					sortType,
+					isNewPage: true
+			 });
 			}
 
 		}
 	}
 
 
-	handleFilterChange(newFilter) {
-		this.props.updateFilters(newFilter);
-	}
 
 	render() {
 

@@ -23,7 +23,8 @@ class App extends React.Component {
         if(nextProps.filters.isSingleTrack) {
           this.props.fetchFeed(nextProps.filters.resource, { id: nextProps.filters.id } );
         } else {
-          this.props.fetchFeed(nextProps.filters.resource, { sortType: nextProps.filters.sortType } );
+          this.props.fetchFeed(nextProps.filters.resource, { sortType: nextProps.filters.sortType, 
+            isNewPage: nextProps.filters.isNewPage } );
         }
       } else { //LIKES, PUBLISHERS, CURATORS
         this.props.fetchFeed(nextProps.filters.resource, { id: nextProps.filters.id });

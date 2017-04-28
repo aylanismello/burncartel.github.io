@@ -18,15 +18,17 @@ const BottomNav = ({ currentUserId }) => {
 				color='aliceblue'
 						className='bc-icon'
 			/>
-			<Link
-				to={`/likes/${currentUserId}`}
-			>
-				<FontAwesome.FaHeart
-					size={30}
-					color='aliceblue'
-							className='bc-icon'
-					/>
-			</Link>
+			{currentUserId ?  <Link
+							to={`/likes/${currentUserId}`}
+						>
+							<FontAwesome.FaHeart
+								size={30}
+								color='aliceblue'
+										className='bc-icon'
+								/>
+						</Link> : null}
+
+
 			<FontAwesome.FaSearch
 				size={30}
 				color='aliceblue'
