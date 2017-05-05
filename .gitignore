@@ -1,5 +1,5 @@
 node_modules/
-bundle.*
+bundle.js.map
 .sass-cache/
 .DS_Store
 assets/main.css.map
