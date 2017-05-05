@@ -26,8 +26,6 @@ import {
 import { getFeedTracksHash } from '../selectors/track_selector';
 import { FEEDS } from '../reducers/feed_reducer';
 import {
-	getTracks,
-	getLikes,
 	getFeed
 } from '../util/bc_api';
 import * as _ from 'lodash';
@@ -64,7 +62,6 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 					dispatch(receiveFeed([feed]))
 				} else if(action.filters.resource === 'tracks') {
 					dispatch(setFeedType('FIRE'));
-					debugger;
 					dispatch(receiveFeed(feed))
 				} else {
 					dispatch(setFeedType(action.filters.resource));

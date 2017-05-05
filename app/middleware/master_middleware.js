@@ -6,7 +6,7 @@ import createLogger  from 'redux-logger';
 
 let myMiddlewares = [ FeedMiddleware,  PlayerMiddleware, UserMiddleware ];
 
-if(process.env['NODE_ENV'] !== 'production') {
+if(process.env.NODE_ENV !== 'production') {
   myMiddlewares.push(createLogger());
 }
 

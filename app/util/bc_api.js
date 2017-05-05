@@ -1,15 +1,7 @@
 import $ from 'jquery';
+import { ENV } from './helpers.js';
 
-let host, port;
-
-if(process.env.NODE_ENV === 'production') {
-	host = process.env.EC2_HOST;
-	port = process.env.EC2_PORT;
-} else {
-	host = '127.0.0.1';
-	port = process.env.EC2_PORT;
-}
-
+const { host, port } = ENV;
 
 export const getFeed = (resource, filters, success = suc, error = err) => {
 	let getUrl;
@@ -20,7 +12,6 @@ export const getFeed = (resource, filters, success = suc, error = err) => {
 	} else {
 		page = filters.page
 	}
-
 
 	if(filters.id && resource !== 'likes') {
 		// getting /publishers/ or /curators/
@@ -40,28 +31,4 @@ export const getFeed = (resource, filters, success = suc, error = err) => {
 	});
 
 
-};
-
-export const getTracks = (filters, success = suc, error = err, page = 1) => {
-	const baseUrl = ((location.hostname === 'localhost') ? localUrl : devUrl);
-
-	const url = `${baseUrl}/${filters['sort']}?page=${page}`;
-
-	$.ajax({
-		url,
-		method: 'GET',
-		data: filters,
-		success,
-		error
-	});
-
-};
-
-export const getLikes = (userId, success = suc, error = err) => {
-	$.ajax({
-		url: `http://localhost:3000/api/v1/users/${userId}/likes`,
-		method: 'GET',
-		success,
-		error
-	});
 };
