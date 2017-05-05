@@ -1,10 +1,17 @@
 import $ from 'jquery';
 
-const localUrl = 'http://localhost:3000/api/v1/tracks/filter';
-const devUrl = 'https://bc-fire-api.herokuapp.com/api/v1/tracks/filter';
+let host, port;
+
+if(process.env.NODE_ENV === 'production') {
+	host = process.env.EC2_HOST;
+	port = process.env.EC2_PORT;
+} else {
+	host = '127.0.0.1';
+	port = process.env.EC2_PORT;
+}
+
 
 export const getFeed = (resource, filters, success = suc, error = err) => {
-
 	let getUrl;
 
 	let page;
@@ -17,18 +24,14 @@ export const getFeed = (resource, filters, success = suc, error = err) => {
 
 	if(filters.id && resource !== 'likes') {
 		// getting /publishers/ or /curators/
-		getUrl = `http://localhost:3000/api/v1/${resource}/${filters.id}?tracks_page=${page}`;
+		getUrl = `http://${host}:${port}/api/v1/${resource}/${filters.id}?tracks_page=${page}`;
 	} else if (filters.id && resource === 'likes'){
-		getUrl = `http://localhost:3000/api/v1/users/${filters.id}?tracks_page=${page}`;
+		getUrl = `http://${host}:${port}/api/v1/users/${filters.id}?tracks_page=${page}`;
 		  // get "/:user_id/likes", root: :track do
 	}else {
 		// we are dealing with a fire feed
-		// getUrl = `http://localhost:3000/api/v1/${resource}?sort_type=${filters.sortType}&page=${page}`;
-		getUrl = `http://localhost:3000/api/v1/feeds?sort_type=${filters.sortType}&tracks_page=${page}`;
-		debugger;
-
+		getUrl = `http://${host}:${port}/api/v1/feeds?sort_type=${filters.sortType}&tracks_page=${page}`;
 	}
-
 
 	$.ajax({
 		url: getUrl,

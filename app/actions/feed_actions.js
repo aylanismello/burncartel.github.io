@@ -1,5 +1,4 @@
 export const feedConstants = {
-	FETCH_TRACKS: 'FETCH_TRACKS',
 	RECEIVE_TRACKS: 'RECEIVE_TRACKS',
 	RESET_TRACKS: 'RESET_TRACKS',
 	UPDATE_FILTERS: 'UPDATE_FILTERS',
@@ -122,11 +121,6 @@ export const receivePlayingTracks = (tracks) => ({
 	tracks
 });
 
-export const fetchTracks = (filters, isNewPage = false) => ({
-	type: feedConstants.FETCH_TRACKS,
-	filters,
-	isNewPage
-});
 
 export const updateFilters = (filters) => ({
 	type: feedConstants.UPDATE_FILTERS,

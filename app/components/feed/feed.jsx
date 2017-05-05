@@ -8,7 +8,7 @@ import Loading from '../loading';
 
 const Feed = ({ tracks, filters, trackLoaded,
 	handleTrackClick, loadingFeed, trackId,
-	playing, fetchTracks, isLoggedIn, loginFB,
+	playing, isLoggedIn, loginFB,
 	likeUnlikeTrack, userLikes, likePostInProgress,
  	paginateTracks, page, playingTrackId,
 	canPaginate, nextPage }) => {

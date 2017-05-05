@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import BurnCartelPlayer from './burn_cartel_player';
-import { updateTrackId, fetchTracks, updatePlayingTrackId } from '../../actions/feed_actions';
+import { updateTrackId, updatePlayingTrackId } from '../../actions/feed_actions';
 import { togglePlay,
 	setTrackLoaded,
 	setTrackNotLoaded,
@@ -48,7 +48,6 @@ const mapDispatchToProps = (dispatch) => ({
 	setTrackLoaded: () => dispatch(setTrackLoaded()),
 	setTrackNotLoaded: () => dispatch(setTrackNotLoaded()),
 	updateCurrentTime: (currentTime) => dispatch(updateCurrentTime(currentTime)),
-	fetchTracks: (filters, isNewpage) => dispatch(fetchTracks(filters, isNewpage)),
 	likeUnlikeTrack: (trackId) => dispatch(likeUnlikeTrack(trackId)),
 	loginFB: () => dispatch(loginFB()),
 

@@ -7,7 +7,6 @@ import {
 	resetPage,
 	incrementPage,
 	resetTracks,
-	fetchTracks,
 	updatePageTitle,
 	updateFocusedTrackId,
 	updatePlayingTrackId,
@@ -65,6 +64,7 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 					dispatch(receiveFeed([feed]))
 				} else if(action.filters.resource === 'tracks') {
 					dispatch(setFeedType('FIRE'));
+					debugger;
 					dispatch(receiveFeed(feed))
 				} else {
 					dispatch(setFeedType(action.filters.resource));
@@ -81,37 +81,6 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 		case feedConstants.PAGINATE_TRACKS:
 			const { last_tracks_page, next_tracks_page, tracks_page } = getState().feed.pagination;
 			dispatch(updateFilters({ ...getState().feed.filters, page: next_tracks_page }));
-
-			return next(action);
-		case feedConstants.FETCH_TRACKS:
-			dispatch(loadingStart());
-
-			if(action.isNewPage) {
-				dispatch(incrementPage());
-			} else {
-				// if not new page, we have a need feed load...
-				// might need to clear the feed.focusedFeed.tracks here too
-				dispatch(resetPage());
-				dispatch(resetTracks());
-			}
-
-			if(getState().feed.feedType === FEEDS.FIRE) {
-				getTracks({ sort: 'influential', ...action.filters}, (tracks) => {
-					dispatch(loadingStop());
-					dispatch(receiveTracks(tracks));
-				}, (error) => {
-					// make error reducer here
-					console.log(`ERROR FETCHING TRACKS: got ${error}`);
-				}, getState().feed.focusedFeed.page);
-			} else if(getState().feed.feedType === FEEDS.LIKES) {
-
-				getLikes(getState().feed.focusedFeed.userLikeId, (tracks) => {
-					dispatch(loadingStop());
-					dispatch(receiveTracks(tracks));
-				}, (error) => {
-					console.log(`ERORR GETTING ${error}`);
-				});
-			}
 
 			return next(action);
 		case feedConstants.HANDLE_TRACK_CLICK:

@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
 import Feed from './feed';
 import {
-	fetchTracks,
 	updateTrackId,
 	handleTrackClick,
 	paginateTracks
@@ -29,7 +28,6 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-	fetchTracks: (filters, isNewpage) => dispatch(fetchTracks(filters, isNewpage)),
 	handleTrackClick: (trackId, clickType = 'play') => {
 		dispatch(handleTrackClick(trackId, clickType))
 

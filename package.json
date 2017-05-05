@@ -9,8 +9,8 @@
   "scripts": {
     "test": "echo Error: no test specified && exit 1",
     "start": "webpack --watch",
-    "start:hotspot": "webpack --watch --config webpack_hotspot.config.js",
-    "build": "webpack --config webpack_prod.config.js --progress -p"
+    "start-env":  "webpack -p --define process.env.NODE_ENV='\"production\"' --watch --progress --colors",
+    "build": "webpack --config webpack.config.prod.js --progress -p"
   },
   "keywords": [],
   "author": "",
