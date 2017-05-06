@@ -10,6 +10,8 @@ class TopNav extends React.Component {
 			open: false,
 			loginText: ''
 		};
+
+		this.renderLogoutButton = this.renderLogoutButton.bind(this)
 	}
 
 	componentWillMount() {
@@ -22,6 +24,27 @@ class TopNav extends React.Component {
 		 this.setState({loginText: 'Logout'});
 	 } else {
 		 this.setState({loginText: 'Login'});
+	 }
+
+ }
+
+ renderLogoutButton() {
+	 if(this.props.currentUser.uid) {
+		 return (
+		 	<Link to='/'>
+			 	<div style={{cursor: 'pointer', backgroundColor: 'white', borderRadius: 5}}
+						 onClick={this.props.currentUser.uid ? this.facebookLogout.bind(this) : () => this.setState({open: true})}>
+					{this.state.loginText}
+				</div>
+			</Link>
+		);
+	 } else {
+		 return (
+		 <div style={{cursor: 'pointer', backgroundColor: 'white', borderRadius: 5}}
+					onClick={this.props.currentUser.uid ? this.facebookLogout.bind(this) : () => this.setState({open: true})}>
+			 {this.state.loginText}
+		 </div>
+		 );
 	 }
 
  }
@@ -75,10 +98,8 @@ class TopNav extends React.Component {
 
 					<div className="login-out-container">
 
-						<div style={{cursor: 'pointer', backgroundColor: 'white', borderRadius: 5}}
-								 onClick={this.props.currentUser.uid ? this.facebookLogout.bind(this) : () => this.setState({open: true})}>
-		  				{this.state.loginText}
-						</div>
+						{this.renderLogoutButton()}
+
 					</div>
 
 					<Modal
