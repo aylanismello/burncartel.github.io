@@ -4,29 +4,76 @@ import * as _ from 'lodash';
 
 export const FEEDS = {
 	FIRE: 'FIRE',
-	LIKES: 'LIKES'
+	LIKES: 'LIKES',
+	CURATORS: 'CURATORS',
+	PUBLISHERS: 'PUBLISHERS',
+	SINGLE_TRACK: 'SINGLE_TRACK'
 }
 
 const initialState = {
-	tracks: [],
-	filters: {
+	focusedFeed: {
+		tracks: [],
+		userLikeId: -1,
+		trackId: -1,
+		page: 1
 	},
-	userLikeId: -1,
-	feedType: FEEDS.FIRE,
-	trackId: -1,
+	FIRE: {
+
+	},
+	LIKES: {
+
+	},
+	PUBLISHERS: {
+		// name: null,
+		// permalink_url: null,
+		// track_count: null,
+		// followers_count: null,
+		// followings_count: null,
+		// num_curators: null,
+		// avatar_url: null,
+		// country: null,
+		// city: null,
+		// curators: [],
+		// handles: []
+		// sorted_tracks: [] this is just tracks in the outer state
+	}, //then these are mapped to /resources request from API
+	CURATORS: {
+
+	},
+	SINGLE_TRACK: {
+
+	},
+	playingFeed: {
+		tracks: [],
+			// might need any number of metadatas here
+		feedName: ""
+	},
 	loadingFeed: true,
-	page: 1
+	feedType: null,
+	filters: {},
+	pagination: {
+		next_tracks_page: null,
+		last_tracks_page: null,
+		tracks_page: null
+	}
 };
 
 const FeedReducer = (state = initialState, action) => {
 	switch(action.type) {
+		case feedConstants.RECEIVE_PAGINATION_DATA:
+			const {last_tracks_page, next_tracks_page, tracks_page } = action;
+
+			return { ...state, pagination: { last_tracks_page, next_tracks_page, tracks_page }};
+		case feedConstants.RECEIVE_FEED_METADATA:
+			const newMetadataState = _.cloneDeep(state);
+			newMetadataState[action.feedType.toUpperCase()] = action.metadata;
+			return newMetadataState;
 		case feedConstants.SET_LIKE_FEED_USER_ID:
-			return { ...state, userLikeId: action.userId };
+			return { ...state, focusedFeed: {...state.focusedFeed, userLikeId: action.userId }};
 		case feedConstants.SET_FEED_TYPE:
 			return { ...state, feedType: action.feedType };
 		case feedConstants.UPDATE_TRACK_LIKE_COUNT:
-
-			let updateTracksWithLikeCount = state.tracks.map((track, idx) => {
+			let updateTracksWithLikeCount = state.focusedFeed.tracks.map((track, idx) => {
 				if(track.id === action.trackId) {
 					return { ...track, num_likes: action.likeCount };
 				} else {
@@ -34,32 +81,28 @@ const FeedReducer = (state = initialState, action) => {
 				}
 			});
 
-			return { ...state, tracks: updateTracksWithLikeCount };
+			return { ...state, focusedFeed: {...state.focusedFeed, tracks: updateTracksWithLikeCount } };
 		case feedConstants.INCREMENT_PAGE:
-			return { ...state, page: (state.page + 1) }
+			return { ...state, focusedFeed: {...state.focusedFeed, page: (state.focusedFeed.page + 1) } };
 		case feedConstants.RESET_PAGE:
-			return { ...state, page: 1 };
+			return { ...state, focusedFeed: {...state.focusedFeed, page: 1 } };
 		case feedConstants.RESET_TRACKS:
-			return { ...state, tracks: [] };
+			return { ...state, focusedFeed: {...state.focusedFeed,  tracks: [] } };
 		case feedConstants.RECEIVE_TRACKS:
 			const newTracks = {};
-			// why is this even still here?
-			// doesn't the track selector do this for us?
-			action.tracks.forEach((track) => {
-				newTracks[track.id] = track;
-			});
-
-			// for some reason the last tracks from old tracks and new tracks double up
-			// return { ...state, tracks: [ ...state.tracks, ...action.tracks.slice(1) ] };
-			return { ...state, tracks: [ ...state.tracks, ...action.tracks ] };
-			// return { ...state, tracks: action.tracks  };
-			// return { ...state, tracks: [ ...state.tracks ] };
+			return { ...state, focusedFeed: {...state.focusedFeed, tracks: [ ...state.focusedFeed.tracks, ...action.tracks ] } };
+		case feedConstants.RECEIVE_PLAYING_TRACKS:
+			return { ...state, playingFeed: { ...state.playingFeed, tracks: action.tracks } };
 		case feedConstants.UPDATE_FILTERS:
-			const newFilters = { ...initialState.filters, ...action.filters } ;
-			const newState = { ...state, filters: newFilters };
-			return newState;
+			return { ...state, filters: action.filters };
+		case feedConstants.SET_PLAYING_FEED_NAME:
+			return { ...state, playingFeed: { ...state.playingFeed, feedName: action.feedName } };
 		case feedConstants.UPDATE_TRACK_ID:
-			return { ...state, trackId: action.trackId };
+			return { ...state, focusedFeed: {...state.focusedFeed, trackId: action.trackId } };
+		case feedConstants.UPDATE_FOCUSED_TRACK_ID:
+			return { ...state, focusedFeed: {...state.focusedFeed, trackId: action.trackId } };
+		case feedConstants.UPDATE_PLAYING_TRACK_ID:
+			return { ...state, playingFeed: {...state.playingFeed, trackId: action.trackId } };
 		case feedConstants.LOADING_START:
 			return { ...state, loadingFeed: true };
 		case feedConstants.LOADING_STOP:

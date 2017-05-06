@@ -17,17 +17,16 @@ class App extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    // you also have to check for pagination being invoked here.
-    // so maybe if this.props.feed.length !=== nextProps.feed.length
-    // wait what...
-
+    
     if(!_.isEqual(this.props.filters, nextProps.filters)) {
-      this.props.fetchTracks(nextProps.filters);
-    }
-
-    if(!_.isEqual(this.props.feedType, nextProps.feedType)) {
-      if(nextProps.feedType === FEEDS.LIKES) {
-        this.props.fetchTracks();
+      if(nextProps.filters.resource === 'tracks') { //TRACKS
+        if(nextProps.filters.isSingleTrack) {
+          this.props.fetchFeed(nextProps.filters);
+        } else {
+          this.props.fetchFeed(nextProps.filters);
+        }
+      } else { //LIKES, PUBLISHERS, CURATORS
+        this.props.fetchFeed(nextProps.filters);
       }
     }
 

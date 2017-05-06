@@ -6,6 +6,7 @@ listening experience for most, and an engaging exploration mode for some.
 ***Note:***
 This page gets served locally with the node package "http-server". We therefore **need to connect to a local Rails server running the BC FIRE API**, [BC Fire Feed](www.github.com/aylanismello/bc-fire-api). See installation instructions for that separately.
 
+The page should be served at localhost:8080
 
 ## Getting started
 

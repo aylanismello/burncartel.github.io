@@ -1,4 +1,5 @@
-import { feedConstants,
+import {
+	feedConstants,
 	receiveTracks,
  	loadingStart,
 	loadingStop,
@@ -6,8 +7,18 @@ import { feedConstants,
 	resetPage,
 	incrementPage,
 	resetTracks,
-	fetchTracks,
-	updatePageTitle
+	updatePageTitle,
+	updateFocusedTrackId,
+	updatePlayingTrackId,
+	receivePlayingTracks,
+	setPlayingFeedName,
+	receiveFeed,
+	receiveFeedMetadata,
+	setFeedType,
+	receiveSingleTrackFeed,
+	fetchFeed,
+	updateFilters,
+	receivePaginationData
 } from '../actions/feed_actions';
 import {
 	togglePlay
@@ -15,64 +26,119 @@ import {
 import { getFeedTracksHash } from '../selectors/track_selector';
 import { FEEDS } from '../reducers/feed_reducer';
 import {
-	getTracks,
-	getLikes
+	getFeed
 } from '../util/bc_api';
+import * as _ from 'lodash';
+
 
 const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 	switch(action.type) {
+		case feedConstants.RECEIVE_FEED:
+			if(action.feed.sorted_serialized_tracks) { // if we have multiple tracks
 
-		case feedConstants.PAGINATE_TRACKS:
-			dispatch(fetchTracks(getState().feed.filters, true));
+				dispatch(receivePaginationData(action.feed));
+				if(getState().feed.pagination.tracks_page === 1) {
+					dispatch(resetTracks());
+				}
+
+
+				dispatch(receiveTracks(action.feed.sorted_serialized_tracks));
+				delete action.feed.sorted_serialized_tracks;
+				dispatch(receiveFeedMetadata(getState().feed.feedType, action.feed))
+
+			} else { // if we have a single track
+				dispatch(receiveTracks(action.feed));
+				dispatch(receiveFeedMetadata(getState().feed.feedType, { cool: 'this guy'}))
+			}
 			return next(action);
-		case feedConstants.FETCH_TRACKS:
+		case feedConstants.FETCH_FEED:
 			dispatch(loadingStart());
 
-			if(action.isNewPage) {
-				dispatch(incrementPage());
-			} else {
-				// if not new page, we have a need feed load...
-				// might need to clear the feed.tracks here too
-				dispatch(resetPage());
-				dispatch(resetTracks());
-			}
+			getFeed(action.filters.resource, action.filters, (feed) => {
+				dispatch(loadingStop());
 
-			if(getState().feed.feedType === FEEDS.FIRE) {
-				getTracks({ sort: 'influential', ...action.filters}, (tracks) => {
-					dispatch(loadingStop());
-					dispatch(receiveTracks(tracks));
-				}, (error) => {
-					// make error reducer here
-					console.log(`ERROR FETCHING TRACKS: got ${error}`);
-				}, getState().feed.page);
-			} else if(getState().feed.feedType === FEEDS.LIKES) {
+				if(action.filters.resource === 'tracks' && action.filters.id) {
+					dispatch(setFeedType('SINGLE_TRACK'));
+					dispatch(receiveFeed([feed]))
+				} else if(action.filters.resource === 'tracks') {
+					dispatch(setFeedType('FIRE'));
+					dispatch(receiveFeed(feed))
+				} else {
+					dispatch(setFeedType(action.filters.resource));
+					dispatch(receiveFeed(feed));
+				}
 
-				getLikes(getState().feed.userLikeId, (tracks) => {
-					dispatch(loadingStop());
-					dispatch(receiveTracks(tracks));
-				}, (error) => {
-					console.log(`ERORR GETTING ${error}`);
-				});
+			}, (error) => {
+				console.log(`ERROR FETCHING TRACKS: got ${error}`);
+			});
 
-			}
+
+			return next(action);
+
+		case feedConstants.PAGINATE_TRACKS:
+			const { last_tracks_page, next_tracks_page, tracks_page } = getState().feed.pagination;
+			dispatch(updateFilters({ ...getState().feed.filters, page: next_tracks_page }));
 
 			return next(action);
 		case feedConstants.HANDLE_TRACK_CLICK:
 			// GOING TO NEW TRACK
-			if(getState().feed.trackId !== action.trackId) {
-				// change this to .real_name when that story is completed
-				const newTrackName = getFeedTracksHash(getState())[action.trackId].name;
-				dispatch(updatePageTitle(newTrackName));
+			if(action.clickType === 'play') {
+				if(getState().feed.playingFeed.trackId !== action.trackId) {
+					// change this to .real_name when that story is completed
+					const newTrackName = getFeedTracksHash(getState())[action.trackId].name;
+					dispatch(updatePageTitle(newTrackName));
+					dispatch(updatePlayingTrackId(action.trackId));
 
-				dispatch(updateTrackId(action.trackId));
-				if(!getState().player.playing) {
-					dispatch(togglePlay());
+					// here we copy over feed.focusedFeed to feed.playingFeed if they are not equal
+					const tracksInFocus = getState().feed.focusedFeed.tracks;
+
+					if(!_.isEqual(getState().feed.playingFeed.tracks, tracksInFocus)) {
+						console.log('you just started playing a track from a new feed (one that is not focused)!');
+						// playingFeed = deepClone of currentFeed?
+						// also update name of feed for player!
+						dispatch(receivePlayingTracks(tracksInFocus));
+
+
+						let newFeedName;
+
+						const feedType = getState().feed.feedType.toUpperCase();
+
+						if(feedType === "LIKES") {
+							newFeedName = 'LIKES';
+						} else if(feedType === "FIRE") {
+							if(getState().feed.filters['sortType']) {
+								newFeedName = getState().feed.filters['sortType']; // fuck probs shouldn't call this a reserved keyword
+							} else {
+								newFeedName = 'some unknown fire'
+							}
+						} else if(feedType === "CURATORS"){
+							newFeedName = `${getState().feed.CURATORS.name}'s`
+						} else if(feedType === 'PUBLISHERS') {
+							newFeedName = `${getState().feed.PUBLISHERS.name}'s`
+						} else if(feedType === 'SINGLE_TRACK') {
+							newFeedName = 'track'
+						} else {
+							newFeedName = 'NO NAME SET, this means newFeedName wasnt set in HANDLE_TRACK_CLICK'
+						}
+
+						dispatch(setPlayingFeedName(newFeedName));
+					} else { // if the focusedTracks and playingTracks are the same...
+						console.log('wtf');
+								// ???
+					}
+
+					if(!getState().player.playing) {
+						dispatch(togglePlay());
+					}
+				} else {
+					dispatch(togglePlay()); 	// TOGGLING OLD TRACK
 				}
+					// what if you're coming from a paused song?
 			} else {
-				dispatch(togglePlay()); 	// TOGGLING OLD TRACK
+				dispatch(updateFocusedTrackId(action.trackId));
 			}
-				// what if you're coming from a paused song?
-				return next(action);
+
+			return next(action);
 		case feedConstants.UPDATE_PAGE_TITLE:
 			document.title = `${action.trackName} | Fire Feed`;
 			return next(action);

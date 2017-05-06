@@ -8,12 +8,16 @@ import Loading from '../loading';
 
 const Feed = ({ tracks, filters, trackLoaded,
 	handleTrackClick, loadingFeed, trackId,
-	playing, fetchTracks, isLoggedIn, loginFB,
+	playing, isLoggedIn, loginFB,
 	likeUnlikeTrack, userLikes, likePostInProgress,
- 	paginateTracks, page }) => {
+ 	paginateTracks, page, playingTrackId,
+	canPaginate, nextPage }) => {
 	let childElements;
 
-	if(loadingFeed && page === 1) {
+
+	// TODO: FIX this shitty conditional
+	// this is really janky
+	if(loadingFeed && nextPage === 2) {
 		childElements = <Loading />;
 	} else {
 
@@ -22,6 +26,7 @@ const Feed = ({ tracks, filters, trackLoaded,
 				track={track}
 				trackIdx={idx}
 				trackId={trackId}
+				playingTrackId={playingTrackId}
 				playing={playing}
 				trackLoaded={trackLoaded}
 				handleTrackClick={handleTrackClick}
@@ -40,12 +45,15 @@ const Feed = ({ tracks, filters, trackLoaded,
 		if(!loadingFeed) {
 			return (
 				<div>
-					<Typicons.TiArrowDown
-						size={100}
-						color="gray"
-						className="bc-icon"
-						onClick={() => paginateTracks()}
-					/>
+					{canPaginate ?
+						<Typicons.TiArrowDown
+							size={100}
+							color="gray"
+							className="bc-icon"
+							onClick={() => paginateTracks()}
+						/>
+					: null}
+
 					<Typicons.TiArrowUp
 						size={100}
 						color="gray"
@@ -68,7 +76,9 @@ const Feed = ({ tracks, filters, trackLoaded,
 	return (
 		<div className="feed-container">
 			{childElements}
-			{page === 1 && loadingFeed ? null : <div className="pagination-button-container"> <NavigateFeedIcons/> </div>}
+			{/* {page === 1 && loadingFeed ? null : <div className="pagination-button-container"> <NavigateFeedIcons/> </div>} */}
+			{/* {canPaginate ?  <div className="pagination-button-container"> <NavigateFeedIcons/> </div> : null} */}
+			<div className="pagination-button-container"> <NavigateFeedIcons/> </div>
 		</div>
 	);
 };

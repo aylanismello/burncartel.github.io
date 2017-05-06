@@ -22,10 +22,10 @@ const CuratorItem = ({ user, handleUserChange }) => {
 							src={user.avatar_url}
 							className="artwork-icon"
 						/>
-						<img
+						{/* <img
 							src='http://wptf.com/wp-content/uploads/2014/05/play-button.png'
 							className="artwork-play"
-						/>
+						/> */}
 						<span className="glyphicon glyphicon-play-circle"/>
 					</div>
 
@@ -33,7 +33,7 @@ const CuratorItem = ({ user, handleUserChange }) => {
 					<div className="caption">
 
 						<Link
-							to={`/users/${user.id}`}
+							to={`/curators/${user.id}`}
 						>
 							<h3 className="user-title">{user.name}</h3>
 						</Link>

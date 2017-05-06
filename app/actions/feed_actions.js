@@ -1,10 +1,11 @@
 export const feedConstants = {
-	FETCH_TRACKS: 'FETCH_TRACKS',
 	RECEIVE_TRACKS: 'RECEIVE_TRACKS',
 	RESET_TRACKS: 'RESET_TRACKS',
 	UPDATE_FILTERS: 'UPDATE_FILTERS',
 	UPDATE_TRACK_IDX: 'UPDATE_TRACK_IDX',
 	UPDATE_TRACK_ID: 'UPDATE_TRACK_ID',
+	UPDATE_FOCUSED_TRACK_ID: 'UPDATE_FOCUSED_TRACK_ID',
+	UPDATE_PLAYING_TRACK_ID: 'UPDATE_PLAYING_TRACK_ID',
 	LOADING_START: 'LOADING_START',
 	LOADING_STOP: 'LOADING_STOP',
 	HANDLE_TRACK_CLICK: 'HANDLE_TRACK_CLICK',
@@ -14,9 +15,50 @@ export const feedConstants = {
 	SET_FEED_TYPE: 'SET_FEED_TYPE',
 	SET_LIKE_FEED_USER_ID: 'SET_LIKE_FEED_USER_ID',
 	PAGINATE_TRACKS: 'PAGINATE_TRACKS',
-	UPDATE_PAGE_TITLE: 'UPDATE_PAGE_TITLE'
+	UPDATE_PAGE_TITLE: 'UPDATE_PAGE_TITLE',
+	RECEIVE_PLAYING_TRACKS: 'RECEIVE_PLAYING_TRACKS',
+	SET_PLAYING_FEED_NAME: 'SET_PLAYING_FEED_NAME',
+	FETCH_FEED: 'FETCH_FEED',
+	RECEIVE_FEED_METADATA: 'RECEIVE_FEED_METADATA',
+	RECEIVE_FEED: 'RECEIVE_FEED',
+	RECEIVE_PAGINATION_DATA: 'RECEIVE_PAGINATION_DATA'
 };
 
+
+export const receivePaginationData = ({last_tracks_page,
+	next_tracks_page, tracks_page }) => ({
+	type: feedConstants.RECEIVE_PAGINATION_DATA,
+	last_tracks_page,
+	next_tracks_page,
+	tracks_page
+});
+
+export const receiveFeed = (feed) => ({
+	type: feedConstants.RECEIVE_FEED,
+	feed
+});
+
+export const receiveFeedMetadata = (feedType, metadata) => ({
+	type: feedConstants.RECEIVE_FEED_METADATA,
+	feedType,
+	metadata
+});
+
+export const fetchFeed = (filters) => ({
+	type: feedConstants.FETCH_FEED,
+	filters
+});
+
+// export const fetchFeed = (resource, filters) => ({
+// 	type: feedConstants.FETCH_FEED,
+// 	resource,
+// 	filters
+// });
+
+export const setPlayingFeedName = (feedName) => ({
+	type: feedConstants.SET_PLAYING_FEED_NAME,
+	feedName
+});
 
 export const updatePageTitle = (trackName) => ({
 	type: feedConstants.UPDATE_PAGE_TITLE,
@@ -55,9 +97,10 @@ export const resetPage = () => ({
 	type: feedConstants.RESET_PAGE
 });
 
-export const handleTrackClick = (trackId) => ({
+export const handleTrackClick = (trackId, clickType) => ({
 	type: feedConstants.HANDLE_TRACK_CLICK,
-	trackId
+	trackId,
+	clickType
 });
 
 export const loadingStart = () => ({
@@ -73,11 +116,11 @@ export const receiveTracks = (tracks) => ({
 	tracks
 });
 
-export const fetchTracks = (filters, isNewPage = false) => ({
-	type: feedConstants.FETCH_TRACKS,
-	filters,
-	isNewPage
+export const receivePlayingTracks = (tracks) => ({
+	type: feedConstants.RECEIVE_PLAYING_TRACKS,
+	tracks
 });
+
 
 export const updateFilters = (filters) => ({
 	type: feedConstants.UPDATE_FILTERS,
@@ -86,5 +129,15 @@ export const updateFilters = (filters) => ({
 
 export const updateTrackId = (trackId) => ({
 	type: feedConstants.UPDATE_TRACK_ID,
+	trackId
+});
+
+export const updateFocusedTrackId = (trackId) => ({
+	type: feedConstants.UPDATE_FOCUSED_TRACK_ID,
+	trackId
+});
+
+export const updatePlayingTrackId = (trackId) => ({
+	type: feedConstants.UPDATE_PLAYING_TRACK_ID,
 	trackId
 });

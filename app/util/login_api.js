@@ -1,4 +1,7 @@
 import $ from 'jquery';
+import { ENV } from './helpers.js';
+
+const { host, port } = ENV;
 
 export const connectFB = () => {
   $.ajax({
@@ -17,7 +20,7 @@ export const getFBUser = (success) => {
     data['email'] = response.email;
 
     $.ajax({
-      url: 'http://localhost:3000/api/v1/session/fb/create',
+      url: `http://${host}:${port}/api/v1/session/fb/create`,
       method: 'POST',
       xhrFields: {
         withCredentials: true

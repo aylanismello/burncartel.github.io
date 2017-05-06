@@ -1,6 +1,8 @@
 import { connect } from 'react-redux';
 import App from './app';
-import { fetchTracks } from '../../actions/feed_actions';
+import {
+	fetchFeed
+ } from '../../actions/feed_actions';
 import {
 	logoutCurrentUser,
 	receiveCurrentUser,
@@ -10,7 +12,7 @@ import {
 
 
 const mapStateToProps = (state, ownProps) => ({
-	feed: state.feed,
+	feed: state.feed.focusedFeed,
 	filters: state.feed.filters,
 	currentUser: state.user.currentUser,
 	fbDidInit: state.user.fbDidInit,
@@ -18,7 +20,7 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-	fetchTracks: (filters) => dispatch(fetchTracks(filters)),
+	fetchFeed: (filters) => dispatch(fetchFeed(filters)),
 	logoutCurrentUser: () => dispatch(logoutCurrentUser()),
 	receiveCurrentUser: (currentUser) => dispatch(receiveCurrentUser(currentUser)),
 	initFB: () => dispatch(initFB()),

@@ -1,5 +1,10 @@
 const path = require('path');
 const webpack = require('webpack');
+
+const NODE_ENV = (process.env === 'production') ? 'production' : 'development';
+const EC2_HOST = process.env.EC2_HOST || 'ec2-52-53-231-190.us-west-1.compute.amazonaws.com';
+const EC2_PORT = process.env.EC2_PORT || '8010';
+
 module.exports = {
   context: __dirname,
   entry: './app/index.jsx',
@@ -34,7 +39,9 @@ module.exports = {
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
-        'NODE_ENV': JSON.stringify('production'),
+        'NODE_ENV': JSON.stringify(NODE_ENV),
+        'EC2_HOST': JSON.stringify(EC2_HOST),
+        'EC2_PORT': JSON.stringify(EC2_PORT)
       }
     }),
     new webpack.optimize.UglifyJsPlugin({

@@ -12,6 +12,7 @@ import BurnCartelCurated from './curated/burn_cartel_curated';
 import TrackShowContainer from './track/track_show_container';
 import CuratorShowContainer from './curator/curator_show_container';
 import LikesShowContainer from './likes/likes_show_container';
+import PublisherShowContainer from './publisher/publisher_show_container';
 import NoMatch from './no_match';
 import AppContainer from './app/app_container';
 
@@ -24,8 +25,14 @@ class AppRouter extends React.Component{
           <AppContainer/>
           <Switch>
             <Route exact path="/" component={HomeContainer} />
+            <Route exact path="/bc" component={HomeContainer} />
+            <Route exact path="/hot" component={HomeContainer} />
+            <Route exact path="/remix" component={HomeContainer} />
+            <Route exact path="/mix" component={HomeContainer} />
+            <Route exact path="/not" component={HomeContainer} />
+            <Route path="/publishers/:id" component={PublisherShowContainer} />
             <Route path="/tracks/:id" component={TrackShowContainer} />
-            <Route path="/users/:id" component={CuratorShowContainer} />
+            <Route path="/curators/:id" component={CuratorShowContainer} />
             <Route path="/likes/:id" component={LikesShowContainer} />
             <Route path="/curated" component={BurnCartelCurated} />
             <Route component={NoMatch}/>

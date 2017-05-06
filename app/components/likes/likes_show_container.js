@@ -26,7 +26,7 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-	updateFilters: () => dispatch(updateFilters()),
+	updateFilters: (filters) => dispatch(updateFilters(filters)),
 	setFeedType: (feedType) => dispatch(setFeedType(feedType)),
 	setLikeFeedUserId: (userId) => dispatch(setLikeFeedUserId(userId)),
 	receiveTracks: (tracks) => dispatch(receiveTracks(tracks))
