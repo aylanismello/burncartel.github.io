@@ -1,52 +1,129 @@
 import { Link } from 'react-router-dom';
 import $ from 'jquery';
 import React from 'react';
+import Modal from 'react-modal';
 
-const TopNav = ({ currentUser, logoutCurrentUser,
-	receiveCurrentUser, loginFB, fbDidInit }) => {
-
-	let fbButton = null;
-	let buttonImgSrc;
-	let facebookLoginOut;
-
-	if(currentUser.uid) {
-		buttonImgSrc = '../../assets/logout_button.png';
-		facebookLoginOut = () => {
-			FB.logout();
-			logoutCurrentUser();
+class TopNav extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			open: false,
+			loginText: ''
 		};
-	} else {
-		buttonImgSrc = '../../assets/fb_login.png';
-		facebookLoginOut = () => loginFB();
+
+		this.renderLogoutButton = this.renderLogoutButton.bind(this)
 	}
 
-	// we CANNOT enable FB login facebook has initialized on the page
-	if(!fbDidInit) {
-		buttonImgSrc = '../../assets/fb_login.png';
-		facebookLoginOut = () => console.log('easy tiger! wait for FB to init');
-	}
+	componentWillMount() {
+    Modal.setAppElement('body');
+ }
 
-	return (
-		<nav className="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse bc-nav">
+ componentWillReceiveProps(nextProps) {
 
-			<Link to="/" className="navbar-brand">
-				<div className="logo-container">
-					<img src="../../assets/bc_small_1.png" alt="Burn Cartel"/>
+	 if (nextProps.currentUser.uid) {
+		 this.setState({loginText: 'Logout'});
+	 } else {
+		 this.setState({loginText: 'Login'});
+	 }
+
+ }
+
+ renderLogoutButton() {
+	 if(this.props.currentUser.uid) {
+		 return (
+		 	<Link to='/'>
+			 	<div style={{cursor: 'pointer', backgroundColor: 'white', borderRadius: 5}}
+						 onClick={this.props.currentUser.uid ? this.facebookLogout.bind(this) : () => this.setState({open: true})}>
+					{this.state.loginText}
 				</div>
 			</Link>
+		);
+	 } else {
+		 return (
+		 <div style={{cursor: 'pointer', backgroundColor: 'white', borderRadius: 5}}
+					onClick={this.props.currentUser.uid ? this.facebookLogout.bind(this) : () => this.setState({open: true})}>
+			 {this.state.loginText}
+		 </div>
+		 );
+	 }
 
-			<div className="login-out-container">
+ }
 
-				<img
-					className="login-out-img"
-					onClick={() => facebookLoginOut()}
-					src={buttonImgSrc}
-				/>
+ handleClose() {
+	 this.setState({
+		 open: false
+	 });
+ }
 
-			</div>
+	facebookLogin() {
+		this.props.loginFB();
+		this.setState({
+			open: false
+		});
+	}
 
-		</nav>
-	);
-};
+	facebookLogout() {
+		FB.logout();
+		this.props.logoutCurrentUser();
+		this.setState({
+			loginText: 'Login'
+		})
+	}
+
+	render() {
+
+		const style = {
+	    content : {
+	      top                   : '50%',
+	      left                  : '50%',
+	      right                 : 'auto',
+	      bottom                : 'auto',
+	      marginRight           : '-50%',
+	      transform             : 'translate(-50%, -50%)',
+				height								: '300px',
+				width									: '300px'
+	    }
+	  };
+
+
+		return (
+			<nav className="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse bc-nav">
+
+				<div className="nav-buttons">
+					<a className="navbar-brand" href="#">
+						<div className="logo-container">
+							<img src="../../assets/bc_small_1.png" alt="Burn Cartel"/>
+						</div>
+					</a>
+
+					<div className="login-out-container">
+
+						{this.renderLogoutButton()}
+
+					</div>
+
+					<Modal
+			      isOpen={this.state.open}
+			      onRequestClose={this.handleClose.bind(this)}
+						onAfterOpen={() => {}}
+			      contentLabel="Modal"
+			      style={style}
+						contentLabel="Example Modal">
+							<div className="login-out-container">
+
+              	<img className="login-out-img"
+                     onClick={this.facebookLogin.bind(this)}
+                     src='../../assets/fb_login.png' />
+
+              </div>
+			    </Modal>
+
+				</div>
+
+			</nav>
+		);
+	}
+
+}
 
 export default TopNav;
