@@ -5,7 +5,7 @@ if(process.env.NODE_ENV === 'production') {
 	port = process.env.EC2_PORT;
 } else {
 	host = '127.0.0.1';
-	port = process.env.EC2_PORT;
+	port = '8010';
 }
 
 
