@@ -105,7 +105,7 @@ class BurnCartelPlayer extends React.Component {
     if(!this.props.playing) {
       this.playIcon = (
           <FontAwesome.FaPlayCircleO
-          size={50}
+          size={40}
           color='aliceblue'
           className='bc-icon'
         />
@@ -113,7 +113,7 @@ class BurnCartelPlayer extends React.Component {
     } else {
       this.playIcon = (
         <FontAwesome.FaPauseCircleO
-          size={50}
+          size={40}
           color='aliceblue'
           className='bc-icon'
         />
@@ -124,16 +124,16 @@ class BurnCartelPlayer extends React.Component {
 
     if(this.track && this.props.trackLoaded) {
         details = (
-          <div>
-            <div>
+          <div className='track-details-text'>
+            <div className='track-top-details'>
               <Link
                 to={`/tracks/${this.track.id}`}
+                onClick={() => handleTrackClick(this.track.id)}
               >
-                <h3 className="track-title" onClick={() => handleTrackClick(this.track.id)}>{this.track.name}</h3>
+                {/* <p className="track-title" onClick={() => handleTrackClick(this.track.id)}>{this.track.name}</p> */}
+                {`${this.track.name} `}
               </Link>
-            </div>
-            <div>
-              by
+                •
               <Link
                 to={`/publishers/${this.props.publisherId}`}
               >
@@ -143,9 +143,9 @@ class BurnCartelPlayer extends React.Component {
             <div>
               Playing from {this.props.feedName.toUpperCase()} feed
             </div>
-            <div>
+            {/* <div>
               {this.secondsToMinutes(this.props.currentTime)}
-            </div>
+            </div> */}
           </div>
       );
     } else if(this.track && !this.props.trackLoaded) {
@@ -177,11 +177,12 @@ class BurnCartelPlayer extends React.Component {
               likeUnlikeTrack={likeUnlikeTrack}
               isLikedByUser={userLikes[trackId] === undefined ? false : true }
               trackId={trackId}
+              size={30}
             />
 
 
             {/* <FontAwesome.FaStepBackward
-              size={50}
+              size={40}
               color='aliceblue'
               className='bc-icon'/> */}
 
@@ -191,7 +192,7 @@ class BurnCartelPlayer extends React.Component {
               </div>
 
               <FontAwesome.FaStepForward
-                size={50}
+                size={40}
                 color='aliceblue'
                 className='bc-icon'
                 onClick={this.goToNextTrack}
@@ -199,7 +200,7 @@ class BurnCartelPlayer extends React.Component {
 
                 {/* <div onClick={this.props.toggleRepeat}>
                   <FontAwesome.FaRepeat
-                  size={50}
+                  size={40}
                   color={this.props.repeating? 'green' : 'red'}
                   className='bc-icon'/>
                 </div> */}

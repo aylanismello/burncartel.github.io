@@ -9,7 +9,7 @@
   "scripts": {
     "test": "echo Error: no test specified && exit 1",
     "start": "webpack --watch",
-    "start-env":  "webpack --progress --colors",
+    "start-env": "webpack --progress --colors",
     "build": "webpack --config webpack.config.prod.js --progress -p"
   },
   "keywords": [],
@@ -35,6 +35,7 @@
     "ng-annotate-loader": "^0.2.0",
     "react": "^15.3.0",
     "react-dom": "^15.3.0",
+    "react-dropdown": "^1.2.3",
     "react-icons": "^2.2.3",
     "react-infinite": "^0.10.0",
     "react-masonry-component": "^5.0.3",

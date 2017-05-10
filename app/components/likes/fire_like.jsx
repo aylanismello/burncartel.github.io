@@ -4,7 +4,8 @@ import { GoFlame } from 'react-icons/lib/go';
 
 const FireLike = ({ isLoggedIn,
   likePostInProgress, likeUnlikeTrack,
-  numLikes, loginFB, isLikedByUser, trackId }) => {
+  numLikes, loginFB, isLikedByUser, trackId,
+  size = 50 }) => {
 
 
   let likesDisplay = numLikes;
@@ -44,7 +45,7 @@ const FireLike = ({ isLoggedIn,
       }}
       >
       <GoFlame
-        size={50}
+        size={size}
         color={flameColor}
         className='like-icon'
       />

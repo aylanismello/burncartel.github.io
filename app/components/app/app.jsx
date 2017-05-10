@@ -17,7 +17,7 @@ class App extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    
+
     if(!_.isEqual(this.props.filters, nextProps.filters)) {
       if(nextProps.filters.resource === 'tracks') { //TRACKS
         if(nextProps.filters.isSingleTrack) {
@@ -50,6 +50,7 @@ class App extends React.Component {
 
       <BottomNav
         currentUserId={this.props.currentUser.id}
+        trackUrl={this.props.trackUrl}
       />
 			</div>
       );
