@@ -1,39 +1,43 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { GoFlame } from 'react-icons/lib/go';
 import * as FontAwesome from 'react-icons/lib/fa/';
 import BurnCartelPlayerContainer from '../burn_cartel_player/burn_cartel_player_container';
 import { FEEDS } from '../../reducers/feed_reducer';
 
-const BottomNav = ({ currentUserId }) => {
+const BottomNav = ({ currentUserId, trackUrl }) => {
 
 	const BottomNavIcons = () => (
 		<div className='bottom-nav-icons'>
-			<FontAwesome.FaSoundcloud
-				size={30}
-				color='aliceblue'
-				className='bc-icon'
-				/>
-			<FontAwesome.FaGlobe
+			<a target="_" href={trackUrl}>
+				<FontAwesome.FaSoundcloud
+					size={40}
+					color='aliceblue'
+					className='bc-icon'
+					/>
+			</a>
+			{/* <FontAwesome.FaGlobe
 				size={30}
 				color='aliceblue'
 						className='bc-icon'
-			/>
-			{currentUserId ?  <Link
-							to={`/likes/${currentUserId}`}
-						>
-							<FontAwesome.FaHeart
-								size={30}
+			/> */}
+			{currentUserId ?
+					<Link
+						to={`/likes/${currentUserId}`}
+					>
+							<GoFlame
+								size={34}
 								color='aliceblue'
-										className='bc-icon'
+								className='bc-icon'
 								/>
-						</Link> : null}
+					</Link> : null}
 
 
-			<FontAwesome.FaSearch
+			{/* <FontAwesome.FaSearch
 				size={30}
 				color='aliceblue'
 						className='bc-icon'
-				/>
+				/> */}
 		</div>
 	);
 
