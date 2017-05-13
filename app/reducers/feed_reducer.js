@@ -24,24 +24,10 @@ const initialState = {
 
 	},
 	PUBLISHERS: {
-		// name: null,
-		// permalink_url: null,
-		// track_count: null,
-		// followers_count: null,
-		// followings_count: null,
-		// num_curators: null,
-		// avatar_url: null,
-		// country: null,
-		// city: null,
-		// curators: [],
-		// handles: []
-		// sorted_tracks: [] this is just tracks in the outer state
-	}, //then these are mapped to /resources request from API
+	},
 	CURATORS: {
-
 	},
 	SINGLE_TRACK: {
-
 	},
 	playingFeed: {
 		tracks: [],
@@ -62,7 +48,6 @@ const FeedReducer = (state = initialState, action) => {
 	switch(action.type) {
 		case feedConstants.RECEIVE_PAGINATION_DATA:
 			const {last_tracks_page, next_tracks_page, tracks_page } = action;
-
 			return { ...state, pagination: { last_tracks_page, next_tracks_page, tracks_page }};
 		case feedConstants.RECEIVE_FEED_METADATA:
 			const newMetadataState = _.cloneDeep(state);
@@ -82,10 +67,6 @@ const FeedReducer = (state = initialState, action) => {
 			});
 
 			return { ...state, focusedFeed: {...state.focusedFeed, tracks: updateTracksWithLikeCount } };
-		case feedConstants.INCREMENT_PAGE:
-			return { ...state, focusedFeed: {...state.focusedFeed, page: (state.focusedFeed.page + 1) } };
-		case feedConstants.RESET_PAGE:
-			return { ...state, focusedFeed: {...state.focusedFeed, page: 1 } };
 		case feedConstants.RESET_TRACKS:
 			return { ...state, focusedFeed: {...state.focusedFeed,  tracks: [] } };
 		case feedConstants.RECEIVE_TRACKS:

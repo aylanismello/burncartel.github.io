@@ -7,8 +7,9 @@ import PublisherShow from './publisher_show';
 
 const mapStateToProps = (state, ownProps) => ({
 	id: ownProps.match.params.id,
+	publisher: state.feed.PUBLISHERS,
 	loadingFeed: state.feed.loadingFeed,
-	publisher: state.feed.PUBLISHERS
+	tracksPage: state.feed.pagination.tracks_page,
 });
 
 const mapDispatchToProps = (dispatch) => ({

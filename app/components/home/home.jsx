@@ -52,6 +52,7 @@ class Home extends React.Component {
 		  { value: '/hot', label: 'Hot' },
 		  { value: '/remix', label: 'Remixes' },
 		  { value: '/mix', label: 'Mixes' },
+		  { value: '/latest', label: 'Latest' },
 		  // { value: '/bc', label: 'BC Selected' },
 		  // { value: '/not', label: 'Unheard' },
 		];
