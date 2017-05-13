@@ -48,7 +48,6 @@ const FeedReducer = (state = initialState, action) => {
 	switch(action.type) {
 		case feedConstants.RECEIVE_PAGINATION_DATA:
 			const {last_tracks_page, next_tracks_page, tracks_page } = action;
-			debugger;
 			return { ...state, pagination: { last_tracks_page, next_tracks_page, tracks_page }};
 		case feedConstants.RECEIVE_FEED_METADATA:
 			const newMetadataState = _.cloneDeep(state);

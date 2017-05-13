@@ -40,6 +40,7 @@ const Feed = ({ tracks, filters, trackLoaded,
 
 	}
 
+
 	const NavigateFeedIcons = () => {
 		if(!loadingFeed && tracksPage) {
 			return (

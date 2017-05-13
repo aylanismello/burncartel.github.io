@@ -11,7 +11,8 @@ const mapStateToProps = (state, ownProps) => {
 	return{
 	id: ownProps.match.params.id,
 	curator: state.feed.CURATORS,
-	loadingFeed: state.feed.loadingFeed
+	loadingFeed: state.feed.loadingFeed,
+	tracksPage: state.feed.pagination.tracks_page,
 	// this.props.loadingFeed || Object.keys(this.props.publisher).length === 0
 	// curator: getCuratorFromTracks(state)
 }};

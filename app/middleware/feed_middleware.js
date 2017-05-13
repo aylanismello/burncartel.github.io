@@ -45,6 +45,7 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 				dispatch(receiveFeedMetadata(getState().feed.feedType, action.feed))
 
 			} else { // if we have a single track
+				dispatch(resetTracks());
 				dispatch(receiveTracks(action.feed));
 				dispatch(receiveFeedMetadata(getState().feed.feedType, { cool: 'this guy'}))
 			}

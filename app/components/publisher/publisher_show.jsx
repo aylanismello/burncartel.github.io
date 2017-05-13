@@ -13,9 +13,10 @@ class PublisherShow extends React.Component {
   }
 
   render() {
-    if(this.props.loadingFeed || Object.keys(this.props.publisher).length === 0) {
-      return <Loading />
-    } else {
+
+    if(this.props.loadingFeed && !this.props.tracksPage) {
+      return <Loading />;
+    } else if(Object.keys(this.props.publisher).length > 0){
       return (
         <div className='container track-show'>
           <PublisherBanner
@@ -23,6 +24,12 @@ class PublisherShow extends React.Component {
           />
 
           <FeedContainer />
+        </div>
+      )
+    } else {
+      return (
+        <div>
+
         </div>
       )
     }
