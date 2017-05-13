@@ -3,6 +3,11 @@ body {
   background: whitesmoke;
   font-family: 'Quicksand', sans-serif; }
 
+.feed-banner {
+  width: 15em; }
+  .feed-banner .Dropdown-root {
+    width: auto; }
+
 .Dropdown-menu {
   background-color: white;
   border: 1px solid #ccc;
@@ -73,10 +78,18 @@ body {
 .pagination-button-container {
   margin-bottom: 3em; }
 
+.track-top-details {
+  color: #A81728;
+  text-decoration: none; }
+  .track-top-details a {
+    color: inherit; }
+
 .login-logout-container {
   color: white;
   margin: 0 2em;
   text-decoration: none; }
+  .login-logout-container:hover {
+    cursor: pointer; }
   .login-logout-container a {
     color: inherit;
     text-decoration: none; }
@@ -185,6 +198,12 @@ body {
 
 .track-show .track-banner {
   background: gray; }
+  .track-show .track-banner .track-item-icon {
+    margin-right: 2em; }
+  .track-show .track-banner .track-banner-icons-container {
+    display: flex;
+    background: whitesmoke;
+    justify-content: flex-start; }
 
 .user-show .user-banner {
   background: gray; }
