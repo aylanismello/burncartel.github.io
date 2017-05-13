@@ -35,19 +35,19 @@ const TrackBanner = ({ track, playingTrackId, playing,
 				</a>
 			</div>
 
-			<div className="artwork-wrapper" onClick={() => handleTrackClick(track.id, 'play')}>
+			<div className="artwork-wrapper">
 				<img
 					src={track.artwork_url}
 					className="artwork-icon"
 				/>
 				<img
+					onClick={() => handleTrackClick(track.id, 'play')}
 					src={playIcon}
 					className="artwork-play"
 				/>
 				<span className="glyphicon glyphicon-play-circle"/>
 			</div>
-			
-			{/* <img src={track.artwork_url} /> */}
+
 		</div>
 
 	);

@@ -75,7 +75,7 @@ body {
 
 .login-logout-container {
   color: white;
-  width: 200px;
+  margin: 0 2em;
   text-decoration: none; }
   .login-logout-container a {
     color: inherit;

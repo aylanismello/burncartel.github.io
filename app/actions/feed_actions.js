@@ -47,12 +47,6 @@ export const fetchFeed = (filters) => ({
 	filters
 });
 
-// export const fetchFeed = (resource, filters) => ({
-// 	type: feedConstants.FETCH_FEED,
-// 	resource,
-// 	filters
-// });
-
 export const setPlayingFeedName = (feedName) => ({
 	type: feedConstants.SET_PLAYING_FEED_NAME,
 	feedName
