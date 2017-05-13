@@ -32,7 +32,7 @@ class TopNav extends React.Component {
 	 if(this.props.currentUser.uid) {
 		 return (
 		 	<Link to='/'>
-			 	<div style={{cursor: 'pointer', backgroundColor: 'white', borderRadius: 5}}
+			 	<div className='login-logout-button'
 						 onClick={this.props.currentUser.uid ? this.facebookLogout.bind(this) : () => this.setState({open: true})}>
 					{this.state.loginText}
 				</div>
@@ -40,7 +40,7 @@ class TopNav extends React.Component {
 		);
 	 } else {
 		 return (
-		 <div style={{cursor: 'pointer', backgroundColor: 'white', borderRadius: 5}}
+		 <div className='login-logout-button'
 					onClick={this.props.currentUser.uid ? this.facebookLogout.bind(this) : () => this.setState({open: true})}>
 			 {this.state.loginText}
 		 </div>
@@ -96,7 +96,7 @@ class TopNav extends React.Component {
 						</div>
 					</a>
 
-					<div className="login-out-container">
+					<div className="login-logout-container">
 
 						{this.renderLogoutButton()}
 
@@ -109,13 +109,24 @@ class TopNav extends React.Component {
 			      contentLabel="Modal"
 			      style={style}
 						contentLabel="Example Modal">
-							<div className="login-out-container">
+							<div className='modal-container'>
+								<div className='ff-welcome-text-container'>
+									<h4> Welcome to Fire Feed! </h4>
 
-              	<img className="login-out-img"
-                     onClick={this.facebookLogin.bind(this)}
-                     src='../../assets/fb_login.png' />
+									<p className='ff-welcome-text'> Fire Feed is only as smart as you let it be! Login
+											to start liking 🔥 tracks to optimize your feed 😃 </p>
 
-              </div>
+
+								</div>
+								<div className="fb-login-container">
+
+
+	              	<img className="login-out-img"
+	                     onClick={this.facebookLogin.bind(this)}
+	                     src='../../assets/fb_login.png' />
+
+	              </div>
+							</div>
 			    </Modal>
 
 				</div>
