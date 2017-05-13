@@ -6,6 +6,13 @@ body {
 	font-family: 'Quicksand', sans-serif;
 }
 
+.feed-banner {
+	width: 15em;
+	.Dropdown-root {
+		width: auto;
+	}
+}
+
 
 .Dropdown-menu {
     background-color: white;
@@ -93,16 +100,14 @@ body {
 	color: white;
 	margin: 0 2em;
 	text-decoration: none;
+	&:hover {
+		cursor: pointer;
+	}
+
 	a {
 		color: inherit;
 		text-decoration: none;
 	}
-
-	.login-logout-button {
-
-	}
-
-
 
 }
 
