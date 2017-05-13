@@ -23,7 +23,7 @@ const mapStateToProps = (state, ownProps) => ({
 	userLikes: getUserTracksHash(state),
 	isLoggedIn: ( state.user.currentUser.uid ? true : false),
 	likePostInProgress: state.user.likePostInProgress,
-	page: state.feed.pagination.tracks_page,
+	tracksPage: state.feed.pagination.tracks_page,
 	nextPage: state.feed.pagination.new_tracks_page
 });
 

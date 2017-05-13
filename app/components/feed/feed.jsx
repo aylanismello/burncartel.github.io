@@ -10,14 +10,13 @@ const Feed = ({ tracks, filters, trackLoaded,
 	handleTrackClick, loadingFeed, trackId,
 	playing, isLoggedIn, loginFB,
 	likeUnlikeTrack, userLikes, likePostInProgress,
- 	paginateTracks, page, playingTrackId,
+ 	paginateTracks, tracksPage, playingTrackId,
 	canPaginate, nextPage }) => {
 	let childElements;
 
-
 	// TODO: FIX this shitty conditional
-	// this is really janky
-	if(loadingFeed && nextPage === 2) {
+
+	if(loadingFeed && !tracksPage) {
 		childElements = <Loading />;
 	} else {
 
@@ -42,7 +41,7 @@ const Feed = ({ tracks, filters, trackLoaded,
 	}
 
 	const NavigateFeedIcons = () => {
-		if(!loadingFeed) {
+		if(!loadingFeed && tracksPage) {
 			return (
 				<div>
 					{canPaginate ?
@@ -62,7 +61,7 @@ const Feed = ({ tracks, filters, trackLoaded,
 					/>
 				</div>
 			);
-		} else {
+		} else if(loadingFeed && tracksPage){
 			return (
 				<GoFlame
 					size={120}
@@ -70,13 +69,17 @@ const Feed = ({ tracks, filters, trackLoaded,
 					className='track-item-icon'
 				/>
 			);
+		} else {
+			return (
+				<div></div>
+			)
 		}
 	};
 
 	return (
 		<div className="feed-container">
 			{childElements}
-			{/* {page === 1 && loadingFeed ? null : <div className="pagination-button-container"> <NavigateFeedIcons/> </div>} */}
+			{/* {tracksPage === 1 && loadingFeed ? null : <div className="pagination-button-container"> <NavigateFeedIcons/> </div>} */}
 			{/* {canPaginate ?  <div className="pagination-button-container"> <NavigateFeedIcons/> </div> : null} */}
 			<div className="pagination-button-container"> <NavigateFeedIcons/> </div>
 		</div>

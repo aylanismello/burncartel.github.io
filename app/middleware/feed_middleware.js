@@ -4,8 +4,6 @@ import {
  	loadingStart,
 	loadingStop,
 	updateTrackId,
-	resetPage,
-	incrementPage,
 	resetTracks,
 	updatePageTitle,
 	updateFocusedTrackId,
@@ -52,20 +50,33 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 			}
 			return next(action);
 		case feedConstants.FETCH_FEED:
+			let nextFeedType;
+
+			if(action.filters.resource === 'tracks' && action.filters.id) {
+				nextFeedType = 'SINGLE_TRACK';
+			} else if(action.filters.resource === 'tracks') {
+				nextFeedType = 'FIRE';
+			} else {
+				nextFeedType = action.filters.resource;
+			}
+
+			// if(getState().feed.feedType !== act)
+			const { feedType } = getState().feed;
+
+			if(feedType && feedType !== nextFeedType) {
+				dispatch(receivePaginationData({ last_tracks_page: null, next_tracks_page: null, tracks_page: null}));
+			}
+			dispatch(setFeedType(nextFeedType));
 			dispatch(loadingStart());
+
 
 			getFeed(action.filters.resource, action.filters, (feed) => {
 				dispatch(loadingStop());
 
 				if(action.filters.resource === 'tracks' && action.filters.id) {
-					dispatch(setFeedType('SINGLE_TRACK'));
 					dispatch(receiveFeed([feed]))
-				} else if(action.filters.resource === 'tracks') {
-					dispatch(setFeedType('FIRE'));
-					dispatch(receiveFeed(feed))
 				} else {
-					dispatch(setFeedType(action.filters.resource));
-					dispatch(receiveFeed(feed));
+					dispatch(receiveFeed(feed))
 				}
 
 			}, (error) => {

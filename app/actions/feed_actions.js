@@ -9,8 +9,6 @@ export const feedConstants = {
 	LOADING_START: 'LOADING_START',
 	LOADING_STOP: 'LOADING_STOP',
 	HANDLE_TRACK_CLICK: 'HANDLE_TRACK_CLICK',
-	INCREMENT_PAGE: 'INCREMENT_PAGE',
-	RESET_PAGE: 'RESET_PAGE',
 	UPDATE_TRACK_LIKE_COUNT: 'UPDATE_TRACK_LIKE_COUNT',
 	SET_FEED_TYPE: 'SET_FEED_TYPE',
 	SET_LIKE_FEED_USER_ID: 'SET_LIKE_FEED_USER_ID',
@@ -89,13 +87,6 @@ export const resetTracks = () => ({
 	type: feedConstants.RESET_TRACKS
 });
 
-export const incrementPage = () => ({
-	type: feedConstants.INCREMENT_PAGE
-});
-
-export const resetPage = () => ({
-	type: feedConstants.RESET_PAGE
-});
 
 export const handleTrackClick = (trackId, clickType) => ({
 	type: feedConstants.HANDLE_TRACK_CLICK,
