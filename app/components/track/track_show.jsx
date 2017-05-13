@@ -2,6 +2,8 @@ import React from 'react';
 import TrackBanner from './track_banner';
 import Loading from '../loading';
 import CuratorList from '../curator/curator_list';
+import FireLike from '../likes/fire_like';
+
 
 // There are two scenarios here. One is that
 // a user got sent here via the internal react-router,
@@ -31,7 +33,11 @@ class TrackShow extends React.Component {
 					trackLoaded={this.props.trackLoaded}
 					playingTrackId={this.props.playingTrackId}
 					handleTrackClick={this.props.handleTrackClick}
-				 />
+				 >
+					 <FireLike
+						 {...this.props}
+					 />
+				 </TrackBanner>
 				<CuratorList
 					track={this.props.track}
 				/>

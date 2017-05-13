@@ -5,7 +5,8 @@ import {
  	updateFilters,
   handleTrackClick
  } from '../../actions/feed_actions';
-import { getFeedTracksHash } from '../../selectors/track_selector';
+import { getFeedTracksHash, getUserTracksHash } from '../../selectors/track_selector';
+import { likeUnlikeTrack } from '../../actions/user_actions';
 import * as _ from 'lodash';
 
 const mapStateToProps = (state, ownProps) => {
@@ -17,7 +18,11 @@ const mapStateToProps = (state, ownProps) => {
     playing: state.player.playing,
     playingTrackId: state.feed.playingFeed.trackId,
 		id: ownProps.match.params.id,
-		track
+		track,
+    isLoggedIn: ( state.user.currentUser.uid ? true : false),
+    likePostInProgress: state.user.likePostInProgress,
+    isLikedByUser: getUserTracksHash(state)[ownProps.match.params.id] === undefined ? false : true,
+    trackId: ownProps.match.params.id
 	};
 };
 
@@ -26,7 +31,9 @@ const mapDispatchToProps = (dispatch) => ({
 	updateTrackId: (id) => dispatch(updateTrackId(id)),
   handleTrackClick: (trackId, clickType = 'play') => {
 		dispatch(handleTrackClick(trackId, clickType))
-	}
+	},
+  loginFB: () => dispatch(loginFB()),
+  likeUnlikeTrack: (trackId) => dispatch(likeUnlikeTrack(trackId))
 });
 
 export default connect(

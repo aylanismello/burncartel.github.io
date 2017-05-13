@@ -278,6 +278,16 @@ body {
 .track-show {
 	.track-banner {
 		background: gray;
+
+		.track-item-icon {
+			margin-right: 2em;
+		}
+
+		.track-banner-icons-container {
+			display: flex;
+			background: whitesmoke;
+			justify-content: flex-start;
+		}
 	}
 }
 

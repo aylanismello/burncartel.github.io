@@ -8,6 +8,7 @@ const FireLike = ({ isLoggedIn,
   size = 50 }) => {
 
 
+
   let likesDisplay = numLikes;
 
 
