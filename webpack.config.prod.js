@@ -1,7 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
 
-// const NODE_ENV = (process.env === 'production') ? 'production' : 'development';
 const NODE_ENV = 'production';
 const EC2_HOST = process.env.EC2_HOST || 'ec2-52-53-231-190.us-west-1.compute.amazonaws.com';
 const EC2_PORT = process.env.EC2_PORT || '80';
