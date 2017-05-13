@@ -14,11 +14,8 @@ import CuratorList from '../curator/curator_list';
 class TrackShow extends React.Component {
 
 	componentWillMount() {
-		// this.props.updateFilters({ resource: 'tracks', id: this.props.id })
 		if(!this.props.track) {
 			this.props.updateFilters({ resource: 'tracks', id: this.props.id, isSingleTrack: true })
-			// this.props.updateTrackId(this.props.id);
-			// this.props.updateFilters({id: this.props.id});
 		}
 	}
 
@@ -44,46 +41,5 @@ class TrackShow extends React.Component {
   }
 
 }
-
-
-
-
-
-// const TrackShow = ({ id, track, updateFilters,
-// 	updateTrackId, playing, trackLoaded,
-// 	playingTrackId, handleTrackClick }) => {
-// 	let childElements;
-//
-// 	if(!track) {
-// 		updateTrackId(id);
-// 		updateFilters({id});
-//
-// 		return (
-// 			<Loading />
-// 		);
-//
-// 	} else {
-//
-// 	// if we try to make this a link ppl could share,
-// 	// then we have to hit up the tracks api
-// 	// in case we don't have the track in our redux store
-//
-// 		return (
-// 			<div className="container track-show">
-// 				<TrackBanner
-// 					track={track}
-// 					playing={playing}
-// 					trackLoaded={trackLoaded}
-// 					playingTrackId={playingTrackId}
-// 					handleTrackClick={handleTrackClick}
-// 				 />
-// 				<CuratorList
-// 					track={track}
-// 				/>
-// 			</div>
-// 		)
-// 	}
-//
-// };
 
 export default TrackShow;

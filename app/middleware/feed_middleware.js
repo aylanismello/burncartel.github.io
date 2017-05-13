@@ -29,6 +29,9 @@ import {
 import * as _ from 'lodash';
 
 
+
+let prevSortType;
+
 const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 	switch(action.type) {
 		case feedConstants.RECEIVE_FEED:
@@ -51,25 +54,33 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 			}
 			return next(action);
 		case feedConstants.FETCH_FEED:
-			let nextFeedType;
+			let nextFeedType, sortType;
+			const { feedType } = getState().feed;
+
 
 			if(action.filters.resource === 'tracks' && action.filters.id) {
 				nextFeedType = 'SINGLE_TRACK';
 			} else if(action.filters.resource === 'tracks') {
 				nextFeedType = 'FIRE';
+				sortType = action.filters.sortType;
 			} else {
 				nextFeedType = action.filters.resource;
 			}
 
-			// if(getState().feed.feedType !== act)
-			const { feedType } = getState().feed;
 
 			if(feedType && feedType !== nextFeedType) {
 				dispatch(receivePaginationData({ last_tracks_page: null, next_tracks_page: null, tracks_page: null}));
 			}
+
+			// OMG SO HACKY. WITH THE CLOSURE AND EVERYTHNG L0Lz
+			if(feedType && feedType === 'FIRE' && sortType && sortType !== prevSortType) {
+				dispatch(receivePaginationData({ last_tracks_page: null, next_tracks_page: null, tracks_page: null}));
+			}
+
+			prevSortType = sortType;
+
 			dispatch(setFeedType(nextFeedType));
 			dispatch(loadingStart());
-
 
 			getFeed(action.filters.resource, action.filters, (feed) => {
 				dispatch(loadingStop());
