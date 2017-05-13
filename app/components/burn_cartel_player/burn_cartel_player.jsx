@@ -130,8 +130,7 @@ class BurnCartelPlayer extends React.Component {
                 to={`/tracks/${this.track.id}`}
                 onClick={() => handleTrackClick(this.track.id)}
               >
-                {/* <p className="track-title" onClick={() => handleTrackClick(this.track.id)}>{this.track.name}</p> */}
-                {`${this.track.name} `}
+                {/* {`${this.track.name} `} */}
               </Link>
                 •
               <Link

@@ -78,6 +78,12 @@ body {
 .pagination-button-container {
   margin-bottom: 3em; }
 
+.track-top-details {
+  color: #A81728;
+  text-decoration: none; }
+  .track-top-details a {
+    color: inherit; }
+
 .login-logout-container {
   color: white;
   margin: 0 2em;
