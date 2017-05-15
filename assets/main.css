@@ -124,8 +124,12 @@ body {
       align-items: center;
       text-align: center; }
       .bc-menu .burn-cartel-player-container .burn-cartel-player .burn-cartel-player-details {
-        flex-grow: 10;
-        text-align: center; }
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center; }
+        .bc-menu .burn-cartel-player-container .burn-cartel-player .burn-cartel-player-details .dummy-icon {
+          visibility: hidden; }
       .bc-menu .burn-cartel-player-container .burn-cartel-player .track-top-details {
         font-size: 12px;
         text-decoration: none; }

@@ -23,6 +23,9 @@ class BurnCartelPlayer extends React.Component {
     this.track = null;
     this.playIcon = null;
 
+    this.tapTimers = [];
+    this.isDoubleTap = false;
+
     this.state = {
       color: 'black'
     };
@@ -141,22 +144,22 @@ class BurnCartelPlayer extends React.Component {
           <div className='track-details-text'>
             <div className='track-top-details'>
 
-              <Link
+              {/* <Link
                 to={`/tracks/${this.track.id}`}
-              >
+              > */}
                 <span className='track-name'>
 
                   {`${this.track.name.slice(0, 20)} `}
                 </span>
-              </Link>
+              {/* </Link> */}
                 •
-              <Link
+              {/* <Link
                 to={`/publishers/${this.props.publisherId}`}
-              >
+              > */}
                 <span className='track-artist'>
                   {` ${this.track.publisher.name.slice(0, 15)} `}
                 </span>
-              </Link>
+              {/* </Link> */}
 
             </div>
             {/* <div>
@@ -193,41 +196,66 @@ class BurnCartelPlayer extends React.Component {
           className="burn-cartel-player-container"
           style={{background: playerColor}}
           >
-          <Hammer
-            options={{
-              recognizers: {
-                swipe: {
-                  threshold: 1
-                },
-                tap: {
-                  taps: 2,
-                  interval: 300
-                }
-              }
-            }}
-            onTap={(e) => {
-              if(!isLoggedIn) {
-                // loginFB();
-              } else if (likePostInProgress){
-                // assuming track has not already been liked
-                console.log('wait for other like create/detroy action to finish!');
-              } else {
-                likeUnlikeTrack(trackId);
-              }
-            }}
-            onSwipe={(e) => {
-              if(e.direction === 2){
-                this.goToNextTrack();
-              } else if(e.direction == 4) {
-                this.goToPrevTrack();
-              }
-            }}
-            >
+
           <div className="burn-cartel-player">
 
+            <Hammer
+              options={{
+                recognizers: {
+                  swipe: {
+                    threshold: 1
+                  },
+                  tap: {
+                    taps: 1,
+                    interval: 200
+                  }
+                }
+              }}
+              onTap={(e) => {
+
+                const idx = this.tapTimers.length;
+
+                this.tapTimers.push(
+                  setTimeout(() => {
+                    if(!this.isDoubleTap) {
+                      window.location = `#/tracks/${this.track.id}`;
+                    } else {
+                      if(idx !== 0)
+                        clearTimeout(this.tapTimers[idx + 1]);
+                      this.isDoubleTap = false;
+                    }
+                  }, 250)
+                );
+
+              }}
+              onDoubleTap={(e) => {
+                this.isDoubleTap = true;
+                if(!isLoggedIn) {
+                  // loginFB();
+                } else if (likePostInProgress){
+                  // assuming track has not already been liked
+                  // console.log('wait for other like create/detroy action to finish!');
+                } else {
+                  likeUnlikeTrack(trackId);
+                }
+              }}
+              onSwipe={(e) => {
+                if(e.direction === 2){
+                  this.goToNextTrack();
+                } else if(e.direction == 4) {
+                  this.goToPrevTrack();
+                }
+              }}
+              >
+
             <div className='burn-cartel-player-details'>
+              <div className='dummy-icon'>
+                {this.playIcon}
+              </div>
               {details}
             </div>
+
+            </Hammer>
 
             <div className='burn-cartel-player-control'>
 
@@ -268,7 +296,7 @@ class BurnCartelPlayer extends React.Component {
 
                 </div>
               </div>
-            </Hammer>
+
           </div>
 
           );
