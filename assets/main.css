@@ -130,23 +130,6 @@ body {
     display: flex;
     justify-content: space-around; }
 
-.artwork-wrapper {
-  position: relative; }
-  .artwork-wrapper .artwork-icon {
-    width: 200px; }
-    .artwork-wrapper .artwork-icon:hover {
-      cursor: pointer; }
-  .artwork-wrapper .artwork-play {
-    position: absolute;
-    width: 50px;
-    top: 75px;
-    left: 75px; }
-    .artwork-wrapper .artwork-play:hover {
-      cursor: pointer;
-      width: 60px;
-      top: 70px;
-      left: 70px; }
-
 .feed-container {
   margin-bottom: 10em;
   margin-top: 1.5em; }
@@ -158,6 +141,15 @@ body {
     margin-bottom: 20px; }
     .feed-container .track-container .artwork-wrapper {
       position: relative; }
+      .feed-container .track-container .artwork-wrapper .ranking-header {
+        position: absolute;
+        color: white;
+        font: bold;
+        letter-spacing: -1px;
+        background: black;
+        /* fallback color */
+        background: rgba(0, 0, 0, 0.7);
+        padding: 10px; }
       .feed-container .track-container .artwork-wrapper .artwork-icon {
         width: 200px; }
         .feed-container .track-container .artwork-wrapper .artwork-icon:hover {

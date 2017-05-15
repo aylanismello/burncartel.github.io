@@ -41,8 +41,12 @@ const TrackItem = ({ track, handleTrackClick, playing,
 			<div className="col-sm-6 col-md-4 track-container">
 				<div className="thumbnail" >
 				{/*  do NOT use image itself to set width of this, there's invisble white space on edges*/}
-					<h2>{trackIdx + 1}</h2>
 					<div className="artwork-wrapper">
+						<h2>
+							<span className='ranking-header'>
+								 {trackIdx + 1}
+							 </span>
+						 </h2>
 						<img
 							src={artwork_url}
 							className="artwork-icon"
@@ -52,7 +56,6 @@ const TrackItem = ({ track, handleTrackClick, playing,
 							src={playIcon}
 							className="artwork-play"
 						/>
-						<span className="glyphicon glyphicon-play-circle"/>
 					</div>
 
 						<div className="caption">
@@ -60,7 +63,6 @@ const TrackItem = ({ track, handleTrackClick, playing,
 							<Link
 								to={`/tracks/${track.id}`}
 							>
-								{/* <h3 className="track-title" onClick={() => handleTrackClick(track.id, 'focus')}> */}
 								<h3 className="track-title">
 									{track.name}
 								</h3>

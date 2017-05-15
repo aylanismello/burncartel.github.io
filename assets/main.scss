@@ -181,31 +181,33 @@ body {
 
 
 // DUPLICATE :(
-.artwork-wrapper {
+// .artwork-wrapper {
+//
+// 	position: relative;
+//
 
-	position: relative;
-
-	.artwork-icon {
-		width: 200px;
-		&:hover {
-			cursor: pointer;
-		}
-	}
-
-	.artwork-play {
-		position: absolute;
-		width: 50px;
-		top: 75px;
-		left: 75px;
-		&:hover {
-			cursor: pointer;
-			width: 60px;
-			top: 70px;
-			left: 70px;
-		}
-	}
-
-}
+//
+// 	.artwork-icon {
+// 		width: 200px;
+// 		&:hover {
+// 			cursor: pointer;
+// 		}
+// 	}
+//
+// 	.artwork-play {
+// 		position: absolute;
+// 		width: 50px;
+// 		top: 75px;
+// 		left: 75px;
+// 		&:hover {
+// 			cursor: pointer;
+// 			width: 60px;
+// 			top: 70px;
+// 			left: 70px;
+// 		}
+// 	}
+//
+// }
 
 .feed-container {
 	margin-bottom: 10em;
@@ -216,9 +218,20 @@ body {
 		border-radius: 4px;
 		padding: 20px;
 		margin-bottom: 20px;
+
 		.artwork-wrapper {
 
 			position: relative;
+
+			.ranking-header {
+					position: absolute;
+					color: white;
+				 font: bold;
+				 letter-spacing: -1px;
+				 background: rgb(0, 0, 0); /* fallback color */
+				 background: rgba(0, 0, 0, 0.7);
+				 padding: 10px;
+			}
 
 			.artwork-icon {
 				width: 200px;
@@ -241,6 +254,7 @@ body {
 			}
 
 		}
+
 		.track-title {
 			&:hover {
 				cursor: pointer;
