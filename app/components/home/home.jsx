@@ -53,31 +53,47 @@ class Home extends React.Component {
 		  { value: '/remix', label: 'Remixes' },
 		  { value: '/mix', label: 'Mixes' },
 		  { value: '/latest', label: 'Latest' },
-		  // { value: '/bc', label: 'BC Selected' },
+		  { value: '/bc', label: 'BC Radio' },
 		  // { value: '/not', label: 'Unheard' },
 		];
 
 		const value = options.filter(option => option.value === this.props.location.pathname)[0];
 
+		let hasRanking = true;
+
+		// make exceptional case for Burn Cartel Radio mode filter, this is a hack for now
+		if(value && value.value === '/bc') {
+			hasRanking = false;
+		}
+
 		return (
 			<div className="container home-page-container">
 				<div className="btn-group btn-group-justified" role="group" aria-label="Justified button group" >
 
-					<div className='feed-banner'>
-						<div className='feed-name'>
-							<h3> {value.label} Feed </h3>
+					{hasRanking ?
+						<div className='feed-banner'>
+							<div className='feed-name'>
+								<h3> {value.label} Feed </h3>
+							</div>
+
+							<Dropdown
+								options={options}
+								onChange={this._onSelect.bind(this)}
+								value={value}
+								placeholder="🔥 Select a feed 🔥"
+							/>
+						</div> :
+						<div className='feed-banner'>
+							<div className='feed-name'>
+								<h2> Burn Cartel Radio </h2>
+							</div>
 						</div>
 
-						<Dropdown
-							options={options}
-							onChange={this._onSelect.bind(this)}
-							value={value}
-							placeholder="🔥 Select a feed 🔥"
-						/>
-					</div>
+					}
+
 
 				</div>
-				<FeedContainer />
+				<FeedContainer hasRanking={hasRanking}/>
 			</div>
 		);
 	}

@@ -5,7 +5,8 @@ import FireLike from '../likes/fire_like';
 
 const TrackItem = ({ track, handleTrackClick, playing,
 	trackId, trackLoaded, trackIdx, isLoggedIn, loginFB,
-	likeUnlikeTrack, isLikedByUser, likePostInProgress, playingTrackId }) => {
+	likeUnlikeTrack, isLikedByUser, likePostInProgress, playingTrackId, hasRanking = true }) => {
+		
 	const numCurators = track.curators.length;
 	const curatorWord = (numCurators <= 1 ? 'curator' : 'curators');
 	const curatorsStr = `${numCurators} ${curatorWord}`
@@ -42,11 +43,16 @@ const TrackItem = ({ track, handleTrackClick, playing,
 				<div className="thumbnail" >
 				{/*  do NOT use image itself to set width of this, there's invisble white space on edges*/}
 					<div className="artwork-wrapper">
-						<h2>
+						{hasRanking ?
+							<h2>
 							<span className='ranking-header'>
 								 {trackIdx + 1}
 							 </span>
 						 </h2>
+						 :
+						 	null
+					 }
+
 						<img
 							src={artwork_url}
 							className="artwork-icon"
@@ -68,7 +74,11 @@ const TrackItem = ({ track, handleTrackClick, playing,
 								</h3>
 							</Link>
 
-							<div>
+
+
+							{hasRanking ?
+								<div>
+								<div>
 								<span> By
 									<Link
 										to={`/publishers/${track.publisher_id}`}
@@ -78,6 +88,9 @@ const TrackItem = ({ track, handleTrackClick, playing,
 								</span>
 							</div>
 							<span>Selected by {curatorsStr} </span>
+								</div>
+								: null
+							}
 
 							<div className="track-item-icons">
 								<FireLike

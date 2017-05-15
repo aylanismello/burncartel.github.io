@@ -24,7 +24,8 @@ const mapStateToProps = (state, ownProps) => ({
 	isLoggedIn: ( state.user.currentUser.uid ? true : false),
 	likePostInProgress: state.user.likePostInProgress,
 	tracksPage: state.feed.pagination.tracks_page,
-	nextPage: state.feed.pagination.new_tracks_page
+	nextPage: state.feed.pagination.new_tracks_page,
+	hasRanking: ownProps.hasRanking
 });
 
 const mapDispatchToProps = dispatch => ({

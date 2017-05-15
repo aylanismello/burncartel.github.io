@@ -11,7 +11,7 @@ const Feed = ({ tracks, filters, trackLoaded,
 	playing, isLoggedIn, loginFB,
 	likeUnlikeTrack, userLikes, likePostInProgress,
  	paginateTracks, tracksPage, playingTrackId,
-	canPaginate, nextPage }) => {
+	canPaginate, nextPage, hasRanking }) => {
 	let childElements;
 
 	// TODO: FIX this shitty conditional
@@ -35,6 +35,7 @@ const Feed = ({ tracks, filters, trackLoaded,
 				likePostInProgress={likePostInProgress}
 				likeUnlikeTrack={likeUnlikeTrack}
 				isLikedByUser={userLikes[track.id] === undefined ? false : true }
+				hasRanking={hasRanking}
 			/>
 		));
 

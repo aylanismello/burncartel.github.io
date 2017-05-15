@@ -90,11 +90,6 @@ class TopNav extends React.Component {
 			<nav className="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse bc-nav">
 
 				<div className="nav-buttons">
-					{/* <a className="navbar-brand" href="#">
-						<div className="logo-container">
-							<img src="../../assets/bc_small_1.png" alt="Burn Cartel"/>
-						</div>
-					</a> */}
 
 					<div className="login-logout-container">
 

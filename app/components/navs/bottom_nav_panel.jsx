@@ -14,7 +14,7 @@ const BottomNavPanel = ({ currentUserId, trackUrl }) => (
 				/>
 		</Link>
 
-		<Link className="navbar-brand" to="/">
+		<Link className="navbar-brand" to="/bc">
 			<div className="logo-container">
 				<img src="../../assets/bc_small_1.png" alt="Burn Cartel"/>
 			</div>
