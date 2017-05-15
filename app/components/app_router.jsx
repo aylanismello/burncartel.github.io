@@ -8,6 +8,7 @@ import {
 } from 'react-router-dom';
 import ScrollToTop from './scroll_to_top';
 import HomeContainer from './home/home_container';
+import Help from './help';
 import BurnCartelCurated from './curated/burn_cartel_curated';
 import TrackShowContainer from './track/track_show_container';
 import CuratorShowContainer from './curator/curator_show_container';
@@ -31,6 +32,7 @@ class AppRouter extends React.Component{
             <Route exact path="/mix" component={HomeContainer} />
             <Route exact path="/not" component={HomeContainer} />
             <Route exact path="/latest" component={HomeContainer} />
+            <Route exact path="/help" component={Help} />
             <Route path="/publishers/:id" component={PublisherShowContainer} />
             <Route path="/tracks/:id" component={TrackShowContainer} />
             <Route path="/curators/:id" component={CuratorShowContainer} />
