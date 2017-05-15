@@ -22,6 +22,10 @@ class BurnCartelPlayer extends React.Component {
     this.secondsToMinutes = this.secondsToMinutes.bind(this);
     this.track = null;
     this.playIcon = null;
+
+    this.state = {
+      color: 'black'
+    };
   }
 
   secondsToMinutes(seconds) {
@@ -176,19 +180,40 @@ class BurnCartelPlayer extends React.Component {
       const { isLoggedIn, loginFB, likePostInProgress,
         likeUnlikeTrack, numLikes, trackId, track, userLikes } = this.props;
 
+      const isLikedByUser = userLikes[trackId] === undefined ? false : true;
+
+      let playerColor = '';
+      if(isLikedByUser) {
+        playerColor = '#ff9000';
+      }
+
       return (
 
-        <div className="burn-cartel-player-container">
+        <div
+          className="burn-cartel-player-container"
+          style={{background: playerColor}}
+          >
           <Hammer
             options={{
               recognizers: {
                 swipe: {
                   threshold: 1
+                },
+                tap: {
+                  taps: 2,
+                  interval: 300
                 }
               }
             }}
             onTap={(e) => {
-              // if held down a certain length of time, like the track
+              if(!isLoggedIn) {
+                // loginFB();
+              } else if (likePostInProgress){
+                // assuming track has not already been liked
+                console.log('wait for other like create/detroy action to finish!');
+              } else {
+                likeUnlikeTrack(trackId);
+              }
             }}
             onSwipe={(e) => {
               if(e.direction === 2){

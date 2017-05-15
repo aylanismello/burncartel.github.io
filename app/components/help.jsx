@@ -12,7 +12,7 @@ const input = `
 
   1. To traverse to the next track, swipe on the track name in the player bar to the left. 👈
   2. To traverse to the previous track, swipe on the player to the right. 👉
-  3. Login to like tracks 👍
+  3. Double-tap the track name in the player to like a track. 👍
   4. Make sure to explore different curators' feeds and make serendipitous discoveries! 🎶💻
 
 
