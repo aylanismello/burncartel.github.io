@@ -191,7 +191,7 @@ class BurnCartelPlayer extends React.Component {
               // if held down a certain length of time, like the track
             }}
             onSwipe={(e) => {
-              if(e.direction === 1){
+              if(e.direction === 2){
                 this.goToNextTrack();
               } else if(e.direction == 4) {
                 this.goToPrevTrack();
