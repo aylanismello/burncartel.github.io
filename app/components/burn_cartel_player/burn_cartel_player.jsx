@@ -126,22 +126,28 @@ class BurnCartelPlayer extends React.Component {
         details = (
           <div className='track-details-text'>
             <div className='track-top-details'>
+
               <Link
                 to={`/tracks/${this.track.id}`}
                 onClick={() => handleTrackClick(this.track.id)}
               >
-                {/* {`${this.track.name} `} */}
+                <span className='track-name'>
+                  {`${this.track.name} `}
+                </span>
               </Link>
                 •
               <Link
                 to={`/publishers/${this.props.publisherId}`}
               >
-                {` ${this.track.publisher.name}`}
+                <span className='track-artist'>
+                  {` ${this.track.publisher.name}`}
+                </span>
               </Link>
+
             </div>
-            <div>
+            {/* <div>
               Playing from {this.props.feedName.toUpperCase()} feed
-            </div>
+            </div> */}
             {/* <div>
               {this.secondsToMinutes(this.props.currentTime)}
             </div> */}
@@ -162,50 +168,52 @@ class BurnCartelPlayer extends React.Component {
 
       return (
         <div className="burn-cartel-player-container">
+          <div className="burn-cartel-player">
 
-          <div className='burn-cartel-player-details'>
-            {details}
-          </div>
+            <div className='burn-cartel-player-details'>
+              {details}
+            </div>
 
-          <div className='burn-cartel-player-control'>
+            <div className='burn-cartel-player-control'>
 
-            <FireLike
-              isLoggedIn={isLoggedIn}
-              loginFB={loginFB}
-              likePostInProgress={likePostInProgress}
-              likeUnlikeTrack={likeUnlikeTrack}
-              isLikedByUser={userLikes[trackId] === undefined ? false : true }
-              trackId={trackId}
-              size={30}
-            />
+              {/* <FireLike
+                isLoggedIn={isLoggedIn}
+                loginFB={loginFB}
+                likePostInProgress={likePostInProgress}
+                likeUnlikeTrack={likeUnlikeTrack}
+                isLikedByUser={userLikes[trackId] === undefined ? false : true }
+                trackId={trackId}
+                size={30}
+              /> */}
 
 
-            {/* <FontAwesome.FaStepBackward
-              size={40}
-              color='aliceblue'
-              className='bc-icon'/> */}
-
-              <div
-                onClick={this.toggle}>
-                {this.playIcon}
-              </div>
-
-              <FontAwesome.FaStepForward
+              {/* <FontAwesome.FaStepBackward
                 size={40}
                 color='aliceblue'
-                className='bc-icon'
-                onClick={this.goToNextTrack}
-              />
+                className='bc-icon'/> */}
 
-                {/* <div onClick={this.props.toggleRepeat}>
-                  <FontAwesome.FaRepeat
+                <div
+                  onClick={this.toggle}>
+                  {this.playIcon}
+                </div>
+
+                {/* <FontAwesome.FaStepForward
                   size={40}
-                  color={this.props.repeating? 'green' : 'red'}
-                  className='bc-icon'/>
-                </div> */}
+                  color='aliceblue'
+                  className='bc-icon'
+                  onClick={this.goToNextTrack}
+                /> */}
 
+                  {/* <div onClick={this.props.toggleRepeat}>
+                    <FontAwesome.FaRepeat
+                    size={40}
+                    color={this.props.repeating? 'green' : 'red'}
+                    className='bc-icon'/>
+                  </div> */}
+
+                </div>
               </div>
-            </div>
+          </div>
 
           );
     } else {

@@ -79,7 +79,7 @@ body {
   margin-bottom: 3em; }
 
 .track-top-details {
-  color: #A81728;
+  font-size: 12px;
   text-decoration: none; }
   .track-top-details a {
     color: inherit; }
@@ -118,17 +118,36 @@ body {
     height: auto; }
 
 .bc-menu {
-  display: block; }
-  .bc-menu .burn-cartel-player-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 0 1em; }
-    .bc-menu .burn-cartel-player-container .burn-cartel-player-control {
-      display: flex; }
+  display: block;
+  padding: 0; }
   .bc-menu .bottom-nav-icons {
     display: flex;
     justify-content: space-around; }
+
+.artwork-wrapper {
+  position: relative; }
+  .artwork-wrapper .ranking-header {
+    position: absolute;
+    color: white;
+    letter-spacing: -1px;
+    background: black;
+    /* fallback color */
+    background: rgba(0, 0, 0, 0.7);
+    padding: 10px; }
+  .artwork-wrapper .artwork-icon {
+    width: 200px; }
+    .artwork-wrapper .artwork-icon:hover {
+      cursor: pointer; }
+  .artwork-wrapper .artwork-play {
+    position: absolute;
+    width: 50px;
+    top: 75px;
+    left: 75px; }
+    .artwork-wrapper .artwork-play:hover {
+      cursor: pointer;
+      width: 60px;
+      top: 70px;
+      left: 70px; }
 
 .feed-container {
   margin-bottom: 10em;
@@ -139,31 +158,6 @@ body {
     border-radius: 4px;
     padding: 20px;
     margin-bottom: 20px; }
-    .feed-container .track-container .artwork-wrapper {
-      position: relative; }
-      .feed-container .track-container .artwork-wrapper .ranking-header {
-        position: absolute;
-        color: white;
-        font: bold;
-        letter-spacing: -1px;
-        background: black;
-        /* fallback color */
-        background: rgba(0, 0, 0, 0.7);
-        padding: 10px; }
-      .feed-container .track-container .artwork-wrapper .artwork-icon {
-        width: 200px; }
-        .feed-container .track-container .artwork-wrapper .artwork-icon:hover {
-          cursor: pointer; }
-      .feed-container .track-container .artwork-wrapper .artwork-play {
-        position: absolute;
-        width: 50px;
-        top: 75px;
-        left: 75px; }
-        .feed-container .track-container .artwork-wrapper .artwork-play:hover {
-          cursor: pointer;
-          width: 60px;
-          top: 70px;
-          left: 70px; }
     .feed-container .track-container .track-title:hover {
       cursor: pointer; }
     .feed-container .track-container .track-item-icons {

@@ -98,7 +98,7 @@ body {
 
 
 .track-top-details {
-	color: #A81728;
+	font-size: 12px;
 	text-decoration: none;
 	a {
 		color: inherit;
@@ -163,15 +163,26 @@ body {
 
 .bc-menu {
 	display: block;
+	padding: 0;
+
 	.burn-cartel-player-container {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		margin: 0 1em;
-		.burn-cartel-player-control {
-			display: flex;
-		}
+		// border-bottom: 2px solid #1E2021;
+		// /* margin: .1em 0; */
+		// margin-bottom: .2em;
+		// padding: .1em;
+		//
+		// .burn-cartel-player {
+		// 	display: flex;
+		// 	justify-content: space-between;
+		// 	align-items: center;
+		// 	text-align: center;
+		//
+		// 	.burn-cartel-player-control {
+		// 		display: flex;
+		// 	}
+		// }
 	}
+
 	.bottom-nav-icons {
 		display: flex;
 		justify-content: space-around;
@@ -179,35 +190,40 @@ body {
 	}
 }
 
+.artwork-wrapper {
 
-// DUPLICATE :(
-// .artwork-wrapper {
-//
-// 	position: relative;
-//
+	position: relative;
 
-//
-// 	.artwork-icon {
-// 		width: 200px;
-// 		&:hover {
-// 			cursor: pointer;
-// 		}
-// 	}
-//
-// 	.artwork-play {
-// 		position: absolute;
-// 		width: 50px;
-// 		top: 75px;
-// 		left: 75px;
-// 		&:hover {
-// 			cursor: pointer;
-// 			width: 60px;
-// 			top: 70px;
-// 			left: 70px;
-// 		}
-// 	}
-//
-// }
+	.ranking-header {
+		position: absolute;
+		color: white;
+		 letter-spacing: -1px;
+		 background: rgb(0, 0, 0); /* fallback color */
+		 background: rgba(0, 0, 0, 0.7);
+		 padding: 10px;
+	}
+
+	.artwork-icon {
+		width: 200px;
+		&:hover {
+			cursor: pointer;
+		}
+	}
+
+	.artwork-play {
+		position: absolute;
+		width: 50px;
+		top: 75px;
+		left: 75px;
+		&:hover {
+			cursor: pointer;
+			width: 60px;
+			top: 70px;
+			left: 70px;
+		}
+	}
+
+}
 
 .feed-container {
 	margin-bottom: 10em;
@@ -219,41 +235,7 @@ body {
 		padding: 20px;
 		margin-bottom: 20px;
 
-		.artwork-wrapper {
 
-			position: relative;
-
-			.ranking-header {
-					position: absolute;
-					color: white;
-				 font: bold;
-				 letter-spacing: -1px;
-				 background: rgb(0, 0, 0); /* fallback color */
-				 background: rgba(0, 0, 0, 0.7);
-				 padding: 10px;
-			}
-
-			.artwork-icon {
-				width: 200px;
-				&:hover {
-					cursor: pointer;
-				}
-			}
-
-			.artwork-play {
-				position: absolute;
-				width: 50px;
-				top: 75px;
-				left: 75px;
-				&:hover {
-					cursor: pointer;
-					width: 60px;
-					top: 70px;
-					left: 70px;
-				}
-			}
-
-		}
 
 		.track-title {
 			&:hover {
