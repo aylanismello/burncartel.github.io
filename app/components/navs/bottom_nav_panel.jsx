@@ -13,6 +13,12 @@ const BottomNavPanel = ({ currentUserId, trackUrl }) => (
 				className='bc-icon'
 				/>
 		</Link>
+
+		<Link className="navbar-brand" to="/">
+			<div className="logo-container">
+				<img src="../../assets/bc_small_1.png" alt="Burn Cartel"/>
+			</div>
+		</Link>
 		{/* <a target="_" href={trackUrl}>
 			<FontAwesome.FaHome
 				size={40}
@@ -24,8 +30,8 @@ const BottomNavPanel = ({ currentUserId, trackUrl }) => (
 				<Link
 					to={`/likes/${currentUserId}`}
 				>
-						<FontAwesome.FaList
-							size={40}
+						<FontAwesome.FaUser
+							size={37}
 							color='aliceblue'
 							className='bc-icon'
 							/>

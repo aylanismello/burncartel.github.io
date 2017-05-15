@@ -129,10 +129,10 @@ class BurnCartelPlayer extends React.Component {
 
               <Link
                 to={`/tracks/${this.track.id}`}
-                onClick={() => handleTrackClick(this.track.id)}
               >
                 <span className='track-name'>
-                  {`${this.track.name} `}
+
+                  {`${this.track.name.slice(0, 20)} `}
                 </span>
               </Link>
                 •
@@ -140,7 +140,7 @@ class BurnCartelPlayer extends React.Component {
                 to={`/publishers/${this.props.publisherId}`}
               >
                 <span className='track-artist'>
-                  {` ${this.track.publisher.name}`}
+                  {` ${this.track.publisher.name.slice(0, 15)} `}
                 </span>
               </Link>
 

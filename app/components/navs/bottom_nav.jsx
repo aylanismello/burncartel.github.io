@@ -20,14 +20,12 @@ const BottomNav = ({ currentUserId, trackUrl }) => {
 				currentUserId={currentUserId}
 			/>
 
-			<div>
       <MediaQuery query='(max-device-width: 450px)'>
         {/* <div>You are using a phone!</div> */}
 			</MediaQuery>
       <MediaQuery query='(min-device-width: 451px)'>
         {/* <div>You are using a laptop or tablet!</div> */}
 			</MediaQuery>
-    </div>
 
 		</nav>
 

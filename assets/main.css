@@ -78,12 +78,6 @@ body {
 .pagination-button-container {
   margin-bottom: 3em; }
 
-.track-top-details {
-  font-size: 12px;
-  text-decoration: none; }
-  .track-top-details a {
-    color: inherit; }
-
 .login-logout-container {
   color: white;
   margin: 0 2em;
@@ -120,9 +114,30 @@ body {
 .bc-menu {
   display: block;
   padding: 0; }
+  .bc-menu .burn-cartel-player-container {
+    border-bottom: 2px solid #1E2021;
+    margin-bottom: .2em;
+    padding: .2em .6em; }
+    .bc-menu .burn-cartel-player-container .burn-cartel-player {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      text-align: center; }
+      .bc-menu .burn-cartel-player-container .burn-cartel-player .burn-cartel-player-details {
+        flex-grow: 10;
+        text-align: center; }
+      .bc-menu .burn-cartel-player-container .burn-cartel-player .track-top-details {
+        font-size: 12px;
+        text-decoration: none; }
+        .bc-menu .burn-cartel-player-container .burn-cartel-player .track-top-details a {
+          color: inherit; }
+      .bc-menu .burn-cartel-player-container .burn-cartel-player .burn-cartel-player-control {
+        display: flex;
+        flex-grow: 0; }
   .bc-menu .bottom-nav-icons {
     display: flex;
-    justify-content: space-around; }
+    justify-content: space-around;
+    align-items: center; }
 
 .artwork-wrapper {
   position: relative; }
@@ -199,6 +214,7 @@ body {
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
-  align-items: center; }
+  align-items: center;
+  flex-direction: row-reverse; }
 
 /*# sourceMappingURL=main.css.map */
