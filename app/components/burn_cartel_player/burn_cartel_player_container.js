@@ -7,13 +7,17 @@ import { togglePlay,
 	updateCurrentTime,
  	toggleRepeat } from '../../actions/player_actions';
 import { loginFB, likeUnlikeTrack } from '../../actions/user_actions';
-import { getPlayingFeedTracksHash, getNextTrackId, getUserTracksHash } from '../../selectors/track_selector';
+import { getPlayingFeedTracksHash,
+	getNextTrackId,
+	getPrevTrackId,
+	getUserTracksHash } from '../../selectors/track_selector';
 
 
 const mapStateToProps = (state) => {
 	const tracksHash = getPlayingFeedTracksHash(state);
 	const track = tracksHash[state.feed.playingFeed.trackId];
 	const nextTrackId = getNextTrackId(state);
+	const prevTrackId = getPrevTrackId(state);
 
 	const publisherId = (track === undefined ? "" : track.publisher_id);
 
@@ -27,6 +31,7 @@ const mapStateToProps = (state) => {
 		trackLoaded: state.player.trackLoaded,
 		trackId: state.feed.playingFeed.trackId,
 		nextTrackId,
+		prevTrackId,
 		playing: state.player.playing,
 		repeating: state.player.repeating,
 		currentTime: state.player.currentTime,

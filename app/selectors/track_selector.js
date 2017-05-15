@@ -59,3 +59,20 @@ export const getNextTrackId = createSelector(
 		}
 	}
 );
+
+export const getPrevTrackId = createSelector(
+	[getPlayingTracks, getCurrentPlayingTrackId],
+	(tracks, trackId) => {
+		let trackIdx = 0;
+		for(const track of tracks) {
+			if(track.id === trackId) {
+				if (trackIdx === 0) {
+					console.log('there is no track before the fisrt one');
+				} else {
+					return (tracks[trackIdx - 1].id);
+				}
+			}
+			trackIdx++;
+		}
+	}
+);

@@ -1,5 +1,6 @@
 // https://github.com/voronianski/soundcloud-audio.js
 import React from 'react';
+import Hammer from 'react-hammerjs';
 import { Link } from 'react-router-dom';
 import SoundCloudAudio from 'soundcloud-audio';
 import * as FontAwesome from 'react-icons/lib/fa/';
@@ -12,6 +13,7 @@ class BurnCartelPlayer extends React.Component {
     super(props);
     this.toggle = this.toggle.bind(this);
     this.goToNextTrack = this.goToNextTrack.bind(this);
+    this.goToPrevTrack = this.goToPrevTrack.bind(this);
     this.playAndLoadTrack = this.playAndLoadTrack.bind(this);
     this.pauseTrack = this.pauseTrack.bind(this);
     this.playTrack = this.playTrack.bind(this);
@@ -71,6 +73,14 @@ class BurnCartelPlayer extends React.Component {
       this.props.updateTrackId(this.props.nextTrackId);
     } else {
       console.log('out of tracks.. must paginate!');
+    }
+  }
+
+  goToPrevTrack() {
+    if(this.props.prevTrackId) {
+      this.props.updateTrackId(this.props.prevTrackId);
+    } else {
+      console.log('no prev track found in player');
     }
   }
 
@@ -167,7 +177,17 @@ class BurnCartelPlayer extends React.Component {
         likeUnlikeTrack, numLikes, trackId, track, userLikes } = this.props;
 
       return (
+
         <div className="burn-cartel-player-container">
+          <Hammer
+            onSwipe={(e) => {
+              if(e.direction === 1){
+                this.goToNextTrack();
+              } else if(e.direction == 4) {
+                this.goToPrevTrack();
+              }
+            }}
+            >
           <div className="burn-cartel-player">
 
             <div className='burn-cartel-player-details'>
@@ -213,6 +233,7 @@ class BurnCartelPlayer extends React.Component {
 
                 </div>
               </div>
+            </Hammer>
           </div>
 
           );

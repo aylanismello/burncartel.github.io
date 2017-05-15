@@ -2,6 +2,8 @@ import { Link } from 'react-router-dom';
 import $ from 'jquery';
 import React from 'react';
 import Modal from 'react-modal';
+import * as FontAwesome from 'react-icons/lib/fa/';
+
 
 class TopNav extends React.Component {
 	constructor(props) {
@@ -90,6 +92,16 @@ class TopNav extends React.Component {
 			<nav className="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse bc-nav">
 
 				<div className="nav-buttons">
+
+					<Link to="/help">
+						<FontAwesome.FaQuestion
+							size={30}
+							color='aliceblue'
+							className='bc-icon'
+							/>
+					</Link>
+
+
 
 					<div className="login-logout-container">
 
