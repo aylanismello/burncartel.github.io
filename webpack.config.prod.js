@@ -2,7 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 
 const NODE_ENV = 'production';
-const EC2_HOST = process.env.EC2_HOST || 'http://ec2-54-193-25-169.us-west-1.compute.amazonaws.com/';
+const EC2_HOST = process.env.EC2_HOST || 'ec2-54-193-25-169.us-west-1.compute.amazonaws.com';
 const EC2_PORT = process.env.EC2_PORT || '80';
 
 module.exports = {
