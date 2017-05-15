@@ -10,8 +10,8 @@ const input = `
 
   **TIPS:**
 
-  1. To traverse to the next track, swipe on the track name in the player bar to the right. 👉
-  2. To traverse to the previous track, swipe on the player to the left. 👈
+  1. To traverse to the next track, swipe on the track name in the player bar to the left. 👈
+  2. To traverse to the previous track, swipe on the player to the right. 👉
   3. Login to like tracks 👍
   4. Make sure to explore different curators' feeds and make serendipitous discoveries! 🎶💻
 
