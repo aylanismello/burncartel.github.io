@@ -180,6 +180,16 @@ class BurnCartelPlayer extends React.Component {
 
         <div className="burn-cartel-player-container">
           <Hammer
+            options={{
+              recognizers: {
+                swipe: {
+                  threshold: 1
+                }
+              }
+            }}
+            onTap={(e) => {
+              // if held down a certain length of time, like the track
+            }}
             onSwipe={(e) => {
               if(e.direction === 1){
                 this.goToNextTrack();
