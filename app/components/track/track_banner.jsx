@@ -20,6 +20,7 @@ const TrackBanner = ({ track, playingTrackId, playing,
 		}
 	}
 
+	const trackImageUrl = track.artwork_url ? track.artwork_url : track.publisher.avatar_url
 
 	return (
 		<div
@@ -41,7 +42,7 @@ const TrackBanner = ({ track, playingTrackId, playing,
 
 			<div className="artwork-wrapper">
 				<img
-					src={track.artwork_url}
+					src={trackImageUrl}
 					className="artwork-icon"
 				/>
 				<img

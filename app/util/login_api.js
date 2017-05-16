@@ -11,6 +11,15 @@ export const connectFB = () => {
   });
 }
 
+const getPicture = (cb, user) => {
+
+  FB.api(`/${user.uid}/picture`, response => {
+    cb({ ...user, photo_url: response.data.url});
+  });
+
+}
+
+
 export const getFBUser = (success) => {
   FB.api('/me', {fields: 'first_name,last_name,email'}, (response) => {
     let data = {};
@@ -27,7 +36,7 @@ export const getFBUser = (success) => {
       },
       data,
       success: (user) => {
-        success(user);
+        getPicture(success, user)
       },
       error: (err) => {
         console.log(err);

@@ -146,6 +146,11 @@ body {
     display: flex;
     justify-content: space-around;
     align-items: center; }
+    .bc-menu .bottom-nav-icons .logged-in-user-avatar-container {
+      width: 35px; }
+      .bc-menu .bottom-nav-icons .logged-in-user-avatar-container .loggin-in-user-avatar {
+        width: 100%;
+        border-radius: 100px; }
 
 .artwork-wrapper {
   position: relative; }

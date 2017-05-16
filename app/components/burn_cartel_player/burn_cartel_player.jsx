@@ -190,6 +190,9 @@ class BurnCartelPlayer extends React.Component {
         playerColor = '#ff9000';
       }
 
+      const tapInterval = 300;
+      const tapIntervalDelta = 10;
+
       return (
 
         <div
@@ -207,7 +210,7 @@ class BurnCartelPlayer extends React.Component {
                   },
                   tap: {
                     taps: 1,
-                    interval: 200
+                    interval: tapInterval
                   }
                 }
               }}
@@ -224,12 +227,12 @@ class BurnCartelPlayer extends React.Component {
                         clearTimeout(this.tapTimers[idx + 1]);
                       this.isDoubleTap = false;
                     }
-                  }, 250)
+                  }, tapInterval + tapIntervalDelta)
                 );
 
               }}
               onDoubleTap={(e) => {
-		e.preventDefault();
+                e.preventDefault();
                 this.isDoubleTap = true;
                 if(!isLoggedIn) {
                   // loginFB();

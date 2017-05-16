@@ -50,6 +50,7 @@ class App extends React.Component {
 
       <BottomNav
         currentUserId={this.props.currentUser.id}
+        currentUserPhotoUrl={this.props.currentUser.photo_url}
         trackUrl={this.props.trackUrl}
       />
 			</div>

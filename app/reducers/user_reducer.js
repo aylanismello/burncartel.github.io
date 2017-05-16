@@ -6,7 +6,8 @@ const initialState = Object.freeze({
     uid: null,
     id: null,
     name: null,
-    provider: null
+    provider: null,
+    photo_url: null
   },
   fbDidInit: false,
   likePostInProgress: false

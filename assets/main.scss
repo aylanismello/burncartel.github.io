@@ -208,6 +208,15 @@ body {
 		justify-content: space-around;
 		align-items: center;
 
+		.logged-in-user-avatar-container {
+			width: 35px;
+			.loggin-in-user-avatar {
+				width: 100%;
+		    border-radius: 100px;
+
+			}
+		}
+
 	}
 }
 
