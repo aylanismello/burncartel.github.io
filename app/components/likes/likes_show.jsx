@@ -7,7 +7,7 @@ import { FEEDS } from '../../reducers/feed_reducer';
 class LikesShow extends React.Component {
 
   componentWillMount() {
-    this.props.updateFilters({ resource: 'likes', id: this.props.ffUserId })
+    this.props.updateFilters({ resource: 'likes', id: this.props.currentUserId })
   }
 
   render() {

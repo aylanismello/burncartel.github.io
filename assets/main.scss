@@ -6,10 +6,53 @@ body {
 	font-family: 'Quicksand', sans-serif;
 }
 
+.help-page {
+	padding: 1em;
+}
+
 .feed-banner {
 	width: 15em;
 	.Dropdown-root {
 		width: auto;
+	}
+}
+
+.user-home {
+	a {
+		color: black;
+		text-decoration: none;
+	}
+	.user-home-content {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: space-between;
+		margin: 2em;
+		.user-choice {
+			display: flex;
+			flex-direction: column;
+			margin: .5em 0;
+			text-align: center;
+			border: solid black 2px;
+			min-width: 250px;
+		}
+	}
+	.user-home-banner {
+		.avatar-container {
+			width: 70px;
+			margin: .5em;
+			img {
+				width: 100%;
+				border-radius: 10px;
+			}
+		}
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		background: ghostwhite;
+    border-radius: 50px;
+
+
 	}
 }
 
@@ -223,6 +266,7 @@ body {
 .artwork-wrapper {
 
 	position: relative;
+	margin: 1em 0;
 
 	.ranking-header {
 		position: absolute;
@@ -314,7 +358,15 @@ body {
 
 .track-show {
 	.track-banner {
-		background: gray;
+		background: indianred;
+		border: 2px solid black;
+		border-radius: 20px;
+		padding: 1em;
+		color: aliceblue;
+
+		a {
+			color: white;
+		}
 
 		.track-item-icon {
 			margin-right: 2em;
@@ -322,7 +374,7 @@ body {
 
 		.track-banner-icons-container {
 			display: flex;
-			background: whitesmoke;
+			background: inherit;
 			justify-content: flex-start;
 		}
 	}

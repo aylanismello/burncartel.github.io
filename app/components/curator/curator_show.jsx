@@ -17,7 +17,7 @@ class CuratorShow extends React.Component {
 			return <Loading />;
 		} else {
 			return (
-				<div className="container user-show">
+				<div className="container user-show track-show">
 					<CuratorBanner user={this.props.curator} />
 					<h2> Top selections </h2>
 					<FeedContainer />

@@ -5,17 +5,15 @@ import {
 	setLikeFeedUserId,
 	receiveTracks
 } from '../../actions/feed_actions';
-import LikesShow from './likes_show';
+import UserHome from './user_home';
 
 
-const mapStateToProps = (state, ownProps) => {
-
-	// const isOfCurrentUser = ( userId === "me" ? true : false);
-	return {
-		userLikes: state.user.currentUser.tracks,
-		currentUserId: state.user.currentUser.id
-	}
-};
+const mapStateToProps = (state, ownProps) => ({
+	userLikes: state.user.currentUser.tracks,
+	userName: state.user.currentUser.name,
+	userPhoto: state.user.currentUser.photo_url,
+	currentUserId: state.user.currentUser.id
+});
 
 const mapDispatchToProps = dispatch => ({
 	updateFilters: (filters) => dispatch(updateFilters(filters)),
@@ -27,4 +25,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(LikesShow);
+)(UserHome);

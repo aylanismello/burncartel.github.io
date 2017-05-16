@@ -29,6 +29,9 @@ const initialState = {
 	},
 	SINGLE_TRACK: {
 	},
+	USER: {
+
+	},
 	playingFeed: {
 		tracks: [],
 			// might need any number of metadatas here

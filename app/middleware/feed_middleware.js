@@ -37,11 +37,11 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 		case feedConstants.RECEIVE_FEED:
 			if(action.feed.sorted_serialized_tracks) { // if we have multiple tracks
 
+
 				dispatch(receivePaginationData(action.feed));
 				if(getState().feed.pagination.tracks_page === 1) {
 					dispatch(resetTracks());
 				}
-
 
 				dispatch(receiveTracks(action.feed.sorted_serialized_tracks));
 				delete action.feed.sorted_serialized_tracks;
@@ -63,6 +63,8 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 			} else if(action.filters.resource === 'tracks') {
 				nextFeedType = 'FIRE';
 				sortType = action.filters.sortType;
+			} else if(action.filters.resource === 'user_feed') {
+				nextFeedType = 'USER';
 			} else {
 				nextFeedType = action.filters.resource;
 			}
