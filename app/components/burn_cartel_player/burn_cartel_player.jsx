@@ -229,6 +229,7 @@ class BurnCartelPlayer extends React.Component {
 
               }}
               onDoubleTap={(e) => {
+		e.preventDefault();
                 this.isDoubleTap = true;
                 if(!isLoggedIn) {
                   // loginFB();

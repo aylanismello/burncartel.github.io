@@ -157,6 +157,9 @@ body {
 .bc-menu {
 	display: block;
 	padding: 0;
+	&:hover {
+		cursor: pointer;
+	}
 
 	.burn-cartel-player-container {
 		border-bottom: 2px solid #1E2021;
@@ -174,6 +177,9 @@ body {
 		    display: flex;
 		    align-items: center;
 		    justify-content: center;
+				&:hover {
+					cursor: pointer;
+				}
 
 				.dummy-icon {
 					visibility: hidden;

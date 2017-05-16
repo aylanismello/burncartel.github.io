@@ -114,6 +114,8 @@ body {
 .bc-menu {
   display: block;
   padding: 0; }
+  .bc-menu:hover {
+    cursor: pointer; }
   .bc-menu .burn-cartel-player-container {
     border-bottom: 2px solid #1E2021;
     margin-bottom: .2em;
@@ -128,6 +130,8 @@ body {
         display: flex;
         align-items: center;
         justify-content: center; }
+        .bc-menu .burn-cartel-player-container .burn-cartel-player .burn-cartel-player-details:hover {
+          cursor: pointer; }
         .bc-menu .burn-cartel-player-container .burn-cartel-player .burn-cartel-player-details .dummy-icon {
           visibility: hidden; }
       .bc-menu .burn-cartel-player-container .burn-cartel-player .track-top-details {
