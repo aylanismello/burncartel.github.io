@@ -20,6 +20,12 @@ const input = `
 
 class UserFeedShow extends React.Component {
 
+  componentWillMount() {
+    if(this.props.currentUserId) {
+      this.props.updateFilters({ resource: 'user_feed', id: this.props.currentUserId })
+    }
+  }
+
   componentWillReceiveProps(nextProps) {
     if(nextProps.currentUserId) {
       this.props.updateFilters({ resource: 'user_feed', id: nextProps.currentUserId })

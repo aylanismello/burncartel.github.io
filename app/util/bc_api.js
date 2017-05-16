@@ -12,7 +12,6 @@ export const getFeed = (resource, filters, success = suc, error = err) => {
 	} else {
 		page = filters.page
 	}
-	debugger;
 
 	if(resource === 'user_feed') {
 		getUrl = `http://${host}:${port}/api/v1/users/${filters.id}/feed?tracks_page=${page}`;

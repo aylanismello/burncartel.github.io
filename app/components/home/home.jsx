@@ -85,7 +85,7 @@ class Home extends React.Component {
 						</div> :
 						<div className='feed-banner'>
 							<div className='feed-name'>
-								<h2> Burn Cartel Radio </h2>
+								<h2> 💻 BC Radio 📻 </h2>
 							</div>
 						</div>
 

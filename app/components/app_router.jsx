@@ -15,6 +15,7 @@ import CuratorShowContainer from './curator/curator_show_container';
 import LikesShowContainer from './likes/likes_show_container';
 import PublisherShowContainer from './publisher/publisher_show_container';
 import UserFeedShowContainer from './user/user_feed_show_container';
+import UserHomeContainer from './user/user_home_container';
 import NoMatch from './no_match';
 import AppContainer from './app/app_container';
 
@@ -39,6 +40,7 @@ class AppRouter extends React.Component{
             <Route path="/curators/:id" component={CuratorShowContainer} />
             <Route path="/me/likes" component={LikesShowContainer} />
             <Route path="/me/feed" component={UserFeedShowContainer} />
+            <Route path="/me" component={UserHomeContainer} />
             <Route path="/curated" component={BurnCartelCurated} />
             <Route component={NoMatch}/>
           </Switch>

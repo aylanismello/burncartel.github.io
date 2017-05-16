@@ -43,7 +43,6 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 					dispatch(resetTracks());
 				}
 
-				debugger;
 				dispatch(receiveTracks(action.feed.sorted_serialized_tracks));
 				delete action.feed.sorted_serialized_tracks;
 				dispatch(receiveFeedMetadata(getState().feed.feedType, action.feed))
