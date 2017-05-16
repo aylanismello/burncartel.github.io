@@ -25,7 +25,7 @@ const CuratorBanner = ({ user }) => {
 	} else {
 		return (
 			<div
-				className="thumbnail user-banner"
+				className="thumbnail track-banner"
 			>
 				<h2> {user.name}</h2>
 				<img src={user.avatar_url} />

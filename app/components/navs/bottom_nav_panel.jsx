@@ -22,7 +22,7 @@ const BottomNavPanel = ({ currentUserId, trackUrl, currentUserPhotoUrl }) => (
 
 		{currentUserId ?
 				<Link
-					to={`/likes/${currentUserId}`}
+					to={`/me/likes`}
 				>
 					<div className='logged-in-user-avatar-container'>
 						<img

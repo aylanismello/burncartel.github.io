@@ -6,6 +6,10 @@ body {
 	font-family: 'Quicksand', sans-serif;
 }
 
+.help-page {
+	padding: 1em;
+}
+
 .feed-banner {
 	width: 15em;
 	.Dropdown-root {
@@ -223,6 +227,7 @@ body {
 .artwork-wrapper {
 
 	position: relative;
+	margin: 1em 0;
 
 	.ranking-header {
 		position: absolute;
@@ -314,7 +319,15 @@ body {
 
 .track-show {
 	.track-banner {
-		background: gray;
+		background: indianred;
+		border: 2px solid black;
+		border-radius: 20px;
+		padding: 1em;
+		color: aliceblue;
+
+		a {
+			color: white;
+		}
 
 		.track-item-icon {
 			margin-right: 2em;
@@ -322,7 +335,7 @@ body {
 
 		.track-banner-icons-container {
 			display: flex;
-			background: whitesmoke;
+			background: inherit;
 			justify-content: flex-start;
 		}
 	}

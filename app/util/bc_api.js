@@ -12,8 +12,11 @@ export const getFeed = (resource, filters, success = suc, error = err) => {
 	} else {
 		page = filters.page
 	}
+	debugger;
 
-	if(filters.id && resource !== 'likes') {
+	if(resource === 'user_feed') {
+		getUrl = `http://${host}:${port}/api/v1/users/${filters.id}/feed?tracks_page=${page}`;
+	} else if(filters.id && resource !== 'likes') {
 		// getting /publishers/ or /curators/
 		getUrl = `http://${host}:${port}/api/v1/${resource}/${filters.id}?tracks_page=${page}`;
 	} else if (filters.id && resource === 'likes'){

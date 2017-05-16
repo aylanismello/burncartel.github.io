@@ -3,6 +3,9 @@ body {
   background: whitesmoke;
   font-family: 'Quicksand', sans-serif; }
 
+.help-page {
+  padding: 1em; }
+
 .feed-banner {
   width: 15em; }
   .feed-banner .Dropdown-root {
@@ -153,7 +156,8 @@ body {
         border-radius: 100px; }
 
 .artwork-wrapper {
-  position: relative; }
+  position: relative;
+  margin: 1em 0; }
   .artwork-wrapper .ranking-header {
     position: absolute;
     color: white;
@@ -211,12 +215,18 @@ body {
     cursor: pointer; }
 
 .track-show .track-banner {
-  background: gray; }
+  background: indianred;
+  border: 2px solid black;
+  border-radius: 20px;
+  padding: 1em;
+  color: aliceblue; }
+  .track-show .track-banner a {
+    color: white; }
   .track-show .track-banner .track-item-icon {
     margin-right: 2em; }
   .track-show .track-banner .track-banner-icons-container {
     display: flex;
-    background: whitesmoke;
+    background: inherit;
     justify-content: flex-start; }
 
 .user-show .user-banner {
