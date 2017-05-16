@@ -190,8 +190,8 @@ class BurnCartelPlayer extends React.Component {
         playerColor = '#ff9000';
       }
 
-      const tapInterval = 300;
-      const tapIntervalDelta = 10;
+      const tapInterval = 400;
+      const tapIntervalDelta = 50;
 
       return (
 
@@ -216,6 +216,7 @@ class BurnCartelPlayer extends React.Component {
               }}
               onTap={(e) => {
 
+                e.preventDefault();
                 const idx = this.tapTimers.length;
 
                 this.tapTimers.push(
