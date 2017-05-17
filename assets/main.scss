@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Quicksand:400,700');
-
+$banner-background-color: #4CA6FF;
 
 body {
 	background: whitesmoke;
@@ -36,7 +36,7 @@ body {
 	    text-align: center;
 	    justify-content: center;
 	    border: solid #d9534f 1px;
-	    box-shadow: 0px 0px 3px 4px palevioletred;
+	    box-shadow: 0px 0px 3px 4px $banner-background-color;
 	    min-height: 170px;
 		}
 	}
@@ -365,20 +365,20 @@ body {
 
 .track-show {
 	.track-banner {
-		background: palevioletred;
+		background: $banner-background-color;
 		border: 2px solid black;
 		border-radius: 20px;
 		padding: 1em;
 		color: aliceblue;
 
 		a {
-			color: white;
+			color: lightgreen;
 		}
 
 		.track-item-icon {
 			margin-right: 2em;
 		}
-		
+
 		.clickable-banner-metadata {
 			color: lightgreen;
 			text-decoration: underline;
@@ -388,9 +388,9 @@ body {
 				width: 20px;
 				margin-right: .5em;
 
-				a {
-					color: lightgreen;
-				}
+				// a {
+				// 	color: lightgreen;
+				// }
 
 				img {
 					width: 100%;

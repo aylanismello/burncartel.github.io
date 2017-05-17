@@ -25,7 +25,7 @@ body {
     text-align: center;
     justify-content: center;
     border: solid #d9534f 1px;
-    box-shadow: 0px 0px 3px 4px palevioletred;
+    box-shadow: 0px 0px 3px 4px #4CA6FF;
     min-height: 170px; }
 .user-home .user-home-banner {
   display: flex;
@@ -246,13 +246,13 @@ body {
     cursor: pointer; }
 
 .track-show .track-banner {
-  background: palevioletred;
+  background: #4CA6FF;
   border: 2px solid black;
   border-radius: 20px;
   padding: 1em;
   color: aliceblue; }
   .track-show .track-banner a {
-    color: white; }
+    color: lightgreen; }
   .track-show .track-banner .track-item-icon {
     margin-right: 2em; }
   .track-show .track-banner .clickable-banner-metadata {
@@ -262,8 +262,6 @@ body {
     .track-show .track-banner .clickable-banner-metadata .tiny-avatar-container {
       width: 20px;
       margin-right: .5em; }
-      .track-show .track-banner .clickable-banner-metadata .tiny-avatar-container a {
-        color: lightgreen; }
       .track-show .track-banner .clickable-banner-metadata .tiny-avatar-container img {
         width: 100%;
         height: auto; }
