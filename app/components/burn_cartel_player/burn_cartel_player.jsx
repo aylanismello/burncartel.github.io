@@ -190,7 +190,7 @@ class BurnCartelPlayer extends React.Component {
         playerColor = '#ff9000';
       }
 
-      const tapInterval = 400;
+      const tapInterval = 450;
       const tapIntervalDelta = 50;
 
       return (
