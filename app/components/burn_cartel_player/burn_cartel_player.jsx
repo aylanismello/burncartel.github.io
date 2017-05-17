@@ -139,7 +139,15 @@ class BurnCartelPlayer extends React.Component {
 
     let details = <div></div>;
 
+
+
     if(this.track && this.props.trackLoaded) {
+
+        let trackName = this.track.name;
+        if (this.track.name.length > 17) {
+          trackName = `${this.track.name.slice(0, 17)}...`;
+        }
+
         details = (
           <div className='track-details-text'>
             <div className='track-top-details'>
@@ -149,7 +157,7 @@ class BurnCartelPlayer extends React.Component {
               > */}
                 <span className='track-name'>
 
-                  {`${this.track.name.slice(0, 20)} `}
+                  {trackName}
                 </span>
               {/* </Link> */}
                 •
@@ -190,7 +198,7 @@ class BurnCartelPlayer extends React.Component {
         playerColor = '#ff9000';
       }
 
-      const tapInterval = 400;
+      const tapInterval = 450;
       const tapIntervalDelta = 50;
 
       return (

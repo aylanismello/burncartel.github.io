@@ -13,7 +13,11 @@ import {
   updateTrackLikeCount
 } from '../actions/feed_actions';
 import { getFBUser } from '../util/login_api';
-import { getUserTracksHash, getFeedTracksHash } from '../selectors/track_selector';
+import {
+  getUserTracksHash,
+  getFeedTracksHash,
+  getPlayingFeedTracksHash
+} from '../selectors/track_selector';
 import { postLike } from '../util/like_api';
 
 
@@ -34,12 +38,12 @@ const UserMiddleware = ({ getState, dispatch }) => next => action => {
       postLike({ create: true }, action.trackId, getState().user.currentUser.id, (createdLike) => {
         dispatch(updateLikedTracks(createdLike.tracks));
 
-        const oneMoreLike = getFeedTracksHash(getState())[action.trackId].num_likes + 1;
+        const oneMoreLike = getPlayingFeedTracksHash(getState())[action.trackId].num_likes + 1;
         dispatch(updateTrackLikeCount(action.trackId, oneMoreLike));
 
         dispatch(endLikePost());
       }, (err) => {
-        throw `omg hit this error creating like ${err}`;
+        throw new Error(`omg hit this error creating like ${err}`);
       });
 
       return next(action);
@@ -49,12 +53,12 @@ const UserMiddleware = ({ getState, dispatch }) => next => action => {
       postLike({ create: false }, action.trackId, getState().user.currentUser.id, (createdLike) => {
         dispatch(updateLikedTracks(createdLike.tracks));
 
-        const oneLessLike = getFeedTracksHash(getState())[action.trackId].num_likes - 1;
+        const oneLessLike = getPlayingFeedTracksHash(getState())[action.trackId].num_likes - 1;
         dispatch(updateTrackLikeCount(action.trackId, oneLessLike));
 
         dispatch(endLikePost());
       }, (err) => {
-        throw `omg hit this error destroying like ${err}`;
+        throw new Error(`omg hit this error destroying like ${err}`);
       });
 
       return next(action);

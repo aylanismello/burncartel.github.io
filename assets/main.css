@@ -16,17 +16,17 @@ body {
   text-decoration: none; }
 .user-home .user-home-content {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  margin: 2em; }
+  margin: 2em;
+  flex-grow: 2; }
   .user-home .user-home-content .user-choice {
     display: flex;
     flex-direction: column;
     margin: .5em 0;
     text-align: center;
-    border: solid black 2px;
-    min-width: 250px; }
+    justify-content: center;
+    border: solid #d9534f 1px;
+    box-shadow: 0px 0px 3px 4px indianred;
+    min-height: 170px; }
 .user-home .user-home-banner {
   display: flex;
   flex-direction: column;
@@ -169,6 +169,8 @@ body {
       .bc-menu .burn-cartel-player-container .burn-cartel-player .track-top-details {
         font-size: 12px;
         text-decoration: none; }
+        .bc-menu .burn-cartel-player-container .burn-cartel-player .track-top-details .track-name {
+          font-weight: 700; }
         .bc-menu .burn-cartel-player-container .burn-cartel-player .track-top-details a {
           color: inherit; }
       .bc-menu .burn-cartel-player-container .burn-cartel-player .burn-cartel-player-control {
