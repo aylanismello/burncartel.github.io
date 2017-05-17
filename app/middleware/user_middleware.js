@@ -38,11 +38,6 @@ const UserMiddleware = ({ getState, dispatch }) => next => action => {
       postLike({ create: true }, action.trackId, getState().user.currentUser.id, (createdLike) => {
         dispatch(updateLikedTracks(createdLike.tracks));
 
-        // const ft = getFeedTracksHash(getState());
-        // if (!ft[action.trackId]) {
-        //   debugger;
-        // }
-
         const oneMoreLike = getPlayingFeedTracksHash(getState())[action.trackId].num_likes + 1;
         dispatch(updateTrackLikeCount(action.trackId, oneMoreLike));
 
@@ -57,11 +52,6 @@ const UserMiddleware = ({ getState, dispatch }) => next => action => {
 
       postLike({ create: false }, action.trackId, getState().user.currentUser.id, (createdLike) => {
         dispatch(updateLikedTracks(createdLike.tracks));
-
-        // const ft = getPlayingFeedTracksHash(getState());
-        // if (!ft[action.trackId]) {
-        //   debugger;
-        // }
 
         const oneLessLike = getPlayingFeedTracksHash(getState())[action.trackId].num_likes - 1;
         dispatch(updateTrackLikeCount(action.trackId, oneLessLike));

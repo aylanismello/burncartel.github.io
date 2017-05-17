@@ -21,12 +21,6 @@ const feed = `
 
 class UserHome extends React.Component {
 
-  componentWillReceiveProps(nextProps) {
-    // if(nextProps.currentUserId) {
-    //   this.props.updateFilters({ resource: 'user_feed', id: nextProps.currentUserId })
-    // }
-  }
-
   render() {
     let name = 'the dopest person in the 🌌';
     if(this.props.userName) {
@@ -53,7 +47,10 @@ class UserHome extends React.Component {
             <Link
               to={`/me/likes`}
             >
-              <div className="user-choice">
+              <div
+                className="user-choice"
+                id="user-likes-button"
+              >
                 <GoFlame
                   size={80}
                   color="orange"
@@ -66,7 +63,10 @@ class UserHome extends React.Component {
             <Link
               to={`/me/feed`}
             >
-              <div className="user-choice">
+              <div
+                className="user-choice"
+                id="user-feed-button"
+                >
                 <GoRadioTower
                   size={80}
                   color="indianred"
