@@ -17,6 +17,8 @@ body {
 	}
 }
 
+
+
 .user-home {
 	a {
 		color: black;
@@ -34,7 +36,7 @@ body {
 	    text-align: center;
 	    justify-content: center;
 	    border: solid #d9534f 1px;
-	    box-shadow: 0px 0px 3px 4px indianred;
+	    box-shadow: 0px 0px 3px 4px palevioletred;
 	    min-height: 170px;
 		}
 	}
@@ -233,7 +235,7 @@ body {
 			.track-top-details {
 				font-size: 12px;
 				text-decoration: none;
-				
+
 				.track-name {
 			    font-weight: 700;
 				}
@@ -363,7 +365,7 @@ body {
 
 .track-show {
 	.track-banner {
-		background: indianred;
+		background: palevioletred;
 		border: 2px solid black;
 		border-radius: 20px;
 		padding: 1em;
@@ -376,6 +378,28 @@ body {
 		.track-item-icon {
 			margin-right: 2em;
 		}
+		
+		.clickable-banner-metadata {
+			color: lightgreen;
+			text-decoration: underline;
+			display: flex;
+
+			.tiny-avatar-container {
+				width: 20px;
+				margin-right: .5em;
+
+				a {
+					color: lightgreen;
+				}
+
+				img {
+					width: 100%;
+					height: auto;
+				}
+
+			}
+		}
+
 
 		.track-banner-icons-container {
 			display: flex;
@@ -385,11 +409,8 @@ body {
 	}
 }
 
-.user-show {
-	.user-banner {
-		background: gray;
-	}
-}
+
+
 
 .nav-buttons {
 	display: flex;

@@ -9,11 +9,12 @@ class CuratorShow extends React.Component {
 	}
 
 	componentWillMount() {
-		this.props.updateFilters({ resource: 'curators', id: this.props.id })
+		this.props.updateFilters({ resource: 'curators', id: this.props.id });
 	}
 
 	render() {
-		if(this.props.loadingFeed && !this.props.tracksPage) {
+		// if (this.props.loadingFeed && !this.props.tracksPage) {
+		if (this.props.loadingFeed) {
 			return <Loading />;
 		} else {
 			return (
@@ -25,7 +26,6 @@ class CuratorShow extends React.Component {
 			);
 		}
 	}
-
 }
 
 export default CuratorShow;

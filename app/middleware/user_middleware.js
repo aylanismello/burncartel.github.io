@@ -5,7 +5,6 @@ import {
   likeTrack,
   unlikeTrack,
   updateLikedTracks,
-  receiveUnlike,
   startLikePost,
   endLikePost
 } from '../actions/user_actions';
@@ -20,6 +19,14 @@ import {
 } from '../selectors/track_selector';
 import { postLike } from '../util/like_api';
 
+const getNewLikeCount = (trackId, getState, incrementOrDecrement) => {
+	const track = getPlayingFeedTracksHash(getState())[trackId] || getFeedTracksHash(getState())[trackId];
+  if(incrementOrDecrement === 'inc') {
+    return track.num_likes + 1;
+  } else {
+    return track.num_likes - 1;
+  }
+};
 
 const UserMiddleware = ({ getState, dispatch }) => next => action => {
   switch(action.type) {
@@ -38,8 +45,10 @@ const UserMiddleware = ({ getState, dispatch }) => next => action => {
       postLike({ create: true }, action.trackId, getState().user.currentUser.id, (createdLike) => {
         dispatch(updateLikedTracks(createdLike.tracks));
 
-        const oneMoreLike = getPlayingFeedTracksHash(getState())[action.trackId].num_likes + 1;
-        dispatch(updateTrackLikeCount(action.trackId, oneMoreLike));
+        // const oneMoreLike = getClickedTrack(action.trackId, getState).num_likes + 1;
+        // const oneMoreLike = getPlayingFeedTracksHash(getState())[action.trackId].num_likes + 1;
+
+        dispatch(updateTrackLikeCount(action.trackId, getNewLikeCount(action.trackId, getState, 'inc')));
 
         dispatch(endLikePost());
       }, (err) => {
@@ -53,8 +62,8 @@ const UserMiddleware = ({ getState, dispatch }) => next => action => {
       postLike({ create: false }, action.trackId, getState().user.currentUser.id, (createdLike) => {
         dispatch(updateLikedTracks(createdLike.tracks));
 
-        const oneLessLike = getPlayingFeedTracksHash(getState())[action.trackId].num_likes - 1;
-        dispatch(updateTrackLikeCount(action.trackId, oneLessLike));
+        // const oneLessLike = getClickedTrack(action.trackId, getState).num_likes - 1;
+        dispatch(updateTrackLikeCount(action.trackId, getNewLikeCount(action.trackId, getState, 'dec')));
 
         dispatch(endLikePost());
       }, (err) => {

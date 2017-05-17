@@ -1,25 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-
-const renderHandles = (handles) => {
-	return handles.map((handle, idx) => (
-		<div key={idx}>
-			<a target="_" href={handle.url}>{handle.service}</a>
-		</div>
-	));
-};
-
-const renderCurators = (curators) => {
-	return curators.map((curator, idx) => (
-		<div>
-			<Link
-				to={`/curators/${curator.id}`}
-				key={`${curator}-${idx}`}>
-				{curator.name}
-			</Link>
-		</div>
-	));
-}
+import { renderUserList, renderUserHandles } from '../../util/component_helpers';
 
 const PublisherBanner = ({ user }) => {
 	return (
@@ -28,9 +8,9 @@ const PublisherBanner = ({ user }) => {
 		>
 			<h2> {user.name}</h2>
 			<img src={user.avatar_url} />
-			{renderHandles(user.handles)}
+			{renderUserHandles(user.handles)}
 			<h3> Most selected by </h3>
-			{renderCurators(user.top_curators)}
+			{renderUserList(user.top_curators, 'curators')}
 		</div>
 	);
 };

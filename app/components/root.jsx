@@ -3,12 +3,10 @@ import { Provider } from 'react-redux';
 import AppRouter from './app_router';
 
 
-const Root = ({ store }) => {
-	return (
+const Root = ({ store }) => (
 		<Provider store={store}>
 			<AppRouter />
 		</Provider>
-	);
-};
+);
 
 export default Root;

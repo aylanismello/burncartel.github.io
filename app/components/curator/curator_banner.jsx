@@ -1,19 +1,6 @@
 import React from 'react';
 import Loading from '../loading';
-import { Link } from 'react-router-dom';
-
-
-const renderPublishers = (publishers) => {
-	return publishers.map((publisher, idx) => (
-		<div>
-			<Link
-				to={`/publishers/${publisher.id}`}
-				key={`${publisher}-${idx}`}>
-				{publisher.name}
-			</Link>
-		</div>
-	));
-}
+import { renderUserList } from '../../util/component_helpers';
 
 const CuratorBanner = ({ user }) => {
 	if(!user.top_publishers) {
@@ -30,7 +17,7 @@ const CuratorBanner = ({ user }) => {
 				<h2> {user.name}</h2>
 				<img src={user.avatar_url} />
 				<h3> Most published artists </h3>
-				{renderPublishers(user.top_publishers)}
+				{renderUserList(user.top_publishers, 'publishers')}
 
 			</div>
 		)

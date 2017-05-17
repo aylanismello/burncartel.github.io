@@ -1,0 +1,29 @@
+{
+  // I want to use babel-eslint for parsing!
+  "parser": "babel-eslint",
+  "extends": "airbnb",
+  "env": {
+    // I write for browser
+    "browser": true,
+    // in CommonJS
+    "node": true
+  },
+  plugins: [
+    "react",
+    "import"
+  ],
+  // To give you an idea how to override rule options:
+  "rules": {
+    "no-tabs": 0,
+    "no-case-declarations": 0,
+    "prefer-default-export": ["error", "never"],
+    "comma-dangle": ["error", "never"],
+    "indent": ["error", "tab", { "SwitchCase": 2 }],
+    "react/jsx-indent": [1, 'tab'],
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": false, "optionalDependencies": false, "peerDependencies": false}]
+    # "quotes": [2, "single"],
+    # "eol-last": [0],
+    # "no-mixed-requires": [0],
+    # "no-underscore-dangle": [0]
+  }
+}
