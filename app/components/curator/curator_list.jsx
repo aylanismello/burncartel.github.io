@@ -1,14 +1,10 @@
 import React from 'react';
-import CuratorItemContainer from './curator_item_container';
-
-const style = {
-	background: 'green'
-};
+// import CuratorItemContainer from './curator_item_container';
+import CuratorItem from './curator_item';
 
 const CuratorList = ({ track }) => {
-
 	const childElements = track.curators.map((curator, idx) => (
-		<CuratorItemContainer
+		<CuratorItem
 			user={curator}
 			key={idx}
 		/>

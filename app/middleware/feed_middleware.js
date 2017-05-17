@@ -41,7 +41,7 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 				dispatch(resetTracks());
 				dispatch(receiveTracks(action.feed));
 				dispatch(
-					receiveFeedMetadata(getState().feed.feedType, { cool: "this guy" })
+					receiveFeedMetadata(getState().feed.feedType, { cool: 'this guy' })
 				);
 			}
 			return next(action);
@@ -49,17 +49,18 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 			let nextFeedType, sortType;
 			const { feedType } = getState().feed;
 
-			if (action.filters.resource === "tracks" && action.filters.id) {
-				nextFeedType = "SINGLE_TRACK";
-			} else if (action.filters.resource === "tracks") {
-				nextFeedType = "FIRE";
+			if (action.filters.resource === 'tracks' && action.filters.id) {
+				nextFeedType = 'SINGLE_TRACK';
+			} else if (action.filters.resource === 'tracks') {
+				nextFeedType = 'FIRE';
 				sortType = action.filters.sortType;
-			} else if (action.filters.resource === "user_feed") {
-				nextFeedType = "USER";
+			} else if (action.filters.resource === 'user_feed') {
+				nextFeedType = 'USER';
 			} else {
 				nextFeedType = action.filters.resource;
 			}
 
+			debugger;
 			if (feedType && feedType !== nextFeedType) {
 				dispatch(
 					receivePaginationData({
@@ -73,7 +74,7 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 			// OMG SO HACKY. WITH THE CLOSURE AND EVERYTHNG L0Lz
 			if (
 				feedType &&
-				feedType === "FIRE" &&
+				feedType === 'FIRE' &&
 				sortType &&
 				sortType !== prevSortType
 			) {
@@ -95,12 +96,13 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 				action.filters.resource,
 				action.filters,
 				feed => {
-					dispatch(loadingStop());
 
-					if (action.filters.resource === "tracks" && action.filters.id) {
+					if (action.filters.resource === 'tracks' && action.filters.id) {
 						dispatch(receiveFeed([feed]));
+						dispatch(loadingStop());
 					} else {
 						dispatch(receiveFeed(feed));
+						dispatch(loadingStop());
 					}
 				},
 				error => {
@@ -123,7 +125,7 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 			return next(action);
 		case feedConstants.HANDLE_TRACK_CLICK:
 			// GOING TO NEW TRACK
-			if (action.clickType === "play") {
+			if (action.clickType === 'play') {
 				if (getState().feed.playingFeed.trackId !== action.trackId) {
 					// change this to .real_name when that story is completed
 					const newTrackName = getFeedTracksHash(getState())[action.trackId]
@@ -136,7 +138,7 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 
 					if (!_.isEqual(getState().feed.playingFeed.tracks, tracksInFocus)) {
 						console.log(
-							"you just started playing a track from a new feed (one that is not focused)!"
+							'you just started playing a track from a new feed (one that is not focused)!'
 						);
 						// playingFeed = deepClone of currentFeed?
 						// also update name of feed for player!
@@ -146,29 +148,29 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 
 						const feedType = getState().feed.feedType.toUpperCase();
 
-						if (feedType === "LIKES") {
-							newFeedName = "LIKES";
-						} else if (feedType === "FIRE") {
-							if (getState().feed.filters["sortType"]) {
-								newFeedName = getState().feed.filters["sortType"]; // fuck probs shouldn't call this a reserved keyword
+						if (feedType === 'LIKES') {
+							newFeedName = 'LIKES';
+						} else if (feedType === 'FIRE') {
+							if (getState().feed.filters['sortType']) {
+								newFeedName = getState().feed.filters['sortType']; // fuck probs shouldn't call this a reserved keyword
 							} else {
-								newFeedName = "some unknown fire";
+								newFeedName = 'some unknown fire';
 							}
-						} else if (feedType === "CURATORS") {
+						} else if (feedType === 'CURATORS') {
 							newFeedName = `${getState().feed.CURATORS.name}'s`;
-						} else if (feedType === "PUBLISHERS") {
+						} else if (feedType === 'PUBLISHERS') {
 							newFeedName = `${getState().feed.PUBLISHERS.name}'s`;
-						} else if (feedType === "SINGLE_TRACK") {
-							newFeedName = "track";
+						} else if (feedType === 'SINGLE_TRACK') {
+							newFeedName = 'track';
 						} else {
 							newFeedName =
-								"NO NAME SET, this means newFeedName wasnt set in HANDLE_TRACK_CLICK";
+								'NO NAME SET, this means newFeedName wasnt set in HANDLE_TRACK_CLICK';
 						}
 
 						dispatch(setPlayingFeedName(newFeedName));
 					} else {
 						// if the focusedTracks and playingTracks are the same...
-						console.log("wtf");
+						console.log('wtf');
 						// ???
 					}
 

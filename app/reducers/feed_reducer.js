@@ -8,7 +8,7 @@ export const FEEDS = {
 	CURATORS: 'CURATORS',
 	PUBLISHERS: 'PUBLISHERS',
 	SINGLE_TRACK: 'SINGLE_TRACK'
-}
+};
 
 const initialState = {
 	focusedFeed: {
@@ -17,25 +17,16 @@ const initialState = {
 		trackId: -1,
 		page: 1
 	},
-	FIRE: {
-
-	},
-	LIKES: {
-
-	},
-	PUBLISHERS: {
-	},
-	CURATORS: {
-	},
-	SINGLE_TRACK: {
-	},
-	USER: {
-
-	},
+	FIRE: {},
+	LIKES: {},
+	PUBLISHERS: {},
+	CURATORS: {},
+	SINGLE_TRACK: {},
+	USER: {},
 	playingFeed: {
 		tracks: [],
-			// might need any number of metadatas here
-		feedName: ""
+		// might need any number of metadatas here
+		feedName: ''
 	},
 	loadingFeed: true,
 	feedType: null,
@@ -48,45 +39,82 @@ const initialState = {
 };
 
 const FeedReducer = (state = initialState, action) => {
-	switch(action.type) {
+	switch (action.type) {
 		case feedConstants.RECEIVE_PAGINATION_DATA:
-			const {last_tracks_page, next_tracks_page, tracks_page } = action;
-			return { ...state, pagination: { last_tracks_page, next_tracks_page, tracks_page }};
+			const { last_tracks_page, next_tracks_page, tracks_page } = action;
+			return {
+				...state,
+				pagination: { last_tracks_page, next_tracks_page, tracks_page }
+			};
 		case feedConstants.RECEIVE_FEED_METADATA:
 			const newMetadataState = _.cloneDeep(state);
+
+			if (!action.feedType) {
+				debugger;
+			}
+
 			newMetadataState[action.feedType.toUpperCase()] = action.metadata;
 			return newMetadataState;
 		case feedConstants.SET_LIKE_FEED_USER_ID:
-			return { ...state, focusedFeed: {...state.focusedFeed, userLikeId: action.userId }};
+			return {
+				...state,
+				focusedFeed: { ...state.focusedFeed, userLikeId: action.userId }
+			};
 		case feedConstants.SET_FEED_TYPE:
 			return { ...state, feedType: action.feedType };
 		case feedConstants.UPDATE_TRACK_LIKE_COUNT:
-			let updateTracksWithLikeCount = state.focusedFeed.tracks.map((track, idx) => {
-				if(track.id === action.trackId) {
-					return { ...track, num_likes: action.likeCount };
-				} else {
-					return track;
+			let updateTracksWithLikeCount = state.focusedFeed.tracks.map(
+				(track, idx) => {
+					if (track.id === action.trackId) {
+						return { ...track, num_likes: action.likeCount };
+					} else {
+						return track;
+					}
 				}
-			});
+			);
 
-			return { ...state, focusedFeed: {...state.focusedFeed, tracks: updateTracksWithLikeCount } };
+			return {
+				...state,
+				focusedFeed: { ...state.focusedFeed, tracks: updateTracksWithLikeCount }
+			};
 		case feedConstants.RESET_TRACKS:
-			return { ...state, focusedFeed: {...state.focusedFeed,  tracks: [] } };
+			return { ...state, focusedFeed: { ...state.focusedFeed, tracks: [] } };
 		case feedConstants.RECEIVE_TRACKS:
 			const newTracks = {};
-			return { ...state, focusedFeed: {...state.focusedFeed, tracks: [ ...state.focusedFeed.tracks, ...action.tracks ] } };
+			return {
+				...state,
+				focusedFeed: {
+					...state.focusedFeed,
+					tracks: [...state.focusedFeed.tracks, ...action.tracks]
+				}
+			};
 		case feedConstants.RECEIVE_PLAYING_TRACKS:
-			return { ...state, playingFeed: { ...state.playingFeed, tracks: action.tracks } };
+			return {
+				...state,
+				playingFeed: { ...state.playingFeed, tracks: action.tracks }
+			};
 		case feedConstants.UPDATE_FILTERS:
 			return { ...state, filters: action.filters };
 		case feedConstants.SET_PLAYING_FEED_NAME:
-			return { ...state, playingFeed: { ...state.playingFeed, feedName: action.feedName } };
+			return {
+				...state,
+				playingFeed: { ...state.playingFeed, feedName: action.feedName }
+			};
 		case feedConstants.UPDATE_TRACK_ID:
-			return { ...state, focusedFeed: {...state.focusedFeed, trackId: action.trackId } };
+			return {
+				...state,
+				focusedFeed: { ...state.focusedFeed, trackId: action.trackId }
+			};
 		case feedConstants.UPDATE_FOCUSED_TRACK_ID:
-			return { ...state, focusedFeed: {...state.focusedFeed, trackId: action.trackId } };
+			return {
+				...state,
+				focusedFeed: { ...state.focusedFeed, trackId: action.trackId }
+			};
 		case feedConstants.UPDATE_PLAYING_TRACK_ID:
-			return { ...state, playingFeed: {...state.playingFeed, trackId: action.trackId } };
+			return {
+				...state,
+				playingFeed: { ...state.playingFeed, trackId: action.trackId }
+			};
 		case feedConstants.LOADING_START:
 			return { ...state, loadingFeed: true };
 		case feedConstants.LOADING_STOP:
