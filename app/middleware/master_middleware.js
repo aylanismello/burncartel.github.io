@@ -1,5 +1,5 @@
 import { applyMiddleware } from 'redux';
-import createLogger from 'redux-logger';
+import { createLogger } from 'redux-logger';
 import FeedMiddleware from './feed_middleware';
 import PlayerMiddleware from './player_middleware';
 import UserMiddleware from './user_middleware';
