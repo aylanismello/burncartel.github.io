@@ -1,6 +1,6 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import * as FontAwesome from "react-icons/lib/fa/";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import * as FontAwesome from 'react-icons/lib/fa/';
 
 const TrackBanner = ({
 	track,
@@ -11,11 +11,11 @@ const TrackBanner = ({
 	children
 }) => {
 	const playIconUrl =
-		"https://cdn3.iconfinder.com/data/icons/seo-marketing-2-1/48/56-128.png";
+		'https://cdn3.iconfinder.com/data/icons/seo-marketing-2-1/48/56-128.png';
 	const pauseIconUrl =
-		"https://cdn1.iconfinder.com/data/icons/media-volume-1/48/017-512.png";
+		'https://cdn1.iconfinder.com/data/icons/media-volume-1/48/017-512.png';
 	const loadingIconUrl =
-		"https://cdn1.iconfinder.com/data/icons/loading-wait-time/256/loading_wait_time_02-128.png";
+		'https://cdn1.iconfinder.com/data/icons/loading-wait-time/256/loading_wait_time_02-128.png';
 
 	let playIcon = playIconUrl;
 
@@ -37,13 +37,13 @@ const TrackBanner = ({
 		<div className="thumbnail track-banner">
 			<h2> {track.name} </h2>
 			<Link to={`/publishers/${track.publisher.id}`}>
-				{" "}<h3> by {track.publisher.name} </h3>{" "}
+				<h3 className="clickable-banner-metadata">{track.publisher.name} </h3>{' '}
 			</Link>
 
 			<div className="artwork-wrapper">
 				<img src={trackImageUrl} className="artwork-icon" />
 				<img
-					onClick={() => handleTrackClick(track.id, "play")}
+					onClick={() => handleTrackClick(track.id, 'play')}
 					src={playIcon}
 					className="artwork-play"
 				/>

@@ -17,6 +17,25 @@ body {
 	}
 }
 
+.clickable-banner-metadata {
+	color: darkslategray;
+	text-decoration: underline;
+	color: darkslategray;
+	text-decoration: underline;
+	display: flex;
+
+	.tiny-avatar-container {
+		width: 20px;
+		margin-right: .5em;
+
+		img {
+			width: 100%;
+			height: auto;
+		}
+
+	}
+}
+
 .user-home {
 	a {
 		color: black;
@@ -233,7 +252,7 @@ body {
 			.track-top-details {
 				font-size: 12px;
 				text-decoration: none;
-				
+
 				.track-name {
 			    font-weight: 700;
 				}

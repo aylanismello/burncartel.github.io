@@ -11,6 +11,19 @@ body {
   .feed-banner .Dropdown-root {
     width: auto; }
 
+.clickable-banner-metadata {
+  color: darkslategray;
+  text-decoration: underline;
+  color: darkslategray;
+  text-decoration: underline;
+  display: flex; }
+  .clickable-banner-metadata .tiny-avatar-container {
+    width: 20px;
+    margin-right: .5em; }
+    .clickable-banner-metadata .tiny-avatar-container img {
+      width: 100%;
+      height: auto; }
+
 .user-home a {
   color: black;
   text-decoration: none; }
