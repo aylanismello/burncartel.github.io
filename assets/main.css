@@ -11,19 +11,6 @@ body {
   .feed-banner .Dropdown-root {
     width: auto; }
 
-.clickable-banner-metadata {
-  color: darkslategray;
-  text-decoration: underline;
-  color: darkslategray;
-  text-decoration: underline;
-  display: flex; }
-  .clickable-banner-metadata .tiny-avatar-container {
-    width: 20px;
-    margin-right: .5em; }
-    .clickable-banner-metadata .tiny-avatar-container img {
-      width: 100%;
-      height: auto; }
-
 .user-home a {
   color: black;
   text-decoration: none; }
@@ -38,7 +25,7 @@ body {
     text-align: center;
     justify-content: center;
     border: solid #d9534f 1px;
-    box-shadow: 0px 0px 3px 4px indianred;
+    box-shadow: 0px 0px 3px 4px palevioletred;
     min-height: 170px; }
 .user-home .user-home-banner {
   display: flex;
@@ -259,7 +246,7 @@ body {
     cursor: pointer; }
 
 .track-show .track-banner {
-  background: indianred;
+  background: palevioletred;
   border: 2px solid black;
   border-radius: 20px;
   padding: 1em;
@@ -268,13 +255,22 @@ body {
     color: white; }
   .track-show .track-banner .track-item-icon {
     margin-right: 2em; }
+  .track-show .track-banner .clickable-banner-metadata {
+    color: lightgreen;
+    text-decoration: underline;
+    display: flex; }
+    .track-show .track-banner .clickable-banner-metadata .tiny-avatar-container {
+      width: 20px;
+      margin-right: .5em; }
+      .track-show .track-banner .clickable-banner-metadata .tiny-avatar-container a {
+        color: lightgreen; }
+      .track-show .track-banner .clickable-banner-metadata .tiny-avatar-container img {
+        width: 100%;
+        height: auto; }
   .track-show .track-banner .track-banner-icons-container {
     display: flex;
     background: inherit;
     justify-content: flex-start; }
-
-.user-show .user-banner {
-  background: gray; }
 
 .nav-buttons {
   display: flex;
