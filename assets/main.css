@@ -169,6 +169,8 @@ body {
       .bc-menu .burn-cartel-player-container .burn-cartel-player .track-top-details {
         font-size: 12px;
         text-decoration: none; }
+        .bc-menu .burn-cartel-player-container .burn-cartel-player .track-top-details .track-name {
+          font-weight: 700; }
         .bc-menu .burn-cartel-player-container .burn-cartel-player .track-top-details a {
           color: inherit; }
       .bc-menu .burn-cartel-player-container .burn-cartel-player .burn-cartel-player-control {

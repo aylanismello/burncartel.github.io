@@ -26,7 +26,7 @@ body {
 		display: flex;
 		margin: 2em;
 		flex-grow: 2;
-		
+
 		.user-choice {
 			display: flex;
 	    flex-direction: column;
@@ -233,6 +233,10 @@ body {
 			.track-top-details {
 				font-size: 12px;
 				text-decoration: none;
+				
+				.track-name {
+			    font-weight: 700;
+				}
 
 				a {
 					color: inherit;

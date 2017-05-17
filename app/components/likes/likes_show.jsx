@@ -21,7 +21,6 @@ class LikesShow extends React.Component {
   render() {
     return (
       <div className="container user-show">
-        {/* <UserBanner user={user} /> */}
         <h2> Your 🔥 Likes 🎵 </h2>
         <FeedContainer />
       </div>
