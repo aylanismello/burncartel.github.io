@@ -49,10 +49,6 @@ const FeedReducer = (state = initialState, action) => {
 		case feedConstants.RECEIVE_FEED_METADATA:
 			const newMetadataState = _.cloneDeep(state);
 
-			if (!action.feedType) {
-				debugger;
-			}
-
 			newMetadataState[action.feedType.toUpperCase()] = action.metadata;
 			return newMetadataState;
 		case feedConstants.SET_LIKE_FEED_USER_ID:

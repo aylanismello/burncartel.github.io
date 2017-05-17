@@ -60,7 +60,6 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 				nextFeedType = action.filters.resource;
 			}
 
-			debugger;
 			if (feedType && feedType !== nextFeedType) {
 				dispatch(
 					receivePaginationData({

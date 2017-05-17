@@ -13,7 +13,6 @@ class CuratorShow extends React.Component {
 	}
 
 	render() {
-		debugger;
 		// if (this.props.loadingFeed && !this.props.tracksPage) {
 		if (this.props.loadingFeed) {
 			return <Loading />;
