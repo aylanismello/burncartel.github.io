@@ -17,6 +17,9 @@ const mapStateToProps = (state) => {
 	const tracksHash = getPlayingFeedTracksHash(state);
 	const track = tracksHash[state.feed.playingFeed.trackId];
 	const nextTrackId = getNextTrackId(state);
+	if(!nextTrackId) {
+		debugger;
+	}
 	const prevTrackId = getPrevTrackId(state);
 
 	const publisherId = (track === undefined ? "" : track.publisher_id);

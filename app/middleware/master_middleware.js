@@ -7,7 +7,7 @@ import UserMiddleware from './user_middleware';
 const myMiddlewares = [FeedMiddleware, PlayerMiddleware, UserMiddleware];
 
 if (process.env.NODE_ENV !== 'production') {
-	myMiddlewares.push(createLogger());
+	// myMiddlewares.push(createLogger());
 }
 
 const masterMiddleware = applyMiddleware(...myMiddlewares);

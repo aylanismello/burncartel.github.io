@@ -17,19 +17,31 @@ class BurnCartelPlayer extends React.Component {
 		this.playTrack = this.playTrack.bind(this);
 		this.scAudio = new SoundCloudAudio(props.clientId);
 		window.sc = this.scAudio;
-		this.secondsToMinutes = this.secondsToMinutes.bind(this);
 		this.track = null;
 		this.playIcon = null;
 
 		this.tapTimers = [];
 		this.isDoubleTap = false;
-
-		this.state = {
-			color: "black"
-		};
 	}
 
-	secondsToMinutes(seconds) {
+	componentWillReceiveProps(nextProps) {
+		// TRACK CHANGED
+		if (this.props.trackId !== nextProps.trackId) {
+			this.track = nextProps.track;
+			this.props.setTrackNotLoaded();
+			this.pauseTrack();
+
+			this.playAndLoadTrack();
+		} else if (this.props.playing !== nextProps.playing) {
+			if (!nextProps.playing) {
+				this.pauseTrack();
+			} else {
+				this.playTrack();
+			}
+		}
+	}
+
+	static secondsToMinutes(seconds) {
 		let timeStamp;
 		const secondsLeft = seconds % 60;
 		const minutesLeft = Math.floor(seconds / 60);
@@ -43,7 +55,14 @@ class BurnCartelPlayer extends React.Component {
 		return timeStamp;
 	}
 
+	static isPlaying(src) {
+		return src.currentTime > 0 && !src.paused && !src.ended
+			 && src.readyState > 2;
+	}
+
 	playAndLoadTrack() {
+		const isPlaying = BurnCartelPlayer.isPlaying(this.scAudio.audio);
+		debugger;
 		this.playTrack();
 
 		let currentTime = 0;
@@ -61,10 +80,16 @@ class BurnCartelPlayer extends React.Component {
 			// how many seconds in?
 		});
 
+
+		// why is this being called twice on the same track??
 		this.scAudio.on("ended", () => {
+			debugger;
 			if (this.props.nextTrackId) {
+				debugger;
+				this.scAudio.removeEventListener('ended');
 				this.props.updateTrackId(this.props.nextTrackId);
 			} else {
+				debugger;
 				console.log("out of tracks.. must paginate!");
 			}
 			// maybe here we send a post request to increment play count of
@@ -76,7 +101,7 @@ class BurnCartelPlayer extends React.Component {
 		if (this.props.nextTrackId) {
 			this.props.updateTrackId(this.props.nextTrackId);
 		} else {
-			console.log("out of tracks.. must paginate!");
+			console.log("out of tracks in player.. must paginate or end of feed!");
 		}
 	}
 
@@ -94,21 +119,6 @@ class BurnCartelPlayer extends React.Component {
 
 	playTrack() {
 		this.scAudio.play({ streamUrl: this.track.stream_url });
-	}
-
-	componentWillReceiveProps(nextProps) {
-		// TRACK CHANGED
-		if (this.props.trackId !== nextProps.trackId) {
-			this.track = nextProps.track;
-			this.props.setTrackNotLoaded();
-			this.playAndLoadTrack();
-		} else if (this.props.playing !== nextProps.playing) {
-			if (!nextProps.playing) {
-				this.pauseTrack();
-			} else {
-				this.playTrack();
-			}
-		}
 	}
 
 	toggle() {
@@ -168,7 +178,7 @@ class BurnCartelPlayer extends React.Component {
               Playing from {this.props.feedName.toUpperCase()} feed
             </div> */}
 					{/* <div>
-              {this.secondsToMinutes(this.props.currentTime)}
+              {BurnCartelPlayer.secondsToMinutes(this.props.currentTime)}
             </div> */}
 				</div>
 			);

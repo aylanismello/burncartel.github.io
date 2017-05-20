@@ -50,7 +50,7 @@ export const getNextTrackId = createSelector(
 		for(const track of tracks) {
 			if(track.id === trackId) {
 				if ((trackIdx + 1) >= tracks.length) {
-					console.log('we have reached end of feed. paginate.');
+					console.log('no more tracks in getNextTrackId / track_selector.js.');
 				} else {
 					return (tracks[trackIdx + 1].id);
 				}
