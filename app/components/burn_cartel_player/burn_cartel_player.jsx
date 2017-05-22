@@ -1,46 +1,14 @@
 // https://github.com/voronianski/soundcloud-audio.js
-import React from "react";
-import Hammer from "react-hammerjs";
-import { Link } from "react-router-dom";
-import SoundCloudAudio from "soundcloud-audio";
-import * as FontAwesome from "react-icons/lib/fa/";
-import FireLike from "../likes/fire_like";
+import React from 'react';
+import Hammer from 'react-hammerjs';
+import { Link } from 'react-router-dom';
+import SoundCloudAudio from 'soundcloud-audio';
+import * as FontAwesome from 'react-icons/lib/fa/';
+import FireLike from '../likes/fire_like';
 
+
+// BUG ONLY HAPPENS WHEN SWITCHING FE
 class BurnCartelPlayer extends React.Component {
-	constructor(props) {
-		super(props);
-		this.toggle = this.toggle.bind(this);
-		this.goToNextTrack = this.goToNextTrack.bind(this);
-		this.goToPrevTrack = this.goToPrevTrack.bind(this);
-		this.playAndLoadTrack = this.playAndLoadTrack.bind(this);
-		this.pauseTrack = this.pauseTrack.bind(this);
-		this.playTrack = this.playTrack.bind(this);
-		this.scAudio = new SoundCloudAudio(props.clientId);
-		window.sc = this.scAudio;
-		this.track = null;
-		this.playIcon = null;
-
-		this.tapTimers = [];
-		this.isDoubleTap = false;
-	}
-
-	componentWillReceiveProps(nextProps) {
-		// TRACK CHANGED
-		if (this.props.trackId !== nextProps.trackId) {
-			this.track = nextProps.track;
-			this.props.setTrackNotLoaded();
-			this.pauseTrack();
-
-			this.playAndLoadTrack();
-		} else if (this.props.playing !== nextProps.playing) {
-			if (!nextProps.playing) {
-				this.pauseTrack();
-			} else {
-				this.playTrack();
-			}
-		}
-	}
-
 	static secondsToMinutes(seconds) {
 		let timeStamp;
 		const secondsLeft = seconds % 60;
@@ -56,52 +24,87 @@ class BurnCartelPlayer extends React.Component {
 	}
 
 	static isPlaying(src) {
-		return src.currentTime > 0 && !src.paused && !src.ended
-			 && src.readyState > 2;
+		return (
+			src.currentTime > 0 && !src.paused && !src.ended && src.readyState > 2
+		);
+	}
+
+	constructor(props) {
+		super(props);
+		this.toggle = this.toggle.bind(this);
+		this.goToNextTrack = this.goToNextTrack.bind(this);
+		this.goToPrevTrack = this.goToPrevTrack.bind(this);
+		this.playAndLoadTrack = this.playAndLoadTrack.bind(this);
+		this.pauseTrack = this.pauseTrack.bind(this);
+		this.playTrack = this.playTrack.bind(this);
+		this.onTrackEnd = this.onTrackEnd.bind(this);
+		this.scAudio = new SoundCloudAudio(props.clientId);
+		window.sc = this.scAudio;
+		this.track = null;
+		this.playIcon = null;
+
+		this.tapTimers = [];
+		this.isDoubleTap = false;
+	}
+
+	componentWillReceiveProps(nextProps) {
+		// TRACK CHANGED
+		if (this.props.trackId !== nextProps.trackId) {
+			if (this.props.feedName !== nextProps.feedName) {
+				this.scAudio.audio.removeEventListener('ended', this.onTrackEnd, false);
+			}
+
+			this.track = nextProps.track;
+			this.props.setTrackNotLoaded();
+			this.pauseTrack();
+
+			this.playAndLoadTrack();
+			// TRACK PAUSE
+		} else if (this.props.playing !== nextProps.playing) {
+			if (!nextProps.playing) {
+				this.pauseTrack();
+			} else {
+				this.playTrack();
+			}
+		}
 	}
 
 	playAndLoadTrack() {
 		const isPlaying = BurnCartelPlayer.isPlaying(this.scAudio.audio);
-		debugger;
 		this.playTrack();
 
 		let currentTime = 0;
 
-		this.scAudio.on("timeupdate", () => {
+		this.scAudio.audio.addEventListener('timeupdate', () => {
 			if (!this.props.trackLoaded && this.scAudio.audio.currentTime > 0) {
 				this.props.setTrackLoaded();
 			}
 
 			if (this.scAudio.audio.currentTime - currentTime > 1) {
 				currentTime++;
+
 				this.props.updateCurrentTime(currentTime);
 			}
-			// what constitutes a play?
-			// how many seconds in?
 		});
-
 
 		// why is this being called twice on the same track??
-		this.scAudio.on("ended", () => {
-			debugger;
-			if (this.props.nextTrackId) {
-				debugger;
-				this.scAudio.removeEventListener('ended');
-				this.props.updateTrackId(this.props.nextTrackId);
-			} else {
-				debugger;
-				console.log("out of tracks.. must paginate!");
-			}
-			// maybe here we send a post request to increment play count of
-			// this track and add to user's history
-		});
+		this.scAudio.audio.addEventListener('ended', this.onTrackEnd, false);
+	}
+
+	onTrackEnd() {
+		this.scAudio.audio.removeEventListener('ended', this.onTrackEnd, false);
+		if (this.props.nextTrackId) {
+			this.props.updateTrackId(this.props.nextTrackId);
+		} else {
+			console.log('out of tracks.. must paginate!');
+		}
 	}
 
 	goToNextTrack() {
 		if (this.props.nextTrackId) {
 			this.props.updateTrackId(this.props.nextTrackId);
 		} else {
-			console.log("out of tracks in player.. must paginate or end of feed!");
+			console.log('out of tracks in player.. must paginate or end of feed!');
 		}
 	}
 
@@ -109,7 +112,7 @@ class BurnCartelPlayer extends React.Component {
 		if (this.props.prevTrackId) {
 			this.props.updateTrackId(this.props.prevTrackId);
 		} else {
-			console.log("no prev track found in player");
+			console.log('no prev track found in player');
 		}
 	}
 
@@ -204,9 +207,9 @@ class BurnCartelPlayer extends React.Component {
 
 			const isLikedByUser = userLikes[trackId] === undefined ? false : true;
 
-			let playerColor = "";
+			let playerColor = '';
 			if (isLikedByUser) {
-				playerColor = "#ff9000";
+				playerColor = '#ff9000';
 			}
 
 			const tapInterval = 450;
