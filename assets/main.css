@@ -25,7 +25,7 @@ body {
     text-align: center;
     justify-content: center;
     border: solid #d9534f 1px;
-    box-shadow: 0px 0px 3px 4px #4CA6FF;
+    box-shadow: 0px 0px 3px 4px #2e3740;
     min-height: 170px; }
 .user-home .user-home-banner {
   display: flex;
@@ -246,7 +246,7 @@ body {
     cursor: pointer; }
 
 .track-show .track-banner {
-  background: #4CA6FF;
+  background: #2e3740;
   border: 2px solid black;
   border-radius: 20px;
   padding: 1em;
