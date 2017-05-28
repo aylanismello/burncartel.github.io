@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Quicksand:400,700');
+@import 'util';
 $banner-background-color: #2e3740;
 
 body {
@@ -207,16 +208,26 @@ body {
 		cursor: pointer;
 	}
 
-	.burn-cartel-player-container {
+	.burn-cartel-player-container.desktop {
+		.burn-cartel-player {
+			@include flexin();
+			.burn-cartel-player-details {
+				@include flexin();
+			}
+
+			.burn-cartel-player-control {
+				@include flexin();
+			}
+		}
+	}
+
+	.burn-cartel-player-container.mobile {
 		border-bottom: 2px solid #1E2021;
 		margin-bottom: .2em;
 		padding: .2em .6em;
 
 		.burn-cartel-player {
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-			text-align: center;
+			@include flexin();
 
 			.burn-cartel-player-details {
 				flex: 1;

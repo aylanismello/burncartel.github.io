@@ -1,12 +1,12 @@
 // https://github.com/voronianski/soundcloud-audio.js
 import React from 'react';
-import Hammer from 'react-hammerjs';
 import { Link } from 'react-router-dom';
 import SoundCloudAudio from 'soundcloud-audio';
+import MediaQuery from 'react-responsive';
 import * as FontAwesome from 'react-icons/lib/fa/';
 import FireLike from '../likes/fire_like';
 import MobilePlayer from './mobile_player';
-
+import DesktopPlayer from './desktop_player';
 
 // BUG ONLY HAPPENS WHEN SWITCHING FE
 class BurnCartelPlayer extends React.Component {
@@ -213,58 +213,30 @@ class BurnCartelPlayer extends React.Component {
 				goToPrevTrack: this.goToPrevTrack,
 				likeUnlikeTrack,
 				isLoggedIn,
+				likePostInProgress,
 				playIcon: this.playIcon,
 				track: this.track,
-				details
-			}
+				details,
+				toggle: this.toggle,
+				trackId,
+				isLikedByUser
+			};
+
+			const moreProps = {
+				loginFB,
+				repeating: false
+			};
+
+			const desktopProps = { ...mobileProps, ...moreProps };
 
 			return (
-				<div
-					className="burn-cartel-player-container"
-					style={{ background: playerColor }}
-				>
-
-					<div className="burn-cartel-player">
+				<div>
+					<MediaQuery query="(max-device-width: 450px)">
 						<MobilePlayer {...mobileProps} />
-
-						<div className="burn-cartel-player-control">
-
-							{/* <FireLike
-                isLoggedIn={isLoggedIn}
-                loginFB={loginFB}
-                likePostInProgress={likePostInProgress}
-                likeUnlikeTrack={likeUnlikeTrack}
-                isLikedByUser={userLikes[trackId] === undefined ? false : true }
-                trackId={trackId}
-                size={30}
-              /> */}
-
-							{/* <FontAwesome.FaStepBackward
-                size={40}
-                color='aliceblue'
-                className='bc-icon'/> */}
-
-							<div onClick={this.toggle}>
-								{this.playIcon}
-							</div>
-
-							{/* <FontAwesome.FaStepForward
-                  size={40}
-                  color='aliceblue'
-                  className='bc-icon'
-                  onClick={this.goToNextTrack}
-                /> */}
-
-							{/* <div onClick={this.props.toggleRepeat}>
-                    <FontAwesome.FaRepeat
-                    size={40}
-                    color={this.props.repeating? 'green' : 'red'}
-                    className='bc-icon'/>
-                  </div> */}
-
-						</div>
-					</div>
-
+					</MediaQuery>
+					<MediaQuery query="(min-device-width: 451px)">
+						<DesktopPlayer {...desktopProps} />
+					</MediaQuery>
 				</div>
 			);
 		} else {
