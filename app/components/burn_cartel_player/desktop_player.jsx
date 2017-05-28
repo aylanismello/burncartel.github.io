@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom';
 import * as FontAwesome from 'react-icons/lib/fa/';
 import FireLike from '../likes/fire_like';
 
-const DesktopPlayer = props => {
+const DesktopPlayer = (props) => {
 	return (
 		<div className="burn-cartel-player-container desktop">
 			<div className="burn-cartel-player">
 
-				<div className="burn-cartel-player-details">
-					{props.details}
+				<div className="burn-cartel-player-details-container">
+					{props.children}
 					<FireLike
 						isLoggedIn={props.isLoggedIn}
 						loginFB={props.loginFB}

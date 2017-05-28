@@ -146,23 +146,48 @@ body {
 .bc-menu {
   display: block;
   padding: 0; }
-  .bc-menu:hover {
-    cursor: pointer; }
-  .bc-menu .burn-cartel-player-container.desktop .burn-cartel-player {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    text-align: center; }
-    .bc-menu .burn-cartel-player-container.desktop .burn-cartel-player .burn-cartel-player-details {
+  .bc-menu .burn-cartel-player-container.desktop {
+    padding: .2em .8em; }
+    .bc-menu .burn-cartel-player-container.desktop .burn-cartel-player {
       display: flex;
       justify-content: space-between;
       align-items: center;
       text-align: center; }
-    .bc-menu .burn-cartel-player-container.desktop .burn-cartel-player .burn-cartel-player-control {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      text-align: center; }
+      .bc-menu .burn-cartel-player-container.desktop .burn-cartel-player .burn-cartel-player-details-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-align: center;
+        height: 85px; }
+        .bc-menu .burn-cartel-player-container.desktop .burn-cartel-player .burn-cartel-player-details-container .burn-cartel-player-details {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          text-align: center; }
+          .bc-menu .burn-cartel-player-container.desktop .burn-cartel-player .burn-cartel-player-details-container .burn-cartel-player-details .track-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center; }
+            .bc-menu .burn-cartel-player-container.desktop .burn-cartel-player .burn-cartel-player-details-container .burn-cartel-player-details .track-details .artwork-wrapper {
+              width: 75px; }
+              .bc-menu .burn-cartel-player-container.desktop .burn-cartel-player .burn-cartel-player-details-container .burn-cartel-player-details .track-details .artwork-wrapper img {
+                max-width: 100%;
+                height: auto; }
+            .bc-menu .burn-cartel-player-container.desktop .burn-cartel-player .burn-cartel-player-details-container .burn-cartel-player-details .track-details .track-details-text {
+              width: 150px; }
+              .bc-menu .burn-cartel-player-container.desktop .burn-cartel-player .burn-cartel-player-details-container .burn-cartel-player-details .track-details .track-details-text .track-name {
+                color: white; }
+              .bc-menu .burn-cartel-player-container.desktop .burn-cartel-player .burn-cartel-player-details-container .burn-cartel-player-details .track-details .track-details-text .track-artist {
+                color: whitesmoke; }
+        .bc-menu .burn-cartel-player-container.desktop .burn-cartel-player .burn-cartel-player-details-container .like-icon-container {
+          width: 20px;
+          height: 30px; }
+      .bc-menu .burn-cartel-player-container.desktop .burn-cartel-player .burn-cartel-player-control {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-align: center; }
   .bc-menu .burn-cartel-player-container.mobile {
     border-bottom: 2px solid #1E2021;
     margin-bottom: .2em;

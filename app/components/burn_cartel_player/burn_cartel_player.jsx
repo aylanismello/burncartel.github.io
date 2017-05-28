@@ -151,6 +151,8 @@ class BurnCartelPlayer extends React.Component {
 
 		let details = <div />;
 
+		const ready = this.track && this.props.trackLoaded;
+
 		if (this.track && this.props.trackLoaded) {
 			let trackName = this.track.name;
 			if (this.track.name.length > 17) {
@@ -236,13 +238,21 @@ class BurnCartelPlayer extends React.Component {
 						<MobilePlayer {...mobileProps}>
 							<TrackDetails
 								playIcon={this.playIcon}
-								details={details}
 								playerType="mobile"
+								ready={ready}
+								track={this.track}
 							/>
 						</MobilePlayer>
 					</MediaQuery>
 					<MediaQuery query="(min-device-width: 451px)">
-						<DesktopPlayer {...desktopProps} />
+						<DesktopPlayer {...desktopProps} >
+							<TrackDetails
+								playIcon={this.playIcon}
+								playerType="desktop"
+								ready={ready}
+								track={this.track}
+							/>
+						</DesktopPlayer>
 					</MediaQuery>
 				</div>
 			);

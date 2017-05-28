@@ -204,15 +204,44 @@ body {
 .bc-menu {
 	display: block;
 	padding: 0;
-	&:hover {
-		cursor: pointer;
-	}
+	// &:hover {
+	// 	cursor: pointer;
+	// }
 
 	.burn-cartel-player-container.desktop {
+		padding: .2em .8em;
 		.burn-cartel-player {
 			@include flexin();
-			.burn-cartel-player-details {
+			.burn-cartel-player-details-container {
 				@include flexin();
+				height: 85px;
+				.burn-cartel-player-details {
+					@include flexin();
+					.track-details {
+						@include flexin();
+						.artwork-wrapper {
+							width: 75px;
+							img {
+								max-width: 100%;
+								height: auto;
+							}
+						}
+						.track-details-text {
+							.track-name {
+								color: white;
+							}
+							.track-artist {
+								color: whitesmoke;
+							}
+							width: 150px;
+						}
+					}
+				}
+
+				.like-icon-container {
+					width: 20px;
+					height: 30px;
+				}
 			}
 
 			.burn-cartel-player-control {
