@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import SoundCloudAudio from 'soundcloud-audio';
 import * as FontAwesome from 'react-icons/lib/fa/';
 import FireLike from '../likes/fire_like';
+import MobilePlayer from './mobile_player';
 
 
 // BUG ONLY HAPPENS WHEN SWITCHING FE
@@ -207,13 +208,15 @@ class BurnCartelPlayer extends React.Component {
 
 			const isLikedByUser = userLikes[trackId] === undefined ? false : true;
 
-			let playerColor = '';
-			if (isLikedByUser) {
-				playerColor = '#ff9000';
+			const mobileProps = {
+				goToNextTrack: this.goToNextTrack,
+				goToPrevTrack: this.goToPrevTrack,
+				likeUnlikeTrack,
+				isLoggedIn,
+				playIcon: this.playIcon,
+				track: this.track,
+				details
 			}
-
-			const tapInterval = 450;
-			const tapIntervalDelta = 50;
 
 			return (
 				<div
@@ -222,63 +225,7 @@ class BurnCartelPlayer extends React.Component {
 				>
 
 					<div className="burn-cartel-player">
-
-						<Hammer
-							options={{
-								recognizers: {
-									swipe: {
-										threshold: 1
-									},
-									tap: {
-										taps: 1,
-										interval: tapInterval
-									}
-								}
-							}}
-							onTap={e => {
-								e.preventDefault();
-								const idx = this.tapTimers.length;
-
-								this.tapTimers.push(
-									setTimeout(() => {
-										if (!this.isDoubleTap) {
-											window.location = `#/tracks/${this.track.id}`;
-										} else {
-											if (idx !== 0) clearTimeout(this.tapTimers[idx + 1]);
-											this.isDoubleTap = false;
-										}
-									}, tapInterval + tapIntervalDelta)
-								);
-							}}
-							onDoubleTap={e => {
-								e.preventDefault();
-								this.isDoubleTap = true;
-								if (!isLoggedIn) {
-									// loginFB();
-								} else if (likePostInProgress) {
-									// assuming track has not already been liked
-									// console.log('wait for other like create/detroy action to finish!');
-								} else {
-									likeUnlikeTrack(trackId);
-								}
-							}}
-							onSwipe={e => {
-								if (e.direction === 2) {
-									this.goToNextTrack();
-								} else if (e.direction == 4) {
-									this.goToPrevTrack();
-								}
-							}}
-						>
-
-							<div className="burn-cartel-player-details">
-								<div className="dummy-icon">
-									{this.playIcon}
-								</div>
-								{details}
-							</div>
-
-						</Hammer>
+						<MobilePlayer {...mobileProps} />
 
 						<div className="burn-cartel-player-control">
 
