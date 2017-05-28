@@ -7,6 +7,7 @@ import * as FontAwesome from 'react-icons/lib/fa/';
 import FireLike from '../likes/fire_like';
 import MobilePlayer from './mobile_player';
 import DesktopPlayer from './desktop_player';
+import TrackDetails from './track_details';
 
 // BUG ONLY HAPPENS WHEN SWITCHING FE
 class BurnCartelPlayer extends React.Component {
@@ -232,7 +233,13 @@ class BurnCartelPlayer extends React.Component {
 			return (
 				<div>
 					<MediaQuery query="(max-device-width: 450px)">
-						<MobilePlayer {...mobileProps} />
+						<MobilePlayer {...mobileProps}>
+							<TrackDetails
+								playIcon={this.playIcon}
+								details={details}
+								playerType="mobile"
+							/>
+						</MobilePlayer>
 					</MediaQuery>
 					<MediaQuery query="(min-device-width: 451px)">
 						<DesktopPlayer {...desktopProps} />

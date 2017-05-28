@@ -4,7 +4,7 @@ import Hammer from 'react-hammerjs';
 const tapTimers = [];
 let isDoubleTap = false;
 
-const MobilePlayer = props => {
+const MobilePlayer = (props) => {
 	let playerColor = '';
 	if (props.isLikedByUser) {
 		playerColor = '#ff9000';
@@ -67,13 +67,7 @@ const MobilePlayer = props => {
 					}}
 				>
 
-					<div className="burn-cartel-player-details">
-						{/* THIS IS HERE AND INVISIBLE BECAUSE I SUCK AT SASS */}
-						<div className="dummy-icon">
-							{props.playIcon}
-						</div>
-						{props.details}
-					</div>
+				{props.children}
 
 				</Hammer>
 				<div className="burn-cartel-player-control">
