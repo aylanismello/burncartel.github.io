@@ -47,6 +47,9 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 			}
 			return next(action);
 		case feedConstants.FETCH_OLD_FEED:
+			// if filters.page is undefined, we are NOT paginating
+			// fix this plz to page defaults to 1
+
 			if (!action.filters.page) {
 				dispatch(resetTracks());
 				dispatch(receiveFeed(getState().feed.USER));
@@ -55,18 +58,34 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 				getFeed(
 					action.filters.resource,
 					action.filters,
-					(feed) => {
+					feed => {
 						dispatch(receivePaginationData(feed));
-						dispatch(receiveTracks(feed.sorted_serialized_tracks))
-						feed.sorted_serialized_tracks = [...getState().feed.USER.sorted_serialized_tracks, ...feed.sorted_serialized_tracks];
-						dispatch(receiveFeedMetadata(getState().feed.feedType, feed))
+						dispatch(receiveTracks(feed.sorted_serialized_tracks));
+						feed.sorted_serialized_tracks = [
+							...getState().feed.USER.sorted_serialized_tracks,
+							...feed.sorted_serialized_tracks
+						];
+						dispatch(receiveFeedMetadata(getState().feed.feedType, feed));
 						dispatch(loadingStop());
 					},
-					(error) => {
+					error => {
 						console.log(`ERROR FETCHING TRACKS: got ${error}`);
 					}
 				);
 			}
+			return next(action);
+		case feedConstants.RESET_PERSONAL_FEED:
+			// SO HACKY, but how else to make sure that the personal feed
+			// updates several times in a row after reset has already been
+			// switched false -> true ??
+			dispatch(
+				updateFilters({
+					resource: 'user_feed',
+					reset: true,
+					id: getState().user.currentUser.id,
+					dopenessLevel: Math.random()
+				})
+			);
 			return next(action);
 		case feedConstants.FETCH_FEED:
 			let nextFeedType, sortType;
@@ -100,18 +119,19 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 				);
 			}
 
-
 			prevSortType = sortType;
 
 			dispatch(setFeedType(nextFeedType));
 			dispatch(loadingStart());
 
-			if (nextFeedType === 'USER' && getState().feed.USER.sorted_serialized_tracks) {
-				// if filters.page is undefined, we are NOT paginating
-				// fix this plz to page defaults to 1
+			debugger;
+			if (
+				nextFeedType === 'USER' &&
+				getState().feed.USER.sorted_serialized_tracks &&
+				!action.filters.reset
+			) {
 				dispatch(fetchOldFeed(action.filters));
 				return next(action);
-				// assume we are NOT paginating
 			}
 
 			getFeed(

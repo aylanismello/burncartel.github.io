@@ -20,9 +20,13 @@ export const feedConstants = {
 	RECEIVE_FEED_METADATA: 'RECEIVE_FEED_METADATA',
 	RECEIVE_FEED: 'RECEIVE_FEED',
 	RECEIVE_PAGINATION_DATA: 'RECEIVE_PAGINATION_DATA',
-	FETCH_OLD_FEED: 'FETCH_OLD_FEED'
+	FETCH_OLD_FEED: 'FETCH_OLD_FEED',
+	RESET_PERSONAL_FEED: 'RESET_PERSONAL_FEED'
 };
 
+export const resetPersonalFeed = () => ({
+	type: feedConstants.RESET_PERSONAL_FEED
+});
 
 export const receivePaginationData = ({last_tracks_page,
 	next_tracks_page, tracks_page }) => ({
