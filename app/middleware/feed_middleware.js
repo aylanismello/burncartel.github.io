@@ -14,7 +14,8 @@ import {
 	receiveFeedMetadata,
 	setFeedType,
 	updateFilters,
-	receivePaginationData
+	receivePaginationData,
+	fetchOldFeed
 } from '../actions/feed_actions';
 import { togglePlay } from '../actions/player_actions';
 import { getFeedTracksHash } from '../selectors/track_selector';
@@ -42,6 +43,28 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 				dispatch(receiveTracks(action.feed));
 				dispatch(
 					receiveFeedMetadata(getState().feed.feedType, { cool: 'this guy' })
+				);
+			}
+			return next(action);
+		case feedConstants.FETCH_OLD_FEED:
+			if (!action.filters.page) {
+				dispatch(resetTracks());
+				dispatch(receiveFeed(getState().feed.USER));
+				dispatch(loadingStop());
+			} else {
+				getFeed(
+					action.filters.resource,
+					action.filters,
+					(feed) => {
+						dispatch(receivePaginationData(feed));
+						dispatch(receiveTracks(feed.sorted_serialized_tracks))
+						feed.sorted_serialized_tracks = [...getState().feed.USER.sorted_serialized_tracks, ...feed.sorted_serialized_tracks];
+						dispatch(receiveFeedMetadata(getState().feed.feedType, feed))
+						dispatch(loadingStop());
+					},
+					(error) => {
+						console.log(`ERROR FETCHING TRACKS: got ${error}`);
+					}
 				);
 			}
 			return next(action);
@@ -86,26 +109,7 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 			if (nextFeedType === 'USER' && getState().feed.USER.sorted_serialized_tracks) {
 				// if filters.page is undefined, we are NOT paginating
 				// fix this plz to page defaults to 1
-				if (!action.filters.page) {
-					dispatch(resetTracks());
-					dispatch(receiveFeed(getState().feed.USER));
-					dispatch(loadingStop());
-				} else {
-					getFeed(
-						action.filters.resource,
-						action.filters,
-						(feed) => {
-							dispatch(receivePaginationData(feed));
-							dispatch(receiveTracks(feed.sorted_serialized_tracks))
-							feed.sorted_serialized_tracks = [...getState().feed.USER.sorted_serialized_tracks, ...feed.sorted_serialized_tracks];
-							dispatch(receiveFeedMetadata(getState().feed.feedType, feed))
-							dispatch(loadingStop());
-						},
-						(error) => {
-							console.log(`ERROR FETCHING TRACKS: got ${error}`);
-						}
-					);
-				}
+				dispatch(fetchOldFeed(action.filters));
 				return next(action);
 				// assume we are NOT paginating
 			}
