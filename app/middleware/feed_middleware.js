@@ -60,7 +60,14 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 				nextFeedType = action.filters.resource;
 			}
 
-			if (feedType && feedType !== nextFeedType) {
+			const isNewPageLoad = feedType && feedType !== nextFeedType;
+			const isNewFireFeedFilter =
+				feedType &&
+				feedType === 'FIRE' &&
+				sortType &&
+				sortType !== prevSortType;
+
+			if (isNewPageLoad || isNewFireFeedFilter) {
 				dispatch(
 					receivePaginationData({
 						last_tracks_page: null,
@@ -71,20 +78,20 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 			}
 
 			// OMG SO HACKY. WITH THE CLOSURE AND EVERYTHNG L0Lz
-			if (
-				feedType &&
-				feedType === 'FIRE' &&
-				sortType &&
-				sortType !== prevSortType
-			) {
-				dispatch(
-					receivePaginationData({
-						last_tracks_page: null,
-						next_tracks_page: null,
-						tracks_page: null
-					})
-				);
-			}
+			// if (
+			// 	feedType &&
+			// 	feedType === 'FIRE' &&
+			// 	sortType &&
+			// 	sortType !== prevSortType
+			// ) {
+			// 	dispatch(
+			// 		receivePaginationData({
+			// 			last_tracks_page: null,
+			// 			next_tracks_page: null,
+			// 			tracks_page: null
+			// 		})
+			// 	);
+			// }
 
 			prevSortType = sortType;
 
@@ -95,7 +102,6 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 				action.filters.resource,
 				action.filters,
 				feed => {
-
 					if (action.filters.resource === 'tracks' && action.filters.id) {
 						dispatch(receiveFeed([feed]));
 						dispatch(loadingStop());
@@ -112,11 +118,7 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 			return next(action);
 
 		case feedConstants.PAGINATE_TRACKS:
-			const {
-				last_tracks_page,
-				next_tracks_page,
-				tracks_page
-			} = getState().feed.pagination;
+			const { next_tracks_page } = getState().feed.pagination;
 			dispatch(
 				updateFilters({ ...getState().feed.filters, page: next_tracks_page })
 			);
