@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Quicksand:400,700');
+@import 'util';
 $banner-background-color: #2e3740;
+$sidebar-width: 170px;
 
 body {
 	background: whitesmoke;
@@ -17,6 +19,49 @@ body {
 	}
 }
 
+
+.side-nav-container {
+	height: 100%; /* 100% Full-height */
+	width: $sidebar-width; /* 0 width - change this with JavaScript */
+	position: fixed; /* Stay in place */
+	z-index: 100000; /* Stay on top */
+	top: 0;
+	left: 0;
+	background-color: #292b2c; /* Black*/
+	overflow-x: hidden; /* Disable horizontal scroll */
+	padding-top: 60px; /* Place content 60px from the top */
+
+	.side-nav {
+		.side-nav-item {
+			@include flexin();
+			justify-content: center;
+			width: 140px;
+			text-align: left;
+			height: 50px;
+	    margin-bottom: 20px;
+	    margin-left: 10px;
+
+			.side-nav-item-caption {
+				color: white;
+				text-decoration: none;
+				font-size: 16px;
+			}
+
+			&:hover {
+				cursor: pointer;
+			}
+
+			.logged-in-user-avatar-container {
+				width: 40px;
+				img {
+					width: 100%;
+					height: auto;
+				}
+			}
+		}
+	}
+	// transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+}
 
 
 .user-home {
@@ -203,20 +248,65 @@ body {
 .bc-menu {
 	display: block;
 	padding: 0;
-	&:hover {
-		cursor: pointer;
+	z-index: 200000;
+	// &:hover {
+	// 	cursor: pointer;
+	// }
+
+	.burn-cartel-player-container.desktop {
+		padding: .2em .8em;
+    border-top: 1px solid black;
+		.burn-cartel-player {
+			@include flexin();
+			.burn-cartel-player-details-container {
+				@include flexin();
+				height: 85px;
+				width: 245px;
+				.burn-cartel-player-details {
+					@include flexin();
+					.track-details {
+						@include flexin();
+						.artwork-wrapper {
+							width: 75px;
+							img {
+								max-width: 100%;
+								height: auto;
+							}
+						}
+						.track-details-text {
+							text-align: left;
+							padding: 10px;
+							.track-name {
+								color: white;
+							}
+							.track-artist {
+								color: whitesmoke;
+								font-size: 12px;
+							}
+							width: 150px;
+						}
+					}
+				}
+
+				.like-icon-container {
+					width: 20px;
+					height: 30px;
+				}
+			}
+
+			.burn-cartel-player-control {
+				@include flexin();
+			}
+		}
 	}
 
-	.burn-cartel-player-container {
+	.burn-cartel-player-container.mobile {
 		border-bottom: 2px solid #1E2021;
 		margin-bottom: .2em;
 		padding: .2em .6em;
 
 		.burn-cartel-player {
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-			text-align: center;
+			@include flexin();
 
 			.burn-cartel-player-details {
 				flex: 1;
@@ -419,3 +509,31 @@ body {
 	width: 100%;
 	align-items: center;
 }
+
+@media screen and (min-width:451px) /* Desktop */ {
+  .container {
+		left: 100px;
+  }
+	.user-home .user-home-content {
+		display: block;
+	}
+
+	.help-page {
+		position: absolute;
+		left: 180px;
+	}
+	.login-logout-container {
+		.login-logout-button {
+			color: black;
+		}
+	}
+
+	.desktop {
+		background: #292b2c
+	}
+	.bg-inverse {
+		background-color: white!important;
+	}
+}
+
+// OVERWRITE BOOTSTRAP

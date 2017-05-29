@@ -52,6 +52,11 @@ class UserFeedShow extends React.Component {
 			return (
 				<div className="container user-show">
 					<h2> {name}'s 🔥 Feed 🎵 </h2>
+          <button
+            onClick={this.props.resetPersonalFeed}
+            >
+            Reset My Feed
+          </button>
 					<FeedContainer />
 				</div>
 			);

@@ -1,9 +1,10 @@
 import { connect } from 'react-redux';
 import {
 	updateFilters,
- 	setFeedType,
+	setFeedType,
 	setLikeFeedUserId,
-	receiveTracks
+	receiveTracks,
+	resetPersonalFeed
 } from '../../actions/feed_actions';
 import UserFeedShow from './user_feed_show';
 
@@ -18,7 +19,8 @@ const mapDispatchToProps = dispatch => ({
 	updateFilters: (filters) => dispatch(updateFilters(filters)),
 	setFeedType: (feedType) => dispatch(setFeedType(feedType)),
 	setLikeFeedUserId: (userId) => dispatch(setLikeFeedUserId(userId)),
-	receiveTracks: (tracks) => dispatch(receiveTracks(tracks))
+	receiveTracks: (tracks) => dispatch(receiveTracks(tracks)),
+	resetPersonalFeed: () => dispatch(resetPersonalFeed())
 });
 
 export default connect(

@@ -1,11 +1,13 @@
 // https://github.com/voronianski/soundcloud-audio.js
 import React from 'react';
-import Hammer from 'react-hammerjs';
 import { Link } from 'react-router-dom';
 import SoundCloudAudio from 'soundcloud-audio';
+import MediaQuery from 'react-responsive';
 import * as FontAwesome from 'react-icons/lib/fa/';
 import FireLike from '../likes/fire_like';
-
+import MobilePlayer from './mobile_player';
+import DesktopPlayer from './desktop_player';
+import TrackDetails from './track_details';
 
 // BUG ONLY HAPPENS WHEN SWITCHING FE
 class BurnCartelPlayer extends React.Component {
@@ -149,6 +151,8 @@ class BurnCartelPlayer extends React.Component {
 
 		let details = <div />;
 
+		const ready = this.track && this.props.trackLoaded;
+
 		if (this.track && this.props.trackLoaded) {
 			let trackName = this.track.name;
 			if (this.track.name.length > 17) {
@@ -207,117 +211,49 @@ class BurnCartelPlayer extends React.Component {
 
 			const isLikedByUser = userLikes[trackId] === undefined ? false : true;
 
-			let playerColor = '';
-			if (isLikedByUser) {
-				playerColor = '#ff9000';
-			}
+			const mobileProps = {
+				goToNextTrack: this.goToNextTrack,
+				goToPrevTrack: this.goToPrevTrack,
+				likeUnlikeTrack,
+				isLoggedIn,
+				likePostInProgress,
+				playIcon: this.playIcon,
+				track: this.track,
+				details,
+				toggle: this.toggle,
+				trackId,
+				isLikedByUser
+			};
 
-			const tapInterval = 450;
-			const tapIntervalDelta = 50;
+			const moreProps = {
+				loginFB,
+				repeating: false
+			};
+
+			const desktopProps = { ...mobileProps, ...moreProps };
 
 			return (
-				<div
-					className="burn-cartel-player-container"
-					style={{ background: playerColor }}
-				>
-
-					<div className="burn-cartel-player">
-
-						<Hammer
-							options={{
-								recognizers: {
-									swipe: {
-										threshold: 1
-									},
-									tap: {
-										taps: 1,
-										interval: tapInterval
-									}
-								}
-							}}
-							onTap={e => {
-								e.preventDefault();
-								const idx = this.tapTimers.length;
-
-								this.tapTimers.push(
-									setTimeout(() => {
-										if (!this.isDoubleTap) {
-											window.location = `#/tracks/${this.track.id}`;
-										} else {
-											if (idx !== 0) clearTimeout(this.tapTimers[idx + 1]);
-											this.isDoubleTap = false;
-										}
-									}, tapInterval + tapIntervalDelta)
-								);
-							}}
-							onDoubleTap={e => {
-								e.preventDefault();
-								this.isDoubleTap = true;
-								if (!isLoggedIn) {
-									// loginFB();
-								} else if (likePostInProgress) {
-									// assuming track has not already been liked
-									// console.log('wait for other like create/detroy action to finish!');
-								} else {
-									likeUnlikeTrack(trackId);
-								}
-							}}
-							onSwipe={e => {
-								if (e.direction === 2) {
-									this.goToNextTrack();
-								} else if (e.direction == 4) {
-									this.goToPrevTrack();
-								}
-							}}
-						>
-
-							<div className="burn-cartel-player-details">
-								<div className="dummy-icon">
-									{this.playIcon}
-								</div>
-								{details}
-							</div>
-
-						</Hammer>
-
-						<div className="burn-cartel-player-control">
-
-							{/* <FireLike
-                isLoggedIn={isLoggedIn}
-                loginFB={loginFB}
-                likePostInProgress={likePostInProgress}
-                likeUnlikeTrack={likeUnlikeTrack}
-                isLikedByUser={userLikes[trackId] === undefined ? false : true }
-                trackId={trackId}
-                size={30}
-              /> */}
-
-							{/* <FontAwesome.FaStepBackward
-                size={40}
-                color='aliceblue'
-                className='bc-icon'/> */}
-
-							<div onClick={this.toggle}>
-								{this.playIcon}
-							</div>
-
-							{/* <FontAwesome.FaStepForward
-                  size={40}
-                  color='aliceblue'
-                  className='bc-icon'
-                  onClick={this.goToNextTrack}
-                /> */}
-
-							{/* <div onClick={this.props.toggleRepeat}>
-                    <FontAwesome.FaRepeat
-                    size={40}
-                    color={this.props.repeating? 'green' : 'red'}
-                    className='bc-icon'/>
-                  </div> */}
-
-						</div>
-					</div>
-
+				<div>
+					<MediaQuery query="(max-device-width: 450px)">
+						<MobilePlayer {...mobileProps}>
+							<TrackDetails
+								playIcon={this.playIcon}
+								playerType="mobile"
+								ready={ready}
+								track={this.track}
+							/>
+						</MobilePlayer>
+					</MediaQuery>
+					<MediaQuery query="(min-device-width: 451px)">
+						<DesktopPlayer {...desktopProps} >
+							<TrackDetails
+								playIcon={this.playIcon}
+								playerType="desktop"
+								ready={ready}
+								track={this.track}
+							/>
+						</DesktopPlayer>
+					</MediaQuery>
 				</div>
 			);
 		} else {

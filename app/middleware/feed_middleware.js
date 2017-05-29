@@ -14,7 +14,8 @@ import {
 	receiveFeedMetadata,
 	setFeedType,
 	updateFilters,
-	receivePaginationData
+	receivePaginationData,
+	fetchOldFeed
 } from '../actions/feed_actions';
 import { togglePlay } from '../actions/player_actions';
 import { getFeedTracksHash } from '../selectors/track_selector';
@@ -34,7 +35,7 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 				}
 
 				dispatch(receiveTracks(action.feed.sorted_serialized_tracks));
-				delete action.feed.sorted_serialized_tracks;
+				// delete action.feed.sorted_serialized_tracks;
 				dispatch(receiveFeedMetadata(getState().feed.feedType, action.feed));
 			} else {
 				// if we have a single track
@@ -44,6 +45,47 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 					receiveFeedMetadata(getState().feed.feedType, { cool: 'this guy' })
 				);
 			}
+			return next(action);
+		case feedConstants.FETCH_OLD_FEED:
+			// if filters.page is undefined, we are NOT paginating
+			// fix this plz to page defaults to 1
+
+			if (!action.filters.page) {
+				dispatch(resetTracks());
+				dispatch(receiveFeed(getState().feed.USER));
+				dispatch(loadingStop());
+			} else {
+				getFeed(
+					action.filters.resource,
+					action.filters,
+					feed => {
+						dispatch(receivePaginationData(feed));
+						dispatch(receiveTracks(feed.sorted_serialized_tracks));
+						feed.sorted_serialized_tracks = [
+							...getState().feed.USER.sorted_serialized_tracks,
+							...feed.sorted_serialized_tracks
+						];
+						dispatch(receiveFeedMetadata(getState().feed.feedType, feed));
+						dispatch(loadingStop());
+					},
+					error => {
+						console.log(`ERROR FETCHING TRACKS: got ${error}`);
+					}
+				);
+			}
+			return next(action);
+		case feedConstants.RESET_PERSONAL_FEED:
+			// SO HACKY, but how else to make sure that the personal feed
+			// updates several times in a row after reset has already been
+			// switched false -> true ??
+			dispatch(
+				updateFilters({
+					resource: 'user_feed',
+					reset: true,
+					id: getState().user.currentUser.id,
+					dopenessLevel: Math.random()
+				})
+			);
 			return next(action);
 		case feedConstants.FETCH_FEED:
 			let nextFeedType, sortType;
@@ -60,23 +102,14 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 				nextFeedType = action.filters.resource;
 			}
 
-			if (feedType && feedType !== nextFeedType) {
-				dispatch(
-					receivePaginationData({
-						last_tracks_page: null,
-						next_tracks_page: null,
-						tracks_page: null
-					})
-				);
-			}
-
-			// OMG SO HACKY. WITH THE CLOSURE AND EVERYTHNG L0Lz
-			if (
+			const isNewPageLoad = feedType && feedType !== nextFeedType;
+			const isNewFireFeedFilter =
 				feedType &&
 				feedType === 'FIRE' &&
 				sortType &&
-				sortType !== prevSortType
-			) {
+				sortType !== prevSortType;
+
+			if (isNewPageLoad || isNewFireFeedFilter) {
 				dispatch(
 					receivePaginationData({
 						last_tracks_page: null,
@@ -91,11 +124,20 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 			dispatch(setFeedType(nextFeedType));
 			dispatch(loadingStart());
 
+			debugger;
+			if (
+				nextFeedType === 'USER' &&
+				getState().feed.USER.sorted_serialized_tracks &&
+				!action.filters.reset
+			) {
+				dispatch(fetchOldFeed(action.filters));
+				return next(action);
+			}
+
 			getFeed(
 				action.filters.resource,
 				action.filters,
 				feed => {
-
 					if (action.filters.resource === 'tracks' && action.filters.id) {
 						dispatch(receiveFeed([feed]));
 						dispatch(loadingStop());
@@ -112,11 +154,7 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 			return next(action);
 
 		case feedConstants.PAGINATE_TRACKS:
-			const {
-				last_tracks_page,
-				next_tracks_page,
-				tracks_page
-			} = getState().feed.pagination;
+			const { next_tracks_page } = getState().feed.pagination;
 			dispatch(
 				updateFilters({ ...getState().feed.filters, page: next_tracks_page })
 			);
