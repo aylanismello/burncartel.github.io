@@ -34,7 +34,7 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 				}
 
 				dispatch(receiveTracks(action.feed.sorted_serialized_tracks));
-				delete action.feed.sorted_serialized_tracks;
+				// delete action.feed.sorted_serialized_tracks;
 				dispatch(receiveFeedMetadata(getState().feed.feedType, action.feed));
 			} else {
 				// if we have a single track
@@ -77,26 +77,38 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 				);
 			}
 
-			// OMG SO HACKY. WITH THE CLOSURE AND EVERYTHNG L0Lz
-			// if (
-			// 	feedType &&
-			// 	feedType === 'FIRE' &&
-			// 	sortType &&
-			// 	sortType !== prevSortType
-			// ) {
-			// 	dispatch(
-			// 		receivePaginationData({
-			// 			last_tracks_page: null,
-			// 			next_tracks_page: null,
-			// 			tracks_page: null
-			// 		})
-			// 	);
-			// }
 
 			prevSortType = sortType;
 
 			dispatch(setFeedType(nextFeedType));
 			dispatch(loadingStart());
+
+			if (nextFeedType === 'USER' && getState().feed.USER.sorted_serialized_tracks) {
+				// if filters.page is undefined, we are NOT paginating
+				// fix this plz to page defaults to 1
+				if (!action.filters.page) {
+					dispatch(resetTracks());
+					dispatch(receiveFeed(getState().feed.USER));
+					dispatch(loadingStop());
+				} else {
+					getFeed(
+						action.filters.resource,
+						action.filters,
+						(feed) => {
+							dispatch(receivePaginationData(feed));
+							dispatch(receiveTracks(feed.sorted_serialized_tracks))
+							feed.sorted_serialized_tracks = [...getState().feed.USER.sorted_serialized_tracks, ...feed.sorted_serialized_tracks];
+							dispatch(receiveFeedMetadata(getState().feed.feedType, feed))
+							dispatch(loadingStop());
+						},
+						(error) => {
+							console.log(`ERROR FETCHING TRACKS: got ${error}`);
+						}
+					);
+				}
+				return next(action);
+				// assume we are NOT paginating
+			}
 
 			getFeed(
 				action.filters.resource,
