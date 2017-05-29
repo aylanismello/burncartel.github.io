@@ -37,7 +37,11 @@ class App extends React.Component {
 		return (
 			<div>
 				<MediaQuery query="(min-device-width: 451px)">
-					<SideNav />
+					<SideNav
+						trackUrl={this.props.trackUrl}
+						currentUserId={this.props.currentUser.id}
+						currentUserPhotoUrl={this.props.currentUser.photo_url}
+					/>
 				</MediaQuery>
 
 				<TopNav

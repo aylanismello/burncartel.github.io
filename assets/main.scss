@@ -30,6 +30,36 @@ body {
 	background-color: #292b2c; /* Black*/
 	overflow-x: hidden; /* Disable horizontal scroll */
 	padding-top: 60px; /* Place content 60px from the top */
+
+	.side-nav {
+		.side-nav-item {
+			@include flexin();
+			justify-content: center;
+			width: 140px;
+			text-align: left;
+			height: 50px;
+	    margin-bottom: 20px;
+	    margin-left: 10px;
+
+			.side-nav-item-caption {
+				color: white;
+				text-decoration: none;
+				font-size: 16px;
+			}
+
+			&:hover {
+				cursor: pointer;
+			}
+
+			.logged-in-user-avatar-container {
+				width: 40px;
+				img {
+					width: 100%;
+					height: auto;
+				}
+			}
+		}
+	}
 	// transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
 }
 
@@ -225,6 +255,7 @@ body {
 
 	.burn-cartel-player-container.desktop {
 		padding: .2em .8em;
+    border-top: 1px solid black;
 		.burn-cartel-player {
 			@include flexin();
 			.burn-cartel-player-details-container {
@@ -483,4 +514,26 @@ body {
   .container {
 		left: 100px;
   }
+	.user-home .user-home-content {
+		display: block;
+	}
+
+	.help-page {
+		position: absolute;
+		left: 180px;
+	}
+	.login-logout-container {
+		.login-logout-button {
+			color: black;
+		}
+	}
+
+	.desktop {
+		background: #292b2c
+	}
+	.bg-inverse {
+		background-color: white!important;
+	}
 }
+
+// OVERWRITE BOOTSTRAP

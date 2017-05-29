@@ -28,6 +28,28 @@ body {
   /* Disable horizontal scroll */
   padding-top: 60px;
   /* Place content 60px from the top */ }
+  .side-nav-container .side-nav .side-nav-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    width: 140px;
+    text-align: left;
+    height: 50px;
+    margin-bottom: 20px;
+    margin-left: 10px; }
+    .side-nav-container .side-nav .side-nav-item .side-nav-item-caption {
+      color: white;
+      text-decoration: none;
+      font-size: 16px; }
+    .side-nav-container .side-nav .side-nav-item:hover {
+      cursor: pointer; }
+    .side-nav-container .side-nav .side-nav-item .logged-in-user-avatar-container {
+      width: 40px; }
+      .side-nav-container .side-nav .side-nav-item .logged-in-user-avatar-container img {
+        width: 100%;
+        height: auto; }
 
 .user-home a {
   color: black;
@@ -166,7 +188,8 @@ body {
   padding: 0;
   z-index: 200000; }
   .bc-menu .burn-cartel-player-container.desktop {
-    padding: .2em .8em; }
+    padding: .2em .8em;
+    border-top: 1px solid black; }
     .bc-menu .burn-cartel-player-container.desktop .burn-cartel-player {
       display: flex;
       justify-content: space-between;
@@ -342,6 +365,22 @@ body {
 
 @media screen and (min-width: 451px) {
   .container {
-    left: 100px; } }
+    left: 100px; }
+
+  .user-home .user-home-content {
+    display: block; }
+
+  .help-page {
+    position: absolute;
+    left: 180px; }
+
+  .login-logout-container .login-logout-button {
+    color: black; }
+
+  .desktop {
+    background: #292b2c; }
+
+  .bg-inverse {
+    background-color: white !important; } }
 
 /*# sourceMappingURL=main.css.map */
