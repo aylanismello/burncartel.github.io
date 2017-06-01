@@ -124,7 +124,6 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 			dispatch(setFeedType(nextFeedType));
 			dispatch(loadingStart());
 
-			debugger;
 			if (
 				nextFeedType === 'USER' &&
 				getState().feed.USER.sorted_serialized_tracks &&
