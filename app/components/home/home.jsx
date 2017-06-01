@@ -57,15 +57,15 @@ class Home extends React.Component {
 			{ value: '/mix', label: 'Mixes' }
 		];
 
-		const value = options.filter(
-			option => option.value === this.props.location.pathname
-		)[0];
-
 		let hasRanking = true;
-
+		let value;
 		// make exceptional case for Burn Cartel Radio mode filter, this is a hack for now
-		if (value && value.value === '/bc') {
+		if (this.props.location.pathname === '/bc') {
 			hasRanking = false;
+		} else {
+			value = options.filter(
+				option => option.value === this.props.location.pathname
+			)[0];
 		}
 
 		return (
