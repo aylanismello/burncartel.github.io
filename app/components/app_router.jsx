@@ -29,6 +29,7 @@ const AppRouter = () => (
 				<Route exact path="/hot" component={HomeContainer} />
 				<Route exact path="/remix" component={HomeContainer} />
 				<Route exact path="/mix" component={HomeContainer} />
+				<Route exact path="/liked" component={HomeContainer} />
 				<Route exact path="/not" component={HomeContainer} />
 				<Route exact path="/latest" component={HomeContainer} />
 				<Route exact path="/help" component={Help} />
