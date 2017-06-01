@@ -97,24 +97,18 @@ class BurnCartelPlayer extends React.Component {
 		this.scAudio.audio.removeEventListener('ended', this.onTrackEnd, false);
 		if (this.props.nextTrackId) {
 			this.props.updateTrackId(this.props.nextTrackId);
-		} else {
-			console.log('out of tracks.. must paginate!');
 		}
 	}
 
 	goToNextTrack() {
 		if (this.props.nextTrackId) {
 			this.props.updateTrackId(this.props.nextTrackId);
-		} else {
-			console.log('out of tracks in player.. must paginate or end of feed!');
 		}
 	}
 
 	goToPrevTrack() {
 		if (this.props.prevTrackId) {
 			this.props.updateTrackId(this.props.prevTrackId);
-		} else {
-			console.log('no prev track found in player');
 		}
 	}
 
