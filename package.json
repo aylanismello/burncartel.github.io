@@ -11,7 +11,7 @@
     "start": "webpack --watch",
     "start-env": "webpack --progress --colors",
     "build": "webpack --config webpack.config.prod.js --progress -p",
-    "start-prod": "webpack --watch webpackconfig.prod.js"
+    "start-prod": "export NODE_ENV=production; webpack --watch"
   },
   "keywords": [],
   "author": "",
