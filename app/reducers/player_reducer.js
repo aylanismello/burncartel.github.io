@@ -9,19 +9,19 @@ const initialState = {
 };
 
 const PlayerReducer = (state = initialState, action) => {
-	switch(action.type) {
+	switch (action.type) {
 		case playerConstants.TOGGLE_PLAY:
-			return { ...state, playing: !state.playing }
+			return { ...state, playing: !state.playing };
 		case playerConstants.INIT_PLAYER:
-			return { ...state, playerInitialized: true }
+			return { ...state, playerInitialized: true };
 		case playerConstants.TOGGLE_REPEAT:
-			return { ...state, repeating: !state.repeating }
+			return { ...state, repeating: !state.repeating };
 		case playerConstants.SET_TRACK_LOADED:
-			return { ...state, trackLoaded: true }
+			return { ...state, trackLoaded: true };
 		case playerConstants.SET_TRACK_NOT_LOADED:
-			return { ...state, trackLoaded: false}
+			return { ...state, trackLoaded: false };
 		case playerConstants.UPDATE_CURRENT_TIME:
-			return { ...state, currentTime: action.currentTime }
+			return { ...state, currentTime: action.currentTime };
 		default:
 			return state;
 	}

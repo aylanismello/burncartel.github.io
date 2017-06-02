@@ -1,10 +1,8 @@
 // https://github.com/voronianski/soundcloud-audio.js
 import React from 'react';
-import { Link } from 'react-router-dom';
 import SoundCloudAudio from 'soundcloud-audio';
 import MediaQuery from 'react-responsive';
 import * as FontAwesome from 'react-icons/lib/fa/';
-import FireLike from '../likes/fire_like';
 import MobilePlayer from './mobile_player';
 import DesktopPlayer from './desktop_player';
 import TrackDetails from './track_details';
@@ -94,9 +92,14 @@ class BurnCartelPlayer extends React.Component {
 	}
 
 	onTrackEnd() {
-		this.scAudio.audio.removeEventListener('ended', this.onTrackEnd, false);
-		if (this.props.nextTrackId) {
-			this.props.updateTrackId(this.props.nextTrackId);
+		if (this.props.repeating) {
+			this.scAudio.audio.currentTime = 0;
+			this.scAudio.audio.play();
+		} else {
+			this.scAudio.audio.removeEventListener('ended', this.onTrackEnd, false);
+			if (this.props.nextTrackId) {
+				this.props.updateTrackId(this.props.nextTrackId);
+			}
 		}
 	}
 
@@ -158,8 +161,8 @@ class BurnCartelPlayer extends React.Component {
 					<div className="track-top-details">
 
 						{/* <Link
-                to={`/tracks/${this.track.id}`}
-              > */}
+		            to={`/tracks/${this.track.id}`}
+		          > */}
 						<span className="track-name">
 
 							{trackName}
@@ -167,8 +170,8 @@ class BurnCartelPlayer extends React.Component {
 						{/* </Link> */}
 						•
 						{/* <Link
-                to={`/publishers/${this.props.publisherId}`}
-              > */}
+		            to={`/publishers/${this.props.publisherId}`}
+		          > */}
 						<span className="track-artist">
 							{` ${this.track.publisher.name.slice(0, 15)} `}
 						</span>
@@ -176,11 +179,11 @@ class BurnCartelPlayer extends React.Component {
 
 					</div>
 					{/* <div>
-              Playing from {this.props.feedName.toUpperCase()} feed
-            </div> */}
+		          Playing from {this.props.feedName.toUpperCase()} feed
+		        </div> */}
 					{/* <div>
-              {BurnCartelPlayer.secondsToMinutes(this.props.currentTime)}
-            </div> */}
+		          {BurnCartelPlayer.secondsToMinutes(this.props.currentTime)}
+		        </div> */}
 				</div>
 			);
 		} else if (this.track && !this.props.trackLoaded) {
@@ -200,7 +203,9 @@ class BurnCartelPlayer extends React.Component {
 				numLikes,
 				trackId,
 				track,
-				userLikes
+				userLikes,
+				toggleRepeat,
+				repeating
 			} = this.props;
 
 			const isLikedByUser = userLikes[trackId] === undefined ? false : true;
@@ -221,7 +226,8 @@ class BurnCartelPlayer extends React.Component {
 
 			const moreProps = {
 				loginFB,
-				repeating: false
+				repeating,
+				toggleRepeat
 			};
 
 			const desktopProps = { ...mobileProps, ...moreProps };
@@ -239,7 +245,7 @@ class BurnCartelPlayer extends React.Component {
 						</MobilePlayer>
 					</MediaQuery>
 					<MediaQuery query="(min-device-width: 451px)">
-						<DesktopPlayer {...desktopProps} >
+						<DesktopPlayer {...desktopProps}>
 							<TrackDetails
 								playIcon={this.playIcon}
 								playerType="desktop"

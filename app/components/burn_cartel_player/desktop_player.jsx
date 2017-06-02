@@ -40,11 +40,12 @@ const DesktopPlayer = (props) => {
 						onClick={props.goToNextTrack}
 					/>
 
-					{/* <FontAwesome.FaRepeat
+					<FontAwesome.FaRepeat
 						size={40}
 						color={props.repeating ? '#0275d8' : 'white'}
 						className="bc-icon"
-					/> */}
+						onClick={props.toggleRepeat}
+					/>
 
 				</div>
 			</div>
