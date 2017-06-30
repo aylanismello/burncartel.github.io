@@ -5,7 +5,6 @@ import {
 	loadingStart,
 	loadingStop,
 	resetTracks,
-	updatePageTitle,
 	updateFocusedTrackId,
 	updatePlayingTrackId,
 	receivePlayingTracks,
@@ -164,9 +163,8 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 			if (action.clickType === 'play') {
 				if (getState().feed.playingFeed.trackId !== action.trackId) {
 					// change this to .real_name when that story is completed
-					const newTrackName = getFeedTracksHash(getState())[action.trackId]
-						.name;
-					dispatch(updatePageTitle(newTrackName));
+
+
 					dispatch(updatePlayingTrackId(action.trackId));
 
 					// here we copy over feed.focusedFeed to feed.playingFeed if they are not equal
@@ -221,9 +219,6 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 				dispatch(updateFocusedTrackId(action.trackId));
 			}
 
-			return next(action);
-		case feedConstants.UPDATE_PAGE_TITLE:
-			document.title = `${action.trackName} | Fire Feed`;
 			return next(action);
 		default:
 			return next(action);

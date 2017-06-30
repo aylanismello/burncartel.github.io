@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import SoundCloudAudio from 'soundcloud-audio';
 import MediaQuery from 'react-responsive';
 import * as FontAwesome from 'react-icons/lib/fa/';
-import FireLike from '../likes/fire_like';
 import MobilePlayer from './mobile_player';
 import DesktopPlayer from './desktop_player';
 import TrackDetails from './track_details';
@@ -118,6 +117,11 @@ class BurnCartelPlayer extends React.Component {
 
 	playTrack() {
 		this.scAudio.play({ streamUrl: this.track.stream_url });
+
+		const title = this.track.name.length > 10 ?
+			`${this.track.name.substr(0, 10)}...` : this.track.name;
+			
+		document.title = `${title} | Fire Feed`;
 	}
 
 	toggle() {

@@ -28,6 +28,7 @@ const AppRouter = () => (
 				<Route exact path="/bc" component={HomeContainer} />
 				<Route exact path="/hot" component={HomeContainer} />
 				<Route exact path="/remix" component={HomeContainer} />
+				<Route exact path="/bc_publishers" component={HomeContainer} />
 				<Route exact path="/mix" component={HomeContainer} />
 				<Route exact path="/liked" component={HomeContainer} />
 				<Route exact path="/not" component={HomeContainer} />

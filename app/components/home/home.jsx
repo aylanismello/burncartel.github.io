@@ -52,6 +52,7 @@ class Home extends React.Component {
 			{ value: '/', label: 'Popular' },
 			{ value: '/liked', label: 'Most Liked' },
 			{ value: '/latest', label: 'Latest' },
+			{ value: '/bc_publishers', label: 'BC Picks' },
 			// { value: '/hot', label: 'Hot' },
 			{ value: '/remix', label: 'Remixes' },
 			{ value: '/mix', label: 'Mixes' }
