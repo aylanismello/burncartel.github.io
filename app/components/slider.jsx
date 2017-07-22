@@ -17,6 +17,14 @@ class Slider extends React.Component {
     this.props.onChange(e.currentTarget.value);
 	}
 
+	componentWillReceiveProps(nextProps) {
+		if(this.props.value !== nextProps.value) {
+			this.setState({
+				value: nextProps.value
+			});
+		}
+	}
+
 	render() {
 		const { value } = this.state;
 		return (

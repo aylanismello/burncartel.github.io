@@ -11,7 +11,6 @@ const defaultCB = data => console.log(`received ${data}`);
 // 			params
 // 		})
 // 		.then((data) => {
-//       debugger;
 // 			success(data);
 // 		})
 // 		.then((err) => {

@@ -44,9 +44,15 @@ const DesktopPlayer = props => {
 
 					<div className="seek-slider">
 						<Slider
-							onChange={newValue => {
-								window.sc.audio.volume = newValue / 100;
+							onChange={(newValue) => {
+								// change window.sc.audio.currentTime
+								// window.sc.audio.currentTime (in seconds)
+								const secondsInSong = props.track.duration / 1000;
+
+								props.seekToTime(secondsInSong * (newValue / 100));
+								// window.sc.audio.currentTime = secondsInSong * (newValue / 100);
 							}}
+							value={(props.currentTime / (props.track.duration / 1000)) * 100}
 						/>
 					</div>
 

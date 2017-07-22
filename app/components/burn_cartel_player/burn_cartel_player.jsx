@@ -39,7 +39,9 @@ class BurnCartelPlayer extends React.Component {
 		this.pauseTrack = this.pauseTrack.bind(this);
 		this.playTrack = this.playTrack.bind(this);
 		this.onTrackEnd = this.onTrackEnd.bind(this);
+		this.seekToTime = this.seekToTime.bind(this);
 		this.scAudio = new SoundCloudAudio(props.clientId);
+		this.currentTime = 0;
 		window.sc = this.scAudio;
 		this.track = null;
 		this.playIcon = null;
@@ -70,21 +72,29 @@ class BurnCartelPlayer extends React.Component {
 		}
 	}
 
+	seekToTime(newTimeInSeconds) {
+		// everything gets kind of fucked here, hopefully a less
+		// errror prone way of seeking replaces this...
+		window.sc.audio.currentTime = newTimeInSeconds;
+		this.currentTime = newTimeInSeconds;
+		this.props.updateCurrentTime(this.currentTime);
+	}
+
 	playAndLoadTrack() {
 		const isPlaying = BurnCartelPlayer.isPlaying(this.scAudio.audio);
 		this.playTrack();
 
-		let currentTime = 0;
+		this.currentTime = 0;
 
 		this.scAudio.audio.addEventListener('timeupdate', () => {
 			if (!this.props.trackLoaded && this.scAudio.audio.currentTime > 0) {
 				this.props.setTrackLoaded();
 			}
 
-			if (this.scAudio.audio.currentTime - currentTime > 1) {
-				currentTime++;
+			if (this.scAudio.audio.currentTime - this.currentTime > 1) {
+				this.currentTime++;
 
-				this.props.updateCurrentTime(currentTime);
+				this.props.updateCurrentTime(this.currentTime);
 			}
 		});
 
@@ -94,6 +104,11 @@ class BurnCartelPlayer extends React.Component {
 
 	onTrackEnd() {
 		this.scAudio.audio.removeEventListener('ended', this.onTrackEnd, false);
+
+		this.currentTime = 0;
+		this.props.updateCurrentTime(this.currentTime);
+
+
 		if (this.props.nextTrackId) {
 			this.props.updateTrackId(this.props.nextTrackId);
 		}
@@ -120,7 +135,7 @@ class BurnCartelPlayer extends React.Component {
 
 		const title = this.track.name.length > 10 ?
 			`${this.track.name.substr(0, 10)}...` : this.track.name;
-			
+
 		document.title = `${title} | Fire Feed`;
 	}
 
@@ -225,7 +240,9 @@ class BurnCartelPlayer extends React.Component {
 
 			const moreProps = {
 				loginFB,
-				repeating: false
+				repeating: false,
+				currentTime: this.props.currentTime,
+				seekToTime: this.seekToTime
 			};
 
 			const desktopProps = { ...mobileProps, ...moreProps };
