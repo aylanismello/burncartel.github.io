@@ -1,6 +1,6 @@
 import React from 'react';
 
-class VolumeSlider extends React.Component {
+class Slider extends React.Component {
 	constructor(props) {
 		super(props);
     this.handleChange = this.handleChange.bind(this);
@@ -14,7 +14,7 @@ class VolumeSlider extends React.Component {
 			value: e.currentTarget.value
 		});
 
-    this.props.onVolumeChange(e.currentTarget.value);
+    this.props.onChange(e.currentTarget.value);
 	}
 
 	render() {
@@ -33,4 +33,4 @@ class VolumeSlider extends React.Component {
 	}
 }
 
-export default VolumeSlider;
+export default Slider;

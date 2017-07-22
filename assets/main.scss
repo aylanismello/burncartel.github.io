@@ -293,6 +293,10 @@ body {
 
 			.burn-cartel-player-control {
 				@include flexin();
+				flex-direction: column;
+				.player-buttons {
+					display: flex;
+				}
 			}
 
 
