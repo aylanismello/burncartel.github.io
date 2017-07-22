@@ -62,11 +62,6 @@ export const setPlayingFeedName = (feedName) => ({
 	feedName
 });
 
-export const updatePageTitle = (trackName) => ({
-	type: feedConstants.UPDATE_PAGE_TITLE,
-	trackName
-});
-
 export const paginateTracks = () => ({
 	type: feedConstants.PAGINATE_TRACKS
 });

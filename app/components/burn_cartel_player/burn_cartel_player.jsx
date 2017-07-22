@@ -121,6 +121,11 @@ class BurnCartelPlayer extends React.Component {
 
 	playTrack() {
 		this.scAudio.play({ streamUrl: this.track.stream_url });
+
+		const title = this.track.name.length > 10 ?
+			`${this.track.name.substr(0, 10)}...` : this.track.name;
+			
+		document.title = `${title} | Fire Feed`;
 	}
 
 	toggle() {

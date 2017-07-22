@@ -8,14 +8,11 @@ import {
 import LikesShow from './likes_show';
 
 
-const mapStateToProps = (state, ownProps) => {
-
-	// const isOfCurrentUser = ( userId === "me" ? true : false);
-	return {
+const mapStateToProps = (state, ownProps) => ({
 		userLikes: state.user.currentUser.tracks,
 		currentUserId: state.user.currentUser.id
 	}
-};
+);
 
 const mapDispatchToProps = dispatch => ({
 	updateFilters: (filters) => dispatch(updateFilters(filters)),

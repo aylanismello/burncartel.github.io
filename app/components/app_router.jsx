@@ -1,23 +1,22 @@
-import React from "react";
+import React from 'react';
 import {
 	HashRouter as Router,
 	Route,
-	IndexRoute,
-	hashHistory,
 	Switch
-} from "react-router-dom";
-import ScrollToTop from "./scroll_to_top";
-import HomeContainer from "./home/home_container";
-import Help from "./help";
-import BurnCartelCurated from "./curated/burn_cartel_curated";
-import TrackShowContainer from "./track/track_show_container";
-import CuratorShowContainer from "./curator/curator_show_container";
-import LikesShowContainer from "./likes/likes_show_container";
-import PublisherShowContainer from "./publisher/publisher_show_container";
-import UserFeedShowContainer from "./user/user_feed_show_container";
-import UserHomeContainer from "./user/user_home_container";
-import NoMatch from "./no_match";
-import AppContainer from "./app/app_container";
+} from 'react-router-dom';
+import ScrollToTop from './scroll_to_top';
+import HomeContainer from './home/home_container';
+import Help from './help';
+import BurnCartelCurated from './curated/burn_cartel_curated';
+import TrackShowContainer from './track/track_show_container';
+import CuratorShowContainer from './curator/curator_show_container';
+import LikesShowContainer from './likes/likes_show_container';
+import PublisherShowContainer from './publisher/publisher_show_container';
+import UserFeedShowContainer from './user/user_feed_show_container';
+import UserHomeContainer from './user/user_home_container';
+import TravelerContainer from './traveler/traveler_container';
+import NoMatch from './no_match';
+import AppContainer from './app/app_container';
 
 const AppRouter = () => (
 	<Router>
@@ -28,6 +27,7 @@ const AppRouter = () => (
 				<Route exact path="/bc" component={HomeContainer} />
 				<Route exact path="/hot" component={HomeContainer} />
 				<Route exact path="/remix" component={HomeContainer} />
+				<Route exact path="/bc_publishers" component={HomeContainer} />
 				<Route exact path="/mix" component={HomeContainer} />
 				<Route exact path="/liked" component={HomeContainer} />
 				<Route exact path="/not" component={HomeContainer} />
@@ -40,6 +40,7 @@ const AppRouter = () => (
 				<Route path="/me/feed" component={UserFeedShowContainer} />
 				<Route path="/me" component={UserHomeContainer} />
 				<Route path="/curated" component={BurnCartelCurated} />
+				<Route path="/traveler" component={TravelerContainer} />
 				<Route component={NoMatch} />
 			</Switch>
 		</ScrollToTop>
