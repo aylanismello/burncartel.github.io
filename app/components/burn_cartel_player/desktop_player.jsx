@@ -1,9 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import * as FontAwesome from 'react-icons/lib/fa/';
 import FireLike from '../likes/fire_like';
+import VolumeSlider from '../volume_slider';
 
-const DesktopPlayer = (props) => {
+const DesktopPlayer = props => {
 	return (
 		<div className="burn-cartel-player-container desktop">
 			<div className="burn-cartel-player">
@@ -45,6 +45,15 @@ const DesktopPlayer = (props) => {
 						color={props.repeating ? '#0275d8' : 'white'}
 						className="bc-icon"
 					/> */}
+
+				</div>
+
+				<div className="burn-cartel-player-control-extra">
+					<VolumeSlider
+						onVolumeChange={(newValue) => {
+							window.sc.audio.volume = newValue / 100;
+						}}
+					/>
 
 				</div>
 			</div>

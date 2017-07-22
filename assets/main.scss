@@ -249,9 +249,6 @@ body {
 	display: block;
 	padding: 0;
 	z-index: 200000;
-	// &:hover {
-	// 	cursor: pointer;
-	// }
 
 	.burn-cartel-player-container.desktop {
 		padding: .2em .8em;
@@ -295,6 +292,11 @@ body {
 			}
 
 			.burn-cartel-player-control {
+				@include flexin();
+			}
+
+
+			.burn-cartel-player-control-extra {
 				@include flexin();
 			}
 		}

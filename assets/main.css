@@ -234,6 +234,11 @@ body {
         justify-content: space-between;
         align-items: center;
         text-align: center; }
+      .bc-menu .burn-cartel-player-container.desktop .burn-cartel-player .burn-cartel-player-control-extra {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-align: center; }
   .bc-menu .burn-cartel-player-container.mobile {
     border-bottom: 2px solid #1E2021;
     margin-bottom: .2em;
