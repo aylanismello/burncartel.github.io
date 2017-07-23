@@ -1,4 +1,6 @@
 import { connect } from 'react-redux';
+import * as _ from 'lodash';
+
 import BurnCartelPlayer from './burn_cartel_player';
 import {
 	updateTrackId,
@@ -10,18 +12,27 @@ import {
 	setTrackNotLoaded,
 	updateCurrentTime,
 	toggleRepeat,
-	toggleShuffle
+	toggleShuffle,
+	reshuffleTracks
 } from '../../actions/player_actions';
 import { loginFB, likeUnlikeTrack } from '../../actions/user_actions';
 import {
 	getPlayingFeedTracksHash,
+	getPlayingFeedTracksHashRandom,
 	getNextTrackId,
 	getPrevTrackId,
-	getUserTracksHash
+	getUserTracksHash,
+	getRandomTrackId
 } from '../../selectors/track_selector';
+
+
+let shuffledTracks;
 
 const mapStateToProps = state => {
 	const tracksHash = getPlayingFeedTracksHash(state);
+	// const tracksHashRandom = getPlayingFeedTracksHashRandom(state);
+
+
 	const track = tracksHash[state.feed.playingFeed.trackId];
 	const nextTrackId = getNextTrackId(state);
 	const prevTrackId = getPrevTrackId(state);
@@ -30,6 +41,9 @@ const mapStateToProps = state => {
 
 	return {
 		// replace this with reading from .env ? it could be sniffed from the network traffic anyhow... hmm...
+		generateRandomTrackId: () => {
+			return getRandomTrackId(state);
+		},
 		feedName: state.feed.playingFeed.feedName,
 		clientId: '282558e0e8cdcd8a9b3ba2b4917596b7',
 		track,
@@ -53,6 +67,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
 	updateTrackId: id => {
 		dispatch(updatePlayingTrackId(id));
+	},
+	shuffledTracks: () => {
+		dispatch(reshuffleTracks())
 	},
 	togglePlay: () => dispatch(togglePlay()),
 	toggleRepeat: () => dispatch(toggleRepeat()),

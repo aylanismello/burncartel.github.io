@@ -4,8 +4,16 @@ import {
 	initPlayer
 } from '../actions/player_actions';
 
+import { reshuffleTracks } from '../actions/feed_actions';
+
 const PlayerMiddleware = ({ getState, dispatch }) => next => action => {
-	switch(action.type) {
+	switch (action.type) {
+		case playerConstants.TOGGLE_SHUFFLE:
+			// transitioning to shuffle state, re-shuffle tracks in player reducer
+			if (!getState().shuffle) {
+				dispatch(reshuffleTracks());
+			}
+			return next(action);
 		case playerConstants.TOGGLE_PLAY:
 			if (!getState().player.playerInitialized) {
 				dispatch(initPlayer());

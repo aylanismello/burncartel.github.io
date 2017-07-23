@@ -9,7 +9,6 @@ export const playerConstants = {
 	TOGGLE_SHUFFLE: 'TOGGLE_SHUFFLE'
 };
 
-
 export const toggleRepeat = () => ({
 	type: playerConstants.TOGGLE_REPEAT
 });
@@ -34,7 +33,7 @@ export const setTrackNotLoaded = () => ({
 	type: playerConstants.SET_TRACK_NOT_LOADED
 });
 
-export const updateCurrentTime = (currentTime) => ({
+export const updateCurrentTime = currentTime => ({
 	type: playerConstants.UPDATE_CURRENT_TIME,
 	currentTime
 });

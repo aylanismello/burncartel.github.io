@@ -14,7 +14,8 @@ import {
 	setFeedType,
 	updateFilters,
 	receivePaginationData,
-	fetchOldFeed
+	fetchOldFeed,
+	receivePlayingTracksShuffled
 } from '../actions/feed_actions';
 import { togglePlay } from '../actions/player_actions';
 import { getFeedTracksHash } from '../selectors/track_selector';
@@ -164,7 +165,6 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 				if (getState().feed.playingFeed.trackId !== action.trackId) {
 					// change this to .real_name when that story is completed
 
-
 					dispatch(updatePlayingTrackId(action.trackId));
 
 					// here we copy over feed.focusedFeed to feed.playingFeed if they are not equal
@@ -219,6 +219,9 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 				dispatch(updateFocusedTrackId(action.trackId));
 			}
 
+			return next(action);
+		case feedConstants.RESHUFFLE_TRACKS:
+			dispatch(receivePlayingTracksShuffled(_.shuffle(getState().feed.playingFeed.tracks)));
 			return next(action);
 		default:
 			return next(action);

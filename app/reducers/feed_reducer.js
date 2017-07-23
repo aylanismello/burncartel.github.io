@@ -25,8 +25,12 @@ const initialState = {
 	USER: {},
 	playingFeed: {
 		tracks: [],
+		trackId: null,
 		// might need any number of metadatas here
 		feedName: ''
+	},
+	playingFeedShuffled: {
+		tracks: []
 	},
 	loadingFeed: true,
 	feedType: null,
@@ -88,6 +92,12 @@ const FeedReducer = (state = initialState, action) => {
 			return {
 				...state,
 				playingFeed: { ...state.playingFeed, tracks: action.tracks }
+			};
+		case feedConstants.RECEIVE_PLAYING_TRACKS_SHUFFLED:
+			debugger;
+			return {
+				...state,
+				playingFeedShuffled: { ...state.playingFeedShuffled, tracks: action.tracks }
 			};
 		case feedConstants.UPDATE_FILTERS:
 			return { ...state, filters: action.filters };
