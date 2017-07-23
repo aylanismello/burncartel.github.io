@@ -11,7 +11,7 @@ import TrackDetails from './track_details';
 class BurnCartelPlayer extends React.Component {
 	static secondsToMinutes(seconds) {
 		let timeStamp;
-		const secondsLeft = seconds % 60;
+		const secondsLeft = Math.floor(seconds % 60);
 		const minutesLeft = Math.floor(seconds / 60);
 
 		if (secondsLeft < 10) {
@@ -38,7 +38,9 @@ class BurnCartelPlayer extends React.Component {
 		this.pauseTrack = this.pauseTrack.bind(this);
 		this.playTrack = this.playTrack.bind(this);
 		this.onTrackEnd = this.onTrackEnd.bind(this);
+		this.seekToTime = this.seekToTime.bind(this);
 		this.scAudio = new SoundCloudAudio(props.clientId);
+		this.currentTime = 0;
 		window.sc = this.scAudio;
 		this.track = null;
 		this.playIcon = null;
@@ -69,21 +71,29 @@ class BurnCartelPlayer extends React.Component {
 		}
 	}
 
+	seekToTime(newTimeInSeconds) {
+		// everything gets kind of fucked here, hopefully a less
+		// errror prone way of seeking replaces this...
+		window.sc.audio.currentTime = newTimeInSeconds;
+		this.currentTime = newTimeInSeconds;
+		this.props.updateCurrentTime(this.currentTime);
+	}
+
 	playAndLoadTrack() {
 		const isPlaying = BurnCartelPlayer.isPlaying(this.scAudio.audio);
 		this.playTrack();
 
-		let currentTime = 0;
+		this.currentTime = 0;
 
 		this.scAudio.audio.addEventListener('timeupdate', () => {
 			if (!this.props.trackLoaded && this.scAudio.audio.currentTime > 0) {
 				this.props.setTrackLoaded();
 			}
 
-			if (this.scAudio.audio.currentTime - currentTime > 1) {
-				currentTime++;
+			if (this.scAudio.audio.currentTime - this.currentTime > 1) {
+				this.currentTime++;
 
-				this.props.updateCurrentTime(currentTime);
+				this.props.updateCurrentTime(this.currentTime);
 			}
 		});
 
@@ -92,26 +102,28 @@ class BurnCartelPlayer extends React.Component {
 	}
 
 	onTrackEnd() {
+
+		this.seekToTime(0);
+
 		if (this.props.repeating) {
-			this.scAudio.audio.currentTime = 0;
 			this.scAudio.audio.play();
-		} else {
+		} else if (this.props.nextTrackId) {
 			this.scAudio.audio.removeEventListener('ended', this.onTrackEnd, false);
-			if (this.props.nextTrackId) {
-				this.props.updateTrackId(this.props.nextTrackId);
-			}
+			this.props.updateTrackId(this.props.nextTrackId);
 		}
 	}
 
 	goToNextTrack() {
 		if (this.props.nextTrackId) {
 			this.props.updateTrackId(this.props.nextTrackId);
+			this.seekToTime(0);
 		}
 	}
 
 	goToPrevTrack() {
 		if (this.props.prevTrackId) {
 			this.props.updateTrackId(this.props.prevTrackId);
+			this.seekToTime(0);
 		}
 	}
 
@@ -122,9 +134,10 @@ class BurnCartelPlayer extends React.Component {
 	playTrack() {
 		this.scAudio.play({ streamUrl: this.track.stream_url });
 
-		const title = this.track.name.length > 10 ?
-			`${this.track.name.substr(0, 10)}...` : this.track.name;
-			
+		const title = this.track.name.length > 10
+			? `${this.track.name.substr(0, 10)}...`
+			: this.track.name;
+
 		document.title = `${title} | Fire Feed`;
 	}
 
@@ -182,13 +195,10 @@ class BurnCartelPlayer extends React.Component {
 						</span>
 						{/* </Link> */}
 
+						<div>
+							Playing from {this.props.feedName.toUpperCase()} feed
+						</div>
 					</div>
-					{/* <div>
-		          Playing from {this.props.feedName.toUpperCase()} feed
-		        </div> */}
-					{/* <div>
-		          {BurnCartelPlayer.secondsToMinutes(this.props.currentTime)}
-		        </div> */}
 				</div>
 			);
 		} else if (this.track && !this.props.trackLoaded) {
@@ -232,7 +242,10 @@ class BurnCartelPlayer extends React.Component {
 			const moreProps = {
 				loginFB,
 				repeating,
-				toggleRepeat
+				toggleRepeat,
+				currentTime: this.props.currentTime,
+				seekToTime: this.seekToTime,
+				secondsToMinutes: BurnCartelPlayer.secondsToMinutes,
 			};
 
 			const desktopProps = { ...mobileProps, ...moreProps };

@@ -1,9 +1,10 @@
 const webpack = require('webpack');
 var WebpackNotifierPlugin = require('webpack-notifier');
 
-const NODE_ENV = 'development';
-const EC2_HOST = process.env.EC2_HOST || 'localhost';
-const EC2_PORT = process.env.EC2_PORT || '3000';
+const NODE_ENV = process.env.NODE_ENV || 'development';
+
+const EC2_HOST = NODE_ENV === 'development' ? 'localhost' : 'ec2-54-193-25-169.us-west-1.compute.amazonaws.com';
+const EC2_PORT = NODE_ENV === 'development' ? '3000' : '80';
 
 const path = require('path');
 module.exports = {

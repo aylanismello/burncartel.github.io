@@ -233,6 +233,15 @@ body {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        text-align: center;
+        flex-direction: column; }
+        .bc-menu .burn-cartel-player-container.desktop .burn-cartel-player .burn-cartel-player-control .player-buttons {
+          display: flex;
+          align-items: center; }
+      .bc-menu .burn-cartel-player-container.desktop .burn-cartel-player .burn-cartel-player-control-extra {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         text-align: center; }
   .bc-menu .burn-cartel-player-container.mobile {
     border-bottom: 2px solid #1E2021;
