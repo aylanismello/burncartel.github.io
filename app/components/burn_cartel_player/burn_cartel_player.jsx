@@ -103,14 +103,14 @@ class BurnCartelPlayer extends React.Component {
 	}
 
 	onTrackEnd() {
-		this.scAudio.audio.removeEventListener('ended', this.onTrackEnd, false);
 
-		// this.currentTime = 0;
-		// this.props.updateCurrentTime(this.currentTime);
+		this.seekToTime(0);
 
-		if (this.props.nextTrackId) {
+		if (this.props.repeating) {
+			this.scAudio.audio.play();
+		} else if (this.props.nextTrackId) {
+			this.scAudio.audio.removeEventListener('ended', this.onTrackEnd, false);
 			this.props.updateTrackId(this.props.nextTrackId);
-			this.seekToTime(0);
 		}
 	}
 
@@ -135,8 +135,9 @@ class BurnCartelPlayer extends React.Component {
 	playTrack() {
 		this.scAudio.play({ streamUrl: this.track.stream_url });
 
-		const title = this.track.name.length > 10 ?
-			`${this.track.name.substr(0, 10)}...` : this.track.name;
+		const title = this.track.name.length > 10
+			? `${this.track.name.substr(0, 10)}...`
+			: this.track.name;
 
 		document.title = `${title} | Fire Feed`;
 	}
@@ -199,9 +200,7 @@ class BurnCartelPlayer extends React.Component {
 					{/* <div>
               Playing from {this.props.feedName.toUpperCase()} feed
             </div> */}
-					{/* <div>
-              {BurnCartelPlayer.secondsToMinutes(this.props.currentTime)}
-            </div> */}
+
 				</div>
 			);
 		} else if (this.track && !this.props.trackLoaded) {
@@ -242,10 +241,11 @@ class BurnCartelPlayer extends React.Component {
 
 			const moreProps = {
 				loginFB,
-				repeating: false,
 				currentTime: this.props.currentTime,
 				seekToTime: this.seekToTime,
-				secondsToMinutes: BurnCartelPlayer.secondsToMinutes
+				secondsToMinutes: BurnCartelPlayer.secondsToMinutes,
+				toggleRepeat: this.props.toggleRepeat,
+				repeating: this.props.repeating
 			};
 
 			const desktopProps = { ...mobileProps, ...moreProps };
@@ -263,7 +263,7 @@ class BurnCartelPlayer extends React.Component {
 						</MobilePlayer>
 					</MediaQuery>
 					<MediaQuery query="(min-device-width: 451px)">
-						<DesktopPlayer {...desktopProps} >
+						<DesktopPlayer {...desktopProps}>
 							<TrackDetails
 								playIcon={this.playIcon}
 								playerType="desktop"

@@ -236,7 +236,8 @@ body {
         text-align: center;
         flex-direction: column; }
         .bc-menu .burn-cartel-player-container.desktop .burn-cartel-player .burn-cartel-player-control .player-buttons {
-          display: flex; }
+          display: flex;
+          align-items: center; }
       .bc-menu .burn-cartel-player-container.desktop .burn-cartel-player .burn-cartel-player-control-extra {
         display: flex;
         justify-content: space-between;

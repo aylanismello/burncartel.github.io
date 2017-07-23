@@ -41,6 +41,14 @@ const DesktopPlayer = props => {
 							className="bc-icon"
 							onClick={props.goToNextTrack}
 						/>
+
+						<FontAwesome.FaRepeat
+							size={30}
+							color={props.repeating ? '#0275d8' : 'white'}
+							className="bc-icon"
+							onClick={props.toggleRepeat}
+						/>
+
 					</div>
 
 					<SeekControl
@@ -49,13 +57,6 @@ const DesktopPlayer = props => {
 						trackDuration={props.track.duration}
 						secondsToMinutes={props.secondsToMinutes}
 					/>
-
-					{/* <FontAwesome.FaRepeat
-						size={40}
-						color={props.repeating ? '#0275d8' : 'white'}
-						className="bc-icon"
-					/> */}
-
 				</div>
 
 				<div className="burn-cartel-player-control-extra">
