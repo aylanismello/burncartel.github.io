@@ -1,20 +1,18 @@
 import React from 'react';
-import { withRouter } from 'react-router';
 import MediaQuery from 'react-responsive';
 import TopNav from '../navs/top_nav';
 import BottomNav from '../navs/bottom_nav';
-import FeedContainer from '../feed/feed_container';
 import SideNav from '../navs/side_nav';
-import { getTrackFromId } from '../../selectors/track_selector';
-import { FEEDS } from '../../reducers/feed_reducer';
 
 class App extends React.Component {
 	constructor(props) {
 		super(props);
+		this.addShortcutsToWindow = this.addShortcutsToWindow.bind(this);
 	}
 
 	componentWillMount() {
 		this.props.initFB();
+		this.addShortcutsToWindow();
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -33,6 +31,17 @@ class App extends React.Component {
 		}
 	}
 
+	addShortcutsToWindow() {
+		// add spacebar = play/pause
+		window.addEventListener('keydown', e => {
+			if (e.keyCode === 32 && e.target === document.body) {
+				e.preventDefault();
+				if (this.props.playerInitialized) {
+					this.props.togglePlay();
+				}
+			}
+		});
+	}
 	render() {
 		return (
 			<div>

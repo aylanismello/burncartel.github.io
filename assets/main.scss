@@ -382,7 +382,7 @@ body {
 	}
 
 	.artwork-icon {
-		width: 200px;
+		width: 125px;
 		&:hover {
 			cursor: pointer;
 		}
@@ -390,14 +390,17 @@ body {
 
 	.artwork-play {
 		position: absolute;
-		width: 50px;
-		top: 75px;
-		left: 75px;
+		width: 40px;
+		top: 45px;
+		left: 45px;
+
+
+
 		&:hover {
 			cursor: pointer;
-			width: 60px;
-			top: 70px;
-			left: 70px;
+			width: 50px;
+			top: 40px;
+			left: 40px;
 		}
 	}
 
