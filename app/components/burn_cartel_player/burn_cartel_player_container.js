@@ -18,32 +18,35 @@ import {
 import { loginFB, likeUnlikeTrack } from '../../actions/user_actions';
 import {
 	getPlayingFeedTracksHash,
-	getPlayingFeedTracksHashRandom,
+	getPlayingFeedTracksHashShuffled,
 	getNextTrackId,
 	getPrevTrackId,
-	getUserTracksHash,
-	getRandomTrackId
+	getNextTrackIdShuffled,
+	getPrevTrackIdShuffled,
+	getUserTracksHash
 } from '../../selectors/track_selector';
 
-
-let shuffledTracks;
-
 const mapStateToProps = state => {
-	const tracksHash = getPlayingFeedTracksHash(state);
 	// const tracksHashRandom = getPlayingFeedTracksHashRandom(state);
 
+	let tracksHash, track, nextTrackId, prevTrackId;
 
-	const track = tracksHash[state.feed.playingFeed.trackId];
-	const nextTrackId = getNextTrackId(state);
-	const prevTrackId = getPrevTrackId(state);
+	if (!state.player.shuffle) {
+		tracksHash = getPlayingFeedTracksHash(state);
+		track = tracksHash[state.feed.playingFeed.trackId];
+		nextTrackId = getNextTrackId(state);
+		prevTrackId = getPrevTrackId(state);
+	} else {
+		tracksHash = getPlayingFeedTracksHashShuffled(state);
+		track = tracksHash[state.feed.playingFeed.trackId];
+		nextTrackId = getNextTrackIdShuffled(state);
+		prevTrackId = getPrevTrackIdShuffled(state);
+	}
 
 	const publisherId = track === undefined ? '' : track.publisher_id;
 
 	return {
 		// replace this with reading from .env ? it could be sniffed from the network traffic anyhow... hmm...
-		generateRandomTrackId: () => {
-			return getRandomTrackId(state);
-		},
 		feedName: state.feed.playingFeed.feedName,
 		clientId: '282558e0e8cdcd8a9b3ba2b4917596b7',
 		track,
@@ -67,9 +70,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
 	updateTrackId: id => {
 		dispatch(updatePlayingTrackId(id));
-	},
-	shuffledTracks: () => {
-		dispatch(reshuffleTracks())
 	},
 	togglePlay: () => dispatch(togglePlay()),
 	toggleRepeat: () => dispatch(toggleRepeat()),
