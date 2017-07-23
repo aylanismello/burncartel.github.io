@@ -105,24 +105,26 @@ class BurnCartelPlayer extends React.Component {
 	onTrackEnd() {
 		this.scAudio.audio.removeEventListener('ended', this.onTrackEnd, false);
 
-		this.currentTime = 0;
-		this.props.updateCurrentTime(this.currentTime);
-
+		// this.currentTime = 0;
+		// this.props.updateCurrentTime(this.currentTime);
 
 		if (this.props.nextTrackId) {
 			this.props.updateTrackId(this.props.nextTrackId);
+			this.seekToTime(0);
 		}
 	}
 
 	goToNextTrack() {
 		if (this.props.nextTrackId) {
 			this.props.updateTrackId(this.props.nextTrackId);
+			this.seekToTime(0);
 		}
 	}
 
 	goToPrevTrack() {
 		if (this.props.prevTrackId) {
 			this.props.updateTrackId(this.props.prevTrackId);
+			this.seekToTime(0);
 		}
 	}
 

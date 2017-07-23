@@ -2,6 +2,7 @@ import React from 'react';
 import * as FontAwesome from 'react-icons/lib/fa/';
 import FireLike from '../likes/fire_like';
 import Slider from '../slider';
+import VolumeControl from '../volume_control';
 
 const DesktopPlayer = props => {
 	return (
@@ -52,8 +53,13 @@ const DesktopPlayer = props => {
 								props.seekToTime(secondsInSong * (newValue / 100));
 								// window.sc.audio.currentTime = secondsInSong * (newValue / 100);
 							}}
+							isVolume={false}
 							value={(props.currentTime / (props.track.duration / 1000)) * 100}
 						/>
+					</div>
+
+					<div className="volume-slider-container">
+						<VolumeControl />
 					</div>
 
 					{/* <FontAwesome.FaRepeat
@@ -65,13 +71,7 @@ const DesktopPlayer = props => {
 				</div>
 
 				<div className="burn-cartel-player-control-extra">
-					<div className="volume-slider">
-						<Slider
-							onChange={newValue => {
-								window.sc.audio.volume = newValue / 100;
-							}}
-						/>
-					</div>
+
 
 				</div>
 			</div>

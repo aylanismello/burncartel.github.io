@@ -22,7 +22,13 @@ class Slider extends React.Component {
 			this.setState({
 				value: nextProps.value
 			});
+			
+			if (this.props.isVolume) {
+				this.props.onChange(nextProps.value);
+			}
 		}
+
+
 	}
 
 	render() {
