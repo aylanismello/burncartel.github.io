@@ -17,7 +17,7 @@ import {
 	fetchOldFeed,
 	receivePlayingTracksShuffled
 } from '../actions/feed_actions';
-import { togglePlay } from '../actions/player_actions';
+import { togglePlay, disableShuffle } from '../actions/player_actions';
 import { getFeedTracksHash } from '../selectors/track_selector';
 import { getFeed } from '../util/bc_api';
 
@@ -170,10 +170,12 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 					// here we copy over feed.focusedFeed to feed.playingFeed if they are not equal
 					const tracksInFocus = getState().feed.focusedFeed.tracks;
 
-					if (!_.isEqual(getState().feed.playingFeed.tracks, tracksInFocus)) {
-						console.log(
-							'you just started playing a track from a new feed (one that is not focused)!'
-						);
+					const isNewFeed = !_.isEqual(
+						getState().feed.playingFeed.tracks,
+						tracksInFocus
+					);
+
+					if (isNewFeed) {
 						// playingFeed = deepClone of currentFeed?
 						// also update name of feed for player!
 						dispatch(receivePlayingTracks(tracksInFocus));
@@ -202,6 +204,8 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 						}
 
 						dispatch(setPlayingFeedName(newFeedName));
+						dispatch(disableShuffle());
+						// we have to turn off shuffle to for a new feed!
 					} else {
 						// if the focusedTracks and playingTracks are the same...
 						console.log('wtf');
@@ -221,7 +225,11 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 
 			return next(action);
 		case feedConstants.RESHUFFLE_TRACKS:
-			dispatch(receivePlayingTracksShuffled(_.shuffle(getState().feed.playingFeed.tracks)));
+			dispatch(
+				receivePlayingTracksShuffled(
+					_.shuffle(getState().feed.playingFeed.tracks)
+				)
+			);
 			return next(action);
 		default:
 			return next(action);

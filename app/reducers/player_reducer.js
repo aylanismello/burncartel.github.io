@@ -19,6 +19,8 @@ const PlayerReducer = (state = initialState, action) => {
 			return { ...state, repeating: !state.repeating };
 		case playerConstants.TOGGLE_SHUFFLE:
 			return { ...state, shuffle: !state.shuffle };
+		case playerConstants.DISABLE_SHUFFLE:
+			return { ...state, shuffle: false };
 		case playerConstants.SET_TRACK_LOADED:
 			return { ...state, trackLoaded: true };
 		case playerConstants.SET_TRACK_NOT_LOADED:

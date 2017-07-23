@@ -6,7 +6,8 @@ export const playerConstants = {
 	SET_TRACK_LOADED: 'SET_TRACK_LOADED',
 	UPDATE_CURRENT_TIME: 'UPDATE_CURRENT_TIME',
 	TOGGLE_REPEAT: 'TOGGLE_REPEAT',
-	TOGGLE_SHUFFLE: 'TOGGLE_SHUFFLE'
+	TOGGLE_SHUFFLE: 'TOGGLE_SHUFFLE',
+	DISABLE_SHUFFLE: 'DISABLE_SHUFFLE'
 };
 
 export const toggleRepeat = () => ({
@@ -15,6 +16,10 @@ export const toggleRepeat = () => ({
 
 export const toggleShuffle = () => ({
 	type: playerConstants.TOGGLE_SHUFFLE
+});
+
+export const disableShuffle = () => ({
+	type: playerConstants.DISABLE_SHUFFLE
 });
 
 export const togglePlay = () => ({
