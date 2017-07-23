@@ -26,9 +26,9 @@ const DesktopPlayer = props => {
 					<div className="player-buttons">
 						<FontAwesome.FaRandom
 							size={25}
-							color={props.repeating ? '#0275d8' : 'white'}
+							color={props.shuffle ? '#0275d8' : 'white'}
 							className="bc-icon"
-							onClick={props.toggleRepeat}
+							onClick={props.toggleShuffle}
 						/>
 
 						<FontAwesome.FaStepBackward

@@ -31,7 +31,7 @@ class BurnCartelPlayer extends React.Component {
 
 	constructor(props) {
 		super(props);
-		this.toggle = this.toggle.bind(this);
+		this.togglePlay = this.togglePlay.bind(this);
 		this.goToNextTrack = this.goToNextTrack.bind(this);
 		this.goToPrevTrack = this.goToPrevTrack.bind(this);
 		this.playAndLoadTrack = this.playAndLoadTrack.bind(this);
@@ -141,7 +141,7 @@ class BurnCartelPlayer extends React.Component {
 		document.title = `${title} | Fire Feed`;
 	}
 
-	toggle() {
+	togglePlay() {
 		this.props.togglePlay();
 	}
 
@@ -234,7 +234,7 @@ class BurnCartelPlayer extends React.Component {
 				playIcon: this.playIcon,
 				track: this.track,
 				details,
-				toggle: this.toggle,
+				toggle: this.togglePlay,
 				trackId,
 				isLikedByUser
 			};
@@ -246,6 +246,8 @@ class BurnCartelPlayer extends React.Component {
 				currentTime: this.props.currentTime,
 				seekToTime: this.seekToTime,
 				secondsToMinutes: BurnCartelPlayer.secondsToMinutes,
+				toggleShuffle: this.props.toggleShuffle,
+				shuffle: this.props.shuffle
 			};
 
 			const desktopProps = { ...mobileProps, ...moreProps };
