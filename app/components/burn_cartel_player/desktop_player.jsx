@@ -1,8 +1,8 @@
 import React from 'react';
 import * as FontAwesome from 'react-icons/lib/fa/';
 import FireLike from '../likes/fire_like';
-import Slider from '../slider';
 import VolumeControl from '../volume_control';
+import SeekControl from '../seek_control';
 
 const DesktopPlayer = props => {
 	return (
@@ -43,20 +43,12 @@ const DesktopPlayer = props => {
 						/>
 					</div>
 
-					<div className="seek-slider">
-						<Slider
-							onChange={(newValue) => {
-								// change window.sc.audio.currentTime
-								// window.sc.audio.currentTime (in seconds)
-								const secondsInSong = props.track.duration / 1000;
-
-								props.seekToTime(secondsInSong * (newValue / 100));
-								// window.sc.audio.currentTime = secondsInSong * (newValue / 100);
-							}}
-							isVolume={false}
-							value={(props.currentTime / (props.track.duration / 1000)) * 100}
-						/>
-					</div>
+					<SeekControl
+						seekToTime={props.seekToTime}
+						currentTime={props.currentTime}
+						trackDuration={props.track.duration}
+						secondsToMinutes={props.secondsToMinutes}
+					/>
 
 					{/* <FontAwesome.FaRepeat
 						size={40}

@@ -59,7 +59,11 @@ input[type=range]:focus {
     width: 80px; }
 
 .seek-slider {
-  width: 300px; }
+  display: flex;
+  justify-content: center;
+  width: 500px; }
+  .seek-slider .seek-slide-time {
+    padding: 0 10px; }
 
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
   input[type='range'] {

@@ -12,7 +12,7 @@ import TrackDetails from './track_details';
 class BurnCartelPlayer extends React.Component {
 	static secondsToMinutes(seconds) {
 		let timeStamp;
-		const secondsLeft = seconds % 60;
+		const secondsLeft = Math.floor(seconds % 60);
 		const minutesLeft = Math.floor(seconds / 60);
 
 		if (secondsLeft < 10) {
@@ -244,7 +244,8 @@ class BurnCartelPlayer extends React.Component {
 				loginFB,
 				repeating: false,
 				currentTime: this.props.currentTime,
-				seekToTime: this.seekToTime
+				seekToTime: this.seekToTime,
+				secondsToMinutes: BurnCartelPlayer.secondsToMinutes
 			};
 
 			const desktopProps = { ...mobileProps, ...moreProps };

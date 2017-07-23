@@ -66,14 +66,20 @@ input[type=range]:focus {
   .mute-button-container {
     margin-right: 10px;
   }
-  
+
   .volume-slider {
     width: 80px;
   }
 }
 
 .seek-slider {
-  width: 300px;
+  display: flex;
+  justify-content: center;
+  width: 500px;
+
+  .seek-slide-time {
+    padding: 0 10px;
+  }
   // width: 80px;
 }
 
