@@ -55,24 +55,41 @@ const TrackItem = ({
 
 	return (
 		<div className="row">
-			<div className="col-sm-6 col-md-4 track-container" id={`track-#${track.id}`}>
+			<div
+				className="col-sm-6 col-md-4 track-container"
+				id={`track-#${track.id}`}
+			>
 				<div className="thumbnail">
 					{/*  do NOT use image itself to set width of this, there's invisble white space on edges*/}
-					<div className="artwork-wrapper">
-						{hasRanking
-							? <h2>
-									<span className="ranking-header">
-										{trackIdx + 1}
-									</span>
-								</h2>
-							: null}
+					<div className="left-side">
+						<div className="artwork-wrapper">
+							{hasRanking
+								? <h2>
+										<span className="ranking-header">
+											{trackIdx + 1}
+										</span>
+									</h2>
+								: null}
 
-						<img src={artwork_url} className="artwork-icon" />
-						<img
-							onClick={() => handleTrackClick(track.id, 'play')}
-							src={playIcon}
-							className="artwork-play"
-						/>
+							<img src={artwork_url} className="artwork-icon" />
+							<img
+								onClick={() => handleTrackClick(track.id, 'play')}
+								src={playIcon}
+								className="artwork-play"
+							/>
+						</div>
+
+						<div className="track-item-icons">
+							<FireLike
+								isLoggedIn={isLoggedIn}
+								loginFB={loginFB}
+								likePostInProgress={likePostInProgress}
+								likeUnlikeTrack={likeUnlikeTrack}
+								numLikes={track.num_likes}
+								isLikedByUser={isLikedByUser}
+								trackId={track.id}
+							/>
+						</div>
 					</div>
 
 					<div className="caption">
@@ -96,18 +113,6 @@ const TrackItem = ({
 									<span>Selected by {curatorsStr} </span>
 								</div>
 							: null}
-
-						<div className="track-item-icons">
-							<FireLike
-								isLoggedIn={isLoggedIn}
-								loginFB={loginFB}
-								likePostInProgress={likePostInProgress}
-								likeUnlikeTrack={likeUnlikeTrack}
-								numLikes={track.num_likes}
-								isLikedByUser={isLikedByUser}
-								trackId={track.id}
-							/>
-						</div>
 
 					</div>
 

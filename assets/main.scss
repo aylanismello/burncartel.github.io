@@ -561,3 +561,14 @@ body {
 		left: 0;
 	}
 }
+
+.thumbnail {
+	display: flex;
+	.caption {
+		margin-left: 2em;
+		margin-top: 1em;
+		h3 {
+			font-size: 1.35rem;
+		}
+	}
+}

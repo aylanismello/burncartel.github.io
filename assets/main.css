@@ -401,5 +401,12 @@ body {
     position: absolute;
     top: 100%;
     left: 0; } }
+.thumbnail {
+  display: flex; }
+  .thumbnail .caption {
+    margin-left: 2em;
+    margin-top: 1em; }
+    .thumbnail .caption h3 {
+      font-size: 1.35rem; }
 
 /*# sourceMappingURL=main.css.map */
