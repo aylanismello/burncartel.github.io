@@ -2,6 +2,19 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { GoFlame } from 'react-icons/lib/go';
 import FireLike from '../likes/fire_like';
+import * as FontAwesome from 'react-icons/lib/fa/';
+
+const shortenLongWordsInTitle = title => {
+	const formattedTitle = title.split(' ').map(word => {
+		if (word.length >= 18) {
+			return `${word.slice(0, 17)}.`;
+		} else {
+			return word;
+		}
+	});
+
+	return formattedTitle.join(' ');
+};
 
 const TrackItem = ({
 	track,
@@ -89,6 +102,18 @@ const TrackItem = ({
 								isLikedByUser={isLikedByUser}
 								trackId={track.id}
 							/>
+
+							<div className="track-item-icon">
+								<a href={track.permalink_url} target="_blank">
+									<FontAwesome.FaSoundcloud
+										size={35}
+										color="black"
+										className="soundcloud-png"
+									/>
+								</a>
+
+							</div>
+
 						</div>
 					</div>
 
@@ -96,7 +121,7 @@ const TrackItem = ({
 
 						<Link to={`/tracks/${track.id}`}>
 							<h3 className="track-title">
-								{track.name}
+								{shortenLongWordsInTitle(track.name)}
 							</h3>
 						</Link>
 
@@ -104,9 +129,9 @@ const TrackItem = ({
 							? <div>
 									<div>
 										<span>
-											{' '}By
+											{' '}By{' '}
 											<Link to={`/publishers/${track.publisher_id}`}>
-												{` ${track.publisher.name}`}
+												{track.publisher.name}
 											</Link>
 										</span>
 									</div>

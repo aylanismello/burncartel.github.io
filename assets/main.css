@@ -137,8 +137,8 @@ body {
     cursor: pointer; }
 
 .like-icon-container {
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   background: whitesmoke;
   border-radius: 10px; }
   .like-icon-container:hover {
@@ -146,6 +146,9 @@ body {
   .like-icon-container .like-icon {
     width: 100%;
     height: 100%; }
+  .like-icon-container .likes-display {
+    font-size: 0.8em;
+    text-align: center; }
 
 .pagination-button-container {
   margin-bottom: 3em; }
@@ -319,7 +322,8 @@ body {
     .feed-container .track-container .track-title:hover {
       cursor: pointer; }
     .feed-container .track-container .track-item-icons {
-      display: flex; }
+      display: flex;
+      justify-content: space-around; }
       .feed-container .track-container .track-item-icons .track-item-icon-container {
         width: 50px; }
         .feed-container .track-container .track-item-icons .track-item-icon-container:hover {
@@ -363,7 +367,8 @@ body {
   .track-show .track-banner .track-banner-icons-container {
     display: flex;
     background: inherit;
-    justify-content: flex-start; }
+    justify-content: flex-start;
+    align-items: center; }
 
 .nav-buttons {
   display: flex;
@@ -401,12 +406,12 @@ body {
     position: absolute;
     top: 100%;
     left: 0; } }
-.thumbnail {
+.track-container .thumbnail {
   display: flex; }
-  .thumbnail .caption {
+  .track-container .thumbnail .caption {
     margin-left: 2em;
     margin-top: 1em; }
-    .thumbnail .caption h3 {
+    .track-container .thumbnail .caption h3 {
       font-size: 1.35rem; }
 
 /*# sourceMappingURL=main.css.map */

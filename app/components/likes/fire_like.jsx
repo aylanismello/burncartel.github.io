@@ -50,7 +50,9 @@ const FireLike = ({ isLoggedIn,
         color={flameColor}
         className='like-icon'
       />
-      {likesDisplay}
+      <div className="likes-display">
+        {likesDisplay}
+      </div>
 
     </div>
   )

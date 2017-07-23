@@ -17,6 +17,7 @@
     "no-tabs": 0,
     "no-case-declarations": 0,
     "prefer-default-export": 0,
+    "no-else-return": 0,
     "comma-dangle": ["error", "never"],
     "indent": ["error", "tab", { "SwitchCase": 2 }],
     "react/jsx-indent": [1, 'tab'],
