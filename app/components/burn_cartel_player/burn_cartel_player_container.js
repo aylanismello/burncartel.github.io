@@ -1,8 +1,6 @@
 import { connect } from 'react-redux';
 import BurnCartelPlayer from './burn_cartel_player';
-import {
-	updatePlayingTrackId
-} from '../../actions/feed_actions';
+import { updatePlayingTrackId } from '../../actions/feed_actions';
 import {
 	togglePlay,
 	setTrackLoaded,
@@ -23,7 +21,6 @@ import {
 } from '../../selectors/track_selector';
 
 const mapStateToProps = state => {
-
 	let tracksHash, track, nextTrackId, prevTrackId;
 
 	if (!state.player.shuffle) {
