@@ -1,5 +1,4 @@
 import { createSelector } from 'reselect';
-import * as _ from 'lodash';
 
 const getUserTracks = state => state.user.currentUser.tracks;
 const getTracks = state => state.feed.focusedFeed.tracks;
@@ -7,6 +6,23 @@ const getPlayingTracks = state => state.feed.playingFeed.tracks;
 const getPlayingTracksShuffled = state => state.feed.playingFeedShuffled.tracks;
 const getCurrentTrackId = state => state.feed.focusedFeed.trackId;
 const getCurrentPlayingTrackId = state => state.feed.playingFeed.trackId;
+
+// learn to refactor this later, i'm tired of this rn
+// export const getPlayingFeedTracksHash = ({ options = { shuffled: false } }) => {
+// 	const getTheTracks = (options.shuffled ? getPlayingTracksShuffled : getPlayingTracks);
+//
+//
+// 	const finalTracks = createSelector([getTheTracks], tracks => {
+// 		let tracksObject = {};
+//
+// 		for (const track of tracks) {
+// 			tracksObject[track.id] = track;
+// 		}
+// 		return tracksObject;
+// 	});
+//
+// 	debugger;
+// };
 
 export const getPlayingFeedTracksHash = createSelector(
 	[getPlayingTracks],

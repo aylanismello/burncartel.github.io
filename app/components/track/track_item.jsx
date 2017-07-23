@@ -55,7 +55,7 @@ const TrackItem = ({
 
 	return (
 		<div className="row">
-			<div className="col-sm-6 col-md-4 track-container">
+			<div className="col-sm-6 col-md-4 track-container" id={`track-#${track.id}`}>
 				<div className="thumbnail">
 					{/*  do NOT use image itself to set width of this, there's invisble white space on edges*/}
 					<div className="artwork-wrapper">

@@ -1,9 +1,6 @@
 import { connect } from 'react-redux';
-import * as _ from 'lodash';
-
 import BurnCartelPlayer from './burn_cartel_player';
 import {
-	updateTrackId,
 	updatePlayingTrackId
 } from '../../actions/feed_actions';
 import {
@@ -12,8 +9,7 @@ import {
 	setTrackNotLoaded,
 	updateCurrentTime,
 	toggleRepeat,
-	toggleShuffle,
-	reshuffleTracks
+	toggleShuffle
 } from '../../actions/player_actions';
 import { loginFB, likeUnlikeTrack } from '../../actions/user_actions';
 import {
@@ -27,7 +23,6 @@ import {
 } from '../../selectors/track_selector';
 
 const mapStateToProps = state => {
-	// const tracksHashRandom = getPlayingFeedTracksHashRandom(state);
 
 	let tracksHash, track, nextTrackId, prevTrackId;
 
