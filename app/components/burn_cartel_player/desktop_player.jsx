@@ -58,10 +58,6 @@ const DesktopPlayer = props => {
 						/>
 					</div>
 
-					<div className="volume-slider-container">
-						<VolumeControl />
-					</div>
-
 					{/* <FontAwesome.FaRepeat
 						size={40}
 						color={props.repeating ? '#0275d8' : 'white'}
@@ -72,6 +68,7 @@ const DesktopPlayer = props => {
 
 				<div className="burn-cartel-player-control-extra">
 
+					<VolumeControl />
 
 				</div>
 			</div>

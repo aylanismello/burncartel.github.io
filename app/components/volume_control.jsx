@@ -22,13 +22,16 @@ class VolumeControl extends React.Component {
 
   render() {
     return (
-      <div>
-        <FontAwesome.FaVolumeUp
-          size={40}
-          color={this.state.muted ? 'black' : 'white'}
-          className="bc-icon"
-          onClick={() => this.handleClick()}
-        />
+      <div className="volume-slider-container">
+        <div className="mute-button-container">
+          <FontAwesome.FaVolumeUp
+            size={25}
+            color={this.state.muted ? 'black' : 'white'}
+            className="bc-icon"
+            onClick={() => this.handleClick()}
+          />
+        </div>
+        
         <div className="volume-slider">
           <Slider
             value={this.state.volume}
