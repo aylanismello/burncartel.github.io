@@ -31,13 +31,15 @@ class VolumeControl extends React.Component {
             onClick={() => this.handleClick()}
           />
         </div>
-        
+
         <div className="volume-slider">
           <Slider
             value={this.state.volume}
             isVolume={true}
             onChange={newValue => {
-              window.sc.audio.volume = newValue / 100;
+              if(newValue !== this.state.volume) {
+                window.sc.audio.volume = newValue / 100;
+              }
             }}
           />
         </div>
