@@ -24,8 +24,15 @@ const DesktopPlayer = props => {
 				<div className="burn-cartel-player-control">
 
 					<div className="player-buttons">
+						<FontAwesome.FaRandom
+							size={25}
+							color={props.repeating ? '#0275d8' : 'white'}
+							className="bc-icon"
+							onClick={props.toggleRepeat}
+						/>
+
 						<FontAwesome.FaStepBackward
-							size={40}
+							size={30}
 							color="aliceblue"
 							className="bc-icon"
 							onClick={props.goToPrevTrack}
@@ -36,14 +43,14 @@ const DesktopPlayer = props => {
 						</div>
 
 						<FontAwesome.FaStepForward
-							size={40}
+							size={30}
 							color="aliceblue"
 							className="bc-icon"
 							onClick={props.goToNextTrack}
 						/>
 
 						<FontAwesome.FaRepeat
-							size={30}
+							size={25}
 							color={props.repeating ? '#0275d8' : 'white'}
 							className="bc-icon"
 							onClick={props.toggleRepeat}
