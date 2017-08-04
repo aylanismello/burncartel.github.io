@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { GoFlame } from 'react-icons/lib/go';
 import * as FontAwesome from 'react-icons/lib/fa/';
 import SideNavItem from './side_nav_item';
+import BCLogo from '../shared/bc_logo';
 
 const SideNavCaption = ({ text }) => (
 	<div className="side-nav-item-caption">
@@ -15,6 +16,13 @@ const SideNavCaption = ({ text }) => (
 const SideNav = props => {
 	return (
 		<div className="side-nav-container">
+
+			<div className="fire-feed-brand-container">
+			  <Link to="/">
+			    <img src="../../assets/fire_feed_logo_1.png" alt="Fire Feed" />
+				</Link>
+			</div>
+
 			<div className="side-nav">
 
 				<Link to="/">

@@ -161,7 +161,7 @@ const TrackItem = ({
 
 						<div className="metadata">
 							{Badge}
-							<TagList tagList={track.top_tags.slice(0, 4)} />
+							<TagList tagList={track.top_tags.slice(0, 6)} />
 						</div>
 
 					</div>

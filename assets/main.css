@@ -25,31 +25,36 @@ body {
   background-color: #292b2c;
   /* Black*/
   overflow-x: hidden;
-  /* Disable horizontal scroll */
-  padding-top: 60px;
-  /* Place content 60px from the top */ }
-  .side-nav-container .side-nav .side-nav-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    text-align: center;
-    justify-content: center;
-    width: 140px;
-    text-align: left;
-    height: 50px;
-    margin-bottom: 20px;
-    margin-left: 10px; }
-    .side-nav-container .side-nav .side-nav-item .side-nav-item-caption {
-      color: white;
-      text-decoration: none;
-      font-size: 16px; }
-    .side-nav-container .side-nav .side-nav-item:hover {
-      cursor: pointer; }
-    .side-nav-container .side-nav .side-nav-item .logged-in-user-avatar-container {
-      width: 40px; }
-      .side-nav-container .side-nav .side-nav-item .logged-in-user-avatar-container img {
-        width: 100%;
-        height: auto; }
+  /* Disable horizontal scroll */ }
+  .side-nav-container .fire-feed-brand-container {
+    border-bottom: 1px solid white; }
+    .side-nav-container .fire-feed-brand-container img {
+      width: auto;
+      height: 100%; }
+  .side-nav-container .side-nav {
+    margin-top: 1em; }
+    .side-nav-container .side-nav .side-nav-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      text-align: center;
+      justify-content: center;
+      width: 140px;
+      text-align: left;
+      height: 50px;
+      margin-bottom: 20px;
+      margin-left: 10px; }
+      .side-nav-container .side-nav .side-nav-item .side-nav-item-caption {
+        color: white;
+        text-decoration: none;
+        font-size: 16px; }
+      .side-nav-container .side-nav .side-nav-item:hover {
+        cursor: pointer; }
+      .side-nav-container .side-nav .side-nav-item .logged-in-user-avatar-container {
+        width: 40px; }
+        .side-nav-container .side-nav .side-nav-item .logged-in-user-avatar-container img {
+          width: 100%;
+          height: auto; }
 
 .user-home a {
   color: black;
@@ -179,6 +184,9 @@ body {
       width: 100%;
       height: auto;
       max-height: 35px; }
+
+.bc-nav {
+  height: 60px; }
 
 .navbar-brand .logo-container {
   width: 6em; }
@@ -328,7 +336,7 @@ body {
       .feed-container .track-container .right-side .bc-badge {
         font-size: 15px; }
       .feed-container .track-container .right-side .metadata .tag-list .bc-tag {
-        background: pink;
+        background: #FE6859;
         margin-right: 1em; }
         .feed-container .track-container .right-side .metadata .tag-list .bc-tag a {
           color: white;
