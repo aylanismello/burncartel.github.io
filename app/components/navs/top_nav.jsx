@@ -3,7 +3,7 @@ import $ from 'jquery';
 import React from 'react';
 import Modal from 'react-modal';
 import * as FontAwesome from 'react-icons/lib/fa/';
-
+import LoginModal from '../shared/login_modal';
 
 class TopNav extends React.Component {
 	constructor(props) {
@@ -101,40 +101,16 @@ class TopNav extends React.Component {
 							/>
 					</Link>
 
-
-
 					<div className="login-logout-container">
-
 						{this.renderLogoutButton()}
-
 					</div>
 
-					<Modal
-			      isOpen={this.state.open}
-			      onRequestClose={this.handleClose.bind(this)}
-						onAfterOpen={() => {}}
-			      contentLabel="Modal"
-			      style={style}
-						contentLabel="Example Modal">
-							<div className='modal-container'>
-								<div className='ff-welcome-text-container'>
-									<h4> Welcome to Fire Feed! </h4>
-
-									<p className='ff-welcome-text'> Fire Feed is only as smart as you let it be! Login
-											to start liking 🔥 tracks to optimize your feed 😃 </p>
-
-
-								</div>
-								<div className="fb-login-container">
-
-
-	              	<img className="login-out-img"
-	                     onClick={this.facebookLogin.bind(this)}
-	                     src='../../assets/fb_login.png' />
-
-	              </div>
-							</div>
-			    </Modal>
+					<LoginModal
+						isOpen={this.state.open}
+						onRequestClose={this.handleClose.bind(this)}
+						style={style}
+						fbLoginCallback={this.facebookLogin.bind(this)}
+					/>
 
 				</div>
 
