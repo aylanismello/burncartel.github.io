@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { GoFlame } from 'react-icons/lib/go';
 import FireLike from '../likes/fire_like';
+import TagList from '../shared/tag_list';
 import * as FontAwesome from 'react-icons/lib/fa/';
 
 const shortenLongWordsInTitle = title => {
@@ -15,6 +15,11 @@ const shortenLongWordsInTitle = title => {
 
 	return formattedTitle.join(' ');
 };
+
+const TrackBadge = ({ title }) => (
+	<span className="badge badge-default bc-badge">{title}</span>
+);
+
 
 const TrackItem = ({
 	track,
@@ -66,10 +71,22 @@ const TrackItem = ({
 		flameColor = 'black';
 	}
 
+	let Badge = null;
+
+	if (track.is_remix) {
+		Badge = <TrackBadge title="REMIX" />;
+	} else if (track.is_mix) {
+		Badge = <TrackBadge title="MIX" />;
+	} else if (track.is_bc) {
+		Badge = <TrackBadge title="BC PICK" />;
+	} else if (track.is_episode) {
+		Badge = <TrackBadge title="BC RADIO" />;
+	}
+
 	return (
 		<div className="row">
 			<div
-				className="col-sm-6 col-md-4 track-container"
+				className="col-sm-6 col-md-10 track-container"
 				id={`track-#${track.id}`}
 			>
 				<div className="thumbnail">
@@ -117,30 +134,37 @@ const TrackItem = ({
 						</div>
 					</div>
 
-					<div className="caption">
+					<div className="right-side">
+						<div className="caption">
 
-						<Link to={`/tracks/${track.id}`}>
-							<h3 className="track-title">
-								{shortenLongWordsInTitle(track.name)}
-							</h3>
-						</Link>
+							<Link to={`/tracks/${track.id}`}>
+								<h3 className="track-title">
+									{shortenLongWordsInTitle(track.name)}
+								</h3>
+							</Link>
 
-						{hasRanking
-							? <div>
-									<div>
-										<span>
-											{' '}By{' '}
-											<Link to={`/publishers/${track.publisher_id}`}>
-												{track.publisher.name}
-											</Link>
-										</span>
+							{hasRanking
+								? <div>
+										<div>
+											<span>
+												{' '}By{' '}
+												<Link to={`/publishers/${track.publisher_id}`}>
+													{track.publisher.name}
+												</Link>
+											</span>
+										</div>
+										<span>Selected by {curatorsStr} </span>
 									</div>
-									<span>Selected by {curatorsStr} </span>
-								</div>
-							: null}
+								: null}
+
+						</div>
+
+						<div className="metadata">
+							{Badge}
+							<TagList tagList={track.top_tags.slice(0, 4)} />
+						</div>
 
 					</div>
-
 				</div>
 
 			</div>

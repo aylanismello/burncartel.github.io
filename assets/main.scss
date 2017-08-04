@@ -422,6 +422,29 @@ body {
 		margin-bottom: 20px;
 
 
+		.right-side {
+			margin-left: 2em;
+			margin-top: 1em;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			.bc-badge {
+				font-size: 15px;
+			}
+			.metadata {
+				.tag-list {
+					.bc-tag {
+						background: pink;
+						margin-right: 1em;
+						
+						a {
+							color: white;
+							text-decoration: none;
+						}
+					}
+				}
+			}
+		}
 
 		.track-title {
 			&:hover {
@@ -573,8 +596,8 @@ body {
 	.thumbnail {
 		display: flex;
 		.caption {
-			margin-left: 2em;
-			margin-top: 1em;
+			// margin-left: 2em;
+			// margin-top: 1em;
 			h3 {
 				font-size: 1.35rem;
 			}

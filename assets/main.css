@@ -319,6 +319,20 @@ body {
     border-radius: 4px;
     padding: 20px;
     margin-bottom: 20px; }
+    .feed-container .track-container .right-side {
+      margin-left: 2em;
+      margin-top: 1em;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between; }
+      .feed-container .track-container .right-side .bc-badge {
+        font-size: 15px; }
+      .feed-container .track-container .right-side .metadata .tag-list .bc-tag {
+        background: pink;
+        margin-right: 1em; }
+        .feed-container .track-container .right-side .metadata .tag-list .bc-tag a {
+          color: white;
+          text-decoration: none; }
     .feed-container .track-container .track-title:hover {
       cursor: pointer; }
     .feed-container .track-container .track-item-icons {
@@ -408,10 +422,7 @@ body {
     left: 0; } }
 .track-container .thumbnail {
   display: flex; }
-  .track-container .thumbnail .caption {
-    margin-left: 2em;
-    margin-top: 1em; }
-    .track-container .thumbnail .caption h3 {
-      font-size: 1.35rem; }
+  .track-container .thumbnail .caption h3 {
+    font-size: 1.35rem; }
 
 /*# sourceMappingURL=main.css.map */
