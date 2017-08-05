@@ -343,7 +343,7 @@ body {
 			top: 60px;
 			background: $tinder-red;
 			width: $dropdown-width;
-			height: 140px;
+			height: 142px;
 			color: white;
 
 			.dropdown-menu-item {
@@ -361,10 +361,10 @@ body {
 				}
 
 				&:last-child {
-					border-top: 2px solid #e6ecf0;
+					border-top: 1.4px solid #e6ecf0;
 				}
-			}
 
+			}
 		}
 	}
 

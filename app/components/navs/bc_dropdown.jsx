@@ -7,46 +7,46 @@ const iconSize = 15;
 const renderDropdownMenu = (onClickLogout, closeDropdown) => (
 	<div className="dropdown-menu-container">
 
-		<Link to="/me">
-			<div className="dropdown-menu-item" onClick={closeDropdown}>
+		<Link to="/me" className="dropdown-menu-item" onClick={closeDropdown}>
+			<div className="dropdown-icon">
 				<FontAwesome.FaUser
 					size={iconSize}
 					color="aliceblue"
 					className="bc-icon"
 				/>
-				<div className="dropdown-text">
-					Profile
-				</div>
+			</div>
+			<div className="dropdown-text">
+				Profile
 			</div>
 		</Link>
 
-		<Link to="/me/likes">
-			<div className="dropdown-menu-item" onClick={closeDropdown}>
+		<Link to="/me/likes" className="dropdown-menu-item" onClick={closeDropdown}>
+			<div className="dropdown-icon">
 				<FontAwesome.FaHeart
 					size={iconSize}
 					color="aliceblue"
 					className="bc-icon"
 				/>
-				<div className="dropdown-text">
-					Likes
-				</div>
+			</div>
+			<div className="dropdown-text">
+				Likes
 			</div>
 		</Link>
 
-		<Link to="/help">
-			<div className="dropdown-menu-item" onClick={closeDropdown}>
+		<Link to="/help" className="dropdown-menu-item" onClick={closeDropdown}>
+			<div className="dropdown-icon">
 				<FontAwesome.FaQuestion
 					size={iconSize}
 					color="aliceblue"
 					className="bc-icon"
 				/>
-				<div className="dropdown-text">
-					Help
-				</div>
+			</div>
+			<div className="dropdown-text">
+				Help
 			</div>
 		</Link>
 
-		<div className="dropdown-menu-item" onClick={onClickLogout}>
+		<div className="dropdown-menu-item dropdown-text" onClick={onClickLogout}>
 			Log Out
 		</div>
 

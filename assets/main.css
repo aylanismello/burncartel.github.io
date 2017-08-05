@@ -243,7 +243,7 @@ body {
     top: 60px;
     background: #FE6859;
     width: 140px;
-    height: 140px;
+    height: 142px;
     color: white; }
     .bc-nav .bc-dropdown-container .dropdown-menu-container .dropdown-menu-item {
       padding: .5em .9em;
@@ -255,7 +255,7 @@ body {
       .bc-nav .bc-dropdown-container .dropdown-menu-container .dropdown-menu-item:hover {
         background: #ee5849; }
       .bc-nav .bc-dropdown-container .dropdown-menu-container .dropdown-menu-item:last-child {
-        border-top: 2px solid #e6ecf0; }
+        border-top: 1.4px solid #e6ecf0; }
 
 .navbar-brand .logo-container {
   width: 6em; }
