@@ -362,8 +362,7 @@ body {
   margin-right: 0; }
 
 .feed-container {
-  margin-bottom: 10em;
-  margin-top: 1.5em; }
+  margin: 1.5em 0 10em 1em; }
   .feed-container .track-container {
     background: white;
     border: 1px solid #ccc;
