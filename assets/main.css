@@ -221,6 +221,12 @@ body {
 
 .bc-nav {
   height: 60px; }
+  .bc-nav .bc-dropdown-container .bc-dropdown-avatar-container {
+    width: 38px; }
+    .bc-nav .bc-dropdown-container .bc-dropdown-avatar-container .bc-dropdown-avatar {
+      width: 100%;
+      height: auto;
+      border-radius: 1000px; }
 
 .navbar-brand .logo-container {
   width: 6em; }

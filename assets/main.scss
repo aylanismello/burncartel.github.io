@@ -309,6 +309,19 @@ body {
 .bc-nav {
 	height: 60px;
 
+	.bc-dropdown-container {
+		.bc-dropdown-avatar-container {
+			width: 38px;
+
+			.bc-dropdown-avatar {
+				width: 100%;
+				height: auto;
+				border-radius: 1000px;
+			}
+		}
+
+	}
+
 }
 .navbar-brand {
 	.logo-container {
@@ -515,15 +528,10 @@ body {
 			display: flex;
 			flex-direction: column;
 			justify-content: space-between;
-			.bc-badge {
-				font-size: 15px;
+				.bc-badge {
+					font-size: 15px;
+				}
 			}
-			// .metadata {
-
-			}
-		// }
-
-
 
 		.track-title {
 			&:hover {
@@ -558,18 +566,12 @@ body {
 	max-height: 300px;
 
 	margin: 0 auto; /* poor attempt at centering */
-
-	// height: auto !important; /* overrides inline */
-	// width: auto !important; /* overrides inline */
-
 	max-width: 300px;
 	display: inline;
 	&:hover {
 		cursor: pointer;
 	}
 }
-//
-
 
 .track-show {
 	.track-banner {
