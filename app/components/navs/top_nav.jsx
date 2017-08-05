@@ -5,15 +5,38 @@ import Modal from 'react-modal';
 import * as FontAwesome from 'react-icons/lib/fa/';
 import LoginModal from '../shared/login_modal';
 
+const loginTypes = {
+	LOGIN: 'LOGIN',
+	SIGNUP: 'SIGNUP'
+};
+
+const style = {
+  content : {
+    top                   : '50%',
+    left                  : '50%',
+    right                 : 'auto',
+    bottom                : 'auto',
+    marginRight           : '-50%',
+    transform             : 'translate(-50%, -50%)',
+		height								: '300px',
+		width									: '300px'
+  }
+};
+
 class TopNav extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			open: false,
-			loginText: ''
+			loginText: '',
+			loginType: ''
 		};
 
-		this.renderLogoutButton = this.renderLogoutButton.bind(this)
+		this.renderLoginOrLogoutButton = this.renderLoginOrLogoutButton.bind(this)
+		this.renderSignupButton = this.renderSignupButton.bind(this)
+		this.updateLoginTypeIfChanged = this.updateLoginTypeIfChanged.bind(this);
+		this.handleLoginClick = this.handleLoginClick.bind(this);
+		this.facebookLogout = this.facebookLogout.bind(this);
 	}
 
 	componentWillMount() {
@@ -30,7 +53,7 @@ class TopNav extends React.Component {
 
  }
 
- renderLogoutButton() {
+ renderLoginOrLogoutButton() {
 	 if(this.props.currentUser.uid) {
 		 return (
 		 	<Link to='/'>
@@ -41,15 +64,36 @@ class TopNav extends React.Component {
 			</Link>
 		);
 	 } else {
+
 		 return (
 		 <div className='login-logout-button'
-					onClick={this.props.currentUser.uid ? this.facebookLogout.bind(this) : () => this.setState({open: true})}>
+					onClick={() => this.handleLoginClick(loginTypes.LOGIN)}>
 			 {this.state.loginText}
 		 </div>
 		 );
 	 }
-
  }
+
+ renderSignupButton() {
+	  if(!this.props.currentUser.uid) {
+
+			return (
+				<div>
+					<span
+						className="badge sign-up"
+						onClick={() => this.handleLoginClick(loginTypes.SIGNUP)}>
+						Sign Up
+					</span>
+				</div>
+			)
+		} else {
+			return null;
+		}
+ }
+
+handleLoginClick(loginType) {
+	this.props.currentUser.uid ? this.facebookLogout() : this.setState({open: true, loginType})
+}
 
  handleClose() {
 	 this.setState({
@@ -72,21 +116,16 @@ class TopNav extends React.Component {
 		})
 	}
 
+	updateLoginTypeIfChanged(loginType) {
+
+		debugger;
+		if (this.state.loginType !== loginType) {
+			this.setState({ loginType: loginType });
+		}
+	}
+
 	render() {
-
-		const style = {
-	    content : {
-	      top                   : '50%',
-	      left                  : '50%',
-	      right                 : 'auto',
-	      bottom                : 'auto',
-	      marginRight           : '-50%',
-	      transform             : 'translate(-50%, -50%)',
-				height								: '300px',
-				width									: '300px'
-	    }
-	  };
-
+		console.dir(this.state);
 
 		return (
 			<nav className="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse bc-nav">
@@ -102,12 +141,14 @@ class TopNav extends React.Component {
 					</Link>
 
 					<div className="login-logout-container">
-						{this.renderLogoutButton()}
+						{this.renderLoginOrLogoutButton()}
+						{this.renderSignupButton()}
 					</div>
 
 					<LoginModal
 						isOpen={this.state.open}
 						onRequestClose={this.handleClose.bind(this)}
+						loginType={this.state.loginType}
 						style={style}
 						fbLoginCallback={this.facebookLogin.bind(this)}
 					/>

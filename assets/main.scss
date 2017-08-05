@@ -2,9 +2,10 @@
 @import 'util';
 $banner-background-color: #2e3740;
 $sidebar-width: 170px;
+$background-color: #E6ECF0;
 
 body {
-	background: whitesmoke;
+	background: $background-color;
 	font-family: 'Quicksand', sans-serif;
 }
 
@@ -227,6 +228,17 @@ body {
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+	text-align: center;
+
+	.ff-logo-container {
+		width: 70px;
+		margin-bottom: 2em;
+
+		img {
+			width: 100%;
+	    height: auto;
+		}
+	}
 
 	.ff-welcome-text-container {
 		.ff-welcome-text {
@@ -236,6 +248,8 @@ body {
 
 	.fb-login-container {
 		width: 70%;
+
+		margin-top: 1em;
 
 		&:hover {
 			cursor: pointer;
@@ -425,6 +439,7 @@ body {
 
 }
 
+
 .feed-container {
 	margin-bottom: 10em;
 	margin-top: 1.5em;
@@ -459,6 +474,8 @@ body {
 				}
 			}
 		}
+
+
 
 		.track-title {
 			&:hover {
@@ -562,6 +579,16 @@ body {
 	justify-content: space-between;
 	width: 100%;
 	align-items: center;
+	.login-logout-container {
+		display: flex;
+		font-size: 14px;
+
+		.sign-up {
+			background: #3CB46E;
+			margin-left: 1em;
+			font-size: 13px;
+		}
+	}
 }
 
 @media screen and (min-width:451px) /* Desktop */ {

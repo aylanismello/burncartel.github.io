@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Quicksand:400,700");
 body {
-  background: whitesmoke;
+  background: #E6ECF0;
   font-family: 'Quicksand', sans-serif; }
 
 .help-page {
@@ -173,11 +173,19 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center; }
+  justify-content: center;
+  text-align: center; }
+  .modal-container .ff-logo-container {
+    width: 70px;
+    margin-bottom: 2em; }
+    .modal-container .ff-logo-container img {
+      width: 100%;
+      height: auto; }
   .modal-container .ff-welcome-text-container .ff-welcome-text {
     text-align: center; }
   .modal-container .fb-login-container {
-    width: 70%; }
+    width: 70%;
+    margin-top: 1em; }
     .modal-container .fb-login-container:hover {
       cursor: pointer; }
     .modal-container .fb-login-container .login-out-img {
@@ -398,6 +406,13 @@ body {
   justify-content: space-between;
   width: 100%;
   align-items: center; }
+  .nav-buttons .login-logout-container {
+    display: flex;
+    font-size: 14px; }
+    .nav-buttons .login-logout-container .sign-up {
+      background: #3CB46E;
+      margin-left: 1em;
+      font-size: 13px; }
 
 @media screen and (min-width: 451px) {
   .container {
