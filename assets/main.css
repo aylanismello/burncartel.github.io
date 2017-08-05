@@ -39,7 +39,8 @@ body {
       position: fixed;
       width: 300px;
       justify-content: space-between;
-      align-items: center; }
+      align-items: center;
+      padding: 0 1em; }
       .side-nav-container .fire-feed-brand-container .follow-bc-container .follow-bc-description {
         color: white;
         margin-top: .4em;

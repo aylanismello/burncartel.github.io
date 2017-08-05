@@ -1,9 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { GoFlame } from 'react-icons/lib/go';
 import * as FontAwesome from 'react-icons/lib/fa/';
-import SideNavItem from './side_nav_item';
-import BCLogo from '../shared/bc_logo';
 import FireFeedBrand from './fire_feed_brand';
 
 const SideNavCaption = ({ text }) => (

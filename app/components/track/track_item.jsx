@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import * as FontAwesome from 'react-icons/lib/fa/';
 import FireLike from '../likes/fire_like';
 import TagList from '../shared/tag_list';
-import * as FontAwesome from 'react-icons/lib/fa/';
+import TrackBadge from '../shared/track_badge';
 
 const shortenLongWordsInTitle = title => {
 	const formattedTitle = title.split(' ').map(word => {
@@ -16,10 +17,9 @@ const shortenLongWordsInTitle = title => {
 	return formattedTitle.join(' ');
 };
 
-const TrackBadge = ({ title }) => (
-	<span className="badge badge-default bc-badge">{title}</span>
-);
-
+// const TrackBadge = ({ title }) => (
+// 	<span className="badge badge-default bc-badge">{title}</span>
+// );
 
 const TrackItem = ({
 	track,
@@ -62,26 +62,17 @@ const TrackItem = ({
 			playIcon = loadingIconUrl;
 		}
 	}
-
-	let flameColor;
-
-	if (isLikedByUser) {
-		flameColor = 'orange';
-	} else {
-		flameColor = 'black';
-	}
-
-	let Badge = null;
-
-	if (track.is_remix) {
-		Badge = <TrackBadge title="REMIX" />;
-	} else if (track.is_mix) {
-		Badge = <TrackBadge title="MIX" />;
-	} else if (track.is_bc) {
-		Badge = <TrackBadge title="BC PICK" />;
-	} else if (track.is_episode) {
-		Badge = <TrackBadge title="BC RADIO" />;
-	}
+	// let Badge = null;
+	//
+	// if (track.is_remix) {
+	// 	Badge = <TrackBadge title="REMIX" />;
+	// } else if (track.is_mix) {
+	// 	Badge = <TrackBadge title="MIX" />;
+	// } else if (track.is_bc) {
+	// 	Badge = <TrackBadge title="BC PICK" />;
+	// } else if (track.is_episode) {
+	// 	Badge = <TrackBadge title="BC RADIO" />;
+	// }
 
 	return (
 		<div className="row">
@@ -160,7 +151,7 @@ const TrackItem = ({
 						</div>
 
 						<div className="metadata">
-							{Badge}
+							<TrackBadge track={track} />
 							<TagList tagList={track.top_tags.slice(0, 6)} />
 						</div>
 

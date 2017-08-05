@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import TagList from '../shared/tag_list';
 import * as FontAwesome from 'react-icons/lib/fa/';
+import TagList from '../shared/tag_list';
+import TrackBadge from '../shared/track_badge';
+
 
 const TrackBanner = ({
 	track,
@@ -34,17 +36,18 @@ const TrackBanner = ({
 		? track.artwork_url
 		: track.publisher.avatar_url;
 
-		// for some reasion FireLike size must be set in CSS*
+	// for some reasion FireLike size must be set in CSS*
 	return (
 		<div className="thumbnail track-banner">
-				<div className="left-side">
+			<div className="left-side">
 
 				<div className="track-title-container">
 					<h2 className="track-title"> {track.name} </h2>
 				</div>
 
 				<Link to={`/publishers/${track.publisher.id}`}>
-					<h3 className="clickable-banner-metadata">{track.publisher.name} </h3>{' '}
+					<h3 className="clickable-banner-metadata">{track.publisher.name} </h3>
+					{' '}
 				</Link>
 
 				<div className="artwork-wrapper">
@@ -59,6 +62,9 @@ const TrackBanner = ({
 			</div>
 			<div className="right-side">
 				<TagList tagList={track.top_tags.slice(0, 5)} />
+
+				<TrackBadge track={track} size={20} />
+
 				<div className="track-banner-icons-container">
 					<div className="track-item-icon">
 						<a href={track.permalink_url} target="_blank">
