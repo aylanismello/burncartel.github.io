@@ -81,12 +81,6 @@ class TopNav extends React.Component {
 					closeDropdown={() => this.setState({ dropdownOpen: false })}
 				/>
 			);
-			// 	<Link to='/'>
-			//  	<div className='login-logout-button'
-			//  onClick={this.props.currentUser.uid ? this.facebookLogout.bind(this) : () => this.setState({open: true})}>
-			// 		{this.state.loginText}
-			// 	</div>
-			// </Link>
 		} else {
 			return (
 				<div

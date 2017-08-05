@@ -33,7 +33,7 @@ const SideNav = props => {
 					</div>
 				</Link>
 
-				<div classNam="navbar-brand-container">
+				<div className="navbar-brand-container">
 					<Link className="navbar-brand" to="/bc">
 						<div className="side-nav-item">
 							<div className="logo-container">

@@ -7,33 +7,44 @@ const iconSize = 15;
 const renderDropdownMenu = (onClickLogout, closeDropdown) => (
 	<div className="dropdown-menu-container">
 
-		<div className="dropdown-menu-item" onClick={closeDropdown}>
-			<Link to="/me">
-				<FontAwesome.FaUser size={iconSize} color="aliceblue" className="bc-icon" />
+		<Link to="/me">
+			<div className="dropdown-menu-item" onClick={closeDropdown}>
+				<FontAwesome.FaUser
+					size={iconSize}
+					color="aliceblue"
+					className="bc-icon"
+				/>
 				<div className="dropdown-text">
 					Profile
 				</div>
-			</Link>
-		</div>
+			</div>
+		</Link>
 
-		<div className="dropdown-menu-item" onClick={closeDropdown}>
-			<Link to="/me/likes">
-					<FontAwesome.FaHeart size={iconSize} color="aliceblue" className="bc-icon" />
-					<div className="dropdown-text">
-						Likes
-					</div>
-			</Link>
-		</div>
+		<Link to="/me/likes">
+			<div className="dropdown-menu-item" onClick={closeDropdown}>
+				<FontAwesome.FaHeart
+					size={iconSize}
+					color="aliceblue"
+					className="bc-icon"
+				/>
+				<div className="dropdown-text">
+					Likes
+				</div>
+			</div>
+		</Link>
 
-
-		<div className="dropdown-menu-item" onClick={closeDropdown}>
-			<Link to="/help">
-					<FontAwesome.FaQuestion size={iconSize} color="aliceblue" className="bc-icon" />
-					<div className="dropdown-text">
-						Help
-					</div>
-			</Link>
-		</div>
+		<Link to="/help">
+			<div className="dropdown-menu-item" onClick={closeDropdown}>
+				<FontAwesome.FaQuestion
+					size={iconSize}
+					color="aliceblue"
+					className="bc-icon"
+				/>
+				<div className="dropdown-text">
+					Help
+				</div>
+			</div>
+		</Link>
 
 		<div className="dropdown-menu-item" onClick={onClickLogout}>
 			Log Out
@@ -64,12 +75,6 @@ const BCDropdown = ({
 			</div>
 
 			{dropdownOpen ? renderDropdownMenu(onClickLogout, closeDropdown) : null}
-
-			{/* <Link to="/">
-				<div className="login-logout-button" onClick={onClickLogout}>
-					{loginText}
-				</div>
-			</Link> */}
 		</div>
 	);
 };
