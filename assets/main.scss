@@ -3,6 +3,8 @@
 $banner-background-color: #2e3740;
 $sidebar-width: 170px;
 $background-color: #E6ECF0;
+$side-nav-color: #292b2c;
+$tinder-red: #FE6859;
 
 body {
 	background: $background-color;
@@ -28,18 +30,58 @@ body {
 	z-index: 100000; /* Stay on top */
 	top: 0;
 	left: 0;
-	background-color: #292b2c; /* Black*/
+	background-color: $side-nav-color; /* Black*/
 	overflow-x: hidden; /* Disable horizontal scroll */
 	// padding-top: 60px; /* Place content 60px from the top */
 
 	.fire-feed-brand-container {
 		border-bottom: 1px solid white;
+		height: 61px;
+
+		.fire-feed-brand {
+			position: fixed;
+		}
+
+		.follow-bc-container {
+			left: 170px;
+	    display: none;
+	    background: $side-nav-color;
+			height: 60px;
+			position: fixed;
+		  width: 300px;
+		  justify-content: space-between;
+		  align-items: center;
+
+			.follow-bc-description {
+				color: white;
+		    margin-top: .4em;
+		    margin-right: .7em;
+			}
+
+			.bc-icon {
+				border-radius: 10000px;
+				padding: .5em;
+				&:hover {
+					background: $tinder-red;
+				}
+			}
+		}
+
 		img {
 			width: auto;
 			height: 100%;
 		}
-		// padding: 5px 0;
+
+		&:hover {
+			cursor: pointer;
+
+			.follow-bc-container {
+				display: flex;
+				cursor: initial;
+			}
+		}
 	}
+
 
 	.side-nav {
 		margin-top: 1em;
@@ -441,7 +483,7 @@ body {
 
 .tag-list {
 	.bc-tag {
-		background: #FE6859;
+		background: $tinder-red;
 		margin-right: 1em;
 
 		.bc-tag-link {

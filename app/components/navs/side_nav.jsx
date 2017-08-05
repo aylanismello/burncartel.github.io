@@ -4,6 +4,7 @@ import { GoFlame } from 'react-icons/lib/go';
 import * as FontAwesome from 'react-icons/lib/fa/';
 import SideNavItem from './side_nav_item';
 import BCLogo from '../shared/bc_logo';
+import FireFeedBrand from './fire_feed_brand';
 
 const SideNavCaption = ({ text }) => (
 	<div className="side-nav-item-caption">
@@ -17,11 +18,7 @@ const SideNav = props => {
 	return (
 		<div className="side-nav-container">
 
-			<div className="fire-feed-brand-container">
-			  <Link to="/">
-			    <img src="../../assets/fire_feed_logo_1.png" alt="Fire Feed" />
-				</Link>
-			</div>
+			<FireFeedBrand />
 
 			<div className="side-nav">
 
@@ -36,14 +33,18 @@ const SideNav = props => {
 					</div>
 				</Link>
 
-				<Link className="navbar-brand" to="/bc">
-					<div className="side-nav-item">
-						<div className="logo-container">
-							<img src="../../assets/bc_small_1.png" alt="Burn Cartel" />
+				<div classNam="navbar-brand-container">
+					<Link className="navbar-brand" to="/bc">
+						<div className="side-nav-item">
+							<div className="logo-container">
+								<img src="../../assets/bc_small_1.png" alt="Burn Cartel" />
+							</div>
+							<SideNavCaption text="Curated" />
 						</div>
-						<SideNavCaption text="Curated" />
-					</div>
-				</Link>
+					</Link>
+
+
+				</div>
 
 				{props.currentUserId
 					? <Link to="/me/likes">
