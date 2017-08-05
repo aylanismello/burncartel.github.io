@@ -6,11 +6,13 @@ const PublisherBanner = ({ user }) => {
 		<div
 			className="thumbnail track-banner"
 		>
-			<h2> {user.name}</h2>
-			<img src={user.avatar_url} />
-			{renderUserHandles(user.handles)}
-			<h3> Most selected by </h3>
-			{renderUserList(user.top_curators, 'curators')}
+			<div className="left-side">
+				<h2> {user.name}</h2>
+				<img src={user.avatar_url} />
+				{renderUserHandles(user.handles)}
+				<h3> Most selected by </h3>
+				{renderUserList(user.top_curators, 'curators')}
+			</div>
 		</div>
 	);
 };
