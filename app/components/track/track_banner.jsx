@@ -34,38 +34,41 @@ const TrackBanner = ({
 		? track.artwork_url
 		: track.publisher.avatar_url;
 
+		// for some reasion FireLike size must be set in CSS*
 	return (
 		<div className="thumbnail track-banner">
-			<h2> {track.name} </h2>
-			<Link to={`/publishers/${track.publisher.id}`}>
-				<h3 className="clickable-banner-metadata">{track.publisher.name} </h3>{' '}
-			</Link>
+				<div className="left-side">
+				<h2> {track.name} </h2>
+				<Link to={`/publishers/${track.publisher.id}`}>
+					<h3 className="clickable-banner-metadata">{track.publisher.name} </h3>{' '}
+				</Link>
 
-			<div className="artwork-wrapper">
-				<img src={trackImageUrl} className="artwork-icon" />
-				<img
-					onClick={() => handleTrackClick(track.id, 'play')}
-					src={playIcon}
-					className="artwork-play"
-				/>
-			</div>
-
-			<div className="track-banner-icons-container">
-				<div className="track-item-icon">
-					<a href={track.permalink_url} target="_blank">
-						<FontAwesome.FaSoundcloud
-							size={40}
-							color="aliceblue"
-							className="soundcloud-png"
-						/>
-					</a>
+				<div className="artwork-wrapper">
+					<img src={trackImageUrl} className="artwork-icon" />
+					<img
+						onClick={() => handleTrackClick(track.id, 'play')}
+						src={playIcon}
+						className="artwork-play"
+					/>
 				</div>
 
-				{children}
 			</div>
+			<div className="right-side">
+				<TagList tagList={track.top_tags.slice(0, 5)} />
+				<div className="track-banner-icons-container">
+					<div className="track-item-icon">
+						<a href={track.permalink_url} target="_blank">
+							<FontAwesome.FaSoundcloud
+								size={43}
+								color="aliceblue"
+								className="soundcloud-png"
+							/>
+						</a>
+					</div>
 
-			<TagList tagList={track.top_tags.slice(0, 6)} />
-
+					{children}
+				</div>
+			</div>
 		</div>
 	);
 };

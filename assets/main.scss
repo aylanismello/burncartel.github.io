@@ -449,6 +449,10 @@ body {
 			text-decoration: none;
 		}
 	}
+
+	.bc-tag:last-child {
+		margin-right: 0;
+	}
 }
 
 
@@ -530,44 +534,69 @@ body {
 		background: $banner-background-color;
 		border: 2px solid black;
 		border-radius: 20px;
-		padding: 1em;
+    padding: 1em 3em;;
 		color: aliceblue;
+		display: flex;
+		justify-content: space-between;
 
-		a {
-			color: lightgreen;
+		.left-side {
+
+			a {
+				color: lightgreen;
+			}
+
+			.track-item-icon {
+				margin-right: 2em;
+			}
+
+			.clickable-banner-metadata {
+				color: lightgreen;
+				text-decoration: underline;
+				display: flex;
+
+				.tiny-avatar-container {
+					width: 20px;
+					margin-right: .5em;
+
+					img {
+						width: 100%;
+						height: auto;
+					}
+
+				}
+			}
+
+
 		}
 
-		.track-item-icon {
-			margin-right: 2em;
-		}
-
-		.clickable-banner-metadata {
-			color: lightgreen;
-			text-decoration: underline;
+		.right-side {
 			display: flex;
+	    flex-direction: column-reverse;
+			align-items: flex-end;
+			justify-content: space-between;
 
-			.tiny-avatar-container {
-				width: 20px;
-				margin-right: .5em;
+			.bc-tag-link {
+				font-size: 15px;
+			}
+			.track-banner-icons-container {
+				display: flex;
+				background: inherit;
+				justify-content: flex-start;
+				align-items: center;
+		    flex-direction: column;
+				margin-top: 3em;
+		    border-left: 3px solid #e6ecf0;
+		    padding-left: .5em;
 
-				// a {
-				// 	color: lightgreen;
-				// }
-
-				img {
-					width: 100%;
-					height: auto;
+				.track-item-icon {
+					margin-bottom: 2em;
 				}
 
+				.like-icon-container {
+					width: 40px;
+					height: 40px;
+				}
 			}
-		}
-
-
-		.track-banner-icons-container {
-			display: flex;
-			background: inherit;
-			justify-content: flex-start;
-	    align-items: center;
 		}
 	}
 }

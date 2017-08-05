@@ -6,7 +6,8 @@ const FireLike = ({ isLoggedIn,
   likePostInProgress, likeUnlikeTrack,
   numLikes, loginFB, isLikedByUser, trackId,
   size = 50 }) => {
-
+// SIZE does not work, it does nothing.
+// this must be changed in css
 
 
   let likesDisplay = numLikes;

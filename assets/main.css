@@ -332,6 +332,8 @@ body {
   .tag-list .bc-tag .bc-tag-link {
     color: white;
     text-decoration: none; }
+.tag-list .bc-tag:last-child {
+  margin-right: 0; }
 
 .feed-container {
   margin-bottom: 10em;
@@ -379,27 +381,45 @@ body {
   background: #2e3740;
   border: 2px solid black;
   border-radius: 20px;
-  padding: 1em;
-  color: aliceblue; }
-  .track-show .track-banner a {
+  padding: 1em 3em;
+  color: aliceblue;
+  display: flex;
+  justify-content: space-between; }
+  .track-show .track-banner .left-side a {
     color: lightgreen; }
-  .track-show .track-banner .track-item-icon {
+  .track-show .track-banner .left-side .track-item-icon {
     margin-right: 2em; }
-  .track-show .track-banner .clickable-banner-metadata {
+  .track-show .track-banner .left-side .clickable-banner-metadata {
     color: lightgreen;
     text-decoration: underline;
     display: flex; }
-    .track-show .track-banner .clickable-banner-metadata .tiny-avatar-container {
+    .track-show .track-banner .left-side .clickable-banner-metadata .tiny-avatar-container {
       width: 20px;
       margin-right: .5em; }
-      .track-show .track-banner .clickable-banner-metadata .tiny-avatar-container img {
+      .track-show .track-banner .left-side .clickable-banner-metadata .tiny-avatar-container img {
         width: 100%;
         height: auto; }
-  .track-show .track-banner .track-banner-icons-container {
+  .track-show .track-banner .right-side {
     display: flex;
-    background: inherit;
-    justify-content: flex-start;
-    align-items: center; }
+    flex-direction: column-reverse;
+    align-items: flex-end;
+    justify-content: space-between; }
+    .track-show .track-banner .right-side .bc-tag-link {
+      font-size: 15px; }
+    .track-show .track-banner .right-side .track-banner-icons-container {
+      display: flex;
+      background: inherit;
+      justify-content: flex-start;
+      align-items: center;
+      flex-direction: column;
+      margin-top: 3em;
+      border-left: 3px solid #e6ecf0;
+      padding-left: .5em; }
+      .track-show .track-banner .right-side .track-banner-icons-container .track-item-icon {
+        margin-bottom: 2em; }
+      .track-show .track-banner .right-side .track-banner-icons-container .like-icon-container {
+        width: 40px;
+        height: 40px; }
 
 .nav-buttons {
   display: flex;
