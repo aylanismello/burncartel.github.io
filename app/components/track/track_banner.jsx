@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import TagList from '../shared/tag_list';
 import * as FontAwesome from 'react-icons/lib/fa/';
 
 const TrackBanner = ({
@@ -62,6 +63,8 @@ const TrackBanner = ({
 
 				{children}
 			</div>
+
+			<TagList tagList={track.top_tags.slice(0, 6)} />
 
 		</div>
 	);

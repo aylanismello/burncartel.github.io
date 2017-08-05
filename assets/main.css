@@ -326,6 +326,13 @@ body {
       top: 40px;
       left: 40px; }
 
+.tag-list .bc-tag {
+  background: #FE6859;
+  margin-right: 1em; }
+  .tag-list .bc-tag .bc-tag-link {
+    color: white;
+    text-decoration: none; }
+
 .feed-container {
   margin-bottom: 10em;
   margin-top: 1.5em; }
@@ -343,12 +350,6 @@ body {
       justify-content: space-between; }
       .feed-container .track-container .right-side .bc-badge {
         font-size: 15px; }
-      .feed-container .track-container .right-side .metadata .tag-list .bc-tag {
-        background: #FE6859;
-        margin-right: 1em; }
-        .feed-container .track-container .right-side .metadata .tag-list .bc-tag a {
-          color: white;
-          text-decoration: none; }
     .feed-container .track-container .track-title:hover {
       cursor: pointer; }
     .feed-container .track-container .track-item-icons {

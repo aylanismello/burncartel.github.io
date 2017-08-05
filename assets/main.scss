@@ -439,6 +439,18 @@ body {
 
 }
 
+.tag-list {
+	.bc-tag {
+		background: #FE6859;
+		margin-right: 1em;
+
+		.bc-tag-link {
+			color: white;
+			text-decoration: none;
+		}
+	}
+}
+
 
 .feed-container {
 	margin-bottom: 10em;
@@ -460,20 +472,10 @@ body {
 			.bc-badge {
 				font-size: 15px;
 			}
-			.metadata {
-				.tag-list {
-					.bc-tag {
-						background: #FE6859;
-						margin-right: 1em;
+			// .metadata {
 
-						a {
-							color: white;
-							text-decoration: none;
-						}
-					}
-				}
 			}
-		}
+		// }
 
 
 
