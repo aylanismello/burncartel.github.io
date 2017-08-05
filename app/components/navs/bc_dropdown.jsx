@@ -1,24 +1,39 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import * as FontAwesome from 'react-icons/lib/fa/';
+
+const iconSize = 15;
 
 const renderDropdownMenu = (onClickLogout, closeDropdown) => (
 	<div className="dropdown-menu-container">
 
-		<Link to="/me">
-			<div
-        className="dropdown-menu-item"
-        onClick={closeDropdown}>
-				Profile
-			</div>
-		</Link>
+		<div className="dropdown-menu-item" onClick={closeDropdown}>
+			<Link to="/me">
+				<FontAwesome.FaUser size={iconSize} color="aliceblue" className="bc-icon" />
+				<div className="dropdown-text">
+					Profile
+				</div>
+			</Link>
+		</div>
 
-		<Link to="/me/likes">
-			<div
-        className="dropdown-menu-item"
-        onClick={closeDropdown}>
-				Likes
-			</div>
-		</Link>
+		<div className="dropdown-menu-item" onClick={closeDropdown}>
+			<Link to="/me/likes">
+					<FontAwesome.FaHeart size={iconSize} color="aliceblue" className="bc-icon" />
+					<div className="dropdown-text">
+						Likes
+					</div>
+			</Link>
+		</div>
+
+
+		<div className="dropdown-menu-item" onClick={closeDropdown}>
+			<Link to="/help">
+					<FontAwesome.FaQuestion size={iconSize} color="aliceblue" className="bc-icon" />
+					<div className="dropdown-text">
+						Help
+					</div>
+			</Link>
+		</div>
 
 		<div className="dropdown-menu-item" onClick={onClickLogout}>
 			Log Out
@@ -33,7 +48,7 @@ const BCDropdown = ({
 	user,
 	dropdownOpen,
 	onClick,
-  closeDropdown
+	closeDropdown
 }) => {
 	const { photo_url, name } = user;
 

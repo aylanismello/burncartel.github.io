@@ -38,14 +38,19 @@ class TopNav extends React.Component {
 		this.updateLoginTypeIfChanged = this.updateLoginTypeIfChanged.bind(this);
 		this.handleLoginClick = this.handleLoginClick.bind(this);
 		this.facebookLogout = this.facebookLogout.bind(this);
+		this.closeDropdownIfPossible = this.closeDropdownIfPossible.bind(this);
 	}
 
 	componentWillMount() {
 		Modal.setAppElement('body');
 
 		document.body.addEventListener('click', (e) => {
-			if (!e.target.className.includes('dropdown') && this.state.dropdownOpen) {
-				this.setState({ dropdownOpen: false });
+			this.closeDropdownIfPossible(e);
+		});
+
+		document.addEventListener('keydown', e => {
+			if (e.keyCode === 27 && e.target === document.body) {
+				this.closeDropdownIfPossible(e);
 			}
 		});
 	}
@@ -55,6 +60,12 @@ class TopNav extends React.Component {
 			this.setState({ loginText: 'Logout' });
 		} else {
 			this.setState({ loginText: 'Login' });
+		}
+	}
+
+	closeDropdownIfPossible(e) {
+		if (!e.target.className.includes('dropdown') && this.state.dropdownOpen) {
+			this.setState({ dropdownOpen: false });
 		}
 	}
 

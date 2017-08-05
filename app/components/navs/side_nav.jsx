@@ -83,7 +83,7 @@ const SideNav = props => {
 						</Link>
 					: null} */}
 
-				<Link to="/help">
+				{/* <Link to="/help">
 					<div className="side-nav-item">
 						<FontAwesome.FaQuestion
 							size={40}
@@ -92,7 +92,7 @@ const SideNav = props => {
 						/>
 						<SideNavCaption text="Help" />
 					</div>
-				</Link>
+				</Link> */}
 
 			</div>
 		</div>
