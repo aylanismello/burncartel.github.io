@@ -29,7 +29,8 @@ class TopNav extends React.Component {
 		this.state = {
 			open: false,
 			loginText: '',
-			loginType: ''
+			loginType: '',
+			dropdownOpen: false
 		};
 
 		this.renderLoginOrLogoutButton = this.renderLoginOrLogoutButton.bind(this);
@@ -41,6 +42,12 @@ class TopNav extends React.Component {
 
 	componentWillMount() {
 		Modal.setAppElement('body');
+
+		document.body.addEventListener('click', (e) => {
+			if (!e.target.className.includes('dropdown') && this.state.dropdownOpen) {
+				this.setState({ dropdownOpen: false });
+			}
+		});
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -56,8 +63,11 @@ class TopNav extends React.Component {
 			return (
 				<BCDropdown
 					onClickLogout={this.facebookLogout.bind(this)}
+					onClick={() => this.setState({ dropdownOpen: !this.state.dropdownOpen})}
 					loginText={this.state.loginText}
 					user={this.props.currentUser}
+					dropdownOpen={this.state.dropdownOpen}
+					closeDropdown={() => this.setState({ dropdownOpen: false })}
 				/>
 			);
 			// 	<Link to='/'>
@@ -117,8 +127,11 @@ class TopNav extends React.Component {
 	facebookLogout() {
 		FB.logout();
 		this.props.logoutCurrentUser();
+
+		// redirect to home page after logging out.. how?
 		this.setState({
-			loginText: 'Login'
+			loginText: 'Login',
+			dropdownOpen: false
 		});
 	}
 
@@ -130,8 +143,6 @@ class TopNav extends React.Component {
 	}
 
 	render() {
-		console.dir(this.state);
-
 		return (
 			<nav className="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse bc-nav">
 

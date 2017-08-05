@@ -46,7 +46,7 @@ const SideNav = props => {
 
 				</div>
 
-				{props.currentUserId
+				{/* {props.currentUserId
 					? <Link to="/me/likes">
 							<div className="side-nav-item">
 								<GoFlame size={40} color="aliceblue" className="bc-icon" />
@@ -54,7 +54,7 @@ const SideNav = props => {
 								<SideNavCaption text="Likes" />
 							</div>
 						</Link>
-					: null}
+					: null} */}
 
 				{props.currentUserId
 					? <Link to="/me/feed">
@@ -70,7 +70,7 @@ const SideNav = props => {
 						</Link>
 					: null}
 
-				{props.currentUserId
+				{/* {props.currentUserId
 					? <Link to={`/me`}>
 							<div className="side-nav-item">
 								<FontAwesome.FaUser
@@ -81,7 +81,7 @@ const SideNav = props => {
 								<SideNavCaption text="Account" />
 							</div>
 						</Link>
-					: null}
+					: null} */}
 
 				<Link to="/help">
 					<div className="side-nav-item">

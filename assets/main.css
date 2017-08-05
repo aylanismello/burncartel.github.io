@@ -221,12 +221,33 @@ body {
 
 .bc-nav {
   height: 60px; }
-  .bc-nav .bc-dropdown-container .bc-dropdown-avatar-container {
-    width: 38px; }
-    .bc-nav .bc-dropdown-container .bc-dropdown-avatar-container .bc-dropdown-avatar {
-      width: 100%;
-      height: auto;
-      border-radius: 1000px; }
+  .bc-nav .bc-dropdown-container .bc-dropdown-avatar-name {
+    background: #FE6859;
+    width: 140px;
+    height: 60px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center; }
+    .bc-nav .bc-dropdown-container .bc-dropdown-avatar-name .bc-dropdown-name {
+      font-size: 16px; }
+    .bc-nav .bc-dropdown-container .bc-dropdown-avatar-name .bc-dropdown-avatar-container {
+      position: relative;
+      width: 38px; }
+      .bc-nav .bc-dropdown-container .bc-dropdown-avatar-name .bc-dropdown-avatar-container .bc-dropdown-avatar {
+        width: 100%;
+        height: auto;
+        border-radius: 1000px; }
+  .bc-nav .bc-dropdown-container .dropdown-menu-container {
+    position: absolute;
+    top: 60px;
+    background: #FE6859;
+    width: 140px;
+    height: 120px;
+    color: white; }
+    .bc-nav .bc-dropdown-container .dropdown-menu-container .dropdown-menu-item {
+      padding: .5em 1em; }
+      .bc-nav .bc-dropdown-container .dropdown-menu-container .dropdown-menu-item:hover {
+        background: #ee5849; }
 
 .navbar-brand .logo-container {
   width: 6em; }
