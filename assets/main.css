@@ -385,20 +385,27 @@ body {
   color: aliceblue;
   display: flex;
   justify-content: space-between; }
-  .track-show .track-banner .left-side a {
-    color: lightgreen; }
-  .track-show .track-banner .left-side .track-item-icon {
-    margin-right: 2em; }
-  .track-show .track-banner .left-side .clickable-banner-metadata {
-    color: lightgreen;
-    text-decoration: underline;
-    display: flex; }
-    .track-show .track-banner .left-side .clickable-banner-metadata .tiny-avatar-container {
-      width: 20px;
-      margin-right: .5em; }
-      .track-show .track-banner .left-side .clickable-banner-metadata .tiny-avatar-container img {
-        width: 100%;
-        height: auto; }
+  .track-show .track-banner .left-side {
+    width: 40%; }
+    .track-show .track-banner .left-side .track-title-container {
+      height: 4.5em; }
+      .track-show .track-banner .left-side .track-title-container .track-title {
+        position: absolute;
+        width: 70%; }
+    .track-show .track-banner .left-side a {
+      color: lightgreen; }
+    .track-show .track-banner .left-side .track-item-icon {
+      margin-right: 2em; }
+    .track-show .track-banner .left-side .clickable-banner-metadata {
+      color: lightgreen;
+      text-decoration: underline;
+      display: flex; }
+      .track-show .track-banner .left-side .clickable-banner-metadata .tiny-avatar-container {
+        width: 20px;
+        margin-right: .5em; }
+        .track-show .track-banner .left-side .clickable-banner-metadata .tiny-avatar-container img {
+          width: 100%;
+          height: auto; }
   .track-show .track-banner .right-side {
     display: flex;
     flex-direction: column-reverse;

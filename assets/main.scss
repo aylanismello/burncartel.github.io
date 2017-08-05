@@ -540,6 +540,15 @@ body {
 		justify-content: space-between;
 
 		.left-side {
+			width: 40%;
+
+			.track-title-container {
+				height: 4.5em;
+				.track-title {
+					position: absolute;
+			    width: 70%;
+				}
+			}
 
 			a {
 				color: lightgreen;

@@ -38,7 +38,11 @@ const TrackBanner = ({
 	return (
 		<div className="thumbnail track-banner">
 				<div className="left-side">
-				<h2> {track.name} </h2>
+
+				<div className="track-title-container">
+					<h2 className="track-title"> {track.name} </h2>
+				</div>
+
 				<Link to={`/publishers/${track.publisher.id}`}>
 					<h3 className="clickable-banner-metadata">{track.publisher.name} </h3>{' '}
 				</Link>
