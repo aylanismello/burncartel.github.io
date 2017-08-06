@@ -402,8 +402,8 @@ body {
     justify-content: center;
     width: 42px;
     height: 42px;
-    top: 45px;
-    left: 45px;
+    top: 43px;
+    left: 43px;
     background-color: rgba(0, 0, 0, 0.52);
     border-radius: 3px; }
 
@@ -464,10 +464,11 @@ body {
   .track-show .track-banner .left-side {
     width: 40%; }
     .track-show .track-banner .left-side .track-title-container {
-      height: 4.5em; }
+      height: 2.5em; }
       .track-show .track-banner .left-side .track-title-container .track-title {
         position: absolute;
-        width: 70%; }
+        width: 80%;
+        font-size: 25px; }
     .track-show .track-banner .left-side a {
       color: lightgreen; }
     .track-show .track-banner .left-side .track-item-icon {
@@ -475,7 +476,8 @@ body {
     .track-show .track-banner .left-side .clickable-banner-metadata {
       color: lightgreen;
       text-decoration: underline;
-      display: flex; }
+      display: flex;
+      font-size: 1.0em; }
       .track-show .track-banner .left-side .clickable-banner-metadata .tiny-avatar-container {
         width: 20px;
         margin-right: .5em; }
@@ -495,9 +497,9 @@ body {
       justify-content: flex-start;
       align-items: center;
       flex-direction: column;
-      margin-top: 3em;
+      margin-top: .5em;
       border-left: 3px solid #e6ecf0;
-      padding-left: .5em; }
+      padding-left: 1em; }
       .track-show .track-banner .right-side .track-banner-icons-container .track-item-icon {
         margin-bottom: 2em; }
       .track-show .track-banner .right-side .track-banner-icons-container .like-icon-container {

@@ -5,6 +5,9 @@ import TagList from '../shared/tag_list';
 import TrackBadge from '../shared/track_badge';
 import BCAlbumArt from '../shared/bc_album_art';
 
+const maxTitleLength = 72;
+const formatName = name => (name.length < maxTitleLength ? name : `${name.slice(0, maxTitleLength)}...`);
+
 const TrackBanner = ({
 	track,
 	playingTrackId,
@@ -13,14 +16,13 @@ const TrackBanner = ({
 	handleTrackClick,
 	children
 }) => {
-
 	// for some reasion FireLike size must be set in CSS*
 	return (
 		<div className="thumbnail track-banner">
 			<div className="left-side">
 
 				<div className="track-title-container">
-					<h2 className="track-title"> {track.name} </h2>
+					<h2 className="track-title"> {formatName(track.name)} </h2>
 				</div>
 
 				<Link to={`/publishers/${track.publisher.id}`}>

@@ -4,36 +4,29 @@ import FeedContainer from '../feed/feed_container';
 import Loading from '../shared/loading';
 
 class PublisherShow extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+	constructor(props) {
+		super(props);
+	}
 
-  componentWillMount() {
-    this.props.updateFilters({ resource: 'publishers', id: this.props.id });
-  }
+	componentWillMount() {
+		this.props.updateFilters({ resource: 'publishers', id: this.props.id });
+	}
 
-  render() {
+	render() {
+		if (this.props.loadingFeed && !this.props.tracksPage) {
+			return <Loading />;
+		} else if (Object.keys(this.props.publisher).length > 0) {
+			return (
+				<div className="container track-show">
+					<PublisherBanner user={this.props.publisher} />
 
-    if(this.props.loadingFeed && !this.props.tracksPage) {
-      return <Loading />;
-    } else if(Object.keys(this.props.publisher).length > 0){
-      return (
-        <div className='container track-show'>
-          <PublisherBanner
-            user={this.props.publisher}
-          />
-
-          <FeedContainer />
-        </div>
-      )
-    } else {
-      return (
-        <div>
-
-        </div>
-      )
-    }
-  }
+					<FeedContainer />
+				</div>
+			);
+		} else {
+			return <div />;
+		}
+	}
 }
 
 export default PublisherShow;
