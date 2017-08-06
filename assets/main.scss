@@ -531,6 +531,10 @@ body {
 
 .artwork-wrapper {
 
+	.sk-spinner {
+		color: white;
+	}
+
 	position: relative;
 	margin: 1em 0;
 
@@ -550,11 +554,17 @@ body {
 		}
 	}
 
+
 	.artwork-play {
 		position: absolute;
-		width: 40px;
+		display: flex;
+		justify-content: center;
+		width: 42px;
+		height: 42px;
 		top: 45px;
 		left: 45px;
+		background-color: rgba(0, 0, 0, 0.52);
+		border-radius: 3px;
 	}
 
 }
@@ -562,9 +572,6 @@ body {
 .cursor-pointer-grow {
 	&:hover {
 		cursor: pointer;
-		width: 50px;
-		top: 40px;
-		left: 40px;
 	}
 }
 

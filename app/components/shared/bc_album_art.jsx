@@ -2,10 +2,7 @@ import React from 'react';
 import * as FontAwesome from 'react-icons/lib/fa/';
 import BCSpinner from './bc_spinner';
 
-const playIconUrl =
-	'https://cdn3.iconfinder.com/data/icons/seo-marketing-2-1/48/56-128.png';
-const pauseIconUrl =
-	'https://cdn1.iconfinder.com/data/icons/media-volume-1/48/017-512.png';
+const iconSize = 40;
 
 const BCAlbumArt = ({
 	hasRanking,
@@ -23,43 +20,40 @@ const BCAlbumArt = ({
 
 	let showLoading = false;
 
-	let currentIcon = (
-		<img
-			onClick={handleTrackClick}
-			src={playIconUrl}
+	const playIcon = (
+		<FontAwesome.FaPlay
+			size={iconSize}
+			color="white"
 			className="artwork-play cursor-pointer-grow"
+			onClick={handleTrackClick}
 		/>
 	);
+
+	const pauseIcon = (
+		<FontAwesome.FaPause
+			size={iconSize}
+			color="white"
+			className="artwork-play cursor-pointer-grow"
+			onClick={handleTrackClick}
+		/>
+	);
+
+	let currentIcon = playIcon;
 
 	if (playingTrackId === trackId) {
 		if (trackLoaded && playing) {
 			showLoading = false;
-			currentIcon = (
-				<img
-					onClick={handleTrackClick}
-					src={pauseIconUrl}
-					className="artwork-play cursor-pointer-grow"
-				/>
-			);
+			currentIcon = pauseIcon;
 		} else if (trackLoaded && !playing) {
 			showLoading = false;
-			currentIcon = (
-				<img
-					onClick={handleTrackClick}
-					src={playIconUrl}
-					className="artwork-play cursor-pointer-grow"
-				/>
-			);
+			currentIcon = playIcon;
 		} else {
-			// currentIcon = <BCSpinner extraClass="artwork-play" />;
 			currentIcon = null;
 			showLoading = true;
 		}
 	}
 
-	// const extraClass = showLoading ? 'artwork-play' : 'artwork-play display-none';
 	const extraClass = showLoading ? 'artwork-play' : 'artwork-play display-none';
-	// const extraClass = 'artwork-play';
 
 	return (
 		<div className="artwork-wrapper">
@@ -72,9 +66,11 @@ const BCAlbumArt = ({
 				: null}
 
 			<img src={artworkUrl} className="artwork-icon" />
-			{currentIcon}
-			<BCSpinner extraClass={extraClass} />
-			{/* <img onClick={handleTrackClick} src={playIconUrl} className="artwork-play" /> */}
+
+			<div className="current-icon-container">
+				{currentIcon}
+				<BCSpinner extraClass={extraClass} name="line-scale-pulse-out-rapid" />
+			</div>
 		</div>
 	);
 };

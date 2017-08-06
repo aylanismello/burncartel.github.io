@@ -385,6 +385,8 @@ body {
 .artwork-wrapper {
   position: relative;
   margin: 1em 0; }
+  .artwork-wrapper .sk-spinner {
+    color: white; }
   .artwork-wrapper .ranking-header {
     position: absolute;
     color: white;
@@ -399,15 +401,17 @@ body {
       cursor: pointer; }
   .artwork-wrapper .artwork-play {
     position: absolute;
-    width: 40px;
+    display: flex;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
     top: 45px;
-    left: 45px; }
+    left: 45px;
+    background-color: rgba(0, 0, 0, 0.52);
+    border-radius: 3px; }
 
 .cursor-pointer-grow:hover {
-  cursor: pointer;
-  width: 50px;
-  top: 40px;
-  left: 40px; }
+  cursor: pointer; }
 
 .tag-list .bc-tag:last-child {
   margin-right: 0; }
