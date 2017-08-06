@@ -13,6 +13,13 @@ body {
 	font-family: 'Quicksand', sans-serif;
 }
 
+.loading-container {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+}
+
 .help-page {
 	padding: 1em;
 }

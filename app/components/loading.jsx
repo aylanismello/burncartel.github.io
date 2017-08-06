@@ -1,10 +1,15 @@
 import React from 'react';
+import BCSpinner from './shared/bc_spinner';
 
 const Loading = () => (
 	<div className="loading-container">
-		<h1>
-			LOADING
-		</h1>
+		<span className="loading-text">
+			<h3>
+				LOADING
+			</h3>
+		</span>
+
+		<BCSpinner />
 	</div>
 );
 
