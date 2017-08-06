@@ -1,6 +1,6 @@
 import React from 'react';
 import TagList from '../shared/tag_list';
-import Loading from '../loading';
+import Loading from '../shared/loading';
 import { renderUserList } from '../../util/component_helpers';
 
 const CuratorBanner = ({ user }) => {

@@ -4,7 +4,7 @@ import * as Typicons from 'react-icons/lib/ti/';
 import { GoFlame } from 'react-icons/lib/go';
 import Infinite from 'react-infinite';
 import TrackItem from '../track/track_item';
-import Loading from '../loading';
+import Loading from '../shared/loading';
 
 const Feed = ({ tracks, filters, trackLoaded,
 	handleTrackClick, loadingFeed, trackId,

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import * as FontAwesome from 'react-icons/lib/fa/';
 import TagList from '../shared/tag_list';
 import TrackBadge from '../shared/track_badge';
-
+import BCAlbumArt from '../shared/bc_album_art';
 
 const TrackBanner = ({
 	track,
@@ -13,28 +13,6 @@ const TrackBanner = ({
 	handleTrackClick,
 	children
 }) => {
-	const playIconUrl =
-		'https://cdn3.iconfinder.com/data/icons/seo-marketing-2-1/48/56-128.png';
-	const pauseIconUrl =
-		'https://cdn1.iconfinder.com/data/icons/media-volume-1/48/017-512.png';
-	const loadingIconUrl =
-		'https://cdn1.iconfinder.com/data/icons/loading-wait-time/256/loading_wait_time_02-128.png';
-
-	let playIcon = playIconUrl;
-
-	if (playingTrackId === track.id) {
-		if (trackLoaded && playing) {
-			playIcon = pauseIconUrl;
-		} else if (trackLoaded && !playing) {
-			playIcon = playIconUrl;
-		} else {
-			playIcon = loadingIconUrl;
-		}
-	}
-
-	const trackImageUrl = track.artwork_url
-		? track.artwork_url
-		: track.publisher.avatar_url;
 
 	// for some reasion FireLike size must be set in CSS*
 	return (
@@ -50,14 +28,14 @@ const TrackBanner = ({
 					{' '}
 				</Link>
 
-				<div className="artwork-wrapper">
-					<img src={trackImageUrl} className="artwork-icon" />
-					<img
-						onClick={() => handleTrackClick(track.id, 'play')}
-						src={playIcon}
-						className="artwork-play"
-					/>
-				</div>
+				<BCAlbumArt
+					trackId={track.id}
+					playingTrackId={playingTrackId}
+					trackLoaded={trackLoaded}
+					playing={playing}
+					handleTrackClick={() => handleTrackClick(track.id, 'play')}
+					track={track}
+				/>
 
 			</div>
 			<div className="right-side">

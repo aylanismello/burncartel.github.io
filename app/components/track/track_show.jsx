@@ -1,6 +1,6 @@
 import React from 'react';
 import TrackBanner from './track_banner';
-import Loading from '../loading';
+import Loading from '../shared/loading';
 import CuratorList from '../curator/curator_list';
 import FireLike from '../likes/fire_like';
 

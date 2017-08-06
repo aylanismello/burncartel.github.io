@@ -1,8 +1,6 @@
-import React from "react";
-import ReactMarkdown from "react-markdown";
-import FeedContainer from "../feed/feed_container";
-import Loading from "../loading";
-import { FEEDS } from "../../reducers/feed_reducer";
+import React from 'react';
+import ReactMarkdown from 'react-markdown';
+import FeedContainer from '../feed/feed_container';
 
 const input = `
   ## uh-oh!
@@ -21,7 +19,7 @@ class UserFeedShow extends React.Component {
 	componentWillMount() {
 		if (this.props.currentUserId) {
 			this.props.updateFilters({
-				resource: "user_feed",
+				resource: 'user_feed',
 				id: this.props.currentUserId
 			});
 		}
@@ -30,14 +28,14 @@ class UserFeedShow extends React.Component {
 	componentWillReceiveProps(nextProps) {
 		if (nextProps.currentUserId) {
 			this.props.updateFilters({
-				resource: "user_feed",
+				resource: 'user_feed',
 				id: nextProps.currentUserId
 			});
 		}
 	}
 
 	render() {
-		let name = "the dopest person in the 🌌";
+		let name = 'the dopest person in the 🌌';
 		if (this.props.userName) {
 			name = this.props.userName;
 		}
@@ -52,11 +50,9 @@ class UserFeedShow extends React.Component {
 			return (
 				<div className="container user-show">
 					<h2> {name}'s 🔥 Feed 🎵 </h2>
-          <button
-            onClick={this.props.resetPersonalFeed}
-            >
-            Reset My Feed
-          </button>
+					<button onClick={this.props.resetPersonalFeed}>
+						Reset My Feed
+					</button>
 					<FeedContainer />
 				</div>
 			);

@@ -1,7 +1,7 @@
 import React from 'react';
 import PublisherBanner from './publisher_banner';
 import FeedContainer from '../feed/feed_container';
-import Loading from '../loading';
+import Loading from '../shared/loading';
 
 class PublisherShow extends React.Component {
   constructor(props) {

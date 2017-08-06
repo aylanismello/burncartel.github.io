@@ -4,6 +4,7 @@ import * as FontAwesome from 'react-icons/lib/fa/';
 import FireLike from '../likes/fire_like';
 import TagList from '../shared/tag_list';
 import TrackBadge from '../shared/track_badge';
+import BCAlbumArt from '../shared/bc_album_art';
 
 const shortenLongWordsInTitle = title => {
 	const formattedTitle = title.split(' ').map(word => {
@@ -16,10 +17,6 @@ const shortenLongWordsInTitle = title => {
 
 	return formattedTitle.join(' ');
 };
-
-// const TrackBadge = ({ title }) => (
-// 	<span className="badge badge-default bc-badge">{title}</span>
-// );
 
 const TrackItem = ({
 	track,
@@ -40,38 +37,27 @@ const TrackItem = ({
 	const curatorWord = numCurators <= 1 ? 'curator' : 'curators';
 	const curatorsStr = `${numCurators} ${curatorWord}`;
 
-	const artwork_url = track.artwork_url
-		? track.artwork_url
-		: track.publisher.avatar_url;
+	// const artwork_url = track.artwork_url
+	// 	? track.artwork_url
+	// 	: track.publisher.avatar_url;
 
-	const playIconUrl =
-		'https://cdn3.iconfinder.com/data/icons/seo-marketing-2-1/48/56-128.png';
-	const pauseIconUrl =
-		'https://cdn1.iconfinder.com/data/icons/media-volume-1/48/017-512.png';
-	const loadingIconUrl =
-		'https://cdn1.iconfinder.com/data/icons/loading-wait-time/256/loading_wait_time_02-128.png';
-
-	let playIcon = playIconUrl;
-
-	if (playingTrackId === track.id) {
-		if (trackLoaded && playing) {
-			playIcon = pauseIconUrl;
-		} else if (trackLoaded && !playing) {
-			playIcon = playIconUrl;
-		} else {
-			playIcon = loadingIconUrl;
-		}
-	}
-	// let Badge = null;
+	// const playIconUrl =
+	// 	'https://cdn3.iconfinder.com/data/icons/seo-marketing-2-1/48/56-128.png';
+	// const pauseIconUrl =
+	// 	'https://cdn1.iconfinder.com/data/icons/media-volume-1/48/017-512.png';
+	// const loadingIconUrl =
+	// 	'https://cdn1.iconfinder.com/data/icons/loading-wait-time/256/loading_wait_time_02-128.png';
 	//
-	// if (track.is_remix) {
-	// 	Badge = <TrackBadge title="REMIX" />;
-	// } else if (track.is_mix) {
-	// 	Badge = <TrackBadge title="MIX" />;
-	// } else if (track.is_bc) {
-	// 	Badge = <TrackBadge title="BC PICK" />;
-	// } else if (track.is_episode) {
-	// 	Badge = <TrackBadge title="BC RADIO" />;
+	// let playIcon = playIconUrl;
+	//
+	// if (playingTrackId === track.id) {
+	// 	if (trackLoaded && playing) {
+	// 		playIcon = pauseIconUrl;
+	// 	} else if (trackLoaded && !playing) {
+	// 		playIcon = playIconUrl;
+	// 	} else {
+	// 		playIcon = loadingIconUrl;
+	// 	}
 	// }
 
 	return (
@@ -83,22 +69,17 @@ const TrackItem = ({
 				<div className="thumbnail">
 					{/*  do NOT use image itself to set width of this, there's invisble white space on edges*/}
 					<div className="left-side">
-						<div className="artwork-wrapper">
-							{hasRanking
-								? <h2>
-										<span className="ranking-header">
-											{trackIdx + 1}
-										</span>
-									</h2>
-								: null}
 
-							<img src={artwork_url} className="artwork-icon" />
-							<img
-								onClick={() => handleTrackClick(track.id, 'play')}
-								src={playIcon}
-								className="artwork-play"
-							/>
-						</div>
+						<BCAlbumArt
+							hasRanking={hasRanking}
+							trackIdx={trackIdx}
+							trackId={track.id}
+							playingTrackId={playingTrackId}
+							trackLoaded={trackLoaded}
+							playing={playing}
+							handleTrackClick={() => handleTrackClick(track.id, 'play')}
+							track={track}
+						/>
 
 						<div className="track-item-icons">
 							<FireLike
