@@ -37,29 +37,6 @@ const TrackItem = ({
 	const curatorWord = numCurators <= 1 ? 'curator' : 'curators';
 	const curatorsStr = `${numCurators} ${curatorWord}`;
 
-	// const artwork_url = track.artwork_url
-	// 	? track.artwork_url
-	// 	: track.publisher.avatar_url;
-
-	// const playIconUrl =
-	// 	'https://cdn3.iconfinder.com/data/icons/seo-marketing-2-1/48/56-128.png';
-	// const pauseIconUrl =
-	// 	'https://cdn1.iconfinder.com/data/icons/media-volume-1/48/017-512.png';
-	// const loadingIconUrl =
-	// 	'https://cdn1.iconfinder.com/data/icons/loading-wait-time/256/loading_wait_time_02-128.png';
-	//
-	// let playIcon = playIconUrl;
-	//
-	// if (playingTrackId === track.id) {
-	// 	if (trackLoaded && playing) {
-	// 		playIcon = pauseIconUrl;
-	// 	} else if (trackLoaded && !playing) {
-	// 		playIcon = playIconUrl;
-	// 	} else {
-	// 		playIcon = loadingIconUrl;
-	// 	}
-	// }
-
 	return (
 		<div className="row">
 			<div
