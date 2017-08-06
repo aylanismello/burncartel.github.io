@@ -53,16 +53,18 @@ const BCAlbumArt = ({
 		}
 	}
 
-	const extraClass = showLoading ? 'artwork-play' : 'artwork-play visibility-hidden';
+	const extraClass = showLoading
+		? 'artwork-play'
+		: 'artwork-play visibility-hidden';
 
 	return (
 		<div className="artwork-wrapper">
 			{hasRanking
-				? <h2>
+				? <h5>
 						<span className="ranking-header">
 							{trackIdx + 1}
 						</span>
-					</h2>
+					</h5>
 				: null}
 
 			<img src={artworkUrl} className="artwork-icon" />

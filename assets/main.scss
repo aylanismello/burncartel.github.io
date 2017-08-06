@@ -6,7 +6,7 @@ $background-color: #E6ECF0;
 $side-nav-color: #292b2c;
 $tinder-red: #FE6859;
 $dropdown-width: 140px;
-$top-nav-height: 60px;
+$top-nav-height: 50px;
 
 body {
 	background: $background-color;
@@ -57,11 +57,9 @@ body {
 	left: 0;
 	background-color: $side-nav-color; /* Black*/
 	overflow-x: hidden; /* Disable horizontal scroll */
-	// padding-top: 60px; /* Place content 60px from the top */
 
 	.fire-feed-brand-container {
-		border-bottom: 1px solid white;
-		height: 61px;
+		height: $top-nav-height + 1;
 
 		.fire-feed-brand {
 			position: fixed;
@@ -71,7 +69,7 @@ body {
 			left: 170px;
 	    display: none;
 	    background: $side-nav-color;
-			height: 60px;
+			height: $top-nav-height;
 			position: fixed;
 		  width: 300px;
 		  justify-content: space-between;
@@ -368,7 +366,7 @@ body {
 
 		.dropdown-menu-container {
 			position: absolute;
-			top: 60px;
+			top: $top-nav-height;
 			background: $tinder-red;
 			width: $dropdown-width;
 			height: 142px;
@@ -544,7 +542,7 @@ body {
 		 letter-spacing: -1px;
 		 background: rgb(0, 0, 0); /* fallback color */
 		 background: rgba(0, 0, 0, 0.7);
-		 padding: 10px;
+		 padding: 7px;
 	}
 
 	.artwork-icon {
@@ -615,7 +613,7 @@ body {
 			display: flex;
 			justify-content: space-around;
 			align-items: center;
-			
+
 			.track-item-icon-container {
 				width: 50px;
 				&:hover {
