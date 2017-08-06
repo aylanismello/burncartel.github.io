@@ -10,6 +10,7 @@ import Help from './help';
 import BurnCartelCurated from './curated/burn_cartel_curated';
 import TrackShowContainer from './track/track_show_container';
 import CuratorShowContainer from './curator/curator_show_container';
+import TagShowContainer from './tag/tag_show_container';
 import LikesShowContainer from './likes/likes_show_container';
 import PublisherShowContainer from './publisher/publisher_show_container';
 import UserFeedShowContainer from './user/user_feed_show_container';
@@ -36,6 +37,7 @@ const AppRouter = () => (
 				<Route path="/publishers/:id" component={PublisherShowContainer} />
 				<Route path="/tracks/:id" component={TrackShowContainer} />
 				<Route path="/curators/:id" component={CuratorShowContainer} />
+				<Route path="/tags/:id" component={TagShowContainer} />
 				<Route path="/me/likes" component={LikesShowContainer} />
 				<Route path="/me/feed" component={UserFeedShowContainer} />
 				<Route path="/me" component={UserHomeContainer} />

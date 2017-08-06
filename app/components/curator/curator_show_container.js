@@ -1,17 +1,12 @@
 import { connect } from 'react-redux';
-import { getCuratorFromTracks } from '../../selectors/curator_selector';
 import { updateFilters, setFeedType } from '../../actions/feed_actions';
 import CuratorShow from './curator_show';
-
-// maybe use selectors here? this is weird.
 
 const mapStateToProps = (state, ownProps) => ({
 	id: ownProps.match.params.id,
 	curator: state.feed.CURATORS,
 	loadingFeed: state.feed.loadingFeed,
 	tracksPage: state.feed.pagination.tracks_page
-	// this.props.loadingFeed || Object.keys(this.props.publisher).length === 0
-	// curator: getCuratorFromTracks(state)
 });
 
 const mapDispatchToProps = dispatch => ({

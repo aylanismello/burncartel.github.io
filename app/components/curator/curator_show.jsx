@@ -4,10 +4,6 @@ import FeedContainer from '../feed/feed_container';
 import Loading from '../loading';
 
 class CuratorShow extends React.Component {
-	constructor(props) {
-		super(props);
-	}
-
 	componentWillMount() {
 		this.props.updateFilters({ resource: 'curators', id: this.props.id });
 	}

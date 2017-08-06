@@ -23,6 +23,7 @@ const initialState = {
 	CURATORS: {},
 	SINGLE_TRACK: {},
 	USER: {},
+	TAGS: {},
 	playingFeed: {
 		tracks: [],
 		trackId: null,

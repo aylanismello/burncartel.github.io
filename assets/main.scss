@@ -24,6 +24,22 @@ body {
 	}
 }
 
+.bc-tag {
+	background: $tinder-red;
+	margin-right: 1em;
+
+	&:hover {
+		cursor: pointer;
+		background: darken($tinder-red, 10%);
+	}
+
+	.bc-tag-link {
+		color: white;
+		text-decoration: none;
+		height: 0px;
+	}
+}
+
 
 .side-nav-container {
 	height: 100%; /* 100% Full-height */
@@ -542,15 +558,7 @@ body {
 }
 
 .tag-list {
-	.bc-tag {
-		background: $tinder-red;
-		margin-right: 1em;
 
-		.bc-tag-link {
-			color: white;
-			text-decoration: none;
-		}
-	}
 
 	.bc-tag:last-child {
 		margin-right: 0;
@@ -565,9 +573,7 @@ body {
 		background: white;
 		border: 1px solid #ccc;
 		border-radius: 4px;
-		padding: 20px;
-		margin-bottom: 20px;
-
+    padding: 0px 20px 10px 20px;
 
 		.right-side {
 			margin-left: 2em;

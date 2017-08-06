@@ -35,7 +35,6 @@ class TopNav extends React.Component {
 
 		this.renderLoginOrLogoutButton = this.renderLoginOrLogoutButton.bind(this);
 		this.renderSignupButton = this.renderSignupButton.bind(this);
-		this.updateLoginTypeIfChanged = this.updateLoginTypeIfChanged.bind(this);
 		this.handleLoginClick = this.handleLoginClick.bind(this);
 		this.facebookLogout = this.facebookLogout.bind(this);
 		this.closeDropdownIfPossible = this.closeDropdownIfPossible.bind(this);
@@ -44,7 +43,7 @@ class TopNav extends React.Component {
 	componentWillMount() {
 		Modal.setAppElement('body');
 
-		document.body.addEventListener('click', (e) => {
+		document.body.addEventListener('click', e => {
 			this.closeDropdownIfPossible(e);
 		});
 
@@ -74,7 +73,8 @@ class TopNav extends React.Component {
 			return (
 				<BCDropdown
 					onClickLogout={this.facebookLogout.bind(this)}
-					onClick={() => this.setState({ dropdownOpen: !this.state.dropdownOpen})}
+					onClick={() =>
+						this.setState({ dropdownOpen: !this.state.dropdownOpen })}
 					loginText={this.state.loginText}
 					user={this.props.currentUser}
 					dropdownOpen={this.state.dropdownOpen}
@@ -138,13 +138,6 @@ class TopNav extends React.Component {
 			loginText: 'Login',
 			dropdownOpen: false
 		});
-	}
-
-	updateLoginTypeIfChanged(loginType) {
-		debugger;
-		if (this.state.loginType !== loginType) {
-			this.setState({ loginType: loginType });
-		}
 	}
 
 	render() {
