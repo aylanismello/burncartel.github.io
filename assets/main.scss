@@ -20,6 +20,10 @@ body {
 	align-items: center;
 }
 
+.display-none {
+	visibility: hidden;
+}
+
 .help-page {
 	padding: 1em;
 }
@@ -551,17 +555,17 @@ body {
 		width: 40px;
 		top: 45px;
 		left: 45px;
-
-
-
-		&:hover {
-			cursor: pointer;
-			width: 50px;
-			top: 40px;
-			left: 40px;
-		}
 	}
 
+}
+
+.cursor-pointer-grow {
+	&:hover {
+		cursor: pointer;
+		width: 50px;
+		top: 40px;
+		left: 40px;
+	}
 }
 
 .tag-list {

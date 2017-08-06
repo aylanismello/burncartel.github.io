@@ -9,6 +9,9 @@ body {
   flex-direction: column;
   align-items: center; }
 
+.display-none {
+  visibility: hidden; }
+
 .help-page {
   padding: 1em; }
 
@@ -399,11 +402,12 @@ body {
     width: 40px;
     top: 45px;
     left: 45px; }
-    .artwork-wrapper .artwork-play:hover {
-      cursor: pointer;
-      width: 50px;
-      top: 40px;
-      left: 40px; }
+
+.cursor-pointer-grow:hover {
+  cursor: pointer;
+  width: 50px;
+  top: 40px;
+  left: 40px; }
 
 .tag-list .bc-tag:last-child {
   margin-right: 0; }
