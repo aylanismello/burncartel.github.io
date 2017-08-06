@@ -9,9 +9,6 @@ body {
   flex-direction: column;
   align-items: center; }
 
-.display-none {
-  visibility: hidden; }
-
 .help-page {
   padding: 1em; }
 
@@ -554,5 +551,13 @@ body {
   display: flex; }
   .track-container .thumbnail .caption h3 {
     font-size: 1.35rem; }
+
+.bottom-loading-spinner {
+  position: absolute;
+  bottom: -70px;
+  left: 40px; }
+
+.visibility-hidden {
+  visibility: hidden; }
 
 /*# sourceMappingURL=main.css.map */

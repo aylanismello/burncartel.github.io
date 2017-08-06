@@ -20,10 +20,6 @@ body {
 	align-items: center;
 }
 
-.display-none {
-	visibility: hidden;
-}
-
 .help-page {
 	padding: 1em;
 }
@@ -799,4 +795,16 @@ body {
 			}
 		}
 	}
+}
+
+
+// ON DEMAND STYLES
+.bottom-loading-spinner {
+	position: absolute;
+  bottom: -70px;
+  left: 40px;
+}
+
+.visibility-hidden {
+	visibility: hidden;
 }

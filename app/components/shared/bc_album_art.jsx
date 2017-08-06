@@ -53,7 +53,7 @@ const BCAlbumArt = ({
 		}
 	}
 
-	const extraClass = showLoading ? 'artwork-play' : 'artwork-play display-none';
+	const extraClass = showLoading ? 'artwork-play' : 'artwork-play visibility-hidden';
 
 	return (
 		<div className="artwork-wrapper">
