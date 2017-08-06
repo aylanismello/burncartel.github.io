@@ -186,10 +186,13 @@ body {
     cursor: pointer; }
 
 .like-icon-container {
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  padding: 2px 6px 3px 0px;
+  height: 23px;
   background: whitesmoke;
-  border-radius: 10px; }
+  border-radius: 10px;
+  display: flex;
+  align-items: center; }
   .like-icon-container:hover {
     cursor: pointer; }
   .like-icon-container .like-icon {
@@ -432,7 +435,8 @@ body {
       cursor: pointer; }
     .feed-container .track-container .track-item-icons {
       display: flex;
-      justify-content: space-around; }
+      justify-content: space-around;
+      align-items: center; }
       .feed-container .track-container .track-item-icons .track-item-icon-container {
         width: 50px; }
         .feed-container .track-container .track-item-icons .track-item-icon-container:hover {
