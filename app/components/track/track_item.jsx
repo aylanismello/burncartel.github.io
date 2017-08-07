@@ -95,13 +95,16 @@ const TrackItem = ({
 
 							{hasRanking
 								? <div>
-										<div>
-											<span>
+										<div className="curators-link">
+											<div className="before-info-dropdown">
 												{' '}By{' '}
+											</div>
+											<span>
 												<InfoDropdown
-													users={track.curators}
-													userType="curators"
-													length={track.curators.length}
+													user={track.publisher}
+													users={track.suggested_publishers}
+													userType="publishers"
+													length={2}
 												>
 													<Link to={`/publishers/${track.publisher_id}`}>
 														{track.publisher.name}

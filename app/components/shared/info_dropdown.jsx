@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import UserList from './user_list';
+import BCAvatarLink from './bc_avatar_link';
+import { Link } from 'react-router-dom';
 
 const pagination = 8;
 
@@ -37,25 +39,38 @@ class InfoDropdown extends React.Component {
 		const { users, userType, children, length } = this.props;
 		return (
 			<div className={className}>
-
-				<UserList
-					users={users}
-					userType={userType}
-					length={this.state.currentLength}
-				/>
-				{this.state.currentLength < length
-					? this.renderMoreContentButton(length)
-					: null}
+				<div className="curator-list">
+					<UserList
+						users={users}
+						userType={userType}
+						length={this.state.currentLength}
+					/>
+					{this.state.currentLength < length
+						? this.renderMoreContentButton(length)
+						: null}
+				</div>
 			</div>
 		);
 	}
 
 	renderPublisherMeta(className) {
-		const { users, userType, user } = this.props;
-
-		return(
+		const { userType, user, users } = this.props;
+		// length is how many suggestions to make
+		return (
 			<div className={className}>
-
+				<div className="publisher-meta">
+					<BCAvatarLink
+						userType={userType}
+						userId={user.id}
+						avatarUrl={user.avatar_url}
+						userName={user.name}
+						avatarSize="large"
+					/>
+					<div className="suggested-publishers">
+						<h5> Sounds like: </h5>
+						<UserList users={users} userType={userType} length={5} />
+					</div>
+				</div>
 			</div>
 		);
 	}

@@ -12,6 +12,7 @@ const UserList = ({ users, userType, length }) => {
 						userId={user.id}
 						avatarUrl={user.avatar_url}
 						userName={user.name}
+						avatarSize="small"
 					/>
 				))}
 		</div>

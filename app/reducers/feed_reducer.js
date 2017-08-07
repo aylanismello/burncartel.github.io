@@ -81,7 +81,6 @@ const FeedReducer = (state = initialState, action) => {
 		case feedConstants.RESET_TRACKS:
 			return { ...state, focusedFeed: { ...state.focusedFeed, tracks: [] } };
 		case feedConstants.RECEIVE_TRACKS:
-			const newTracks = {};
 			return {
 				...state,
 				focusedFeed: {
@@ -95,7 +94,6 @@ const FeedReducer = (state = initialState, action) => {
 				playingFeed: { ...state.playingFeed, tracks: action.tracks }
 			};
 		case feedConstants.RECEIVE_PLAYING_TRACKS_SHUFFLED:
-			debugger;
 			return {
 				...state,
 				playingFeedShuffled: { ...state.playingFeedShuffled, tracks: action.tracks }
