@@ -1,7 +1,27 @@
 @import url("https://fonts.googleapis.com/css?family=Quicksand:400,700");
+.info-dropdown-container .hover-on-element {
+  position: relative; }
+  .info-dropdown-container .hover-on-element:hover {
+    cursor: pointer; }
+    .info-dropdown-container .hover-on-element:hover .info-dropdown {
+      display: block; }
+  .info-dropdown-container .hover-on-element .info-dropdown {
+    position: absolute;
+    top: 20px;
+    border: 2px solid red;
+    border-radius: 5px;
+    background: black;
+    width: 150px;
+    height: 150px;
+    z-index: 1000; }
+
 body {
   background: #E6ECF0;
   font-family: 'Quicksand', sans-serif; }
+
+a:hover {
+  text-decoration: none;
+  cursor: pointer; }
 
 .loading-container {
   display: flex;
@@ -554,6 +574,10 @@ body {
     left: 0; } }
 .track-container .thumbnail {
   display: flex; }
+  .track-container .thumbnail .caption .curators-link {
+    display: flex; }
+    .track-container .thumbnail .caption .curators-link .before-info-dropdown {
+      margin-right: .3em; }
   .track-container .thumbnail .caption h3 {
     font-size: 1.35rem; }
 

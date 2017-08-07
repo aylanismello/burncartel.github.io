@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Quicksand:400,700');
 @import 'util';
+@import 'info-dropdown';
 $banner-background-color: #2e3740;
 $sidebar-width: 170px;
 $background-color: #E6ECF0;
@@ -11,6 +12,11 @@ $top-nav-height: 50px;
 body {
 	background: $background-color;
 	font-family: 'Quicksand', sans-serif;
+}
+
+a:hover {
+	text-decoration: none;
+	cursor: pointer;
 }
 
 .loading-container {
@@ -794,8 +800,13 @@ body {
 	.thumbnail {
 		display: flex;
 		.caption {
-			// margin-left: 2em;
-			// margin-top: 1em;
+			.curators-link {
+				display: flex;
+				.before-info-dropdown {
+					margin-right: .3em;
+				}
+			}
+
 			h3 {
 				font-size: 1.35rem;
 			}

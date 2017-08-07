@@ -1,6 +1,7 @@
 import React from 'react';
+import UserList from '../shared/user_list';
 import TagList from '../shared/tag_list';
-import { renderUserList, renderUserHandles } from '../../util/component_helpers';
+import { renderUserHandles } from '../../util/component_helpers';
 
 const PublisherBanner = ({ user }) => {
 	return (
@@ -12,7 +13,11 @@ const PublisherBanner = ({ user }) => {
 				<img src={user.avatar_url} />
 				{renderUserHandles(user.handles)}
 				<h3> Most selected by </h3>
-				{renderUserList(user.top_curators, 'curators')}
+				<UserList
+					users={user.top_curators}
+					userType="curators"
+					length={5}
+				/>
 			</div>
 
 			<div className="right-side">
