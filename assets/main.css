@@ -30,6 +30,11 @@
         border-right: 5px solid transparent;
         top: -5px;
         border-bottom: 5px solid #2e3740; }
+      .info-dropdown-container .info-dropdown .info-dropdown-content .more-content-button {
+        color: white;
+        width: 50px; }
+        .info-dropdown-container .info-dropdown .info-dropdown-content .more-content-button:hover {
+          cursor: pointer; }
 
 .user-list-container .clickable-banner-metadata {
   color: lightgreen;

@@ -42,6 +42,15 @@ $hover-text-color: #0275d8;
       width: 200px;
       padding: 10px;
       display: none;
+
+      .more-content-button {
+        color: white;
+        width: 50px;
+        &:hover {
+          cursor: pointer;
+        }
+      }
     }
+
   }
 }
