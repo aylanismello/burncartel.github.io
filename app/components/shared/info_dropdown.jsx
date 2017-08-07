@@ -16,7 +16,7 @@ class InfoDropdown extends React.Component {
 
 	renderMoreContentButton(length) {
 		return (
-			<h3
+			<div
 				className="more-content-button"
 				onClick={() => {
 					if (this.state.currentLength < length) {
@@ -27,7 +27,7 @@ class InfoDropdown extends React.Component {
 				}}
 			>
 				{' '}+
-			</h3>
+			</div>
 		);
 	}
 

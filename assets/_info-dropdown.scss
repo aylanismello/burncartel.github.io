@@ -45,7 +45,11 @@ $hover-text-color: #0275d8;
 
       .more-content-button {
         color: white;
-        width: 50px;
+        background: #234f7b;
+        text-align: center;
+        border-radius: 5px;
+        width: 20px;
+        margin-top: 5px;
         &:hover {
           cursor: pointer;
         }

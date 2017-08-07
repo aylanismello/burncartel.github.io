@@ -32,7 +32,11 @@
         border-bottom: 5px solid #2e3740; }
       .info-dropdown-container .info-dropdown .info-dropdown-content .more-content-button {
         color: white;
-        width: 50px; }
+        background: #234f7b;
+        text-align: center;
+        border-radius: 5px;
+        width: 20px;
+        margin-top: 5px; }
         .info-dropdown-container .info-dropdown .info-dropdown-content .more-content-button:hover {
           cursor: pointer; }
 
