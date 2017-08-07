@@ -2,6 +2,8 @@
 @import 'util';
 @import 'info-dropdown';
 @import 'user-list';
+@import 'user-handle-list';
+
 
 body {
 	background: $background-color;
@@ -654,9 +656,14 @@ a:hover {
 		display: flex;
 		justify-content: space-between;
 
+
 		.left-side {
 			width: 40%;
 
+			.user-selection-summary {
+		    margin-top: 10px;
+			}
+			
 			.track-title-container {
 				height: 2.5em;
 				.track-title {

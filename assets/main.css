@@ -53,6 +53,11 @@
       width: 100%;
       height: auto; }
 
+.user-handle-list-container {
+  display: flex; }
+  .user-handle-list-container .clickable-banner-metadata {
+    margin-right: 1em; }
+
 body {
   background: #E6ECF0;
   font-family: 'Quicksand', sans-serif; }
@@ -524,6 +529,8 @@ a:hover {
   justify-content: space-between; }
   .track-show .track-banner .left-side {
     width: 40%; }
+    .track-show .track-banner .left-side .user-selection-summary {
+      margin-top: 10px; }
     .track-show .track-banner .left-side .track-title-container {
       height: 2.5em; }
       .track-show .track-banner .left-side .track-title-container .track-title {

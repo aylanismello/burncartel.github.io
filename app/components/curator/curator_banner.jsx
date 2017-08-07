@@ -14,14 +14,18 @@ const CuratorBanner = ({ user }) => {
 		return (
 			<div className="thumbnail track-banner">
 				<div className="left-side">
-					<h2> {user.name}</h2>
-					<img src={user.avatar_url} />
-					<h3> Most published artists </h3>
-					<UserList
-						users={user.top_publishers}
-						userType="publishers"
-						length={5}
-					/>
+					<div className="main-user-summary">
+						<h2> {user.name}</h2>
+						<img src={user.avatar_url} />
+					</div>
+					<div className="user-selection-summary">
+						<h5> Most published artists </h5>
+						<UserList
+							users={user.top_publishers}
+							userType="publishers"
+							length={5}
+						/>
+					</div>
 				</div>
 
 				<div className="right-side">
