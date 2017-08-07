@@ -4,7 +4,7 @@ import UserList from './user_list';
 import BCAvatarLink from './bc_avatar_link';
 import { Link } from 'react-router-dom';
 
-const pagination = 8;
+const pagination = 6;
 
 class InfoDropdown extends React.Component {
 	constructor(props) {

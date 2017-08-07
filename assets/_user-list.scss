@@ -3,6 +3,7 @@
 		color: $extra-info-color;
 		display: flex;
 		font-size: 1.0em;
+		margin-bottom: 5px;
 
     &:hover {
       color: lighten($extra-info-color, 10%);

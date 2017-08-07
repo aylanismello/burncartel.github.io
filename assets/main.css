@@ -46,7 +46,8 @@
 .user-list-container .clickable-banner-metadata {
   color: lightgreen;
   display: flex;
-  font-size: 1.0em; }
+  font-size: 1.0em;
+  margin-bottom: 5px; }
   .user-list-container .clickable-banner-metadata:hover {
     color: #bcf5bc; }
 
