@@ -1,23 +1,33 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import UserList from './user_list';
 
-const InfoDropdown = ({ children }) => {
+const InfoDropdown = ({ children, users, userType, length }) => {
 	return (
 		<div className="info-dropdown-container">
-			<div className="hover-on-element">
-				{children}
-				<div className="info-dropdown">
-						<span className="caret info-caret" />
-					OK!
+			<div className="info-dropdown">
+				<div className="actual-hover">
+					{children}
+				</div>
+				<div className="info-dropdown-content">
+					<UserList users={users} userType={userType} length={length} />
 				</div>
 			</div>
-			{/* <div className="info-dropdown-content"> */}
-
-			{/* </div> */}
 		</div>
 	);
 };
 
-InfoDropdown.propTypes = {};
+InfoDropdown.defaultProps = {
+	users: [],
+	userType: 'curators',
+	length: 5
+};
+
+InfoDropdown.propTypes = {
+	children: PropTypes.string.isRequired,
+	users: PropTypes.array,
+	userType: PropTypes.string,
+	length: PropTypes.number
+};
 
 export default InfoDropdown;

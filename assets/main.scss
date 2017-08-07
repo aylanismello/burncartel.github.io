@@ -54,6 +54,24 @@ a:hover {
 }
 
 
+.clickable-banner-metadata {
+	color: lightgreen;
+	text-decoration: underline;
+	display: flex;
+	font-size: 1.0em;
+
+	.tiny-avatar-container {
+		width: 20px;
+		margin-right: .5em;
+
+		img {
+			width: 100%;
+			height: auto;
+		}
+
+	}
+}
+
 .side-nav-container {
 	height: 100%; /* 100% Full-height */
 	width: $sidebar-width; /* 0 width - change this with JavaScript */
@@ -680,23 +698,7 @@ a:hover {
 				margin-right: 2em;
 			}
 
-			.clickable-banner-metadata {
-				color: lightgreen;
-				text-decoration: underline;
-				display: flex;
-				font-size: 1.0em;
 
-				.tiny-avatar-container {
-					width: 20px;
-					margin-right: .5em;
-
-					img {
-						width: 100%;
-						height: auto;
-					}
-
-				}
-			}
 
 
 		}

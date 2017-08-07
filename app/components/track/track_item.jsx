@@ -105,10 +105,14 @@ const TrackItem = ({
 										</div>
 										<div className="curators-link">
 											<div className="before-info-dropdown">
-											Selected by
+												Selected by
 											</div>
-											<InfoDropdown>
-												{curatorsStr}
+											<InfoDropdown
+												users={track.curators}
+												userType="curators"
+												length={track.curators.length}
+											>
+												<a> {curatorsStr} </a>
 											</InfoDropdown>
 										</div>
 									</div>
