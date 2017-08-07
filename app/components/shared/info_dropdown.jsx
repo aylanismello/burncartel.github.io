@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import UserList from './user_list';
 
-const pagination = 8;
+const pagination = 6;
 
 class InfoDropdown extends React.Component {
 	constructor(props) {
