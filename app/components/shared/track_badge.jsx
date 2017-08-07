@@ -11,7 +11,7 @@ const TrackBadge = props => {
 
 	if (props.track.is_remix && props.track.is_bc) {
 		badgeText = 'REMIX + BC PICK';
-	} else if (pprops.track.is_remix){
+	} else if (props.track.is_remix){
 		badgeText = 'REMIX';
 	} else if (props.track.is_mix) {
 		badgeText = 'MIX';
