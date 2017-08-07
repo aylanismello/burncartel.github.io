@@ -9,6 +9,8 @@ class InfoDropdown extends React.Component {
 		super(props);
 
 		this.renderMoreContentButton = this.renderMoreContentButton.bind(this);
+		this.renderCuratorList = this.renderCuratorList.bind(this);
+		this.renderPublisherMeta = this.renderPublisherMeta.bind(this);
 		this.state = {
 			currentLength: pagination
 		};
@@ -31,6 +33,33 @@ class InfoDropdown extends React.Component {
 		);
 	}
 
+	renderCuratorList(className) {
+		const { users, userType, children, length } = this.props;
+		return (
+			<div className={className}>
+
+				<UserList
+					users={users}
+					userType={userType}
+					length={this.state.currentLength}
+				/>
+				{this.state.currentLength < length
+					? this.renderMoreContentButton(length)
+					: null}
+			</div>
+		);
+	}
+
+	renderPublisherMeta(className) {
+		const { users, userType, user } = this.props;
+
+		return(
+			<div className={className}>
+
+			</div>
+		);
+	}
+
 	render() {
 		const { users, userType, children, length } = this.props;
 
@@ -42,14 +71,9 @@ class InfoDropdown extends React.Component {
 					</div>
 					<div className="info-dropdown-content">
 						<div className="arrow-up" />
-						<UserList
-							users={users}
-							userType={userType}
-							length={this.state.currentLength}
-						/>
-						{(this.state.currentLength < length)
-							? this.renderMoreContentButton(length)
-							: null}
+						{userType === 'curators'
+							? this.renderCuratorList('inner-content')
+							: this.renderPublisherMeta('inner-content')}
 					</div>
 				</div>
 			</div>

@@ -1,19 +1,19 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import BCAvatarLink from './bc_avatar_link';
 
 const UserList = ({ users, userType, length }) => {
 	return (
 		<div className="user-list-container">
-			{users.slice(0, length).map((user, idx) => (
-					<Link to={`/${userType}/${user.id}`} key={`${userType}-${idx}`}
-						className="clickable-banner-metadata">
-					<div className="tiny-avatar-container">
-						<img src={user.avatar_url} alt="avatar" />
-					</div>
-
-						{user.name}
-					</Link>
-			))}
+			{users
+				.slice(0, length)
+				.map(user => (
+					<BCAvatarLink
+						userType={userType}
+						userId={user.id}
+						avatarUrl={user.avatar_url}
+						userName={user.name}
+					/>
+				))}
 		</div>
 	);
 };

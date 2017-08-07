@@ -98,9 +98,16 @@ const TrackItem = ({
 										<div>
 											<span>
 												{' '}By{' '}
-												<Link to={`/publishers/${track.publisher_id}`}>
-													{track.publisher.name}
-												</Link>
+												<InfoDropdown
+													users={track.curators}
+													userType="curators"
+													length={track.curators.length}
+												>
+													<Link to={`/publishers/${track.publisher_id}`}>
+														{track.publisher.name}
+													</Link>
+												</InfoDropdown>
+
 											</span>
 										</div>
 										<div className="curators-link">
