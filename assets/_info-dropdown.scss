@@ -1,38 +1,47 @@
 $hover-item-color: #0275d8;
+$dropdown-color: #2e3740;
+$top-distance: 25px;
+$hover-text-color: #0275d8;
 
 .info-dropdown-container {
+  height: 40px;
+  &:hover {
+    cursor: pointer;
+    .info-dropdown .info-dropdown-content {
+      cursor: auto;
+      display: block;
+    }
+  }
 
   .info-dropdown {
     position: relative;
 
     .actual-hover {
-      color: $hover-item-color;
+      color: $hover-text-color;
       &:hover {
-        color: darken($hover-item-color, 20%);
-      }
-    }
-
-    &:hover {
-      cursor: pointer;
-      .info-dropdown-content {
-        cursor: auto;
-        display: block;
+        color: lighten($hover-text-color, 10%);
       }
     }
 
     .info-dropdown-content {
-      display: none;
+      .arrow-up {
+        width: 0;
+        height: 0;
+        position: absolute;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        top: -5px;
+        border-bottom: 5px solid $dropdown-color;
+      }
       position: absolute;
-      top: 20px;
-      box-shadow: 0px 3px 5px #a51c35;
+      top: $top-distance;
+      box-shadow: 0px 3px 5px #676767;
       border-radius: 5px;
-      background: white;
+      background: $dropdown-color;
       z-index: 1000;
       width: 200px;
       padding: 10px;
-
-
-
+      display: none;
     }
   }
 }

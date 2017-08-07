@@ -10,6 +10,7 @@ const InfoDropdown = ({ children, users, userType, length }) => {
 					{children}
 				</div>
 				<div className="info-dropdown-content">
+					<div className="arrow-up" />
 					<UserList users={users} userType={userType} length={length} />
 				</div>
 			</div>

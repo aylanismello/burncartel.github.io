@@ -1,0 +1,22 @@
+.user-list-container {
+	.clickable-banner-metadata {
+		color: $extra-info-color;
+		display: flex;
+		font-size: 1.0em;
+
+    &:hover {
+      color: lighten($extra-info-color, 10%);
+    }
+
+		.tiny-avatar-container {
+			width: 20px;
+			margin-right: .5em;
+
+			img {
+				width: 100%;
+				height: auto;
+			}
+
+		}
+	}
+}

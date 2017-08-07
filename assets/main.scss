@@ -1,13 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Quicksand:400,700');
 @import 'util';
 @import 'info-dropdown';
-$banner-background-color: #2e3740;
-$sidebar-width: 170px;
-$background-color: #E6ECF0;
-$side-nav-color: #292b2c;
-$tinder-red: #FE6859;
-$dropdown-width: 140px;
-$top-nav-height: 50px;
+@import 'user-list';
 
 body {
 	background: $background-color;
@@ -53,24 +47,6 @@ a:hover {
 	}
 }
 
-
-.clickable-banner-metadata {
-	color: lightgreen;
-	text-decoration: underline;
-	display: flex;
-	font-size: 1.0em;
-
-	.tiny-avatar-container {
-		width: 20px;
-		margin-right: .5em;
-
-		img {
-			width: 100%;
-			height: auto;
-		}
-
-	}
-}
 
 .side-nav-container {
 	height: 100%; /* 100% Full-height */
@@ -691,7 +667,7 @@ a:hover {
 			}
 
 			a {
-				color: lightgreen;
+				color: $extra-info-color;
 			}
 
 			.track-item-icon {
