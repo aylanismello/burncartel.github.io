@@ -1,16 +1,18 @@
 @import url('https://fonts.googleapis.com/css?family=Quicksand:400,700');
 @import 'util';
-$banner-background-color: #2e3740;
-$sidebar-width: 170px;
-$background-color: #E6ECF0;
-$side-nav-color: #292b2c;
-$tinder-red: #FE6859;
-$dropdown-width: 140px;
-$top-nav-height: 50px;
+@import 'info-dropdown';
+@import 'user-list';
+@import 'user-handle-list';
+
 
 body {
 	background: $background-color;
 	font-family: 'Quicksand', sans-serif;
+}
+
+a:hover {
+	text-decoration: none;
+	cursor: pointer;
 }
 
 .loading-container {
@@ -654,9 +656,14 @@ body {
 		display: flex;
 		justify-content: space-between;
 
+
 		.left-side {
 			width: 40%;
 
+			.user-selection-summary {
+		    margin-top: 10px;
+			}
+			
 			.track-title-container {
 				height: 2.5em;
 				.track-title {
@@ -667,30 +674,14 @@ body {
 			}
 
 			a {
-				color: lightgreen;
+				color: $extra-info-color;
 			}
 
 			.track-item-icon {
 				margin-right: 2em;
 			}
 
-			.clickable-banner-metadata {
-				color: lightgreen;
-				text-decoration: underline;
-				display: flex;
-				font-size: 1.0em;
 
-				.tiny-avatar-container {
-					width: 20px;
-					margin-right: .5em;
-
-					img {
-						width: 100%;
-						height: auto;
-					}
-
-				}
-			}
 
 
 		}
@@ -794,8 +785,13 @@ body {
 	.thumbnail {
 		display: flex;
 		.caption {
-			// margin-left: 2em;
-			// margin-top: 1em;
+			.curators-link {
+				display: flex;
+				.before-info-dropdown {
+					margin-right: .3em;
+				}
+			}
+
 			h3 {
 				font-size: 1.35rem;
 			}

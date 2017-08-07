@@ -5,6 +5,7 @@ import FireLike from '../likes/fire_like';
 import TagList from '../shared/tag_list';
 import TrackBadge from '../shared/track_badge';
 import BCAlbumArt from '../shared/bc_album_art';
+import InfoDropdown from '../shared/info_dropdown';
 
 const shortenLongWordsInTitle = title => {
 	const formattedTitle = title.split(' ').map(word => {
@@ -102,7 +103,18 @@ const TrackItem = ({
 												</Link>
 											</span>
 										</div>
-										<span>Selected by {curatorsStr} </span>
+										<div className="curators-link">
+											<div className="before-info-dropdown">
+												Selected by
+											</div>
+											<InfoDropdown
+												users={track.curators}
+												userType="curators"
+												length={track.curators.length}
+											>
+												<a> {curatorsStr} </a>
+											</InfoDropdown>
+										</div>
 									</div>
 								: null}
 

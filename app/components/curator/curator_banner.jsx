@@ -1,7 +1,7 @@
 import React from 'react';
+import UserList from '../shared/user_list';
 import TagList from '../shared/tag_list';
 import Loading from '../shared/loading';
-import { renderUserList } from '../../util/component_helpers';
 
 const CuratorBanner = ({ user }) => {
 	if (!user.top_publishers) {
@@ -14,10 +14,18 @@ const CuratorBanner = ({ user }) => {
 		return (
 			<div className="thumbnail track-banner">
 				<div className="left-side">
-					<h2> {user.name}</h2>
-					<img src={user.avatar_url} />
-					<h3> Most published artists </h3>
-					{renderUserList(user.top_publishers, 'publishers')}
+					<div className="main-user-summary">
+						<h2> {user.name}</h2>
+						<img src={user.avatar_url} />
+					</div>
+					<div className="user-selection-summary">
+						<h5> Most published artists </h5>
+						<UserList
+							users={user.top_publishers}
+							userType="publishers"
+							length={5}
+						/>
+					</div>
 				</div>
 
 				<div className="right-side">
