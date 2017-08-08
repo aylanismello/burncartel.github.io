@@ -3,6 +3,7 @@ import React from 'react';
 import Modal from 'react-modal';
 import * as FontAwesome from 'react-icons/lib/fa/';
 import LoginModal from '../shared/login_modal';
+import BCSearchBar from '../shared/bc_search_bar';
 import BCDropdown from './bc_dropdown';
 
 const loginTypes = {
@@ -146,13 +147,14 @@ class TopNav extends React.Component {
 
 				<div className="nav-buttons">
 
-					<Link to="/help">
+					<BCSearchBar />
+					{/* <Link to="/help">
 						<FontAwesome.FaQuestion
 							size={30}
 							color="aliceblue"
 							className="bc-icon"
 						/>
-					</Link>
+					</Link> */}
 
 					<div className="login-logout-container">
 						{this.renderLoginOrLogoutButton()}

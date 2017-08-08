@@ -58,6 +58,12 @@
   .user-handle-list-container .clickable-banner-metadata {
     margin-right: 1em; }
 
+.search-bar-container {
+  margin-left: 180px; }
+  .search-bar-container .search-bar {
+    border-radius: 100px;
+    height: 30px; }
+
 body {
   background: #E6ECF0;
   font-family: 'Quicksand', sans-serif; }
