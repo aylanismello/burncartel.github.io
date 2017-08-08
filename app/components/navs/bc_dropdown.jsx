@@ -20,7 +20,7 @@ const renderDropdownMenu = (onClickLogout, closeDropdown) => (
 			</div>
 		</Link>
 
-		<Link to="/me/likes" className="dropdown-menu-item" onClick={closeDropdown}>
+		{/* <Link to="/me/likes" className="dropdown-menu-item" onClick={closeDropdown}>
 			<div className="dropdown-icon">
 				<FontAwesome.FaHeart
 					size={iconSize}
@@ -31,7 +31,7 @@ const renderDropdownMenu = (onClickLogout, closeDropdown) => (
 			<div className="dropdown-text">
 				Likes
 			</div>
-		</Link>
+		</Link> */}
 
 		<Link to="/help" className="dropdown-menu-item" onClick={closeDropdown}>
 			<div className="dropdown-icon">

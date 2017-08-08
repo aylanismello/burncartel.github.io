@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import * as FontAwesome from 'react-icons/lib/fa/';
+import { GoFlame } from 'react-icons/lib/go';
 import FireFeedBrand from './fire_feed_brand';
 
 const SideNavCaption = ({ text }) => (
@@ -43,7 +44,7 @@ const SideNav = props => {
 
 				</div>
 
-				{/* {props.currentUserId
+				{props.currentUserId
 					? <Link to="/me/likes">
 							<div className="side-nav-item">
 								<GoFlame size={40} color="aliceblue" className="bc-icon" />
@@ -51,7 +52,7 @@ const SideNav = props => {
 								<SideNavCaption text="Likes" />
 							</div>
 						</Link>
-					: null} */}
+					: null}
 
 				{props.currentUserId
 					? <Link to="/me/feed">
