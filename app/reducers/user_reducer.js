@@ -2,7 +2,7 @@ import { userConstants } from '../actions/user_actions';
 
 const initialState = Object.freeze({
   currentUser: {
-    tracks: [],
+    sorted_serialized_tracks: [],
     uid: null,
     id: null,
     name: null,

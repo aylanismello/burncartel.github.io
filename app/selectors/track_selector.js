@@ -1,10 +1,9 @@
 import { createSelector } from 'reselect';
 
-const getUserTracks = state => state.user.currentUser.tracks;
+const getUserTracks = state => state.user.currentUser.sorted_serialized_tracks;
 const getTracks = state => state.feed.focusedFeed.tracks;
 const getPlayingTracks = state => state.feed.playingFeed.tracks;
 const getPlayingTracksShuffled = state => state.feed.playingFeedShuffled.tracks;
-const getCurrentTrackId = state => state.feed.focusedFeed.trackId;
 const getCurrentPlayingTrackId = state => state.feed.playingFeed.trackId;
 
 // learn to refactor this later, i'm tired of this rn

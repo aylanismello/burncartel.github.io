@@ -57,13 +57,13 @@ const SideNav = props => {
 				{props.currentUserId
 					? <Link to="/me/feed">
 							<div className="side-nav-item">
-								<FontAwesome.FaRssSquare
+								<FontAwesome.FaSpaceShuttle
 									size={40}
 									color="aliceblue"
 									className="bc-icon"
 								/>
 
-								<SideNavCaption text="My Feed" />
+								<SideNavCaption text="Smart Feed" />
 							</div>
 						</Link>
 					: null}
