@@ -7,12 +7,10 @@ import {
 	initFB,
 	loginFB
 } from '../../actions/user_actions';
-import {
-	togglePlay
-} from '../../actions/player_actions';
+import { togglePlay } from '../../actions/player_actions';
 import { getPlayingFeedTracksHash } from '../../selectors/track_selector';
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = state => ({
 	feed: state.feed.focusedFeed,
 	playerInitialized: state.player.playerInitialized,
 	filters: state.feed.filters,
@@ -20,7 +18,8 @@ const mapStateToProps = (state, ownProps) => ({
 	fbDidInit: state.user.fbDidInit,
 	feedType: state.feed.feedType,
 	trackUrl: state.feed.playingFeed.trackId
-		? getPlayingFeedTracksHash(state)[state.feed.playingFeed.trackId].permalink_url
+		? getPlayingFeedTracksHash(state)[state.feed.playingFeed.trackId]
+				.permalink_url
 		: '#'
 });
 

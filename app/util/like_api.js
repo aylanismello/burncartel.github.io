@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import { ENV } from './helpers.js';
+import { ENV } from './helpers';
 
 const { host, port } = ENV;
 
