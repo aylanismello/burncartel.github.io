@@ -18,7 +18,6 @@ import {
 	receivePlayingTracksShuffled
 } from '../actions/feed_actions';
 import { togglePlay, disableShuffle } from '../actions/player_actions';
-import { getFeedTracksHash } from '../selectors/track_selector';
 import { getFeed } from '../util/bc_api';
 
 let prevSortType;
@@ -98,6 +97,8 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 				sortType = action.filters.sortType;
 			} else if (action.filters.resource === 'user_feed') {
 				nextFeedType = 'USER';
+			} else if (action.filters.resource === 'search') {
+				nextFeedType = 'SEARCH';
 			} else {
 				nextFeedType = action.filters.resource;
 			}
@@ -151,7 +152,6 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 			);
 
 			return next(action);
-
 		case feedConstants.PAGINATE_TRACKS:
 			const { next_tracks_page } = getState().feed.pagination;
 			dispatch(

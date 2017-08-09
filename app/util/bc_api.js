@@ -2,6 +2,7 @@ import $ from 'jquery';
 import { ENV } from './helpers';
 
 const { host, port } = ENV;
+const url = `http://${host}:${port}/api/v1`;
 
 export const getFeed = (resource, filters, success, error) => {
 	let getUrl;
@@ -13,21 +14,27 @@ export const getFeed = (resource, filters, success, error) => {
 		page = filters.page;
 	}
 
-	if (resource === 'user_feed') {
-		getUrl = `http://${host}:${port}/api/v1/users/${filters.id}/feed?tracks_page=${page}`;
+	if (resource === 'search') {
+		if (filters.resource_type) {
+			getUrl = `${url}/feeds/search?q=${filters.q}&resource_type=${filters.resource_type}&tracks_page=${page}`;
+		} else {
+			getUrl = `${url}/feeds/search?q=${filters.q}&tracks_page=${page}`;
+		}
+	} else if (resource === 'user_feed') {
+		getUrl = `${url}/users/${filters.id}/feed?tracks_page=${page}`;
 	} else if (filters.id && resource === 'tags') {
 		// user this feeds convention from now on!
 		// it makes more sense since this is really a nested resource
-		getUrl = `http://${host}:${port}/api/v1/${resource}/${filters.id}/feed?tracks_page=${page}`;
+		getUrl = `${url}/${resource}/${filters.id}/feed?tracks_page=${page}`;
 	} else if (filters.id && resource !== 'likes') {
 		// getting /publishers/ or /curators/
-		getUrl = `http://${host}:${port}/api/v1/${resource}/${filters.id}?tracks_page=${page}`;
+		getUrl = `${url}/${resource}/${filters.id}?tracks_page=${page}`;
 	} else if (filters.id && resource === 'likes') {
-		getUrl = `http://${host}:${port}/api/v1/users/${filters.id}?tracks_page=${page}`;
+		getUrl = `${url}/users/${filters.id}?tracks_page=${page}`;
 		// get "/:user_id/likes", root: :track do
 	} else {
 		// we are dealing with a fire feed
-		getUrl = `http://${host}:${port}/api/v1/feeds?sort_type=${filters.sortType}&tracks_page=${page}`;
+		getUrl = `${url}/feeds?sort_type=${filters.sortType}&tracks_page=${page}`;
 	}
 
 	$.ajax({

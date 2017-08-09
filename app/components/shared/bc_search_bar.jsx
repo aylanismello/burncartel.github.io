@@ -14,8 +14,8 @@ class BCSearchBar extends React.Component {
 		this.setState({ searchText: e.target.value });
 	}
 
-	handleSubmit(e) {
-		alert(this.state.searchText);
+	handleSubmit() {
+		window.location = `/#search?q=${this.state.searchText}`;
 	}
 
 	render() {
