@@ -436,10 +436,13 @@ a:hover {
 	display: block;
 	padding: 0;
 	z-index: 200000;
-
+	color: white;
+	box-shadow: 0px 0px 5px #676767;
+	
 	.burn-cartel-player-container.desktop {
 		padding: .2em .8em;
-    border-top: 1px solid black;
+		background: rgba(41, 43, 44, 0.91);
+
 		.burn-cartel-player {
 			@include flexin();
 			.burn-cartel-player-details-container {
@@ -656,10 +659,6 @@ a:hover {
 	}
 }
 
-.bc-menu {
-	color: white;
-}
-
 .bc-icon {
 	max-height: 300px;
 
@@ -783,7 +782,7 @@ a:hover {
 	}
 
 	.desktop {
-		background: #292b2c
+		background: #292b2c;
 	}
 	.bg-inverse {
 		background-color: white!important;

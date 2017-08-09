@@ -1,7 +1,19 @@
 .search-bar-container {
   margin-left: $sidebar-width + 10;
-  .search-bar {
-    border-radius: 100px;
-    height: 30px;
+  .input-group {
+    align-items: center;
+    .search-bar-icon {
+      position: absolute  ;
+      left: 10px;
+      z-index: 10000;
+    }
+
+    .search-bar {
+      border-radius: 100px;
+      height: 30px;
+      position: relative;
+      padding-left: 35px;
+    }
   }
+
 }

@@ -1,4 +1,5 @@
 import React from 'react';
+import { FaSearch } from 'react-icons/lib/fa';
 
 class BCSearchBar extends React.Component {
 	constructor(props) {
@@ -17,6 +18,11 @@ class BCSearchBar extends React.Component {
 		return (
 			<div className="col-lg-3 search-bar-container">
 				<div className="input-group">
+					<FaSearch
+						size={15}
+						color="#3c3e3f"
+						className="search-bar-icon"
+					/>
 					<input
 						type="text"
 						className="form-control search-bar"
