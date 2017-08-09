@@ -438,7 +438,7 @@ a:hover {
 	z-index: 200000;
 	color: white;
 	box-shadow: 0px 0px 5px #676767;
-	
+
 	.burn-cartel-player-container.desktop {
 		padding: .2em .8em;
 		background: rgba(41, 43, 44, 0.91);
@@ -454,7 +454,7 @@ a:hover {
 					.track-details {
 						@include flexin();
 						.artwork-wrapper {
-							width: 75px;
+							width: 60px;
 							img {
 								max-width: 100%;
 								height: auto;
@@ -470,7 +470,7 @@ a:hover {
 								color: whitesmoke;
 								font-size: 12px;
 							}
-							width: 150px;
+							width: 170px;
 						}
 					}
 				}
