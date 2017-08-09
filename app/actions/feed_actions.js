@@ -23,8 +23,14 @@ export const feedConstants = {
 	FETCH_OLD_FEED: 'FETCH_OLD_FEED',
 	RESET_PERSONAL_FEED: 'RESET_PERSONAL_FEED',
 	RESHUFFLE_TRACKS: 'RESHUFFLE_TRACKS',
-	RECEIVE_PLAYING_TRACKS_SHUFFLED: 'RECEIVE_PLAYING_TRACKS_SHUFFLED'
+	RECEIVE_PLAYING_TRACKS_SHUFFLED: 'RECEIVE_PLAYING_TRACKS_SHUFFLED',
+	SET_HAS_SEARCH_RESULTS: 'SET_HAS_SEARCH_RESULTS'
 };
+
+export const setHasSearchResults = hasSearchResults => ({
+	type: feedConstants.SET_HAS_SEARCH_RESULTS,
+	hasSearchResults
+});
 
 export const receivePlayingTracksShuffled = tracks => ({
 	type: feedConstants.RECEIVE_PLAYING_TRACKS_SHUFFLED,

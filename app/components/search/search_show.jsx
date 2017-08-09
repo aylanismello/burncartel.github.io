@@ -16,7 +16,7 @@ class SearchShow extends React.Component {
 	componentWillReceiveProps(nextProps) {
 		if (nextProps.q !== this.props.q) {
 			this.setState({ loadingAnotherSearch: true });
-			this.props.updateFilters({ resource: 'search', q: this.props.q });
+			this.props.updateFilters({ resource: 'search', q: nextProps.q });
 		}
 
 		if (this.props.loadingFeed && !nextProps.loadingFeed) {
@@ -30,10 +30,19 @@ class SearchShow extends React.Component {
 			this.state.loadingAnotherSearch
 		) {
 			return <Loading />;
-		} else {
+		} else if (this.props.hasSearchResults) {
 			return (
 				<div className="container track-show">
 					<FeedContainer />
+				</div>
+			);
+		} else {
+			// has no search results :(
+			return (
+				<div className="container track-show">
+					<h1>
+						NO RESULTS FOR {this.props.q} 😭
+					</h1>
 				</div>
 			);
 		}
@@ -44,7 +53,8 @@ React.propTypes = {
 	q: PropTypes.string.isRequired,
 	updateFilters: PropTypes.func.isRequired,
 	loadingFeed: PropTypes.bool.isRequired,
-	tracksPage: PropTypes.number.isRequired
+	tracksPage: PropTypes.number.isRequired,
+	hasSearchResults: PropTypes.bool.isRequired
 };
 
 export default SearchShow;

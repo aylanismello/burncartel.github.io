@@ -5,7 +5,8 @@ import { updateFilters } from '../../actions/feed_actions';
 const mapStateToProps = (state, ownProps) => ({
 	q: ownProps.location.search.match(/q=[a-z0-9]*[&]?/)[0].slice(2, ownProps.location.search.length),
 	loadingFeed: state.feed.loadingFeed,
-	tracksPage: state.feed.pagination.tracks_page
+	tracksPage: state.feed.pagination.tracks_page,
+	hasSearchResults: state.feed.SEARCH.hasSearchResults
 });
 
 const mapDispatchToProps = dispatch => ({

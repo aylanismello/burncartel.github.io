@@ -15,6 +15,8 @@ class BCSearchBar extends React.Component {
 	}
 
 	handleSubmit() {
+		// WHAT'S THE REACT WAY TO THIS, THIS SHIT IS JANKY
+		// AND ONLY PUSH THE NEW HASH LOCATION THE FIRST TIME
 		window.location = `/#search?q=${this.state.searchText}`;
 	}
 

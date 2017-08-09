@@ -15,7 +15,8 @@ import {
 	updateFilters,
 	receivePaginationData,
 	fetchOldFeed,
-	receivePlayingTracksShuffled
+	receivePlayingTracksShuffled,
+	setHasSearchResults
 } from '../actions/feed_actions';
 import { togglePlay, disableShuffle } from '../actions/player_actions';
 import { getFeed } from '../util/bc_api';
@@ -141,6 +142,19 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 					if (action.filters.resource === 'tracks' && action.filters.id) {
 						dispatch(receiveFeed([feed]));
 						dispatch(loadingStop());
+					} else if (action.filters.resource === 'search') {
+						// IF WE HAVE A SEARCH, IT IS THE ONLY CONDITION
+						// WHERE IT IS OKAY TO RECEIVE AN EMPTY FEED.
+
+						// this means we got back an empty feed
+						if (feed.status) {
+							dispatch(setHasSearchResults(false));
+							dispatch(loadingStop());
+						} else {
+							dispatch(receiveFeed(feed));
+							dispatch(setHasSearchResults(true));
+							dispatch(loadingStop());
+						}
 					} else {
 						dispatch(receiveFeed(feed));
 						dispatch(loadingStop());

@@ -19,6 +19,9 @@ const initialState = {
 	},
 	FIRE: {},
 	LIKES: {},
+	SEARCH: {
+		hasSearchResults: false
+	},
 	PUBLISHERS: {},
 	CURATORS: {},
 	SINGLE_TRACK: {},
@@ -61,6 +64,9 @@ const FeedReducer = (state = initialState, action) => {
 				...state,
 				focusedFeed: { ...state.focusedFeed, userLikeId: action.userId }
 			};
+		case feedConstants.SET_HAS_SEARCH_RESULTS:
+			const { hasSearchResults } = action;
+			return { ...state, SEARCH: { ...state.SEARCH, hasSearchResults } };
 		case feedConstants.SET_FEED_TYPE:
 			return { ...state, feedType: action.feedType };
 		case feedConstants.UPDATE_TRACK_LIKE_COUNT:
@@ -96,7 +102,10 @@ const FeedReducer = (state = initialState, action) => {
 		case feedConstants.RECEIVE_PLAYING_TRACKS_SHUFFLED:
 			return {
 				...state,
-				playingFeedShuffled: { ...state.playingFeedShuffled, tracks: action.tracks }
+				playingFeedShuffled: {
+					...state.playingFeedShuffled,
+					tracks: action.tracks
+				}
 			};
 		case feedConstants.UPDATE_FILTERS:
 			return { ...state, filters: action.filters };
