@@ -9,7 +9,6 @@ import UserHome from './user_home';
 
 
 const mapStateToProps = (state, ownProps) => ({
-	userLikes: state.user.currentUser.tracks,
 	userName: state.user.currentUser.name,
 	userPhoto: state.user.currentUser.photo_url,
 	currentUserId: state.user.currentUser.id

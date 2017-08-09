@@ -24,7 +24,8 @@ const UserReducer = (state = initialState, action) => {
     case userConstants.END_LIKE_POST:
       return { ...state, likePostInProgress: false };
     case userConstants.RECEIVE_CURRENT_USER:
-      return { ...state, currentUser: action.currentUser };
+      const { sorted_serialized_tracks } = action.currentUser;
+      return { ...state, currentUser: { ...action.currentUser, tracks: sorted_serialized_tracks } };
     case userConstants.LOGOUT_CURRENT_USER:
       return { ...initialState, fbDidInit: true };
     default:
