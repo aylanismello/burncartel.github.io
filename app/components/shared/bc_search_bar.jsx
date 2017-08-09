@@ -14,22 +14,24 @@ class BCSearchBar extends React.Component {
 		this.setState({ searchText: e.target.value });
 	}
 
+	handleSubmit(e) {
+		alert(this.state.searchText);
+	}
+
 	render() {
 		return (
 			<div className="col-lg-3 search-bar-container">
-				<div className="input-group">
-					<FaSearch
-						size={15}
-						color="#3c3e3f"
-						className="search-bar-icon"
-					/>
+				<form className="input-group" onSubmit={() => this.handleSubmit()}>
+					<FaSearch size={16} color="#3c3e3f" className="search-bar-icon" />
 					<input
 						type="text"
 						className="form-control search-bar"
+						value={this.state.searchText}
+						onChange={e => this.handleChange(e)}
 						placeholder="Search"
 					/>
 
-				</div>
+				</form>
 			</div>
 		);
 	}
