@@ -1,14 +1,8 @@
 import React from 'react';
 import Dropdown from 'react-dropdown';
 import FeedContainer from '../feed/feed_container';
-import { Link } from 'react-router-dom';
-import { FEEDS } from '../../reducers/feed_reducer';
 
 class Home extends React.Component {
-	constructor(props) {
-		super(props);
-	}
-
 	componentWillMount() {
 		const sortType = this.props.history.location.pathname.slice(1);
 
@@ -85,7 +79,7 @@ class Home extends React.Component {
 
 								<Dropdown
 									options={options}
-									onChange={this._onSelect.bind(this)}
+									onChange={() => this._onSelect()}
 									value={value}
 									placeholder="🔥 Select a feed 🔥"
 								/>
