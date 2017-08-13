@@ -1,13 +1,12 @@
-import { createStore } from 'redux';
+import { createStore, compose } from 'redux';
 import RootReducer from '../reducers/root_reducer';
 import masterMiddleware from '../middleware/master_middleware';
 
-const configureStore = (preloadedState = {}) => (
-  createStore(
-    RootReducer,
-    preloadedState,
-    masterMiddleware
-  )
-);
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+// const store = createStore(reducer, /* preloadedState, */ composeEnhancers(
+
+const configureStore = (preloadedState = {}) =>
+	createStore(RootReducer, preloadedState, composeEnhancers(masterMiddleware));
 
 export default configureStore;
