@@ -37,7 +37,7 @@ class Home extends React.Component {
 		}
 	}
 
-	_onSelect(e) {
+	onSelect(e) {
 		this.props.history.push(e.value);
 	}
 
@@ -79,7 +79,7 @@ class Home extends React.Component {
 
 								<Dropdown
 									options={options}
-									onChange={() => this._onSelect()}
+									onChange={e => this.onSelect(e)}
 									value={value}
 									placeholder="🔥 Select a feed 🔥"
 								/>
