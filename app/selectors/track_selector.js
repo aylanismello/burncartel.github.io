@@ -20,7 +20,6 @@ const getCurrentPlayingTrackId = state => state.feed.playingFeed.trackId;
 // 		return tracksObject;
 // 	});
 //
-// 	debugger;
 // };
 
 export const getPlayingFeedTracksHash = createSelector(

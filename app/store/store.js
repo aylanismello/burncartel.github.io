@@ -4,8 +4,6 @@ import masterMiddleware from '../middleware/master_middleware';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-// const store = createStore(reducer, /* preloadedState, */ composeEnhancers(
-
 const configureStore = (preloadedState = {}) =>
 	createStore(RootReducer, preloadedState, composeEnhancers(masterMiddleware));
 

@@ -5,7 +5,6 @@ import { FaSearch } from 'react-icons/lib/fa';
 class BCSearchBar extends React.Component {
 	constructor(props, context) {
 		super(props);
-		debugger;
 		this.handleChange = this.handleChange.bind(this);
 		this.state = {
 			searchText: ''
@@ -26,7 +25,7 @@ class BCSearchBar extends React.Component {
 	render() {
 		return (
 			<div className="col-lg-3 search-bar-container">
-				<form className="input-group" onSubmit={(e) => this.handleSubmit(e)}>
+				<form className="input-group" onSubmit={e => this.handleSubmit(e)}>
 					<FaSearch size={16} color="#3c3e3f" className="search-bar-icon" />
 					<input
 						type="text"

@@ -5,8 +5,12 @@ import PlayerMiddleware from './player_middleware';
 import UserMiddleware from './user_middleware';
 import TravelerMiddleware from './traveler_middleware';
 
-const myMiddlewares = [FeedMiddleware, PlayerMiddleware,
-	UserMiddleware, TravelerMiddleware];
+const myMiddlewares = [
+	FeedMiddleware,
+	PlayerMiddleware,
+	UserMiddleware,
+	TravelerMiddleware
+];
 
 if (process.env.NODE_ENV !== 'production') {
 	myMiddlewares.push(createLogger());
