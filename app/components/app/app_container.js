@@ -10,18 +10,20 @@ import {
 import { togglePlay } from '../../actions/player_actions';
 import { getPlayingFeedTracksHash } from '../../selectors/track_selector';
 
-const mapStateToProps = state => ({
-	feed: state.feed.focusedFeed,
-	playerInitialized: state.player.playerInitialized,
-	filters: state.feed.filters,
-	currentUser: state.user.currentUser,
-	fbDidInit: state.user.fbDidInit,
-	feedType: state.feed.feedType,
-	trackUrl: state.feed.playingFeed.trackId
-		? getPlayingFeedTracksHash(state)[state.feed.playingFeed.trackId]
-				.permalink_url
-		: '#'
-});
+const mapStateToProps = state => {
+	return {
+		feed: state.feed.focusedFeed,
+		playerInitialized: state.player.playerInitialized,
+		filters: state.feed.filters,
+		currentUser: state.user.currentUser,
+		fbDidInit: state.user.fbDidInit,
+		feedType: state.feed.feedType,
+		trackUrl: state.feed.playingFeed.trackId
+			? getPlayingFeedTracksHash(state)[state.feed.playingFeed.trackId]
+					.permalink_url
+			: '#'
+	};
+};
 
 const mapDispatchToProps = dispatch => ({
 	fetchFeed: filters => dispatch(fetchFeed(filters)),

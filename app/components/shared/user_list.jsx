@@ -9,6 +9,7 @@ const UserList = ({ users, userType, length }) => {
 				.map(user => (
 					<BCAvatarLink
 						userType={userType}
+						key={user.id}
 						userId={user.id}
 						avatarUrl={user.avatar_url}
 						userName={user.name}

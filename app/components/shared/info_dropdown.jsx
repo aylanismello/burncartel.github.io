@@ -102,7 +102,7 @@ InfoDropdown.defaultProps = {
 };
 
 InfoDropdown.propTypes = {
-	children: PropTypes.string.isRequired,
+	children: PropTypes.object.isRequired,
 	users: PropTypes.array,
 	userType: PropTypes.string.isRequired,
 	length: PropTypes.number.isRequired

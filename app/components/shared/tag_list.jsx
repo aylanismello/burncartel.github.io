@@ -8,7 +8,7 @@ const Tag = ({ tag }) => (
 
 const TagList = ({ tagList }) => (
 	<div className="tag-list">
-		{tagList.map(tag => <Tag tag={tag} />)}
+		{tagList.map(tag => <Tag tag={tag} key={tag.id} />)}
 	</div>
 );
 
