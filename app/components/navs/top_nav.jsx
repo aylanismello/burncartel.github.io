@@ -64,7 +64,7 @@ class TopNav extends React.Component {
 	}
 
 	closeDropdownIfPossible(e) {
-		if (!e.target.className.includes('dropdown') && this.state.dropdownOpen) {
+		if (e.target.className && e.target.className.includes && !e.target.className.includes('dropdown') && this.state.dropdownOpen) {
 			this.setState({ dropdownOpen: false });
 		}
 	}
