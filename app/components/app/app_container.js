@@ -10,11 +10,16 @@ import {
 import { togglePlay } from '../../actions/player_actions';
 import { getPlayingFeedTracksHash } from '../../selectors/track_selector';
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
 	const feedTracksHash = getPlayingFeedTracksHash(state);
 
-	const trackUrl = state.feed.playingFeed.trackId &&
-		Object.keys(feedTracksHash).length > 0
+	// if (!feedTracksHash[state.feed.playingFeed.trackId]) {
+	// 	debugger;
+	// }
+
+	// const trackUrl = state.feed.playingFeed.trackId &&
+	// 	Object.keys(feedTracksHash).length > 0
+	const trackUrl = feedTracksHash[state.feed.playingFeed.trackId]
 		? feedTracksHash[state.feed.playingFeed.trackId].permalink_url
 		: '#';
 
