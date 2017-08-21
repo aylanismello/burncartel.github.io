@@ -72,6 +72,11 @@
       position: relative;
       padding-left: 35px; }
 
+.search-type-container .search-type {
+  margin-right: 0.5em; }
+  .search-type-container .search-type:hover {
+    cursor: pointer; }
+
 body {
   background: #E6ECF0;
   font-family: 'Quicksand', sans-serif; }

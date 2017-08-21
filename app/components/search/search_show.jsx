@@ -8,7 +8,11 @@ class SearchShow extends React.Component {
 		// fuck with resource_type later when we could look up regex stuffz
 		// alert(`q is ${q}`);
 		const { q, resource_type } = this.props;
-		this.props.updateFilters({ resource: 'search', q, resource_type });
+		this.props.updateFilters({
+			resource: 'search',
+			q,
+			resource_type: resource_type || 'track'
+		});
 		this.state = {
 			loadingAnotherSearch: false
 		};
@@ -32,12 +36,75 @@ class SearchShow extends React.Component {
 		}
 	}
 
+	getButtonStyle(resourceType) {
+		if (resourceType === this.props.resource_type) {
+			return { fontWeight: 'bold' };
+			// return {};
+		} else {
+			return {};
+		}
+	}
+
+	selectNewResourceType(resourceType) {
+		window.location = `/#search?q=${this.props.q}&resource_type=${resourceType}`;
+	}
+
+	renderResourceFilters() {
+		return (
+			<div className="search-type-container">
+				<span
+					className="search-type"
+					onClick={() => this.selectNewResourceType('track')}
+					style={this.getButtonStyle('track')}
+				>
+					&gt;
+					{' '}SONGS{' '}
+				</span>
+				<span
+					className="search-type"
+					onClick={() => this.selectNewResourceType('publisher')}
+					style={this.getButtonStyle('publisher')}
+				>
+					&gt;
+					{' '}PUBLISHERS{' '}
+				</span>
+				<span
+					className="search-type"
+					onClick={() => this.selectNewResourceType('curator')}
+					style={this.getButtonStyle('curator')}
+				>
+					&gt;
+					{' '}CURATORS{' '}
+				</span>
+				<span
+					className="search-type"
+					onClick={() => this.selectNewResourceType('tag')}
+					style={this.getButtonStyle('tag')}
+				>
+					&gt;
+					{' '}TAGS{' '}
+				</span>
+			</div>
+		);
+	}
+
 	render() {
 		if (
 			(this.props.loadingFeed && !this.props.tracksPage) ||
 			this.state.loadingAnotherSearch
 		) {
-			return <Loading />;
+			return (
+				<div className="container">
+					<h2>
+						{' '}
+						results for
+						{' '}
+						<span style={{ fontWeight: 'bold' }}> {this.props.q} </span>
+					</h2>
+					{this.renderResourceFilters()}
+					<Loading />
+				</div>
+			);
 		} else if (this.props.hasSearchResults) {
 			return (
 				<div className="container track-show">
@@ -47,6 +114,7 @@ class SearchShow extends React.Component {
 						{' '}
 						<span style={{ fontWeight: 'bold' }}> {this.props.q} </span>
 					</h2>
+					{this.renderResourceFilters()}
 					<FeedContainer />
 				</div>
 			);
@@ -54,18 +122,25 @@ class SearchShow extends React.Component {
 			// has no search results :(
 			return (
 				<div className="container track-show">
-					<h1>
-						NO RESULTS FOR {this.props.q} 😭
-					</h1>
+					<div className="search-type-container">
+						<h2>
+							nothing found for
+							{' '}
+							<span style={{ fontWeight: 'bold' }}> {this.props.q} </span>
+							{' '}
+							😭
+						</h2>
+						{this.renderResourceFilters()}
+					</div>
 				</div>
 			);
 		}
 	}
 }
 
-React.propTypes = {
+SearchShow.propTypes = {
 	q: PropTypes.string.isRequired,
-	resource_type: PropTypes.string,
+	resource_type: PropTypes.string.isRequired,
 	updateFilters: PropTypes.func.isRequired,
 	loadingFeed: PropTypes.bool.isRequired,
 	tracksPage: PropTypes.number.isRequired,

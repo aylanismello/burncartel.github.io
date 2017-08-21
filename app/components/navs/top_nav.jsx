@@ -1,6 +1,9 @@
+/* global FB*/
 import { Link } from 'react-router-dom';
 import React from 'react';
+import PropTypes from 'prop-types';
 import Modal from 'react-modal';
+import queryString from 'query-string';
 import * as FontAwesome from 'react-icons/lib/fa/';
 import LoginModal from '../shared/login_modal';
 import BCSearchBar from '../shared/bc_search_bar';
@@ -143,12 +146,15 @@ class TopNav extends React.Component {
 	}
 
 	render() {
+		// grab the q params from our query string to update search bar
+		const { q } = queryString.parse(this.context.router.route.location.search);
+
 		return (
 			<nav className="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse bc-nav">
 
 				<div className="nav-buttons">
 
-					<BCSearchBar />
+					<BCSearchBar q={q} />
 					{/* <Link to="/help">
 						<FontAwesome.FaQuestion
 							size={30}
@@ -176,5 +182,9 @@ class TopNav extends React.Component {
 		);
 	}
 }
+
+TopNav.contextTypes = {
+	router: PropTypes.object
+};
 
 export default TopNav;

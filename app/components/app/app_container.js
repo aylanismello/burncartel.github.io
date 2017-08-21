@@ -10,7 +10,7 @@ import {
 import { togglePlay } from '../../actions/player_actions';
 import { getPlayingFeedTracksHash } from '../../selectors/track_selector';
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, ownProps) => {
 	const feedTracksHash = getPlayingFeedTracksHash(state);
 
 	const trackUrl = feedTracksHash[state.feed.playingFeed.trackId]

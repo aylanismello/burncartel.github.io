@@ -151,6 +151,9 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 							dispatch(setHasSearchResults(false));
 							dispatch(loadingStop());
 						} else {
+							// add resource_type to feed metadata!
+							feed.resource_type = action.filters.resource_type;
+
 							dispatch(receiveFeed(feed));
 							dispatch(setHasSearchResults(true));
 							dispatch(loadingStop());
