@@ -10,7 +10,14 @@ import {
 import { togglePlay } from '../../actions/player_actions';
 import { getPlayingFeedTracksHash } from '../../selectors/track_selector';
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
+	const feedTracksHash = getPlayingFeedTracksHash(state);
+
+	const trackUrl = state.feed.playingFeed.trackId &&
+		Object.keys(feedTracksHash).length > 0
+		? feedTracksHash[state.feed.playingFeed.trackId].permalink_url
+		: '#';
+
 	return {
 		feed: state.feed.focusedFeed,
 		playerInitialized: state.player.playerInitialized,
@@ -18,10 +25,7 @@ const mapStateToProps = state => {
 		currentUser: state.user.currentUser,
 		fbDidInit: state.user.fbDidInit,
 		feedType: state.feed.feedType,
-		trackUrl: state.feed.playingFeed.trackId
-			? getPlayingFeedTracksHash(state)[state.feed.playingFeed.trackId]
-					.permalink_url
-			: '#'
+		trackUrl
 	};
 };
 
