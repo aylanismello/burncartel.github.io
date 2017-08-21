@@ -19,8 +19,9 @@ import {
 	getPrevTrackIdShuffled,
 	getUserTracksHash
 } from '../../selectors/track_selector';
+import { ENV } from '../../util/helpers';
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
 	let tracksHash, track, nextTrackId, prevTrackId;
 
 	if (!state.player.shuffle) {
@@ -40,7 +41,7 @@ const mapStateToProps = state => {
 	return {
 		// replace this with reading from .env ? it could be sniffed from the network traffic anyhow... hmm...
 		feedName: state.feed.playingFeed.feedName,
-		clientId: '282558e0e8cdcd8a9b3ba2b4917596b7',
+		clientId: ENV.clientId,
 		track,
 		publisherId,
 		trackLoaded: state.player.trackLoaded,
@@ -53,14 +54,14 @@ const mapStateToProps = state => {
 		currentTime: state.player.currentTime,
 		filters: state.feed.playingFeed.filters,
 		playerInitialized: state.player.playerInitialized,
-		isLoggedIn: state.user.currentUser.uid ? true : false,
+		isLoggedIn: !!state.user.currentUser.uid,
 		likePostInProgress: state.user.likePostInProgress,
 		userLikes: getUserTracksHash(state)
 	};
 };
 
 const mapDispatchToProps = dispatch => ({
-	updateTrackId: id => {
+	updateTrackId: (id) => {
 		dispatch(updatePlayingTrackId(id));
 	},
 	togglePlay: () => dispatch(togglePlay()),
