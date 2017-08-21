@@ -15,9 +15,16 @@ class SearchShow extends React.Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		if (nextProps.q !== this.props.q || nextProps.resource_type !== this.props.resource_type) {
+		if (
+			nextProps.q !== this.props.q ||
+			nextProps.resource_type !== this.props.resource_type
+		) {
 			this.setState({ loadingAnotherSearch: true });
-			this.props.updateFilters({ resource: 'search', q: nextProps.q, resource_type: nextProps.resource_type });
+			this.props.updateFilters({
+				resource: 'search',
+				q: nextProps.q,
+				resource_type: nextProps.resource_type
+			});
 		}
 
 		if (this.props.loadingFeed && !nextProps.loadingFeed) {
@@ -34,6 +41,12 @@ class SearchShow extends React.Component {
 		} else if (this.props.hasSearchResults) {
 			return (
 				<div className="container track-show">
+					<h2>
+						{' '}
+						results for
+						{' '}
+						<span style={{ fontWeight: 'bold' }}> {this.props.q} </span>
+					</h2>
 					<FeedContainer />
 				</div>
 			);
