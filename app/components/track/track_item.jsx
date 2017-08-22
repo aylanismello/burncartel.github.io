@@ -1,6 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import * as FontAwesome from 'react-icons/lib/fa/';
+import { dateToTimeAgo } from '../../util/helpers';
 import FireLike from '../likes/fire_like';
 import TagList from '../shared/tag_list';
 import TrackBadge from '../shared/track_badge';
@@ -128,6 +130,8 @@ const TrackItem = ({
 									</div>
 								: null}
 
+								{`${dateToTimeAgo(track.created_at_external)} old`}
+
 						</div>
 
 						<div className="metadata">
@@ -141,6 +145,26 @@ const TrackItem = ({
 			</div>
 		</div>
 	);
+};
+
+TrackItem.propTypes = {
+	track: PropTypes.object.isRequired,
+	handleTrackClick: PropTypes.func.isRequired,
+	playing: PropTypes.bool.isRequired,
+	trackId: PropTypes.number.isRequired,
+	trackLoaded: PropTypes.bool.isRequired,
+	trackIdx: PropTypes.number.isRequired,
+	isLoggedIn: PropTypes.bool.isRequired,
+	loginFB: PropTypes.func.isRequired,
+	likeUnlikeTrack: PropTypes.func.isRequired,
+	isLikedByUser: PropTypes.bool.isRequired,
+	likePostInProgress: PropTypes.bool.isRequired,
+	playingTrackId: PropTypes.number.isRequired,
+	hasRanking: PropTypes.bool
+};
+
+TrackItem.defaultProps = {
+	hasRanking: true
 };
 
 export default TrackItem;

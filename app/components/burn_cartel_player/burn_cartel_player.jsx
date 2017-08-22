@@ -7,17 +7,25 @@ import MobilePlayer from './mobile_player';
 import DesktopPlayer from './desktop_player';
 import TrackDetails from './track_details';
 
-// BUG ONLY HAPPENS WHEN SWITCHING FE
 class BurnCartelPlayer extends React.Component {
 	static secondsToMinutes(seconds) {
-		let timeStamp;
+		let timeStamp = '';
 		const secondsLeft = Math.floor(seconds % 60);
-		const minutesLeft = Math.floor(seconds / 60);
+		let minutesLeft = Math.floor(seconds / 60);
+		const hoursLeft = Math.floor(seconds / (60 * 60));
+
+		if (hoursLeft) {
+			timeStamp += `${hoursLeft}:`;
+			minutesLeft = Math.floor(minutesLeft % 60);
+			if (minutesLeft < 10) {
+				minutesLeft = `0${minutesLeft}`;
+			}
+		}
 
 		if (secondsLeft < 10) {
-			timeStamp = `${minutesLeft}:0${secondsLeft}`;
+			timeStamp += `${minutesLeft}:0${secondsLeft}`;
 		} else {
-			timeStamp = `${minutesLeft}:${secondsLeft}`;
+			timeStamp += `${minutesLeft}:${secondsLeft}`;
 		}
 
 		return timeStamp;

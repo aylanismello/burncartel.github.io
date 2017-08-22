@@ -1,12 +1,15 @@
-let host, port, clientId;
+import moment from 'moment';
 
-host = process.env.EC2_HOST;
-port = process.env.EC2_PORT;
-clientId = 'caf73ef1e709f839664ab82bef40fa96';
-
+const host = process.env.EC2_HOST;
+const port = process.env.EC2_PORT;
+const clientId = 'caf73ef1e709f839664ab82bef40fa96';
 
 export const ENV = {
-  host,
-  port,
-  clientId
+	host,
+	port,
+	clientId
+};
+
+export const dateToTimeAgo = (date) => {
+	return moment.duration(moment(new Date()).diff(moment(date))).humanize();
 };

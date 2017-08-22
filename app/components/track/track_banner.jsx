@@ -1,12 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import * as FontAwesome from 'react-icons/lib/fa/';
+import { dateToTimeAgo } from '../../util/helpers';
 import TagList from '../shared/tag_list';
 import TrackBadge from '../shared/track_badge';
 import BCAlbumArt from '../shared/bc_album_art';
 
 const maxTitleLength = 72;
-const formatName = name => (name.length < maxTitleLength ? name : `${name.slice(0, maxTitleLength)}...`);
+const formatName = name =>
+	name.length < maxTitleLength ? name : `${name.slice(0, maxTitleLength)}...`;
 
 const TrackBanner = ({
 	track,
@@ -29,6 +31,10 @@ const TrackBanner = ({
 					<h3 className="clickable-banner-metadata">{track.publisher.name} </h3>
 					{' '}
 				</Link>
+
+				<span className="released-text">
+					{`${dateToTimeAgo(track.created_at_external)} old`}{' '}
+				</span>
 
 				<BCAlbumArt
 					trackId={track.id}

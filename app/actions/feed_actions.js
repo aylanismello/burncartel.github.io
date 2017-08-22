@@ -45,15 +45,18 @@ export const reshuffleTracks = () => ({
 	type: feedConstants.RESHUFFLE_TRACKS
 });
 
-export const receivePaginationData = ({last_tracks_page,
-	next_tracks_page, tracks_page }) => ({
+export const receivePaginationData = ({
+	last_tracks_page,
+	next_tracks_page,
+	tracks_page
+}) => ({
 	type: feedConstants.RECEIVE_PAGINATION_DATA,
 	last_tracks_page,
 	next_tracks_page,
 	tracks_page
 });
 
-export const receiveFeed = (feed) => ({
+export const receiveFeed = feed => ({
 	type: feedConstants.RECEIVE_FEED,
 	feed
 });
@@ -64,17 +67,17 @@ export const receiveFeedMetadata = (feedType, metadata) => ({
 	metadata
 });
 
-export const fetchFeed = (filters) => ({
+export const fetchFeed = filters => ({
 	type: feedConstants.FETCH_FEED,
 	filters
 });
 
-export const fetchOldFeed = (filters) => ({
+export const fetchOldFeed = filters => ({
 	type: feedConstants.FETCH_OLD_FEED,
 	filters
 });
 
-export const setPlayingFeedName = (feedName) => ({
+export const setPlayingFeedName = feedName => ({
 	type: feedConstants.SET_PLAYING_FEED_NAME,
 	feedName
 });
@@ -83,12 +86,12 @@ export const paginateTracks = () => ({
 	type: feedConstants.PAGINATE_TRACKS
 });
 
-export const setLikeFeedUserId = (userId) => ({
+export const setLikeFeedUserId = userId => ({
 	type: feedConstants.SET_LIKE_FEED_USER_ID,
 	userId
-})
+});
 
-export const setFeedType = (feedType) => ({
+export const setFeedType = feedType => ({
 	type: feedConstants.SET_FEED_TYPE,
 	feedType
 });
@@ -102,7 +105,6 @@ export const updateTrackLikeCount = (trackId, likeCount) => ({
 export const resetTracks = () => ({
 	type: feedConstants.RESET_TRACKS
 });
-
 
 export const handleTrackClick = (trackId, clickType) => ({
 	type: feedConstants.HANDLE_TRACK_CLICK,
@@ -118,33 +120,32 @@ export const loadingStop = () => ({
 	type: feedConstants.LOADING_STOP
 });
 
-export const receiveTracks = (tracks) => ({
+export const receiveTracks = tracks => ({
 	type: feedConstants.RECEIVE_TRACKS,
 	tracks
 });
 
-export const receivePlayingTracks = (tracks) => ({
+export const receivePlayingTracks = tracks => ({
 	type: feedConstants.RECEIVE_PLAYING_TRACKS,
 	tracks
 });
 
-
-export const updateFilters = (filters) => ({
+export const updateFilters = filters => ({
 	type: feedConstants.UPDATE_FILTERS,
 	filters
 });
 
-export const updateTrackId = (trackId) => ({
+export const updateTrackId = trackId => ({
 	type: feedConstants.UPDATE_TRACK_ID,
 	trackId
 });
 
-export const updateFocusedTrackId = (trackId) => ({
+export const updateFocusedTrackId = trackId => ({
 	type: feedConstants.UPDATE_FOCUSED_TRACK_ID,
 	trackId
 });
 
-export const updatePlayingTrackId = (trackId) => ({
+export const updatePlayingTrackId = trackId => ({
 	type: feedConstants.UPDATE_PLAYING_TRACK_ID,
 	trackId
 });
