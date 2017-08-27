@@ -132,7 +132,7 @@ const TrackItem = ({
 						</div>
 
 						<div className="metadata">
-							<CountryBadge track={track} />
+							<CountryBadge locations={track.locations} />
 							<TrackBadge track={track} />
 							<TagList tagList={track.top_tags.slice(0, 6)} />
 						</div>

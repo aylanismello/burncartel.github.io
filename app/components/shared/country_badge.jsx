@@ -1,11 +1,14 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const CountryBadge = ({ track }) => {
-	if (!track.locations || track.locations.length === 0) {
+const CountryBadge = ({ locations, width }) => {
+	const widthInPx = `${width}px`;
+
+	if (!locations || locations.length === 0) {
 		return null;
 	}
 
-	let country = track.locations.filter(location => {
+	let country = locations.filter(location => {
 		return location.location_type === 'COUNTRY';
 	})[0];
 
@@ -13,17 +16,24 @@ const CountryBadge = ({ track }) => {
 		return null;
 	}
 
-	console.log('COUNTRY IZ GOOD');
-
 	return (
 		<div className="country-badge-container">
 			<img
 				className="country-badge"
 				src={country.flag_url}
-				style={{ width: '50px' }}
+				style={{ width: widthInPx }}
 			/>
 		</div>
 	);
+};
+
+CountryBadge.propTypes = {
+	locations: PropTypes.object,
+	width: PropTypes.number
+};
+
+CountryBadge.defaultProps = {
+	width: 45
 };
 
 export default CountryBadge;

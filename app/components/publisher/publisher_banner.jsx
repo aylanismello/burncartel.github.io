@@ -1,6 +1,7 @@
 import React from 'react';
 import UserList from '../shared/user_list';
 import TagList from '../shared/tag_list';
+import CountryBadge from '../shared/country_badge';
 import UserHandleList from '../shared/user_handle_list';
 
 const PublisherBanner = ({ user }) => {
@@ -19,6 +20,7 @@ const PublisherBanner = ({ user }) => {
 			</div>
 
 			<div className="right-side">
+				<CountryBadge locations={user.locations} width={100} />
 				<TagList tagList={user.top_tags.slice(0, 5)} />
 			</div>
 		</div>
