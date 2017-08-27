@@ -4,6 +4,7 @@ import * as FontAwesome from 'react-icons/lib/fa/';
 import FireLike from '../likes/fire_like';
 import TagList from '../shared/tag_list';
 import TrackBadge from '../shared/track_badge';
+import CountryBadge from '../shared/country_badge';
 import BCAlbumArt from '../shared/bc_album_art';
 import InfoDropdown from '../shared/info_dropdown';
 
@@ -131,6 +132,7 @@ const TrackItem = ({
 						</div>
 
 						<div className="metadata">
+							<CountryBadge track={track} />
 							<TrackBadge track={track} />
 							<TagList tagList={track.top_tags.slice(0, 6)} />
 						</div>

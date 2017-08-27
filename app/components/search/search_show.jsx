@@ -78,6 +78,14 @@ class SearchShow extends React.Component {
 				</span>
 				<span
 					className="search-type"
+					onClick={() => this.selectNewResourceType('location')}
+					style={this.getButtonStyle('location')}
+				>
+					&gt;
+					{' '}LOCATIONS{' '}
+				</span>
+				<span
+					className="search-type"
 					onClick={() => this.selectNewResourceType('tag')}
 					style={this.getButtonStyle('tag')}
 				>
