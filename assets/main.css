@@ -33,6 +33,9 @@
       .info-dropdown-container .info-dropdown .info-dropdown-content .publisher-meta .suggested-publishers {
         margin-top: .5em;
         color: white; }
+      .info-dropdown-container .info-dropdown .info-dropdown-content .location-meta {
+        color: white;
+        font-size: 12px; }
       .info-dropdown-container .info-dropdown .info-dropdown-content .more-content-button {
         color: white;
         background: #234f7b;
@@ -77,8 +80,16 @@
   .search-type-container .search-type:hover {
     cursor: pointer; }
 
-.country-badge-container:hover {
-  cursor: pointer; }
+.country-badge-container {
+  display: flex; }
+  .country-badge-container:hover {
+    cursor: pointer; }
+
+.track-container .country-badge {
+  margin-right: 0.6em; }
+
+.track-banner .country-badge {
+  margin-left: 1em; }
 
 body {
   background: #E6ECF0;

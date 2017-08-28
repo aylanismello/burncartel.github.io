@@ -104,7 +104,7 @@ const TrackItem = ({
 												<InfoDropdown
 													user={track.publisher}
 													users={track.suggested_publishers}
-													userType="publishers"
+													infoType="publishers"
 													length={2}
 												>
 													<Link to={`/publishers/${track.publisher_id}`}>
@@ -120,7 +120,7 @@ const TrackItem = ({
 											</div>
 											<InfoDropdown
 												users={track.curators}
-												userType="curators"
+												infoType="curators"
 												length={track.curators.length}
 											>
 												<a> {curatorsStr} </a>
@@ -132,7 +132,9 @@ const TrackItem = ({
 						</div>
 
 						<div className="metadata">
+
 							<CountryBadge locations={track.locations} />
+
 							<TrackBadge track={track} />
 							<TagList tagList={track.top_tags.slice(0, 6)} />
 						</div>
