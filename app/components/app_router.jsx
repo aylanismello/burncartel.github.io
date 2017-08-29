@@ -16,7 +16,8 @@ import LikesShowContainer from './likes/likes_show_container';
 import PublisherShowContainer from './publisher/publisher_show_container';
 import UserFeedShowContainer from './user/user_feed_show_container';
 import UserHomeContainer from './user/user_home_container';
-import TravelerContainer from './traveler/traveler_container';
+import TravelerShowContainer from './traveler/traveler_show_container';
+import TravelerIndexContainer from './traveler/traveler_index_container';
 import NoMatch from './no_match';
 import AppContainer from './app/app_container';
 
@@ -44,7 +45,8 @@ const AppRouter = () => (
 				<Route path="/me/feed" component={UserFeedShowContainer} />
 				<Route path="/me" component={UserHomeContainer} />
 				<Route path="/curated" component={BurnCartelCurated} />
-				<Route path="/traveler" component={TravelerContainer} />
+				<Route path="/traveler/:id" component={TravelerShowContainer} />
+				<Route path="/traveler" component={TravelerIndexContainer} />
 				<Route component={NoMatch} />
 			</Switch>
 		</ScrollToTop>

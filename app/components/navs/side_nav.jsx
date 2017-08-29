@@ -81,16 +81,16 @@ const SideNav = props => {
 						</Link>
 					: null} */}
 
-				{/* <Link to="/help">
+				<Link to="/traveler">
 					<div className="side-nav-item">
-						<FontAwesome.FaQuestion
+						<FontAwesome.FaGlobe
 							size={40}
 							color="aliceblue"
 							className="bc-icon"
 						/>
-						<SideNavCaption text="Help" />
+						<SideNavCaption text="Traveler" />
 					</div>
-				</Link> */}
+				</Link>
 
 			</div>
 		</div>

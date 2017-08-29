@@ -6,9 +6,6 @@ $hover-text-color: #0275d8;
 .info-dropdown-container {
   height: 40px;
 
-
-
-
   &:hover {
     cursor: pointer;
     .info-dropdown .info-dropdown-content {
@@ -43,6 +40,11 @@ $hover-text-color: #0275d8;
           margin-top: .5em;
           color: white;
         }
+      }
+
+      .location-meta {
+        color: white;
+        font-size: 12px;
       }
 
       position: absolute;

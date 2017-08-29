@@ -1,0 +1,19 @@
+.country-badge-container {
+  display: flex;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.track-container {
+  .country-badge {
+    margin-right: 0.6em;
+  }
+}
+
+.track-banner {
+  .country-badge {
+    margin-left: 1em;
+  }
+}

@@ -5,6 +5,7 @@ import BCAvatarLink from './bc_avatar_link';
 import { Link } from 'react-router-dom';
 
 const pagination = 6;
+const DEFAULT_CLASS_NAME = 'inner-content';
 
 class InfoDropdown extends React.Component {
 	constructor(props) {
@@ -35,14 +36,14 @@ class InfoDropdown extends React.Component {
 		);
 	}
 
-	renderCuratorList(className) {
-		const { users, userType, children, length } = this.props;
+	renderCuratorList() {
+		const { users, infoType, children, length } = this.props;
 		return (
-			<div className={className}>
+			<div className={DEFAULT_CLASS_NAME}>
 				<div className="curator-list">
 					<UserList
 						users={users}
-						userType={userType}
+						infoType={infoType}
 						length={this.state.currentLength}
 					/>
 					{this.state.currentLength < length
@@ -53,14 +54,24 @@ class InfoDropdown extends React.Component {
 		);
 	}
 
-	renderPublisherMeta(className) {
-		const { userType, user, users } = this.props;
+	renderLocationMeta() {
+		return (
+			<div className={DEFAULT_CLASS_NAME}>
+				<div className="location-meta">
+					<span>{this.props.location.name} </span>
+				</div>
+			</div>
+		);
+	}
+
+	renderPublisherMeta() {
+		const { infoType, user, users } = this.props;
 		// length is how many suggestions to make
 		return (
-			<div className={className}>
+			<div className={DEFAULT_CLASS_NAME}>
 				<div className="publisher-meta">
 					<BCAvatarLink
-						userType={userType}
+						infoType={infoType}
 						userId={user.id}
 						avatarUrl={user.avatar_url}
 						userName={user.name}
@@ -68,7 +79,7 @@ class InfoDropdown extends React.Component {
 					/>
 					<div className="suggested-publishers">
 						<h5> Sounds like: </h5>
-						<UserList users={users} userType={userType} length={5} />
+						<UserList users={users} infoType={infoType} length={5} />
 					</div>
 				</div>
 			</div>
@@ -76,7 +87,19 @@ class InfoDropdown extends React.Component {
 	}
 
 	render() {
-		const { users, userType, children, length } = this.props;
+		const { infoType, children } = this.props;
+
+		let style = {};
+		let content;
+		if (infoType === 'curators') {
+			content = this.renderCuratorList();
+		} else if (infoType === 'publishers') {
+			content = this.renderPublisherMeta();
+		} else {
+			content = this.renderLocationMeta();
+			// this overrides the default distance from relative dropdown triggering element
+			style = { top: '32px', width: 'auto', padding: '5px' };
+		}
 
 		return (
 			<div className="info-dropdown-container">
@@ -84,11 +107,9 @@ class InfoDropdown extends React.Component {
 					<div className="actual-hover">
 						{children}
 					</div>
-					<div className="info-dropdown-content">
+					<div className="info-dropdown-content" style={style}>
 						<div className="arrow-up" />
-						{userType === 'curators'
-							? this.renderCuratorList('inner-content')
-							: this.renderPublisherMeta('inner-content')}
+						{content}
 					</div>
 				</div>
 			</div>
@@ -98,13 +119,14 @@ class InfoDropdown extends React.Component {
 
 InfoDropdown.defaultProps = {
 	users: [],
-	userType: 'curators'
+	infoType: 'curators'
 };
 
 InfoDropdown.propTypes = {
 	children: PropTypes.object.isRequired,
 	users: PropTypes.array,
-	userType: PropTypes.string.isRequired,
+	location: PropTypes.object,
+	infoType: PropTypes.oneOf(['curators', 'publishers', 'locations']).isRequired,
 	length: PropTypes.number.isRequired
 };
 

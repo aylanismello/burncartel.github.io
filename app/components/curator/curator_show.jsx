@@ -23,7 +23,10 @@ class CuratorShow extends React.Component {
 	}
 
 	render() {
-		if ((this.props.loadingFeed && !this.props.tracksPage) || this.state.loadingAnotherCurator) {
+		if (
+			(this.props.loadingFeed && !this.props.tracksPage) ||
+			this.state.loadingAnotherCurator
+		) {
 			return <Loading />;
 		} else {
 			return (
