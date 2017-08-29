@@ -24,6 +24,7 @@ const initialState = {
 	},
 	PUBLISHERS: {},
 	CURATORS: {},
+	LOCATIONS: {},
 	SINGLE_TRACK: {},
 	USER: {},
 	TAGS: {},

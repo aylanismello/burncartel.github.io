@@ -26,6 +26,7 @@ const CountryBadge = ({ locations, width }) => {
 					<InfoDropdown
 						location={country}
 						infoType="locations"
+						key={country.name}
 						length={2}
 					>
 						<a href={`/#/search?q=${country.name}&resource_type=location`}>

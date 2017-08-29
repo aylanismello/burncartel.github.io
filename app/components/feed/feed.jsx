@@ -52,6 +52,7 @@ const Feed = ({
 	}
 
 	const NavigateFeedIcons = () => {
+		debugger;
 		if (!loadingFeed && tracksPage) {
 			return (
 				<div className="navigate-feed-icons">
