@@ -28,7 +28,7 @@ class TravelerShow extends React.Component {
 	render() {
 		if (
 			(this.props.loadingFeed && !this.props.tracksPage) ||
-			this.state.loadingAnotherLocation
+			this.state.loadingAnotherLocation || !this.props.location.name
 		) {
 			return <Loading />;
 		} else {
