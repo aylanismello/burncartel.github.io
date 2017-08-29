@@ -12,9 +12,9 @@ const myMiddlewares = [
 	TravelerMiddleware
 ];
 
-if (process.env.NODE_ENV !== 'production') {
-	myMiddlewares.push(createLogger());
-}
+// if (process.env.NODE_ENV !== 'production') {
+// 	myMiddlewares.push(createLogger());
+// }
 
 const masterMiddleware = applyMiddleware(...myMiddlewares);
 

@@ -17,6 +17,7 @@ import PublisherShowContainer from './publisher/publisher_show_container';
 import UserFeedShowContainer from './user/user_feed_show_container';
 import UserHomeContainer from './user/user_home_container';
 import TravelerShowContainer from './traveler/traveler_show_container';
+import TravelerIndexContainer from './traveler/traveler_index_container';
 import NoMatch from './no_match';
 import AppContainer from './app/app_container';
 
@@ -45,6 +46,7 @@ const AppRouter = () => (
 				<Route path="/me" component={UserHomeContainer} />
 				<Route path="/curated" component={BurnCartelCurated} />
 				<Route path="/traveler/:id" component={TravelerShowContainer} />
+				<Route path="/traveler" component={TravelerIndexContainer} />
 				<Route component={NoMatch} />
 			</Switch>
 		</ScrollToTop>

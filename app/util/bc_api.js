@@ -20,6 +20,12 @@ export const getFeed = (resource, filters, success, error) => {
 		} else {
 			getUrl = `${url}/feeds/search?q=${filters.q}&tracks_page=${page}`;
 		}
+	} else if (resource === 'locations' && filters.location_type !== undefined) {
+		// THIS IS FOR raw locations without sorted_tracks
+		getUrl = `${url}/${resource}?location_type=${filters.location_type}`;
+	} else if (resource === 'locations' && filters.parent_location !== undefined) {
+		// THIS IS also FOR raw locations without sorted_tracks
+		getUrl = `${url}/${resource}/${filters.parent_location}/children_locations`;
 	} else if (resource === 'user_feed') {
 		getUrl = `${url}/users/${filters.id}/feed?tracks_page=${page}`;
 	} else if (filters.id && resource === 'tags') {
@@ -27,7 +33,7 @@ export const getFeed = (resource, filters, success, error) => {
 		// it makes more sense since this is really a nested resource
 		getUrl = `${url}/${resource}/${filters.id}/feed?tracks_page=${page}`;
 	} else if (filters.id && resource !== 'likes') {
-		// getting /publishers/ or /curators/
+		// getting /publishers/ or /curators/ OR locations
 		getUrl = `${url}/${resource}/${filters.id}?tracks_page=${page}`;
 	} else if (filters.id && resource === 'likes') {
 		getUrl = `${url}/users/${filters.id}?tracks_page=${page}`;

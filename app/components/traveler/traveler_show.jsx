@@ -35,8 +35,12 @@ class TravelerShow extends React.Component {
 			return (
 				<div className="container track-show">
 					<h2>
-						Top tracks in {this.props.location.name}
+						Top tracks in{' '}
+						<span style={{ fontWeight: 'bold' }}>
+							{' '}{this.props.location.name}{' '}
+						</span>
 					</h2>
+
 					<FeedContainer />
 				</div>
 			);
