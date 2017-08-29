@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import InfoDropdown from './info_dropdown';
 
-const CountryBadge = ({ locations, width }) => {
+const CountryBadges = ({ locations, width }) => {
 	// aspect ratio is 2:1
 	const widthInPx = `${width}px`;
 	const heightInPx = `${width / 2}px`;
@@ -43,13 +43,13 @@ const CountryBadge = ({ locations, width }) => {
 	);
 };
 
-CountryBadge.propTypes = {
+CountryBadges.propTypes = {
 	locations: PropTypes.object,
 	width: PropTypes.number
 };
 
-CountryBadge.defaultProps = {
+CountryBadges.defaultProps = {
 	width: 45
 };
 
-export default CountryBadge;
+export default CountryBadges;

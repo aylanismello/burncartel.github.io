@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import CountryBadge from '../shared/country_badge';
 import { FaList } from 'react-icons/lib/fa';
 import { Link } from 'react-router-dom';
+import CountryBadges from '../shared/country_badges';
 
 const TravelerItem = ({ location }) => {
 	const locationType = location.location_type;
@@ -27,23 +27,10 @@ const TravelerItem = ({ location }) => {
 			<div className="col-sm-6 col-md-4 track-container">
 				<div className="thumbnail">
 					<div className="left-side">
-						{/*  would be cool to have snapshots here..
-              not we just have svgs of flags for locations of type 'COUNTRY'
-              */}
-						{/* <div className="artwork-wrapper">
-							<Link to={`/curators/${user.id}`}>
-								<img
-									src={user.avatar_url}
-									className="artwork-icon"
-									alt="avatar"
-								/>
-								<span className="glyphicon glyphicon-play-circle" />
-							</Link>
-						</div> */}
 
 						<div className="caption">
 							{locationType === 'COUNTRY'
-								? <CountryBadge locations={[location]} />
+								? <CountryBadges locations={[location]} />
 								: null}
 							<Link to={nextInTreeLink}>
 								<h3 className="user-title">{location.name}</h3>

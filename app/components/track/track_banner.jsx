@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import * as FontAwesome from 'react-icons/lib/fa/';
 import TagList from '../shared/tag_list';
 import TrackBadge from '../shared/track_badge';
-import CountryBadge from '../shared/country_badge';
+import CountryBadges from '../shared/country_badges';
 import BCAlbumArt from '../shared/bc_album_art';
 
 const maxTitleLength = 72;
@@ -42,7 +42,7 @@ const TrackBanner = ({
 
 			</div>
 			<div className="right-side">
-				<CountryBadge locations={track.locations} width={60}/>
+				<CountryBadges locations={track.locations} width={60}/>
 				<TagList tagList={track.top_tags.slice(0, 5)} />
 
 				<TrackBadge track={track} size={20} />
