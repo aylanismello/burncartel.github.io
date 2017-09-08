@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-	HashRouter as Router,
-	Route,
-	Switch
-} from 'react-router-dom';
+import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import ScrollToTop from './scroll_to_top';
 import HomeContainer from './home/home_container';
 import Help from './help';
@@ -18,16 +14,17 @@ import UserFeedShowContainer from './user/user_feed_show_container';
 import UserHomeContainer from './user/user_home_container';
 import TravelerShowContainer from './traveler/traveler_show_container';
 import TravelerIndexContainer from './traveler/traveler_index_container';
+import redirectOnLogout from './hoc/redirect_on_logout';
 import NoMatch from './no_match';
 import AppContainer from './app/app_container';
 
-const AppRouter = () => (
-	<Router>
+const AppRouter = () =>
+	(<Router>
 		<ScrollToTop>
 			<AppContainer />
 			<Switch>
 				<Route exact path="/" component={HomeContainer} />
-				<Route exact path="/bc" component={HomeContainer} />
+				<Route exact path="/bc" component={redirectOnLogout(HomeContainer)} />
 				<Route exact path="/hot" component={HomeContainer} />
 				<Route exact path="/remix" component={HomeContainer} />
 				<Route exact path="/bc_publishers" component={HomeContainer} />
@@ -50,7 +47,6 @@ const AppRouter = () => (
 				<Route component={NoMatch} />
 			</Switch>
 		</ScrollToTop>
-	</Router>
-);
+	</Router>);
 
 export default AppRouter;

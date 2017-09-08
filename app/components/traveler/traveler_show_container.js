@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { updateFilters, receiveTracks } from '../../actions/feed_actions';
+import redirectOnLogout from '../hoc/redirect_on_logout';
 import TravelerShow from './traveler_show';
 
 const mapStateToProps = (state, ownProps) => {
@@ -16,4 +17,4 @@ const mapDispatchToProps = dispatch => ({
 	receiveTracks: tracks => dispatch(receiveTracks(tracks))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(TravelerShow);
+export default connect(mapStateToProps, mapDispatchToProps)(redirectOnLogout(TravelerShow));
