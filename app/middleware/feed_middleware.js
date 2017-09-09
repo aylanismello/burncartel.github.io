@@ -119,6 +119,11 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 						tracks_page: null
 					})
 				);
+			} else {
+				// does this here mean it's just the same shit??
+				// in this event, just trigger next action, which will
+				// do nothing else and allow the rehydration logic to take effect
+				next(action);
 			}
 
 			prevSortType = sortType;

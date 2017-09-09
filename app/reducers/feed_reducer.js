@@ -1,6 +1,6 @@
-import { feedConstants } from '../actions/feed_actions';
-import { getFeedTracksHash, getTrackIdx } from '../selectors/track_selector';
 import * as _ from 'lodash';
+import { REHYDRATE } from 'redux-persist/constants';
+import { feedConstants } from '../actions/feed_actions';
 
 export const FEEDS = {
 	FIRE: 'FIRE',
@@ -49,6 +49,8 @@ const initialState = {
 
 const FeedReducer = (state = initialState, action) => {
 	switch (action.type) {
+		case REHYDRATE:
+			return action.payload.feed;
 		case feedConstants.RECEIVE_PAGINATION_DATA:
 			const { last_tracks_page, next_tracks_page, tracks_page } = action;
 			return {
