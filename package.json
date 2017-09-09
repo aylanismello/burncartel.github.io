@@ -54,6 +54,7 @@
     "redux": "^3.5.2",
     "redux-persist": "^4.9.1",
     "reselect": "^2.5.4",
+    "semantic-ui-react": "^0.72.0",
     "serve-favicon": "~2.3.0",
     "soundcloud-audio": "^1.1.0",
     "style-loader": "^0.13.0",
