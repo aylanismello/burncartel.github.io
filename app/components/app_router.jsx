@@ -14,6 +14,7 @@ import UserFeedShowContainer from './user/user_feed_show_container';
 import UserHomeContainer from './user/user_home_container';
 import TravelerShowContainer from './traveler/traveler_show_container';
 import TravelerIndexContainer from './traveler/traveler_index_container';
+import ExploreContainer from './explore/explore_container';
 import redirectOnLogout from './hoc/redirect_on_logout';
 import NoMatch from './no_match';
 import AppContainer from './app/app_container';
@@ -24,14 +25,14 @@ const AppRouter = () =>
 			<AppContainer />
 			<Switch>
 				<Route exact path="/" component={HomeContainer} />
-				<Route exact path="/bc" component={redirectOnLogout(HomeContainer)} />
-				<Route exact path="/hot" component={HomeContainer} />
-				<Route exact path="/remix" component={HomeContainer} />
-				<Route exact path="/bc_publishers" component={HomeContainer} />
-				<Route exact path="/mix" component={HomeContainer} />
-				<Route exact path="/liked" component={HomeContainer} />
-				<Route exact path="/not" component={HomeContainer} />
-				<Route exact path="/latest" component={HomeContainer} />
+				<Route exact path="/bc" component={redirectOnLogout(ExploreContainer)} />
+				<Route exact path="/hot" component={ExploreContainer} />
+				<Route exact path="/remix" component={ExploreContainer} />
+				<Route exact path="/bc_publishers" component={ExploreContainer} />
+				<Route exact path="/mix" component={ExploreContainer} />
+				<Route exact path="/liked" component={ExploreContainer} />
+				<Route exact path="/not" component={ExploreContainer} />
+				<Route exact path="/latest" component={ExploreContainer} />
 				<Route exact path="/help" component={Help} />
 				<Route path="/publishers/:id" component={PublisherShowContainer} />
 				<Route path="/tracks/:id" component={TrackShowContainer} />

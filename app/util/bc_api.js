@@ -45,6 +45,9 @@ export const getFeed = (resource, filters, success, error) => {
 
 	$.ajax({
 		url: getUrl,
+		data: {
+			days_old: 100
+		},
 		success,
 		error
 	});
