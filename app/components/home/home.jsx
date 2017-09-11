@@ -1,16 +1,14 @@
 import React from 'react';
-import Dropdown from 'react-dropdown';
+// import Dropdown from 'react-dropdown';
 import { Grid, Container, Image } from 'semantic-ui-react';
 import FeedContainer from '../feed/feed_container';
 
-const urls = [
-	'https://static1.squarespace.com/static/57f5390f5016e1da21c4bbdf/582a29c215d5dbb8582d3d2d/59834d5ccd0f6841623bb870/1501777245342/Ways08.1200-showcase.jpg',
-	'https://static1.squarespace.com/static/57f5390f5016e1da21c4bbdf/582a29c215d5dbb8582d3d2d/591db6fdebbd1a0edc2a7876/1495119615915/EH+Logo+3000x3000.jpg',
-	'https://static1.squarespace.com/static/57f5390f5016e1da21c4bbdf/582a29c215d5dbb8582d3d2d/593ac6fbcd0f68380abfdb07/1497024255948/ConLaw_Logo_05.22.17_Red_2400x2400.png',
-	'https://static1.squarespace.com/static/57f5390f5016e1da21c4bbdf/582a29c215d5dbb8582d3d2d/58581bc15016e17cbf709c29/1482169527123/showcard_99pi.jpg',
-	'https://static1.squarespace.com/static/57f5390f5016e1da21c4bbdf/582a29c215d5dbb8582d3d2d/585835bf414fb5cb3971c483/1482176498289/showcard_allusionist.jpg',
-	'https://static1.squarespace.com/static/57f5390f5016e1da21c4bbdf/582a29c215d5dbb8582d3d2d/58582e3646c3c4d40191a3fb/1482174491847/showcard_bugle.jpg'
-];
+const urls = {
+	liked: './assets/bc_radio_episode_14_cover.png',
+	latest: './assets/bc_radio_episode_12_cover.png',
+	remix: './assets/bc_radio_episode_11_cover.png',
+	bc_publishers: './assets/bc_radio_episode_10_cover.png'
+};
 
 class Home extends React.Component {
 	componentWillMount() {
@@ -104,9 +102,16 @@ class Home extends React.Component {
 
 				<Grid columns={4} centered>
 					<Grid.Row>
-						{urls.map(url => (
-							<Grid.Column width={5}>
-								<Image inline src={url} width="100px" spaced />
+						{Object.keys(urls).map(url => (
+							<Grid.Column width={16}>
+								{/* <Image inline src={url} width="200px" spaced /> */}
+								<Image
+									className="bc-feed-cover"
+									src={url}
+									href={`/#/${urls[url]}`}
+									width="200px"
+									spaced
+								/>
 							</Grid.Column>
 						))}
 					</Grid.Row>
