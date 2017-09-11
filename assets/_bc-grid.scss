@@ -7,3 +7,9 @@
 //     }
 //   }
 // }
+
+.bc-feed-cover {
+  &:hover {
+    border: 5px solid black;
+  }
+}

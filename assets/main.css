@@ -91,6 +91,34 @@
 .track-banner .country-badge {
   margin-left: 1em; }
 
+.artwork-wrapper {
+  position: relative;
+  margin: 1em 0; }
+  .artwork-wrapper .sk-spinner {
+    color: white; }
+  .artwork-wrapper .ranking-header {
+    position: absolute;
+    color: white;
+    letter-spacing: -1px;
+    background: black;
+    /* fallback color */
+    background: rgba(0, 0, 0, 0.7);
+    padding: 7px; }
+  .artwork-wrapper .artwork-icon {
+    width: 125px; }
+    .artwork-wrapper .artwork-icon:hover {
+      cursor: pointer; }
+  .artwork-wrapper .artwork-play {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    top: 43px;
+    left: 43px;
+    background-color: rgba(0, 0, 0, 0.52);
+    border-radius: 3px; }
+
 body {
   background: #E6ECF0;
   font-family: 'Quicksand', sans-serif; }
@@ -496,34 +524,6 @@ a:hover {
       .bc-menu .bottom-nav-icons .logged-in-user-avatar-container .loggin-in-user-avatar {
         width: 100%;
         border-radius: 100px; }
-
-.artwork-wrapper {
-  position: relative;
-  margin: 1em 0; }
-  .artwork-wrapper .sk-spinner {
-    color: white; }
-  .artwork-wrapper .ranking-header {
-    position: absolute;
-    color: white;
-    letter-spacing: -1px;
-    background: black;
-    /* fallback color */
-    background: rgba(0, 0, 0, 0.7);
-    padding: 7px; }
-  .artwork-wrapper .artwork-icon {
-    width: 125px; }
-    .artwork-wrapper .artwork-icon:hover {
-      cursor: pointer; }
-  .artwork-wrapper .artwork-play {
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    width: 42px;
-    height: 42px;
-    top: 43px;
-    left: 43px;
-    background-color: rgba(0, 0, 0, 0.52);
-    border-radius: 3px; }
 
 .cursor-pointer-grow:hover {
   cursor: pointer; }
