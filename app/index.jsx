@@ -7,7 +7,7 @@ import { connectFB } from './util/login_api';
 document.addEventListener('DOMContentLoaded', () => {
 	// prevent native gestures from interfering with touch-based devices UX
 	// this prevents pinching to zoom for safari
-	document.addEventListener('gesturestart', (e) => {
+	document.addEventListener('gesturestart', e => {
 		e.preventDefault();
 	});
 
