@@ -91,6 +91,31 @@
 .track-banner .country-badge {
   margin-left: 1em; }
 
+.artwork-wrapper-feed {
+  width: 200px;
+  height: 200px;
+  position: relative; }
+  .artwork-wrapper-feed .sk-spinner {
+    color: white; }
+  .artwork-wrapper-feed .feed-cover-buttons-container {
+    position: absolute;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.52); }
+    .artwork-wrapper-feed .feed-cover-buttons-container .current-icon-container .artwork-play {
+      width: 50px;
+      height: 50px;
+      border: 3px solid white;
+      border-radius: 10000px; }
+  .artwork-wrapper-feed:hover {
+    cursor: pointer; }
+    .artwork-wrapper-feed:hover .feed-cover-buttons-container {
+      display: flex; }
+
 .artwork-wrapper {
   position: relative;
   margin: 1em 0; }
