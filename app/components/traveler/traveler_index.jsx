@@ -53,7 +53,6 @@ class TravelerIndex extends React.Component {
 				</h2>
 			);
 		} else {
-			debugger;
 			return (
 				<h2>
 					Explore tracks in {this.props.locations[0].parent_location.name}

@@ -34,6 +34,7 @@ export const getFeed = (resource, filters, success, error) => {
 		getUrl = `${url}/${resource}/${filters.id}/feed?tracks_page=${page}`;
 	} else if (filters.id && resource !== 'likes') {
 		// getting /publishers/ or /curators/ OR locations
+		// REFACTOR FOR ALL THESE TO HIT /feeds
 		getUrl = `${url}/${resource}/${filters.id}?tracks_page=${page}`;
 	} else if (filters.id && resource === 'likes') {
 		getUrl = `${url}/users/${filters.id}?tracks_page=${page}`;
