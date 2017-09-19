@@ -31,7 +31,7 @@ const SideNav = props => {
 					</div>
 				</Link>
 
-				<div className="navbar-brand-container">
+				{/* <div className="navbar-brand-container">
 					<Link className="navbar-brand" to="/bc">
 						<div className="side-nav-item">
 							<div className="logo-container">
@@ -42,7 +42,7 @@ const SideNav = props => {
 					</Link>
 
 
-				</div>
+				</div> */}
 
 				{props.currentUserId
 					? <Link to="/me/likes">
