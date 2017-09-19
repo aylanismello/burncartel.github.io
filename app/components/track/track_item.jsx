@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { Segment, Image, Grid } from 'semantic-ui-react';
 import * as FontAwesome from 'react-icons/lib/fa/';
 import { dateToTimeAgo } from '../../util/helpers';
 import FireLike from '../likes/fire_like';
@@ -42,112 +43,107 @@ const TrackItem = ({
 	const curatorsStr = `${numCurators} ${curatorWord}`;
 
 	return (
-		<div className="row">
-			<div
-				className="col-sm-6 col-md-10 track-container"
-				id={`track-#${track.id}`}
-			>
-				<div className="thumbnail">
-					{/*  do NOT use image itself to set width of this, there's invisble white space on edges*/}
-					<div className="left-side">
+		<Segment>
+			<Grid className="track-container">
+				<Grid.Column className="thumnbail" width={3}>
 
-						<BCAlbumArt
-							hasRanking={hasRanking}
-							trackIdx={trackIdx}
+					<BCAlbumArt
+						hasRanking={hasRanking}
+						trackIdx={trackIdx}
+						trackId={track.id}
+						playingTrackId={playingTrackId}
+						trackLoaded={trackLoaded}
+						playing={playing}
+						handleTrackClick={() => handleTrackClick(track.id, 'play')}
+						track={track}
+					/>
+
+					<div className="track-item-icons">
+						<FireLike
+							isLoggedIn={isLoggedIn}
+							loginFB={loginFB}
+							likePostInProgress={likePostInProgress}
+							likeUnlikeTrack={likeUnlikeTrack}
+							numLikes={track.num_likes}
+							isLikedByUser={isLikedByUser}
 							trackId={track.id}
-							playingTrackId={playingTrackId}
-							trackLoaded={trackLoaded}
-							playing={playing}
-							handleTrackClick={() => handleTrackClick(track.id, 'play')}
-							track={track}
 						/>
 
-						<div className="track-item-icons">
-							<FireLike
-								isLoggedIn={isLoggedIn}
-								loginFB={loginFB}
-								likePostInProgress={likePostInProgress}
-								likeUnlikeTrack={likeUnlikeTrack}
-								numLikes={track.num_likes}
-								isLikedByUser={isLikedByUser}
-								trackId={track.id}
-							/>
-
-							<div className="track-item-icon">
-								<a href={track.permalink_url} target="_blank">
-									<FontAwesome.FaSoundcloud
-										size={35}
-										color="black"
-										className="soundcloud-png"
-									/>
-								</a>
-
-							</div>
+						<div className="track-item-icon">
+							<a href={track.permalink_url} target="_blank">
+								<FontAwesome.FaSoundcloud
+									size={35}
+									color="black"
+									className="soundcloud-png"
+								/>
+							</a>
 
 						</div>
+
 					</div>
+				</Grid.Column>
+				{/* </div> */}
 
-					<div className="right-side">
-						<div className="caption">
+				{/* <div className="right-side"> */}
+				<Grid.Column width={13} className="right-side">
+					<div className="caption">
 
-							<Link to={`/tracks/${track.id}`}>
-								<h3 className="track-title">
-									{shortenLongWordsInTitle(track.name)}
-								</h3>
-							</Link>
+						<Link to={`/tracks/${track.id}`}>
+							<h3 className="track-title">
+								{shortenLongWordsInTitle(track.name)}
+							</h3>
+						</Link>
 
-							{hasRanking
-								? <div>
-										<div className="curators-link">
-											<div className="before-info-dropdown">
-												{' '}By{' '}
-											</div>
-											<span>
-												<InfoDropdown
-													user={track.publisher}
-													users={track.suggested_publishers}
-													infoType="publishers"
-													length={2}
-												>
-													<Link to={`/publishers/${track.publisher_id}`}>
-														{track.publisher.name}
-													</Link>
-												</InfoDropdown>
-
-											</span>
+						{hasRanking
+							? <div>
+									<div className="curators-link">
+										<div className="before-info-dropdown">
+											{' '}By{' '}
 										</div>
-										<div className="curators-link">
-											<div className="before-info-dropdown">
-												Selected by
-											</div>
+										<span>
 											<InfoDropdown
-												users={track.curators}
-												infoType="curators"
-												length={track.curators.length}
+												user={track.publisher}
+												users={track.suggested_publishers}
+												infoType="publishers"
+												length={2}
 											>
-												<a> {curatorsStr} </a>
+												<Link to={`/publishers/${track.publisher_id}`}>
+													{track.publisher.name}
+												</Link>
 											</InfoDropdown>
-										</div>
+
+										</span>
 									</div>
-								: null}
+									<div className="curators-link">
+										<div className="before-info-dropdown">
+											Selected by
+										</div>
+										<InfoDropdown
+											users={track.curators}
+											infoType="curators"
+											length={track.curators.length}
+										>
+											<a> {curatorsStr} </a>
+										</InfoDropdown>
+									</div>
+								</div>
+							: null}
 
-								{`${dateToTimeAgo(track.created_at_external)} old`}
-
-						</div>
-
-						<div className="metadata">
-
-							<CountryBadges locations={track.locations} />
-
-							<TrackBadge track={track} />
-							<TagList tagList={track.top_tags.slice(0, 6)} />
-						</div>
+						{`${dateToTimeAgo(track.created_at_external)} old`}
 
 					</div>
-				</div>
 
-			</div>
-		</div>
+					<div className="metadata">
+
+						<CountryBadges locations={track.locations} />
+
+						<TrackBadge track={track} />
+						<TagList tagList={track.top_tags.slice(0, 6)} />
+					</div>
+				</Grid.Column>
+
+			</Grid>
+		</Segment>
 	);
 };
 
