@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import Modal from 'react-modal';
 import queryString from 'query-string';
 import * as FontAwesome from 'react-icons/lib/fa/';
+import { Menu } from 'semantic-ui-react';
 import LoginModal from '../shared/login_modal';
 import BCSearchBar from '../shared/bc_search_bar';
 import BCDropdown from './bc_dropdown';
@@ -150,8 +151,8 @@ class TopNav extends React.Component {
 		const { q } = queryString.parse(this.context.router.route.location.search);
 
 		return (
-			<nav className="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse bc-nav">
-
+			// <nav className="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse bc-nav">
+			<Menu fixed="top" className="bc-nav" >
 				<div className="nav-buttons">
 
 					<BCSearchBar q={q} />
@@ -177,8 +178,7 @@ class TopNav extends React.Component {
 					/>
 
 				</div>
-
-			</nav>
+			</Menu>
 		);
 	}
 }

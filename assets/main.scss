@@ -7,10 +7,18 @@
 @import 'search-show';
 @import 'country-badge';
 @import 'artwork-wrapper';
+@import 'gradients';
 // @import 'bc-grid';
 
+
+.ui.top.fixed.bc-nav.menu {
+	@include nav-gradient();
+	border: none;
+}
+
 body {
-	background: $background-color;
+	@include gradient();
+	// background: $background-color;
 	font-family: 'Quicksand', sans-serif;
 }
 
@@ -368,7 +376,7 @@ a:hover {
 .bc-nav {
 	height: $top-nav-height;
 	box-shadow: 0px 0px 5px #676767;
-
+	@include gradient();
 	.bc-dropdown-container {
 
 		.bc-dropdown-avatar-name {
