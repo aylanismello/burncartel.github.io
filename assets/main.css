@@ -156,6 +156,8 @@ body {
   /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to bottom, #EAECC6, #2BC0E4);
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   font-family: 'Quicksand', sans-serif; }
 
 a:hover {
@@ -424,9 +426,10 @@ a:hover {
   background: -webkit-linear-gradient(to bottom, #EAECC6, #2BC0E4);
   /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to bottom, #EAECC6, #2BC0E4);
-  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */ }
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background-repeat: no-repeat;
+  background-attachment: fixed; }
   .bc-nav .bc-dropdown-container .bc-dropdown-avatar-name {
-    background: #FE6859;
     width: 140px;
     height: 50px;
     display: flex;

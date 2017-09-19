@@ -28,7 +28,8 @@ const initialState = {
 	SINGLE_TRACK: {},
 	USER: {},
 	TAGS: {},
-	EXPLORE: {},
+	PLAYLISTS: null,
+	EXPLORE: null,
 	playingFeed: {
 		tracks: [],
 		trackId: null,

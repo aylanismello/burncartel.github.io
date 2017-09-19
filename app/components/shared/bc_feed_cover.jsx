@@ -20,18 +20,18 @@ class BCFeedCover extends React.Component {
 	componentWillMount() {
 		// first this we must do it resolve this feed type to an id!
 		// cause we might need that later!
-		if (!this.props.linkUrl) {
-			getFeedResourceId(
-				(response) => {
-					const { id } = response.data;
-					this.setState({
-						linkUrl: `/${this.props.resource}/${id}`
-					});
-				},
-				this.props.resource,
-				this.props.filters
-			);
-		}
+		// if (!this.props.linkUrl) {
+		// 	getFeedResourceId(
+		// 		(response) => {
+		// 			const { id } = response.data;
+		// 			this.setState({
+		// 				linkUrl: `/${this.props.resource}/${id}`
+		// 			});
+		// 		},
+		// 		this.props.resource,
+		// 		this.props.filters
+		// 	);
+		// }
 	}
 
 	render() {

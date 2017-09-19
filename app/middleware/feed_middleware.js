@@ -30,6 +30,7 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 				// if we have multiple tracks
 
 				dispatch(receivePaginationData(action.feed));
+				// THIS IS WHY ALL FEEDS NEED TO RETURN PAGINATION INFO
 				if (getState().feed.pagination.tracks_page === 1) {
 					dispatch(resetTracks());
 				}
@@ -166,14 +167,22 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 					} else if (
 						(action.filters.resource === 'locations' &&
 							(action.filters.location_type !== undefined ||
-								action.filters.parent_location !== undefined))
-						// action.filters.resource === 'playlists'
+								action.filters.parent_location !== undefined)) ||
+						(action.filters.resource === 'playlists' && !action.filters.id)
 					) {
 						// RECEIVING ONLY LOCATIONS, NO TRACKS
 						// TODO: THIS SHOULD BE REFACTORED INTO AN INDEPENDENT MIDDLEWARE CASE!
-						dispatch(
-							receiveFeedMetadata(getState().feed.feedType, { metadata: feed })
-						);
+						if (action.filters.resource === 'playlists') {
+							// weird edge case where singular of playlists resource in Feed Reducer is
+							// EXPLORE and totally different shape (w/out tracks)
+							dispatch(receiveFeedMetadata('EXPLORE', feed));
+						} else {
+							dispatch(
+								receiveFeedMetadata(getState().feed.feedType, {
+									metadata: feed
+								})
+							);
+						}
 						dispatch(loadingStop());
 					} else {
 						dispatch(receiveFeed(feed));
