@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import TravelerList from './traveler_list';
+import LocationList from './location_list';
 import Loading from '../shared/loading';
 
-class TravelerIndex extends React.Component {
+class LocationIndex extends React.Component {
 	// we are getting locations, but tracks are empty
 
 	constructor(props) {
@@ -13,7 +13,7 @@ class TravelerIndex extends React.Component {
 
 	componentWillMount() {
 		if (!this.props.query.parent_location) {
-			// THIS REALLY ONLY GETS TRIGGERED WHEN /traveler loads
+			// THIS REALLY ONLY GETS TRIGGERED WHEN locations loads
 			this.props.updateFilters({
 				resource: 'locations',
 				location_type: 0
@@ -70,7 +70,7 @@ class TravelerIndex extends React.Component {
 					{this.props.query.parent_location
 						? this.renderHeader('other')
 						: this.renderHeader('root')}
-					<TravelerList
+					<LocationList
 						locations={this.props.locations}
 					/>
 				</div>
@@ -79,16 +79,16 @@ class TravelerIndex extends React.Component {
 	}
 }
 
-TravelerIndex.propTypes = {
+LocationIndex.propTypes = {
 	updateFilters: PropTypes.func.isRequired,
 	query: PropTypes.object,
 	locations: PropTypes.object,
 	loadingFeed: PropTypes.bool.isRequired
 };
 
-TravelerIndex.defaultProps = {
+LocationIndex.defaultProps = {
 	query: {},
 	locations: null
 };
 
-export default TravelerIndex;
+export default LocationIndex;

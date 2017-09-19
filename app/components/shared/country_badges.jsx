@@ -29,7 +29,7 @@ const CountryBadges = ({ locations, width }) => {
 						key={country.name}
 						length={2}
 					>
-						<a href={`/#/traveler/${country.id}`}>
+						<a href={`/#locations/${country.id}`}>
 							<img
 								className="country-badge"
 								src={country.flag_url}

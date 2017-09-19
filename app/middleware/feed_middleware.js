@@ -164,20 +164,13 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 							dispatch(loadingStop());
 						}
 					} else if (
-						action.filters.resource === 'locations' &&
-						action.filters.location_type !== undefined
+						(action.filters.resource === 'locations' &&
+							(action.filters.location_type !== undefined ||
+								action.filters.parent_location !== undefined))
+						// action.filters.resource === 'playlists'
 					) {
 						// RECEIVING ONLY LOCATIONS, NO TRACKS
 						// TODO: THIS SHOULD BE REFACTORED INTO AN INDEPENDENT MIDDLEWARE CASE!
-						dispatch(
-							receiveFeedMetadata(getState().feed.feedType, { metadata: feed })
-						);
-						dispatch(loadingStop());
-					} else if (
-						action.filters.resource === 'locations' &&
-						action.filters.parent_location !== undefined
-					) {
-						// RECEIVING CHILDREN LOCATIONS
 						dispatch(
 							receiveFeedMetadata(getState().feed.feedType, { metadata: feed })
 						);

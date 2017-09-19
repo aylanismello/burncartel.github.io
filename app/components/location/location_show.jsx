@@ -2,7 +2,7 @@ import React from 'react';
 import FeedContainer from '../feed/feed_container';
 import Loading from '../shared/loading';
 
-class TravelerShow extends React.Component {
+class LocationShow extends React.Component {
 	componentWillMount() {
 		this.props.updateFilters({
 			resource: 'locations',
@@ -28,7 +28,8 @@ class TravelerShow extends React.Component {
 	render() {
 		if (
 			(this.props.loadingFeed && !this.props.tracksPage) ||
-			this.state.loadingAnotherLocation || !this.props.location.name
+			this.state.loadingAnotherLocation ||
+			!this.props.location.name
 		) {
 			return <Loading />;
 		} else {
@@ -48,4 +49,4 @@ class TravelerShow extends React.Component {
 	}
 }
 
-export default TravelerShow;
+export default LocationShow;

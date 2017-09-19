@@ -28,6 +28,7 @@ const initialState = {
 	SINGLE_TRACK: {},
 	USER: {},
 	TAGS: {},
+	EXPLORE: {},
 	playingFeed: {
 		tracks: [],
 		trackId: null,
@@ -49,8 +50,9 @@ const initialState = {
 
 const FeedReducer = (state = initialState, action) => {
 	switch (action.type) {
-		case REHYDRATE:
-			return action.payload.feed;
+		// add this is again when we understand what to include/leave out
+		// case REHYDRATE:
+		// 	return action.payload.feed;
 		case feedConstants.RECEIVE_PAGINATION_DATA:
 			const { last_tracks_page, next_tracks_page, tracks_page } = action;
 			return {

@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import TravelerItem from './traveler_item';
+import LocationItem from './location_item';
 
-const TravelerList = ({ locations }) => {
+const LocationList = ({ locations }) => {
 	const childElements = locations.map((location, idx) => (
-		<TravelerItem location={location} key={idx} />
+		<LocationItem location={location} key={idx} />
 	));
 
 	return (
@@ -14,8 +14,8 @@ const TravelerList = ({ locations }) => {
 	);
 };
 
-TravelerList.propTypes = {
+LocationList.propTypes = {
 	locations: PropTypes.instanceOf(Array).isRequired
 };
 
-export default TravelerList;
+export default LocationList;

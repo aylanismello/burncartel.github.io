@@ -12,9 +12,9 @@ import LikesShowContainer from './likes/likes_show_container';
 import PublisherShowContainer from './publisher/publisher_show_container';
 import UserFeedShowContainer from './user/user_feed_show_container';
 import UserHomeContainer from './user/user_home_container';
-import TravelerShowContainer from './traveler/traveler_show_container';
-import TravelerIndexContainer from './traveler/traveler_index_container';
-import ExploreContainer from './explore/explore_container';
+import LocationShowContainer from './location/location_show_container';
+import LocationIndexContainer from './location/location_index_container';
+import PlaylistShowContainer from './playlist/playlist_show_container';
 import redirectOnLogout from './hoc/redirect_on_logout';
 import NoMatch from './no_match';
 import AppContainer from './app/app_container';
@@ -25,15 +25,16 @@ const AppRouter = () =>
 			<AppContainer />
 			<Switch>
 				<Route exact path="/" component={HomeContainer} />
-				<Route exact path="/bc" component={redirectOnLogout(ExploreContainer)} />
+				{/* <Route exact path="/bc" component={redirectOnLogout(ExploreContainer)} />
 				<Route exact path="/hot" component={ExploreContainer} />
 				<Route exact path="/remix" component={ExploreContainer} />
 				<Route exact path="/bc_publishers" component={ExploreContainer} />
 				<Route exact path="/mix" component={ExploreContainer} />
 				<Route exact path="/liked" component={ExploreContainer} />
 				<Route exact path="/not" component={ExploreContainer} />
-				<Route exact path="/latest" component={ExploreContainer} />
+				<Route exact path="/latest" component={ExploreContainer} /> */}
 				<Route exact path="/help" component={Help} />
+				<Route exact path="/playlists/:id" component={PlaylistShowContainer} />
 				<Route path="/publishers/:id" component={PublisherShowContainer} />
 				<Route path="/tracks/:id" component={TrackShowContainer} />
 				<Route path="/curators/:id" component={CuratorShowContainer} />
@@ -43,8 +44,8 @@ const AppRouter = () =>
 				<Route path="/me/feed" component={UserFeedShowContainer} />
 				<Route path="/me" component={UserHomeContainer} />
 				<Route path="/curated" component={BurnCartelCurated} />
-				<Route path="/traveler/:id" component={TravelerShowContainer} />
-				<Route path="/traveler" component={TravelerIndexContainer} />
+				<Route path="/locations/:id" component={LocationShowContainer} />
+				<Route path="/locations" component={LocationIndexContainer} />
 				<Route component={NoMatch} />
 			</Switch>
 		</ScrollToTop>

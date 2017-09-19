@@ -81,7 +81,7 @@ const SideNav = props => {
 						</Link>
 					: null} */}
 
-				<Link to="/traveler">
+				<Link to="/locations">
 					<div className="side-nav-item">
 						<FontAwesome.FaGlobe
 							size={40}

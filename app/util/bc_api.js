@@ -1,8 +1,22 @@
 import $ from 'jquery';
+import axios from 'axios';
 import { ENV } from './helpers';
 
 const { host, port } = ENV;
 const url = `http://${host}:${port}/api/v1`;
+
+export const getFeedResourceId = (success, resource, filters) => {
+	axios
+		.get(`${url}/${resource}`, {
+			params: filters
+		})
+		.then(response => {
+			success(response);
+		})
+		.catch(error => {
+			console.log('damn we fucked up');
+		});
+};
 
 export const getFeed = (resource, filters, success, error) => {
 	let getUrl;
@@ -20,25 +34,28 @@ export const getFeed = (resource, filters, success, error) => {
 		} else {
 			getUrl = `${url}/feeds/search?q=${filters.q}&tracks_page=${page}`;
 		}
+	} else if (resource === 'playlists' && !filters.id) {
+		getUrl = `${url}/playlists/`;
+	} else if (resource === 'playlists' && filters.id) {
+		getUrl = `${url}/playlists/${filters.id}/feed`;
 	} else if (resource === 'locations' && filters.location_type !== undefined) {
 		// THIS IS FOR raw locations without sorted_tracks
 		getUrl = `${url}/${resource}?location_type=${filters.location_type}`;
-	} else if (resource === 'locations' && filters.parent_location !== undefined) {
+	} else if (resource === 'tracks') {
+		getUrl = `${url}/tracks/${filters.id}`;
+	} else if (
+		resource === 'locations' &&
+		filters.parent_location !== undefined
+	) {
 		// THIS IS also FOR raw locations without sorted_tracks
 		getUrl = `${url}/${resource}/${filters.parent_location}/children_locations`;
 	} else if (resource === 'user_feed') {
 		getUrl = `${url}/users/${filters.id}/feed?tracks_page=${page}`;
-	} else if (filters.id && resource === 'tags') {
-		// user this feeds convention from now on!
-		// it makes more sense since this is really a nested resource
-		getUrl = `${url}/${resource}/${filters.id}/feed?tracks_page=${page}`;
 	} else if (filters.id && resource !== 'likes') {
-		// getting /publishers/ or /curators/ OR locations
-		// REFACTOR FOR ALL THESE TO HIT /feeds
-		getUrl = `${url}/${resource}/${filters.id}?tracks_page=${page}`;
+		// getting /publishers/ or /curators/ OR /locations or /tags
+		getUrl = `${url}/${resource}/${filters.id}/feed?tracks_page=${page}`;
 	} else if (filters.id && resource === 'likes') {
-		getUrl = `${url}/users/${filters.id}?tracks_page=${page}`;
-		// get "/:user_id/likes", root: :track do
+		getUrl = `${url}/users/${filters.id}/likes?tracks_page=${page}`;
 	} else {
 		// we are dealing with a fire feed
 		getUrl = `${url}/feeds?sort_type=${filters.sortType}&tracks_page=${page}`;

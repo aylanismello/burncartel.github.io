@@ -4,7 +4,7 @@ import { FaList } from 'react-icons/lib/fa';
 import { Link } from 'react-router-dom';
 import CountryBadges from '../shared/country_badges';
 
-const TravelerItem = ({ location }) => {
+const LocationItem = ({ location }) => {
 	const locationType = location.location_type;
 	const numTracks = location.num_tracks;
 	const numPublishers = location.num_publishers;
@@ -17,10 +17,10 @@ const TravelerItem = ({ location }) => {
 		infoText += `& has ${location.children_with_tracks.length} cities`;
 	}
 
-	const locationFeedLink = `/traveler/${location.id}`;
+	const locationFeedLink = `/locations/${location.id}`;
 	const nextInTreeLink = locationType === 'CITY'
 		? locationFeedLink
-		: `/traveler?parent_location=${location.id}`;
+		: `/locations?parent_location=${location.id}`;
 
 	return (
 		<div className="row">
@@ -50,8 +50,8 @@ const TravelerItem = ({ location }) => {
 	);
 };
 
-TravelerItem.propTypes = {
+LocationItem.propTypes = {
 	location: PropTypes.object.isRequired
 };
 
-export default TravelerItem;
+export default LocationItem;
