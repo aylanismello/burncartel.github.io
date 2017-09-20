@@ -1,4 +1,5 @@
 import React from 'react';
+import { Container } from 'semantic-ui-react';
 import FeedContainer from '../feed/feed_container';
 import Loading from '../shared/loading';
 
@@ -34,7 +35,7 @@ class LocationShow extends React.Component {
 			return <Loading />;
 		} else {
 			return (
-				<div className="container track-show">
+				<Container className="main-content track-show">
 					<h2>
 						Top tracks in{' '}
 						<span style={{ fontWeight: 'bold' }}>
@@ -43,7 +44,7 @@ class LocationShow extends React.Component {
 					</h2>
 
 					<FeedContainer />
-				</div>
+				</Container>
 			);
 		}
 	}

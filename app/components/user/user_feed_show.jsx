@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
+import { Container } from 'semantic-ui-react';
 import FeedContainer from '../feed/feed_container';
 
 const input = `
@@ -48,13 +49,13 @@ class UserFeedShow extends React.Component {
 			);
 		} else {
 			return (
-				<div className="container user-show">
+				<Container className="main-content user-show">
 					<h2> {name}'s 🔥 Feed 🎵 </h2>
 					<button onClick={this.props.resetPersonalFeed}>
 						Reset My Feed
 					</button>
 					<FeedContainer />
-				</div>
+				</Container>
 			);
 		}
 	}

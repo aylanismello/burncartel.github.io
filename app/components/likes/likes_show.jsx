@@ -1,4 +1,5 @@
 import React from 'react';
+import { Container } from 'semantic-ui-react';
 import FeedContainer from '../feed/feed_container';
 
 class LikesShow extends React.Component {
@@ -22,10 +23,10 @@ class LikesShow extends React.Component {
 
 	render() {
 		return (
-			<div className="container user-show">
+			<Container className="main-content user-show">
 				<h2> Your 🔥 Likes 🎵 </h2>
 				<FeedContainer />
-			</div>
+			</Container>
 		);
 	}
 }

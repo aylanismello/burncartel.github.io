@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Container } from 'semantic-ui-react';
 import LocationList from './location_list';
 import Loading from '../shared/loading';
 
@@ -66,14 +67,14 @@ class LocationIndex extends React.Component {
 			return <Loading />;
 		} else {
 			return (
-				<div className="container track-show">
+				<Container className="main-content track-show">
 					{this.props.query.parent_location
 						? this.renderHeader('other')
 						: this.renderHeader('root')}
 					<LocationList
 						locations={this.props.locations}
 					/>
-				</div>
+				</Container>
 			);
 		}
 	}

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Container } from 'semantic-ui-react';
 import FeedContainer from '../feed/feed_container';
 import Loading from '../shared/loading';
 
@@ -36,7 +37,8 @@ class TagShow extends React.Component {
 			const { name } = this.props.tag;
 
 			return (
-				<div className="container user-show">
+				<Container className="main-content user-show">
+				{/* <div className="container user-show"> */}
 					<h2>
 						{' '}results for tags:
 					</h2>
@@ -49,7 +51,7 @@ class TagShow extends React.Component {
 					</span>
 
 					<FeedContainer />
-				</div>
+				</Container>
 			);
 		}
 	}

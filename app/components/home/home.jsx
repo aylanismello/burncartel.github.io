@@ -16,7 +16,7 @@ class Home extends React.Component {
 
 	render() {
 		return (
-			<Container>
+			<Container className="main-content">
 				<Segment padded basic>
 					<Header as="h1">
 						<Icon name="plug" />

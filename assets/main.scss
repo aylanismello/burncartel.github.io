@@ -779,8 +779,11 @@ a:hover {
 	}
 }
 
+
+
 .track-container {
-	.thumbnail {
+	.track {
+	// .track {
 		display: flex;
 		.caption {
 			.curators-link {
@@ -797,7 +800,6 @@ a:hover {
 	}
 }
 
-
 // ON DEMAND STYLES
 .bottom-loading-spinner {
 	position: absolute;
@@ -808,3 +810,6 @@ a:hover {
 .visibility-hidden {
 	visibility: hidden;
 }
+
+
+@import 'post-semantic';

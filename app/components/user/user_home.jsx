@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
+import { Container } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import { GoFlame, GoRadioTower } from 'react-icons/lib/go';
 
@@ -30,7 +31,7 @@ class UserHome extends React.Component {
 			);
 		} else {
 			return (
-				<div className="container user-home">
+				<Container className="main-content user-home">
 					<div className="user-home-banner">
 						<div className="avatar-container">
 							<img alt={`${this.props.userName}`} src={this.props.userPhoto} />
@@ -54,7 +55,7 @@ class UserHome extends React.Component {
 						</Link>
 					</div>
 
-				</div>
+				</Container>
 			);
 		}
 	}

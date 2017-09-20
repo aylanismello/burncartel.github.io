@@ -693,13 +693,13 @@ a:hover {
     position: absolute;
     top: 100%;
     left: 0; } }
-.track-container .thumbnail {
+.track-container .track {
   display: flex; }
-  .track-container .thumbnail .caption .curators-link {
+  .track-container .track .caption .curators-link {
     display: flex; }
-    .track-container .thumbnail .caption .curators-link .before-info-dropdown {
+    .track-container .track .caption .curators-link .before-info-dropdown {
       margin-right: .3em; }
-  .track-container .thumbnail .caption h3 {
+  .track-container .track .caption h3 {
     font-size: 1.35rem; }
 
 .bottom-loading-spinner {
@@ -709,5 +709,14 @@ a:hover {
 
 .visibility-hidden {
   visibility: hidden; }
+
+.main-content {
+  padding-left: 7em; }
+
+.bc-menu {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%; }
 
 /*# sourceMappingURL=main.css.map */

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Container } from 'semantic-ui-react';
 import Loading from '../shared/loading';
 import FeedContainer from '../feed/feed_container';
 import PlaylistBanner from './playlist_banner';
@@ -35,10 +36,12 @@ class PlaylistShow extends Component {
 			return <Loading />;
 		} else {
 			return (
-				<div className="container user-show track-show">
+				// <div className="container user-show track-show">
+				// <Container className="container user-show track-show">
+				<Container className="main-content user-show track-show">
 					<PlaylistBanner {...this.props.playlist} />
 					<FeedContainer />
-				</div>
+				</Container>
 			);
 		}
 	}

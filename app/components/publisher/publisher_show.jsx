@@ -1,4 +1,5 @@
 import React from 'react';
+import { Container } from 'semantic-ui-react';
 import PublisherBanner from './publisher_banner';
 import FeedContainer from '../feed/feed_container';
 import Loading from '../shared/loading';
@@ -30,11 +31,11 @@ class PublisherShow extends React.Component {
 			return <Loading />;
 		} else if (Object.keys(this.props.publisher).length > 0) {
 			return (
-				<div className="container track-show">
+				<Container className="main-content track-show">
 					<PublisherBanner user={this.props.publisher} />
 
 					<FeedContainer />
-				</div>
+				</Container>
 			);
 		} else {
 			return <div />;

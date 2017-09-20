@@ -18,6 +18,7 @@ import PlaylistShowContainer from './playlist/playlist_show_container';
 import redirectOnLogout from './hoc/redirect_on_logout';
 import NoMatch from './no_match';
 import AppContainer from './app/app_container';
+import { Container } from 'semantic-ui-react';
 
 const AppRouter = () =>
 	(<Router>
@@ -26,13 +27,13 @@ const AppRouter = () =>
 			<Switch>
 				<Route exact path="/" component={HomeContainer} />
 				{/* <Route exact path="/bc" component={redirectOnLogout(ExploreContainer)} />
-				<Route exact path="/hot" component={ExploreContainer} />
-				<Route exact path="/remix" component={ExploreContainer} />
-				<Route exact path="/bc_publishers" component={ExploreContainer} />
-				<Route exact path="/mix" component={ExploreContainer} />
-				<Route exact path="/liked" component={ExploreContainer} />
-				<Route exact path="/not" component={ExploreContainer} />
-				<Route exact path="/latest" component={ExploreContainer} /> */}
+					<Route exact path="/hot" component={ExploreContainer} />
+					<Route exact path="/remix" component={ExploreContainer} />
+					<Route exact path="/bc_publishers" component={ExploreContainer} />
+					<Route exact path="/mix" component={ExploreContainer} />
+					<Route exact path="/liked" component={ExploreContainer} />
+					<Route exact path="/not" component={ExploreContainer} />
+					<Route exact path="/latest" component={ExploreContainer} /> */}
 				<Route exact path="/help" component={Help} />
 				<Route exact path="/playlists/:id" component={PlaylistShowContainer} />
 				<Route path="/publishers/:id" component={PublisherShowContainer} />

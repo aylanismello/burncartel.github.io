@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Container } from 'semantic-ui-react';
 import Loading from '../shared/loading';
 import FeedContainer from '../feed/feed_container';
 
@@ -102,7 +103,7 @@ class SearchShow extends React.Component {
 			this.state.loadingAnotherSearch
 		) {
 			return (
-				<div className="container">
+				<Container className="main-content">
 					<h2>
 						{' '}
 						results for
@@ -111,11 +112,11 @@ class SearchShow extends React.Component {
 					</h2>
 					{this.renderResourceFilters()}
 					<Loading />
-				</div>
+				</Container>
 			);
 		} else if (this.props.hasSearchResults) {
 			return (
-				<div className="container track-show">
+				<Container className="main-content track-show">
 					<h2>
 						{' '}
 						results for
@@ -124,12 +125,12 @@ class SearchShow extends React.Component {
 					</h2>
 					{this.renderResourceFilters()}
 					<FeedContainer />
-				</div>
+				</Container>
 			);
 		} else {
 			// has no search results :(
 			return (
-				<div className="container track-show">
+				<Container className="main-content track-show">
 					<div className="search-type-container">
 						<h2>
 							nothing found for
@@ -140,7 +141,7 @@ class SearchShow extends React.Component {
 						</h2>
 						{this.renderResourceFilters()}
 					</div>
-				</div>
+				</Container>
 			);
 		}
 	}

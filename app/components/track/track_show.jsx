@@ -1,4 +1,5 @@
 import React from 'react';
+import { Container } from 'semantic-ui-react';
 import TrackBanner from './track_banner';
 import Loading from '../shared/loading';
 import CuratorList from '../curator/curator_list';
@@ -28,7 +29,7 @@ class TrackShow extends React.Component {
 			return <Loading />;
 		} else {
 			return (
-				<div className="container track-show">
+				<Container className="main-content track-show">
 					<TrackBanner
 						track={this.props.track}
 						playing={this.props.playing}
@@ -39,7 +40,7 @@ class TrackShow extends React.Component {
 						<FireLike {...this.props} />
 					</TrackBanner>
 					<CuratorList track={this.props.track} />
-				</div>
+				</Container>
 			);
 		}
 	}
