@@ -1,7 +1,9 @@
 import $ from 'jquery';
+import axios from 'axios';
 import { ENV } from './helpers';
 
 const { host, port } = ENV;
+axios.defaults.withCredentials = true;
 
 export const connectFB = () => {
 	$.ajax({
@@ -25,19 +27,30 @@ export const getFBUser = success => {
 		data['uid'] = response.id;
 		data['email'] = response.email;
 
-		$.ajax({
-			url: `http://${host}:${port}/api/v1/session/fb/create`,
-			method: 'POST',
-			xhrFields: {
-				withCredentials: true
-			},
-			data,
-			success: user => {
+		axios
+			.post(`http://${host}:${port}/api/v1/session/fb/create`, {
+				...data
+			})
+			.then(({ data }) => {
 				getPicture(success, user);
-			},
-			error: err => {
+			})
+			.catch(err => {
 				console.log(err);
-			}
-		});
+			});
+
+		// $.ajax({
+		// 	url: `http://${host}:${port}/api/v1/session/fb/create`,
+		// 	method: 'POST',
+		// 	xhrFields: {
+		// 		withCredentials: true
+		// 	},
+		// 	data,
+		// 	success: user => {
+		// 		getPicture(success, user);
+		// 	},
+		// 	error: err => {
+		// 		console.log(err);
+		// 	}
+		// });
 	});
 };

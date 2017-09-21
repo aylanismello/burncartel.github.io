@@ -1,4 +1,3 @@
-import $ from 'jquery';
 import axios from 'axios';
 import { ENV } from './helpers';
 
@@ -18,7 +17,7 @@ export const getFeed = (resource, filters, success, error) => {
 	if (resource === 'search') {
 		if (filters.resource_type) {
 			// getUrl = `${url}/feeds/search?q=${filters.q}&resource_type=${filters.resource_type}&tracks_page=${page}`;
-			getUrl = `${url}/feeds/search`;
+			getUrl = `${url}/feeds/search`
 		} else {
 			getUrl = `${url}/feeds/search`;
 			// getUrl = `${url}/feeds/search?q=${filters.q}&tracks_page=${page}`;
@@ -41,10 +40,12 @@ export const getFeed = (resource, filters, success, error) => {
 		// THIS IS also FOR raw locations without sorted_tracks
 		getUrl = `${url}/${resource}/${filters.parent_location}/children_locations`;
 	} else if (resource === 'user_feed') {
-		getUrl = `${url}/users/${filters.id}/feed?tracks_page=${page}`;
+		// getUrl = `${url}/users/${filters.id}/feed?tracks_page=${page}`;
+		getUrl = `${url}/users/${filters.id}/feed`;
 	} else if (filters.id && resource !== 'likes') {
 		// getting /publishers/ or /curators/ OR /locations or /tags
-		getUrl = `${url}/${resource}/${filters.id}/feed?tracks_page=${page}`;
+		// getUrl = `${url}/${resource}/${filters.id}/feed?tracks_page=${page}`;
+		getUrl = `${url}/${resource}/${filters.id}/feed`;
 	} else if (filters.id && resource === 'likes') {
 		// getUrl = `${url}/users/${filters.id}/likes?tracks_page=${page}`;
 		getUrl = `${url}/users/${filters.id}/likes`;
@@ -55,13 +56,12 @@ export const getFeed = (resource, filters, success, error) => {
 	}
 	axios
 		.get(getUrl, {
-			params: { ...filters, tracks_page: page }
+			params: {...filters, tracks_page: page }
 		})
 		.then(({ data }) => {
 			success(data);
 		})
 		.catch(err => {
-			debugger;
 			error(err);
 		});
 
