@@ -24,7 +24,8 @@ export const getFeed = (resource, filters, success, error) => {
 	} else if (resource === 'playlists' && !filters.id) {
 		getUrl = `${url}/playlists/`;
 	} else if (resource === 'playlists' && filters.id) {
-		getUrl = `${url}/playlists/${filters.id}/feed?tracks_page=${page}`;
+		// getUrl = `${url}/playlists/${filters.id}/feed?tracks_page=${page}`;
+		getUrl = `${url}/playlists/${filters.id}/feed`;
 	} else if (resource === 'locations' && filters.location_type !== undefined) {
 		// THIS IS FOR raw locations without sorted_tracks
 		getUrl = `${url}/${resource}?location_type=${filters.location_type}`;
@@ -47,13 +48,24 @@ export const getFeed = (resource, filters, success, error) => {
 		// we are dealing with a fire feed
 		getUrl = `${url}/feeds?sort_type=${filters.sortType}&tracks_page=${page}`;
 	}
+	axios
+		.get(getUrl, {
+			params: filters
+		})
+		.then(({ data }) => {
+			success(data);
+		})
+		.catch(err => {
+			error(err);
+		});
 
-	$.ajax({
-		url: getUrl,
-		data: {
-			// days_old: 100
-		},
-		success,
-		error
-	});
+	//
+	// $.ajax({
+	// 	url: getUrl,
+	// 	data: {
+	// 		// days_old: 100
+	// 	},
+	// 	success,
+	// 	error
+	// });
 };
