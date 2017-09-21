@@ -117,8 +117,7 @@
       display: flex; }
 
 .artwork-wrapper {
-  position: relative;
-  margin: 1em 0; }
+  position: relative; }
   .artwork-wrapper .sk-spinner {
     color: white; }
   .artwork-wrapper .ranking-header {
@@ -137,10 +136,8 @@
     position: absolute;
     display: flex;
     justify-content: center;
-    width: 42px;
-    height: 42px;
-    top: 43px;
-    left: 43px;
+    top: 3.0rem;
+    left: 2.9rem;
     background-color: rgba(0, 0, 0, 0.52);
     border-radius: 3px; }
 

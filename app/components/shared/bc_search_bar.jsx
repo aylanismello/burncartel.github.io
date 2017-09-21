@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FaSearch } from 'react-icons/lib/fa';
+import { Search, Grid } from 'semantic-ui-react';
 
 class BCSearchBar extends React.Component {
 	constructor(props) {
@@ -31,10 +31,12 @@ class BCSearchBar extends React.Component {
 	handleSubmit(e) {
 		// WHAT'S THE REACT WAY TO THIS, THIS SHIT IS JANKY
 		// AND ONLY PUSH THE NEW HASH LOCATION THE FIRST TIME
+
+		// the right way is to pass the context props called router to this component somehow
+		e.preventDefault();
 		if (this.canSubmit()) {
 			window.location = `/#search?q=${this.state.searchText}&resource_type=track`;
 		}
-		e.preventDefault();
 	}
 
 	handleChange(e) {
@@ -43,25 +45,27 @@ class BCSearchBar extends React.Component {
 
 	render() {
 		return (
-			<div className="col-lg-3 search-bar-container">
-				<form className="input-group" onSubmit={e => this.handleSubmit(e)}>
-					<FaSearch size={16} color="#3c3e3f" className="search-bar-icon" />
-					<input
-						type="text"
-						className="form-control search-bar"
-						value={this.state.searchText}
-						onChange={e => this.handleChange(e)}
-						placeholder="Search"
-					/>
-
-				</form>
-			</div>
+			<Grid className="search-bar-container" style={{ marginLeft: '200px' }}>
+				<Grid.Column width={8}>
+					<form onSubmit={e => this.handleSubmit(e)}>
+						<Search
+							open={false}
+							value={this.state.searchText}
+							onSearchChange={e => this.handleChange(e)}
+						/>
+					</form>
+				</Grid.Column>
+			</Grid>
 		);
 	}
 }
 
-BCSearchBar.props = {
+BCSearchBar.propTypes = {
 	q: PropTypes.string
+};
+
+BCSearchBar.defaultProps = {
+	q: null
 };
 
 export default BCSearchBar;

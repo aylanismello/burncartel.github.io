@@ -1,4 +1,5 @@
 import React from 'react';
+import { Label } from 'semantic-ui-react';
 
 const TrackBadge = props => {
 	let badgeText;
@@ -25,9 +26,10 @@ const TrackBadge = props => {
 
 	if (badgeText) {
 		return (
-			<span style={style} className="badge badge-default bc-badge">
+			// <span style={style} className="badge badge-default bc-badge">
+			<Label basic style={style} >
 				{badgeText}
-			</span>
+			</Label>
 		);
 	} else {
 		return null;

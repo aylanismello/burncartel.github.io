@@ -1,15 +1,9 @@
 import React from 'react';
+import Tag from './tag';
 
-const Tag = ({ tag }) => (
-	<span className="badge bc-tag">
-		<a className="bc-tag-link" href={`#/tags/${tag.id}`}>{`#${tag.name}`}</a>
-	</span>
-);
-
-const TagList = ({ tagList }) => (
-	<div className="tag-list">
+const TagList = ({ tagList }) =>
+	(<div className="tag-list">
 		{tagList.map(tag => <Tag tag={tag} key={tag.id} />)}
-	</div>
-);
+	</div>);
 
 export default TagList;

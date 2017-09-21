@@ -1,5 +1,5 @@
+// THIS IS ALL FOR THE TRACK ITEM ALBUM ARTZ
 .artwork-wrapper-feed {
-
 	width: 200px;
 	height: 200px;
 	.sk-spinner {
@@ -41,7 +41,7 @@
 	}
 
 	position: relative;
-	margin: 1em 0;
+	// margin: 1em 0;
 
 	.ranking-header {
 		position: absolute;
@@ -63,10 +63,8 @@
 		position: absolute;
 		display: flex;
 		justify-content: center;
-		width: 42px;
-		height: 42px;
-		top: 43px;
-		left: 43px;
+		top: 3.0rem;
+		left: 2.9rem;
 		background-color: rgba(0, 0, 0, 0.52);
 		border-radius: 3px;
 	}

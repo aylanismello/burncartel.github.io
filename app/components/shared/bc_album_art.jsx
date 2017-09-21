@@ -14,9 +14,7 @@ const BCAlbumArt = ({
 	trackLoaded,
 	track
 }) => {
-	const artworkUrl = track.artwork_url
-		? track.artwork_url
-		: track.publisher.avatar_url;
+	const artworkUrl = track.artwork_url ? track.artwork_url : track.publisher.avatar_url;
 
 	let showLoading = false;
 
@@ -53,18 +51,14 @@ const BCAlbumArt = ({
 		}
 	}
 
-	const extraClass = showLoading
-		? 'artwork-play'
-		: 'artwork-play visibility-hidden';
+	const extraClass = showLoading ? 'artwork-play' : 'artwork-play visibility-hidden';
 
 	return (
 		<div className="artwork-wrapper">
 			{hasRanking
-				? <h5>
-						<span className="ranking-header">
-							{trackIdx + 1}
-						</span>
-					</h5>
+				? <span className="ranking-header">
+					{trackIdx + 1}
+				</span>
 				: null}
 
 			<img src={artworkUrl} className="artwork-icon" />

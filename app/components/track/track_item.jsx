@@ -44,7 +44,7 @@ const TrackItem = ({
 
 	return (
 		<Segment>
-			<Grid className="track-container">
+			<Grid className="track-container" padded>
 				<Grid.Column className="track" width={3}>
 					<Grid>
 						<Grid.Row>
@@ -141,10 +141,17 @@ const TrackItem = ({
 						</Grid.Row>
 
 						<Grid.Row className="metadata">
-							<CountryBadges locations={track.locations} />
-
-							<TrackBadge track={track} />
-							<TagList tagList={track.top_tags.slice(0, 6)} />
+							<Grid>
+								<Grid.Row>
+									<CountryBadges locations={track.locations} />
+								</Grid.Row>
+								<Grid.Row>
+									<TrackBadge track={track} />
+								</Grid.Row>
+								<Grid.Row>
+									<TagList tagList={track.top_tags.slice(0, 6)} />
+								</Grid.Row>
+							</Grid>
 						</Grid.Row>
 					</Grid>
 				</Grid.Column>
