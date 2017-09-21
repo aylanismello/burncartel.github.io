@@ -49,8 +49,10 @@ class BCSearchBar extends React.Component {
 				<Grid.Column width={8}>
 					<form onSubmit={e => this.handleSubmit(e)}>
 						<Search
+							size="small"
 							open={false}
 							value={this.state.searchText}
+							placeholder="Search"
 							onSearchChange={e => this.handleChange(e)}
 						/>
 					</form>
