@@ -6,13 +6,13 @@ import * as FontAwesome from 'react-icons/lib/fa/';
 import { dateToTimeAgo } from '../../util/helpers';
 import FireLike from '../likes/fire_like';
 import TagList from '../shared/tag_list';
-import TrackBadge from '../shared/track_badge';
-import CountryBadges from '../shared/country_badges';
+import TrackBadge, { getBadgeText } from '../shared/track_badge';
+import CountryBadges, { getCountries } from '../shared/country_badges';
 import BCAlbumArt from '../shared/bc_album_art';
 import InfoDropdown from '../shared/info_dropdown';
 
-const shortenLongWordsInTitle = (title) => {
-	const formattedTitle = title.split(' ').map((word) => {
+const shortenLongWordsInTitle = title => {
+	const formattedTitle = title.split(' ').map(word => {
 		if (word.length >= 18) {
 			return `${word.slice(0, 17)}.`;
 		} else {
@@ -59,7 +59,7 @@ const TrackItem = ({
 								track={track}
 							/>
 						</Grid.Row>
-						<Grid.Row>
+						<Grid.Row className="track-item-icons-container">
 							<div className="track-item-icons">
 								<FireLike
 									isLoggedIn={isLoggedIn}
@@ -73,7 +73,11 @@ const TrackItem = ({
 
 								<div className="track-item-icon">
 									<a href={track.permalink_url} target="_blank">
-										<FontAwesome.FaSoundcloud size={35} color="black" className="soundcloud-png" />
+										<FontAwesome.FaSoundcloud
+											size={35}
+											color="black"
+											className="soundcloud-png"
+										/>
 									</a>
 								</div>
 							</div>
@@ -97,42 +101,54 @@ const TrackItem = ({
 
 								{hasRanking
 									? <div>
-										<Grid.Row>
-											<div className="curators-link" style={{ display: 'flex' }}>
-												<div className="before-info-dropdown" style={{ marginRight: '.3em' }}>
-													{' '}By{' '}
-												</div>
-												<span>
-													<InfoDropdown
+											<Grid.Row>
+												<div
+													className="curators-link"
+													style={{ display: 'flex' }}
+												>
+													<div
+														className="before-info-dropdown"
+														style={{ marginRight: '.3em' }}
+													>
+														{' '}By{' '}
+													</div>
+													<span>
+														<InfoDropdown
 															user={track.publisher}
 															users={track.suggested_publishers}
 															infoType="publishers"
 															length={2}
+														>
+															<Link to={`/publishers/${track.publisher_id}`}>
+																{track.publisher.name}
+															</Link>
+														</InfoDropdown>
+													</span>
+												</div>
+											</Grid.Row>
+											<Grid.Row>
+												<div
+													className="curators-link"
+													style={{ display: 'flex' }}
+												>
+													<div
+														className="before-info-dropdown"
+														style={{ marginRight: '.3em' }}
 													>
-														<Link to={`/publishers/${track.publisher_id}`}>
-															{track.publisher.name}
-														</Link>
-													</InfoDropdown>
-												</span>
-											</div>
-										</Grid.Row>
-										<Grid.Row>
-											<div className="curators-link" style={{ display: 'flex' }}>
-												<div className="before-info-dropdown" style={{ marginRight: '.3em' }}>
 														Selected by
 													</div>
-												<InfoDropdown
+													<InfoDropdown
 														users={track.curators}
 														infoType="curators"
 														length={track.curators.length}
-												>
-													<a>
-														{' '}{curatorsStr}{' '}
-													</a>
-												</InfoDropdown>
-											</div>
-										</Grid.Row>
-									</div>
+													>
+														<a>
+															{' '}{curatorsStr}{' '}
+														</a>
+													</InfoDropdown>
+												</div>
+											</Grid.Row>
+										</div>
 									: null}
 								<Grid.Row>
 									{`${dateToTimeAgo(track.created_at_external)} old`}
@@ -142,15 +158,19 @@ const TrackItem = ({
 
 						<Grid.Row className="metadata">
 							<Grid>
-								<Grid.Row>
-									<CountryBadges locations={track.locations} />
-								</Grid.Row>
-								<Grid.Row>
-									<TrackBadge track={track} />
-								</Grid.Row>
-								<Grid.Row>
-									<TagList tagList={track.top_tags.slice(0, 6)} />
-								</Grid.Row>
+								{getCountries(track.locations) || getBadgeText(track)
+									? <Grid.Row>
+											<CountryBadges locations={track.locations} />
+											<TrackBadge track={track} />
+										</Grid.Row>
+									: null}
+
+								{track.top_tags.length > 0
+									? <Grid.Row>
+											<TagList tagList={track.top_tags.slice(0, 6)} />
+										</Grid.Row>
+									: null}
+
 							</Grid>
 						</Grid.Row>
 					</Grid>

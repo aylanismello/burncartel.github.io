@@ -1,32 +1,34 @@
 import React from 'react';
 import { Label } from 'semantic-ui-react';
 
-const TrackBadge = props => {
-	let badgeText;
 
+export const getBadgeText = (track) => {
+	if (track.is_remix && track.is_bc) {
+		return 'REMIX + BC PICK';
+	} else if (track.is_remix){
+		return 'REMIX';
+	} else if (track.is_mix) {
+		return 'MIX';
+	} else if (track.is_bc) {
+		return 'BC PICK';
+	} else if (track.is_episode) {
+		return 'BC RADIO';
+	} else {
+		return null;
+	}
+}
+
+const TrackBadge = props => {
 	const style = {};
 
 	if (props.size) {
 		style.fontSize = `${parseInt(props.size)}px`;
 	}
 
-	if (props.track.is_remix && props.track.is_bc) {
-		badgeText = 'REMIX + BC PICK';
-	} else if (props.track.is_remix){
-		badgeText = 'REMIX';
-	} else if (props.track.is_mix) {
-		badgeText = 'MIX';
-	} else if (props.track.is_bc) {
-		badgeText = 'BC PICK';
-	} else if (props.track.is_episode) {
-		badgeText = 'BC RADIO';
-	} else {
-		badgeText = null;
-	}
+	const badgeText = getBadgeText(props.track);
 
 	if (badgeText) {
 		return (
-			// <span style={style} className="badge badge-default bc-badge">
 			<Label basic style={style} >
 				{badgeText}
 			</Label>

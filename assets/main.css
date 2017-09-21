@@ -585,7 +585,8 @@ a:hover {
   .feed-container .track-container .track-item-icons {
     display: flex;
     justify-content: space-around;
-    align-items: center; }
+    align-items: center;
+    width: 70%; }
     .feed-container .track-container .track-item-icons .track-item-icon-container {
       width: 50px; }
       .feed-container .track-container .track-item-icons .track-item-icon-container:hover {
@@ -715,5 +716,17 @@ a:hover {
   left: 0;
   bottom: 0;
   width: 100%; }
+
+.side-nav-item {
+  font-family: 'Quicksand', sans-serif; }
+
+.main-content {
+  font-family: 'Quicksand', sans-serif; }
+
+h1, h2, h3, h4, h5 {
+  font-family: 'Quicksand', sans-serif; }
+
+.login-logout-container {
+  font-family: 'Quicksand', sans-serif; }
 
 /*# sourceMappingURL=main.css.map */

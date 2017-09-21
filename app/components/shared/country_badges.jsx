@@ -2,20 +2,29 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import InfoDropdown from './info_dropdown';
 
+export const getCountries = (locations) => {
+	if (!locations || locations.length === 0) {
+		return null;
+	}
+
+	const countries = locations.filter((location) => {
+		return location.location_type === 'COUNTRY';
+	});
+
+	if (countries.length === 0) {
+		return null;
+	}
+
+	return countries;
+};
+
 const CountryBadges = ({ locations, width }) => {
 	// aspect ratio is 2:1
 	const widthInPx = `${width}px`;
 	const heightInPx = `${width / 2}px`;
 
-	if (!locations || locations.length === 0) {
-		return null;
-	}
-
-	const countries = locations.filter(location => {
-		return location.location_type === 'COUNTRY';
-	});
-
-	if (countries.length === 0) {
+	const countries = getCountries(locations);
+	if (!countries) {
 		return null;
 	}
 
