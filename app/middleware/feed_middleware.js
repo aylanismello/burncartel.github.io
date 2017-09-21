@@ -21,7 +21,7 @@ import {
 import { togglePlay, disableShuffle } from '../actions/player_actions';
 import { getFeed } from '../util/bc_api';
 
-let prevSortType, prevResourceId;
+let prevSortType, prevPlaylistId;
 
 const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 	switch (action.type) {
@@ -106,6 +106,16 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 			}
 
 			// weird edge case where we change between playlists?
+			// can't we just do something less horrible?
+			let didSwitchPlaylist = false;
+
+			if (
+				nextFeedType === 'playlists' &&
+				action.filters.id !== prevPlaylistId
+			) {
+				prevPlaylistId = action.filters.id;
+				didSwitchPlaylist = true;
+			}
 
 			const isNewPageLoad = feedType && feedType !== nextFeedType;
 			const isNewFireFeedFilter =
@@ -114,8 +124,8 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 				sortType &&
 				sortType !== prevSortType;
 
-				// THIS LOGIC LETS US -> SHOW LOADING ON TRACK FEEDS
-			if (isNewPageLoad || isNewFireFeedFilter) {
+			// THIS LOGIC LETS US -> SHOW LOADING ON TRACK FEEDS
+			if (isNewPageLoad || isNewFireFeedFilter || didSwitchPlaylist) {
 				dispatch(
 					receivePaginationData({
 						last_tracks_page: null,
