@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import * as FontAwesome from 'react-icons/lib/fa/';
 import { Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
-import { getFeedResourceId } from '../../util/bc_api';
 import BCSpinner from './bc_spinner';
 
 const iconSize = 40;
@@ -15,23 +14,6 @@ class BCFeedCover extends React.Component {
 		this.state = {
 			linkUrl: props.linkUrl || ''
 		};
-	}
-
-	componentWillMount() {
-		// first this we must do it resolve this feed type to an id!
-		// cause we might need that later!
-		// if (!this.props.linkUrl) {
-		// 	getFeedResourceId(
-		// 		(response) => {
-		// 			const { id } = response.data;
-		// 			this.setState({
-		// 				linkUrl: `/${this.props.resource}/${id}`
-		// 			});
-		// 		},
-		// 		this.props.resource,
-		// 		this.props.filters
-		// 	);
-		// }
 	}
 
 	render() {

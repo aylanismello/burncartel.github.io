@@ -5,19 +5,6 @@ import { ENV } from './helpers';
 const { host, port } = ENV;
 const url = `http://${host}:${port}/api/v1`;
 
-export const getFeedResourceId = (success, resource, filters) => {
-	axios
-		.get(`${url}/${resource}`, {
-			params: filters
-		})
-		.then(response => {
-			success(response);
-		})
-		.catch(error => {
-			console.log('damn we fucked up');
-		});
-};
-
 export const getFeed = (resource, filters, success, error) => {
 	let getUrl;
 
@@ -37,7 +24,7 @@ export const getFeed = (resource, filters, success, error) => {
 	} else if (resource === 'playlists' && !filters.id) {
 		getUrl = `${url}/playlists/`;
 	} else if (resource === 'playlists' && filters.id) {
-		getUrl = `${url}/playlists/${filters.id}/feed`;
+		getUrl = `${url}/playlists/${filters.id}/feed?tracks_page=${page}`;
 	} else if (resource === 'locations' && filters.location_type !== undefined) {
 		// THIS IS FOR raw locations without sorted_tracks
 		getUrl = `${url}/${resource}?location_type=${filters.location_type}`;

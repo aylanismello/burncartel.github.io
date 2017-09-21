@@ -33,6 +33,7 @@ class PlaylistShow extends Component {
 			(this.props.loadingFeed && !this.props.tracksPage) ||
 			this.state.loadingAnotherPlaylist
 		) {
+			debugger;
 			return <Loading />;
 		} else {
 			return (

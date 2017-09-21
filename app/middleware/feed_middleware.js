@@ -21,7 +21,7 @@ import {
 import { togglePlay, disableShuffle } from '../actions/player_actions';
 import { getFeed } from '../util/bc_api';
 
-let prevSortType;
+let prevSortType, prevResourceId;
 
 const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 	switch (action.type) {
@@ -105,6 +105,8 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 				nextFeedType = action.filters.resource;
 			}
 
+			// weird edge case where we change between playlists?
+
 			const isNewPageLoad = feedType && feedType !== nextFeedType;
 			const isNewFireFeedFilter =
 				feedType &&
@@ -112,6 +114,7 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 				sortType &&
 				sortType !== prevSortType;
 
+				// THIS LOGIC LETS US -> SHOW LOADING ON TRACK FEEDS
 			if (isNewPageLoad || isNewFireFeedFilter) {
 				dispatch(
 					receivePaginationData({
