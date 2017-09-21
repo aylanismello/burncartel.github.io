@@ -17,9 +17,11 @@ export const getFeed = (resource, filters, success, error) => {
 
 	if (resource === 'search') {
 		if (filters.resource_type) {
-			getUrl = `${url}/feeds/search?q=${filters.q}&resource_type=${filters.resource_type}&tracks_page=${page}`;
+			// getUrl = `${url}/feeds/search?q=${filters.q}&resource_type=${filters.resource_type}&tracks_page=${page}`;
+			getUrl = `${url}/feeds/search`;
 		} else {
-			getUrl = `${url}/feeds/search?q=${filters.q}&tracks_page=${page}`;
+			getUrl = `${url}/feeds/search`;
+			// getUrl = `${url}/feeds/search?q=${filters.q}&tracks_page=${page}`;
 		}
 	} else if (resource === 'playlists' && !filters.id) {
 		getUrl = `${url}/playlists/`;
@@ -28,7 +30,8 @@ export const getFeed = (resource, filters, success, error) => {
 		getUrl = `${url}/playlists/${filters.id}/feed`;
 	} else if (resource === 'locations' && filters.location_type !== undefined) {
 		// THIS IS FOR raw locations without sorted_tracks
-		getUrl = `${url}/${resource}?location_type=${filters.location_type}`;
+		// getUrl = `${url}/${resource}?location_type=${filters.location_type}`;
+		getUrl = `${url}/${resource}`;
 	} else if (resource === 'tracks') {
 		getUrl = `${url}/tracks/${filters.id}`;
 	} else if (
@@ -43,19 +46,22 @@ export const getFeed = (resource, filters, success, error) => {
 		// getting /publishers/ or /curators/ OR /locations or /tags
 		getUrl = `${url}/${resource}/${filters.id}/feed?tracks_page=${page}`;
 	} else if (filters.id && resource === 'likes') {
-		getUrl = `${url}/users/${filters.id}/likes?tracks_page=${page}`;
+		// getUrl = `${url}/users/${filters.id}/likes?tracks_page=${page}`;
+		getUrl = `${url}/users/${filters.id}/likes`;
 	} else {
 		// we are dealing with a fire feed
-		getUrl = `${url}/feeds?sort_type=${filters.sortType}&tracks_page=${page}`;
+		// getUrl = `${url}/feeds?sort_type=${filters.sortType}&tracks_page=${page}`;
+		getUrl = `${url}/feeds`;
 	}
 	axios
 		.get(getUrl, {
-			params: filters
+			params: { ...filters, tracks_page: page }
 		})
 		.then(({ data }) => {
 			success(data);
 		})
 		.catch(err => {
+			debugger;
 			error(err);
 		});
 
