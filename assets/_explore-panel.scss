@@ -1,0 +1,45 @@
+// THIS IS ALL FOR THE TRACK ITEM ALBUM ARTZ
+.explore-panel {
+
+  .explore-panel-slider {
+    padding: 1rem;
+
+    .artwork-wrapper-feed {
+    	width: 200px;
+    	height: 200px;
+    	display: inline-block;
+    	margin-right: 50px;
+    	.sk-spinner {
+    		color: white;
+    	}
+
+    	position: relative;
+
+    	.feed-cover-buttons-container {
+    		position: absolute;
+    		display: none;
+    		width: 100%;
+    		height: 100%;
+    		top: 0;
+    		justify-content: center;
+    		align-items: center;
+    		background-color: rgba(0, 0, 0, 0.52);
+
+    		.current-icon-container {
+    			.artwork-play {
+    				width: 50px;
+    				height: 50px;
+    				border: 3px solid white;
+    				border-radius: 10000px;
+    			}
+    		}
+    	}
+    	&:hover {
+    		cursor: pointer;
+    		.feed-cover-buttons-container {
+    			display: flex;
+    		}
+    	}
+    }
+  }
+}

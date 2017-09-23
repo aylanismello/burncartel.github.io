@@ -1,12 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-	Container,
-	Header,
-	Icon,
-	Divider,
-	Segment
-} from 'semantic-ui-react';
+import { Container, Header, Icon, Segment } from 'semantic-ui-react';
 import ExplorePanel from './explore_panel';
 
 class Home extends React.Component {
@@ -19,11 +13,10 @@ class Home extends React.Component {
 			<Container className="main-content">
 				<Segment padded basic>
 					<Header as="h1">
-						<Icon name="plug" />
+						<Icon name="music" />
 						<Header.Content>Explore</Header.Content>
 					</Header>
 
-					<Divider section />
 					{this.props.playlists
 						? <ExplorePanel playlists={this.props.playlists} />
 						: null}
