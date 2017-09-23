@@ -17,6 +17,8 @@ class Home extends React.Component {
 						<Header.Content>Explore</Header.Content>
 					</Header>
 
+				</Segment>
+				<Segment padded basic>
 					{this.props.playlists
 						? <ExplorePanel playlists={this.props.playlists} />
 						: null}
