@@ -1,9 +1,6 @@
 import $ from 'jquery';
-import axios from 'axios';
 import { ENV } from './helpers';
-
 const { host, port } = ENV;
-axios.defaults.withCredentials = true;
 
 export const connectFB = () => {
 	$.ajax({
@@ -27,30 +24,31 @@ export const getFBUser = success => {
 		data['uid'] = response.id;
 		data['email'] = response.email;
 
-		axios
-			.post(`http://${host}:${port}/api/v1/session/fb/create`, {
-				...data
-			})
-			.then(({ data }) => {
-				getPicture(success, user);
-			})
-			.catch(err => {
-				console.log(err);
-			});
-
-		// $.ajax({
-		// 	url: `http://${host}:${port}/api/v1/session/fb/create`,
-		// 	method: 'POST',
-		// 	xhrFields: {
-		// 		withCredentials: true
-		// 	},
-		// 	data,
-		// 	success: user => {
+		// I do not know how to send over xhrFields with axios :( so I cannot get rid of the JQuery dependency :(
+		// axios
+		// 	.post(`http://${host}:${port}/api/v1/session/fb/create`, {
+		// 		...data
+		// 	})
+		// 	.then(({ data }) => {
 		// 		getPicture(success, user);
-		// 	},
-		// 	error: err => {
+		// 	})
+		// 	.catch(err => {
 		// 		console.log(err);
-		// 	}
-		// });
+		// 	});
+
+		$.ajax({
+			url: `http://${host}:${port}/api/v1/session/fb/create`,
+			method: 'POST',
+			xhrFields: {
+				withCredentials: true
+			},
+			data,
+			success: user => {
+				getPicture(success, user);
+			},
+			error: err => {
+				console.log(err);
+			}
+		});
 	});
 };
