@@ -3,7 +3,7 @@ module.exports = {
 	entry: './app/index.jsx',
 	output: {
 		path: './',
-		filename: './app/bundle.js'
+		filename: './build/bundle.js'
 	},
 	resolve: {
 		extensions: ['', '.js', '.jsx']
