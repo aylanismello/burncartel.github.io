@@ -4,9 +4,9 @@ import PlayerReducer from './player_reducer';
 import UserReducer from './user_reducer';
 
 const RootReducer = combineReducers({
-  feed: FeedReducer,
-  player: PlayerReducer,
-  user: UserReducer
+	feed: FeedReducer,
+	player: PlayerReducer,
+	user: UserReducer
 });
 
 export default RootReducer;

@@ -1,13 +1,19 @@
-import { createStore } from 'redux';
+import { createStore, compose } from 'redux';
+import { persistStore } from 'redux-persist';
 import RootReducer from '../reducers/root_reducer';
 import masterMiddleware from '../middleware/master_middleware';
 
-const configureStore = (preloadedState = {}) => (
-  createStore(
-    RootReducer,
-    preloadedState,
-    masterMiddleware
-  )
-);
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-export default configureStore;
+const store = (preloadedState = {}) =>
+	createStore(
+		RootReducer,
+		preloadedState,
+		composeEnhancers(masterMiddleware)
+	);
+
+const myStore = store();
+
+persistStore(myStore);
+
+export default myStore;

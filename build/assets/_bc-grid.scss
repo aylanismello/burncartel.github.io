@@ -1,0 +1,15 @@
+// .bc-grid {
+//   .bc-row {
+//     padding: 1em 0;
+//
+//     .bc-feed-cover {
+//       margin: 1em;
+//     }
+//   }
+// }
+
+.bc-feed-cover {
+  &:hover {
+    border: 5px solid black;
+  }
+}

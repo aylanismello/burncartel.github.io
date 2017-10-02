@@ -1,106 +1,37 @@
 import React from 'react';
-import Dropdown from 'react-dropdown';
-import FeedContainer from '../feed/feed_container';
-import { Link } from 'react-router-dom';
-import { FEEDS } from '../../reducers/feed_reducer';
+import PropTypes from 'prop-types';
+import { Container, Header, Icon, Segment } from 'semantic-ui-react';
+import ExplorePanel from './explore_panel';
 
 class Home extends React.Component {
-	constructor(props) {
-		super(props);
-	}
-
 	componentWillMount() {
-		const sortType = this.props.history.location.pathname.slice(1);
-
-		if (sortType === '') {
-			this.props.updateFilters({
-				resource: 'tracks',
-				sortType: 'influential'
-			});
-		} else {
-			this.props.updateFilters({
-				resource: 'tracks',
-				sortType
-			});
-		}
-	}
-
-	componentWillReceiveProps(nextProps) {
-		if (this.props.pathname !== nextProps.pathname) {
-			const sortType = nextProps.pathname.slice(1);
-
-			if (sortType === '') {
-				this.props.updateFilters({
-					resource: 'tracks',
-					sortType: 'influential'
-				});
-			} else {
-				this.props.updateFilters({
-					resource: 'tracks',
-					sortType
-				});
-			}
-		}
-	}
-
-	_onSelect(e) {
-		this.props.history.push(e.value);
+		this.props.updateFilters({ resource: 'playlists' });
 	}
 
 	render() {
-		const options = [
-			{ value: '/', label: 'Popular' },
-			{ value: '/liked', label: 'Most Liked' },
-			{ value: '/latest', label: 'Latest' },
-			{ value: '/bc_publishers', label: 'BC Picks' },
-			// { value: '/hot', label: 'Hot' },
-			{ value: '/remix', label: 'Remixes' },
-			{ value: '/mix', label: 'Mixes' }
-		];
-
-		let hasRanking = true;
-		let value;
-		// make exceptional case for Burn Cartel Radio mode filter, this is a hack for now
-		if (this.props.location.pathname === '/bc') {
-			hasRanking = false;
-		} else {
-			value = options.filter(
-				option => option.value === this.props.location.pathname
-			)[0];
-		}
-
 		return (
-			<div className="container home-page-container">
-				<div
-					className="btn-group btn-group-justified"
-					role="group"
-					aria-label="Justified button group"
-				>
+			<Container className="main-content">
+				<Segment padded basic>
+					<Header as="h1">
+						<Icon name="music" />
+						<Header.Content>Explore</Header.Content>
+					</Header>
 
-					{hasRanking
-						? <div className="feed-banner">
-								<div className="feed-name">
-									<h3> {value.label} Feed </h3>
-								</div>
-
-								<Dropdown
-									options={options}
-									onChange={this._onSelect.bind(this)}
-									value={value}
-									placeholder="🔥 Select a feed 🔥"
-								/>
-							</div>
-						: <div className="feed-banner">
-								<div className="feed-name">
-									<h2> 💻 BC Radio 📻 </h2>
-								</div>
-							</div>}
-
-				</div>
-				<FeedContainer hasRanking={hasRanking} />
-			</div>
+				</Segment>
+				<Segment padded basic>
+					{this.props.playlists
+						? <ExplorePanel playlists={this.props.playlists} />
+						: null}
+				</Segment>
+			</Container>
 		);
 	}
 }
+
+const { func, instanceOf, objectOf } = PropTypes;
+Home.propTypes = {
+	updateFilters: func.isRequired,
+	playlists: objectOf(instanceOf(Array))
+};
 
 export default Home;

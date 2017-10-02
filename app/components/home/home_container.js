@@ -1,22 +1,17 @@
 import { connect } from 'react-redux';
-import {
-	updateFilters,
-	setFeedType
- } from '../../actions/feed_actions';
+import { updateFilters, setFeedType } from '../../actions/feed_actions';
+import { getPlaylistsHash } from '../../selectors/playlist_selector';
 import Home from './home';
 
-
-// how do i get rid of this obj without breaking everything?
 const mapStateToProps = (state, ownProps) => ({
-	pathname: ownProps.history.location.pathname
+	pathname: ownProps.history.location.pathname,
+	playlists: state.feed.EXPLORE ? getPlaylistsHash(state) : null,
+	loadingFeed: state.feed.loadingFeed
 });
 
 const mapDispatchToProps = dispatch => ({
-	updateFilters: (filters) => dispatch(updateFilters(filters)),
-	setFeedType: (feedType) => dispatch(setFeedType(feedType)),
+	updateFilters: filters => dispatch(updateFilters(filters)),
+	setFeedType: feedType => dispatch(setFeedType(feedType))
 });
 
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps
-)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

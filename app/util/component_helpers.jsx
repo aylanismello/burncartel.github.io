@@ -1,29 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { List } from 'immutable';
 import * as FontAwesome from 'react-icons/lib/fa/';
 
-
-// WE ARE CUTTING THIS LIST FOR NOW BEFORE WE GET BETTER UX
-export const renderUserList = (users, userType) => {
-	return users.slice(0, 5).map((user, idx) => (
-		<div className="clickable-banner-metadata">
-			<div className="tiny-avatar-container">
-				<img src={user.avatar_url} alt="avatar" />
-			</div>
-
-			<Link
-				to={`/${userType}/${user.id}`}
-				key={`${userType}-${idx}`}>
-				{user.name}
-			</Link>
-		</div>
-	));
-};
-
-
 export const renderUserHandles = (handles) => {
 
+	// TODO: add bandcamp if intelligntely indentify?
 	const serviceIcons = {
 		instagram: <FontAwesome.FaInstagram />,
 		facebook: <FontAwesome.FaFacebook />,
@@ -32,7 +13,6 @@ export const renderUserHandles = (handles) => {
 		youtube: <FontAwesome.FaYoutube />,
 		default: <FontAwesome.FaLaptop />
 	};
-
 
 	// ALSO CUT THIS LIST DOWN
 

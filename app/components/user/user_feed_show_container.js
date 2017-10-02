@@ -7,6 +7,7 @@ import {
 	resetPersonalFeed
 } from '../../actions/feed_actions';
 import UserFeedShow from './user_feed_show';
+import redirectOnLogout from '../hoc/redirect_on_logout';
 
 
 const mapStateToProps = (state, ownProps) => ({
@@ -26,4 +27,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(UserFeedShow);
+)(redirectOnLogout(UserFeedShow, { requireLogin: true }));

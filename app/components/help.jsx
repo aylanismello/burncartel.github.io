@@ -1,5 +1,5 @@
-import React from "react";
-import ReactMarkdown from "react-markdown";
+import React from 'react';
+import ReactMarkdown from 'react-markdown';
 
 const input = `
   # Hello 🌎!
@@ -29,10 +29,9 @@ const input = `
 
 `;
 
-const Help = () => (
-	<div className="help-page">
+const Help = () =>
+	(<div className="help-page">
 		<ReactMarkdown source={input} />
-	</div>
-);
+	</div>);
 
 export default Help;

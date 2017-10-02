@@ -1,6 +1,6 @@
-import { feedConstants } from '../actions/feed_actions';
-import { getFeedTracksHash, getTrackIdx } from '../selectors/track_selector';
 import * as _ from 'lodash';
+import { REHYDRATE } from 'redux-persist/constants';
+import { feedConstants } from '../actions/feed_actions';
 
 export const FEEDS = {
 	FIRE: 'FIRE',
@@ -19,10 +19,17 @@ const initialState = {
 	},
 	FIRE: {},
 	LIKES: {},
+	SEARCH: {
+		hasSearchResults: false
+	},
 	PUBLISHERS: {},
 	CURATORS: {},
+	LOCATIONS: {},
 	SINGLE_TRACK: {},
 	USER: {},
+	TAGS: {},
+	PLAYLISTS: null,
+	EXPLORE: null,
 	playingFeed: {
 		tracks: [],
 		trackId: null,
@@ -44,6 +51,9 @@ const initialState = {
 
 const FeedReducer = (state = initialState, action) => {
 	switch (action.type) {
+		// add this is again when we understand what to include/leave out
+		// case REHYDRATE:
+		// 	return action.payload.feed;
 		case feedConstants.RECEIVE_PAGINATION_DATA:
 			const { last_tracks_page, next_tracks_page, tracks_page } = action;
 			return {
@@ -60,6 +70,9 @@ const FeedReducer = (state = initialState, action) => {
 				...state,
 				focusedFeed: { ...state.focusedFeed, userLikeId: action.userId }
 			};
+		case feedConstants.SET_HAS_SEARCH_RESULTS:
+			const { hasSearchResults } = action;
+			return { ...state, SEARCH: { ...state.SEARCH, hasSearchResults } };
 		case feedConstants.SET_FEED_TYPE:
 			return { ...state, feedType: action.feedType };
 		case feedConstants.UPDATE_TRACK_LIKE_COUNT:
@@ -80,7 +93,6 @@ const FeedReducer = (state = initialState, action) => {
 		case feedConstants.RESET_TRACKS:
 			return { ...state, focusedFeed: { ...state.focusedFeed, tracks: [] } };
 		case feedConstants.RECEIVE_TRACKS:
-			const newTracks = {};
 			return {
 				...state,
 				focusedFeed: {
@@ -94,10 +106,12 @@ const FeedReducer = (state = initialState, action) => {
 				playingFeed: { ...state.playingFeed, tracks: action.tracks }
 			};
 		case feedConstants.RECEIVE_PLAYING_TRACKS_SHUFFLED:
-			debugger;
 			return {
 				...state,
-				playingFeedShuffled: { ...state.playingFeedShuffled, tracks: action.tracks }
+				playingFeedShuffled: {
+					...state.playingFeedShuffled,
+					tracks: action.tracks
+				}
 			};
 		case feedConstants.UPDATE_FILTERS:
 			return { ...state, filters: action.filters };

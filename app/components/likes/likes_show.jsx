@@ -1,32 +1,34 @@
 import React from 'react';
+import { Container } from 'semantic-ui-react';
 import FeedContainer from '../feed/feed_container';
-import Loading from '../loading';
-import { FEEDS } from '../../reducers/feed_reducer';
-
 
 class LikesShow extends React.Component {
+	componentWillMount() {
+		if (this.props.currentUserId) {
+			this.props.updateFilters({
+				resource: 'likes',
+				id: this.props.currentUserId
+			});
+		}
+	}
 
-  componentWillMount() {
-    if(this.props.currentUserId) {
-      this.props.updateFilters({ resource: 'likes', id: this.props.currentUserId })
-    }
-  }
+	componentWillReceiveProps(nextProps) {
+		if (nextProps.currentUserId) {
+			this.props.updateFilters({
+				resource: 'likes',
+				id: nextProps.currentUserId
+			});
+		}
+	}
 
-  componentWillReceiveProps(nextProps) {
-    if(nextProps.currentUserId) {
-      this.props.updateFilters({ resource: 'likes', id: nextProps.currentUserId })
-    }
-  }
-
-  render() {
-    return (
-      <div className="container user-show">
-        <h2> Your 🔥 Likes 🎵 </h2>
-        <FeedContainer />
-      </div>
-    );
-
-  }
+	render() {
+		return (
+			<Container className="main-content user-show">
+				<h2> Your 🔥 Likes 🎵 </h2>
+				<FeedContainer />
+			</Container>
+		);
+	}
 }
 
 export default LikesShow;

@@ -15,13 +15,13 @@ import {
 	updateFilters,
 	receivePaginationData,
 	fetchOldFeed,
-	receivePlayingTracksShuffled
+	receivePlayingTracksShuffled,
+	setHasSearchResults
 } from '../actions/feed_actions';
 import { togglePlay, disableShuffle } from '../actions/player_actions';
-import { getFeedTracksHash } from '../selectors/track_selector';
 import { getFeed } from '../util/bc_api';
 
-let prevSortType;
+let prevSortType, prevPlaylistId;
 
 const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 	switch (action.type) {
@@ -30,6 +30,7 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 				// if we have multiple tracks
 
 				dispatch(receivePaginationData(action.feed));
+				// THIS IS WHY ALL FEEDS NEED TO RETURN PAGINATION INFO
 				if (getState().feed.pagination.tracks_page === 1) {
 					dispatch(resetTracks());
 				}
@@ -98,8 +99,22 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 				sortType = action.filters.sortType;
 			} else if (action.filters.resource === 'user_feed') {
 				nextFeedType = 'USER';
+			} else if (action.filters.resource === 'search') {
+				nextFeedType = 'SEARCH';
 			} else {
 				nextFeedType = action.filters.resource;
+			}
+
+			// weird edge case where we change between playlists?
+			// can't we just do something less horrible?
+			let didSwitchPlaylist = false;
+
+			if (
+				nextFeedType === 'playlists' &&
+				action.filters.id !== prevPlaylistId
+			) {
+				prevPlaylistId = action.filters.id;
+				didSwitchPlaylist = true;
 			}
 
 			const isNewPageLoad = feedType && feedType !== nextFeedType;
@@ -109,7 +124,8 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 				sortType &&
 				sortType !== prevSortType;
 
-			if (isNewPageLoad || isNewFireFeedFilter) {
+			// THIS LOGIC LETS US -> SHOW LOADING ON TRACK FEEDS
+			if (isNewPageLoad || isNewFireFeedFilter || didSwitchPlaylist) {
 				dispatch(
 					receivePaginationData({
 						last_tracks_page: null,
@@ -117,6 +133,11 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 						tracks_page: null
 					})
 				);
+			} else {
+				// does this here mean it's just the same shit??
+				// in this event, just trigger next action, which will
+				// do nothing else and allow the rehydration logic to take effect
+				next(action);
 			}
 
 			prevSortType = sortType;
@@ -140,6 +161,42 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 					if (action.filters.resource === 'tracks' && action.filters.id) {
 						dispatch(receiveFeed([feed]));
 						dispatch(loadingStop());
+					} else if (action.filters.resource === 'search') {
+						// IF WE HAVE A SEARCH, IT IS THE ONLY CONDITION
+						// WHERE IT IS OKAY TO RECEIVE AN EMPTY FEED.
+
+						// this means we got back an empty feed
+						if (feed.status) {
+							dispatch(setHasSearchResults(false));
+							dispatch(loadingStop());
+						} else {
+							// add resource_type to feed metadata!
+							feed.resource_type = action.filters.resource_type;
+
+							dispatch(receiveFeed(feed));
+							dispatch(setHasSearchResults(true));
+							dispatch(loadingStop());
+						}
+					} else if (
+						(action.filters.resource === 'locations' &&
+							(action.filters.location_type !== undefined ||
+								action.filters.parent_location !== undefined)) ||
+						(action.filters.resource === 'playlists' && !action.filters.id)
+					) {
+						// RECEIVING ONLY LOCATIONS, NO TRACKS
+						// TODO: THIS SHOULD BE REFACTORED INTO AN INDEPENDENT MIDDLEWARE CASE!
+						if (action.filters.resource === 'playlists') {
+							// weird edge case where singular of playlists resource in Feed Reducer is
+							// EXPLORE and totally different shape (w/out tracks)
+							dispatch(receiveFeedMetadata('EXPLORE', feed));
+						} else {
+							dispatch(
+								receiveFeedMetadata(getState().feed.feedType, {
+									metadata: feed
+								})
+							);
+						}
+						dispatch(loadingStop());
 					} else {
 						dispatch(receiveFeed(feed));
 						dispatch(loadingStop());
@@ -151,7 +208,6 @@ const FeedMiddleware = ({ getState, dispatch }) => next => action => {
 			);
 
 			return next(action);
-
 		case feedConstants.PAGINATE_TRACKS:
 			const { next_tracks_page } = getState().feed.pagination;
 			dispatch(

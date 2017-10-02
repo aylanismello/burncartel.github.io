@@ -1,8 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { GoFlame } from 'react-icons/lib/go';
-import FireLike from '../likes/fire_like';
+import { Segment, Image, Grid } from 'semantic-ui-react';
 import * as FontAwesome from 'react-icons/lib/fa/';
+import { dateToTimeAgo } from '../../util/helpers';
+import FireLike from '../likes/fire_like';
+import TagList from '../shared/tag_list';
+import TrackBadge, { getBadgeText } from '../shared/track_badge';
+import CountryBadges, { getCountries } from '../shared/country_badges';
+import BCAlbumArt from '../shared/bc_album_art';
+import InfoDropdown from '../shared/info_dropdown';
 
 const shortenLongWordsInTitle = title => {
 	const formattedTitle = title.split(' ').map(word => {
@@ -35,117 +42,162 @@ const TrackItem = ({
 	const curatorWord = numCurators <= 1 ? 'curator' : 'curators';
 	const curatorsStr = `${numCurators} ${curatorWord}`;
 
-	const artwork_url = track.artwork_url
-		? track.artwork_url
-		: track.publisher.avatar_url;
-
-	const playIconUrl =
-		'https://cdn3.iconfinder.com/data/icons/seo-marketing-2-1/48/56-128.png';
-	const pauseIconUrl =
-		'https://cdn1.iconfinder.com/data/icons/media-volume-1/48/017-512.png';
-	const loadingIconUrl =
-		'https://cdn1.iconfinder.com/data/icons/loading-wait-time/256/loading_wait_time_02-128.png';
-
-	let playIcon = playIconUrl;
-
-	if (playingTrackId === track.id) {
-		if (trackLoaded && playing) {
-			playIcon = pauseIconUrl;
-		} else if (trackLoaded && !playing) {
-			playIcon = playIconUrl;
-		} else {
-			playIcon = loadingIconUrl;
-		}
-	}
-
-	let flameColor;
-
-	if (isLikedByUser) {
-		flameColor = 'orange';
-	} else {
-		flameColor = 'black';
-	}
-
 	return (
-		<div className="row">
-			<div
-				className="col-sm-6 col-md-4 track-container"
-				id={`track-#${track.id}`}
-			>
-				<div className="thumbnail">
-					{/*  do NOT use image itself to set width of this, there's invisble white space on edges*/}
-					<div className="left-side">
-						<div className="artwork-wrapper">
-							{hasRanking
-								? <h2>
-										<span className="ranking-header">
-											{trackIdx + 1}
-										</span>
-									</h2>
-								: null}
-
-							<img src={artwork_url} className="artwork-icon" />
-							<img
-								onClick={() => handleTrackClick(track.id, 'play')}
-								src={playIcon}
-								className="artwork-play"
-							/>
-						</div>
-
-						<div className="track-item-icons">
-							<FireLike
-								isLoggedIn={isLoggedIn}
-								loginFB={loginFB}
-								likePostInProgress={likePostInProgress}
-								likeUnlikeTrack={likeUnlikeTrack}
-								numLikes={track.num_likes}
-								isLikedByUser={isLikedByUser}
+		<Segment>
+			<Grid className="track-container" padded>
+				<Grid.Column className="track" width={3}>
+					<Grid>
+						<Grid.Row>
+							<BCAlbumArt
+								hasRanking={hasRanking}
+								trackIdx={trackIdx}
 								trackId={track.id}
+								playingTrackId={playingTrackId}
+								trackLoaded={trackLoaded}
+								playing={playing}
+								handleTrackClick={() => handleTrackClick(track.id, 'play')}
+								track={track}
 							/>
+						</Grid.Row>
+						<Grid.Row className="track-item-icons-container">
+							<div className="track-item-icons">
+								<FireLike
+									isLoggedIn={isLoggedIn}
+									loginFB={loginFB}
+									likePostInProgress={likePostInProgress}
+									likeUnlikeTrack={likeUnlikeTrack}
+									numLikes={track.num_likes}
+									isLikedByUser={isLikedByUser}
+									trackId={track.id}
+								/>
 
-							<div className="track-item-icon">
-								<a href={track.permalink_url} target="_blank">
-									<FontAwesome.FaSoundcloud
-										size={35}
-										color="black"
-										className="soundcloud-png"
-									/>
-								</a>
-
-							</div>
-
-						</div>
-					</div>
-
-					<div className="caption">
-
-						<Link to={`/tracks/${track.id}`}>
-							<h3 className="track-title">
-								{shortenLongWordsInTitle(track.name)}
-							</h3>
-						</Link>
-
-						{hasRanking
-							? <div>
-									<div>
-										<span>
-											{' '}By{' '}
-											<Link to={`/publishers/${track.publisher_id}`}>
-												{track.publisher.name}
-											</Link>
-										</span>
-									</div>
-									<span>Selected by {curatorsStr} </span>
+								<div className="track-item-icon">
+									<a href={track.permalink_url} target="_blank">
+										<FontAwesome.FaSoundcloud
+											size={35}
+											color="black"
+											className="soundcloud-png"
+										/>
+									</a>
 								</div>
-							: null}
+							</div>
+						</Grid.Row>
+					</Grid>
+				</Grid.Column>
+				{/* </div> */}
 
-					</div>
+				{/* <div className="right-side"> */}
+				<Grid.Column width={13}>
+					<Grid className="right-side">
+						<Grid.Row className="caption">
+							<Grid>
+								<Grid.Row>
+									<Link to={`/tracks/${track.id}`}>
+										<h3 className="track-title">
+											{shortenLongWordsInTitle(track.name)}
+										</h3>
+									</Link>
+								</Grid.Row>
 
-				</div>
+								{hasRanking
+									? <div>
+											<Grid.Row>
+												<div
+													className="curators-link"
+													style={{ display: 'flex' }}
+												>
+													<div
+														className="before-info-dropdown"
+														style={{ marginRight: '.3em' }}
+													>
+														{' '}By{' '}
+													</div>
+													<span>
+														<InfoDropdown
+															user={track.publisher}
+															users={track.suggested_publishers}
+															infoType="publishers"
+															length={2}
+														>
+															<Link to={`/publishers/${track.publisher_id}`}>
+																{track.publisher.name}
+															</Link>
+														</InfoDropdown>
+													</span>
+												</div>
+											</Grid.Row>
+											<Grid.Row>
+												<div
+													className="curators-link"
+													style={{ display: 'flex' }}
+												>
+													<div
+														className="before-info-dropdown"
+														style={{ marginRight: '.3em' }}
+													>
+														Selected by
+													</div>
+													<InfoDropdown
+														users={track.curators}
+														infoType="curators"
+														length={track.curators.length}
+													>
+														<a>
+															{' '}{curatorsStr}{' '}
+														</a>
+													</InfoDropdown>
+												</div>
+											</Grid.Row>
+										</div>
+									: null}
+								<Grid.Row>
+									{`${dateToTimeAgo(track.created_at_external)} old`}
+								</Grid.Row>
+							</Grid>
+						</Grid.Row>
 
-			</div>
-		</div>
+						<Grid.Row className="metadata">
+							<Grid>
+								{getCountries(track.locations) || getBadgeText(track)
+									? <Grid.Row>
+											<CountryBadges locations={track.locations} />
+											<TrackBadge track={track} />
+										</Grid.Row>
+									: null}
+
+								{track.top_tags.length > 0
+									? <Grid.Row>
+											<TagList tagList={track.top_tags.slice(0, 6)} />
+										</Grid.Row>
+									: null}
+
+							</Grid>
+						</Grid.Row>
+					</Grid>
+				</Grid.Column>
+			</Grid>
+		</Segment>
 	);
+};
+
+TrackItem.propTypes = {
+	track: PropTypes.object.isRequired,
+	handleTrackClick: PropTypes.func.isRequired,
+	playing: PropTypes.bool.isRequired,
+	trackId: PropTypes.number.isRequired,
+	trackLoaded: PropTypes.bool.isRequired,
+	trackIdx: PropTypes.number.isRequired,
+	isLoggedIn: PropTypes.bool.isRequired,
+	loginFB: PropTypes.func.isRequired,
+	likeUnlikeTrack: PropTypes.func.isRequired,
+	isLikedByUser: PropTypes.bool.isRequired,
+	likePostInProgress: PropTypes.bool.isRequired,
+	playingTrackId: PropTypes.number.isRequired,
+	hasRanking: PropTypes.bool
+};
+
+TrackItem.defaultProps = {
+	hasRanking: true
 };
 
 export default TrackItem;

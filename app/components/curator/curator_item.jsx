@@ -9,23 +9,30 @@ const CuratorItem = ({ user }) => {
 		<div className="row">
 			<div className="col-sm-6 col-md-4 track-container">
 				<div className="thumbnail">
+					<div className="left-side">
+						<div className="artwork-wrapper">
+							<Link to={`/curators/${user.id}`}>
+							<img
+								src={user.avatar_url}
+								className="artwork-icon"
+								alt="avatar"
+							/>
+							<span className="glyphicon glyphicon-play-circle" />
+							</Link>
+						</div>
 
-					<div className="artwork-wrapper">
-						<img src={user.avatar_url} className="artwork-icon" alt="avatar"/>
-						<span className="glyphicon glyphicon-play-circle" />
+						<div className="caption">
+
+							<Link to={`/curators/${user.id}`}>
+								<h3 className="user-title">{user.name}</h3>
+							</Link>
+
+							<h4 className="user-location">Based out of {userLocation}</h4>
+							<span>Posted <a href="#">{user.track_count}</a> tracks</span>
+							<div className="fire-emoji-container" />
+						</div>
+
 					</div>
-
-					<div className="caption">
-
-						<Link to={`/curators/${user.id}`}>
-							<h3 className="user-title">{user.name}</h3>
-						</Link>
-
-						<h4 className="user-location">Based out of {userLocation}</h4>
-						<span>Posted <a href="#">{user.track_count}</a> tracks</span>
-						<div className="fire-emoji-container" />
-					</div>
-
 				</div>
 			</div>
 		</div>

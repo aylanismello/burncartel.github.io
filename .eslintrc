@@ -15,13 +15,22 @@
   // To give you an idea how to override rule options:
   "rules": {
     "no-tabs": 0,
+    "camelcase": 0,
+    'arrow-body-style': 0,
     "no-case-declarations": 0,
-    "prefer-default-export": 0,
+    "import/prefer-default-export": 0,
+    "react/jsx-indent-props": 0,
+    "react/no-array-index-key": 0,
+    "one-var-declaration-per-line": 0,
+    'jsx-a11y/no-noninteractive-element-interactions': 0,
+    'jsx-a11y/no-static-element-interactions': 0,
+    'jsx-a11y/alt-text': 0,
     "no-else-return": 0,
     "comma-dangle": ["error", "never"],
-    "indent": ["error", "tab", { "SwitchCase": 2 }],
+    "indent": ["error", "tab", { "SwitchCase": 1 }],
     "react/jsx-indent": [1, 'tab'],
     "react/prefer-stateless-function": 0,
-    "import/no-extraneous-dependencies": ["error", {"devDependencies": false, "optionalDependencies": false, "peerDependencies": false}]
+    "import/no-extraneous-dependencies": 0,
+    "no-underscore-dangle": 0
   }
 }

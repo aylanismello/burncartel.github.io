@@ -1,0 +1,8 @@
+.search-type-container {
+  .search-type {
+    margin-right: 0.5em;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
