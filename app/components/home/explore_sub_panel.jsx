@@ -27,7 +27,7 @@ const ExplorePanel = ({ playlistType, type }) => {
 		<Slider className="explore-panel-slider" {...settings}>
 			{playlistType.map(playlist => (
 				<BCFeedCover
-					artworkUrl={`/assets/images/${playlist.artwork_url}`}
+					artworkUrl={playlist.photo.processed_small}
 					linkUrl={`/playlists/${playlist.id}`}
 					filters={{ q: playlist.q }}
 					handleFeedClick={() => {}}
