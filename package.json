@@ -13,7 +13,7 @@
                 "clean": "rm -f ./build/*.js",
 		"build": "npm run clean && webpack --config webpack.config.prod.js --progress -p",
 		"start-prod": "export NODE_ENV=production; webpack --watch",
-		"deploy": "npm run build && aws s3 sync build s3://fire-feed"
+		"deploy": "npm run build && aws s3 sync build s3://burncartel.com"
 	},
 	"keywords": [],
 	"author": "",
