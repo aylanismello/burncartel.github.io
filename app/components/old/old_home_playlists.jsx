@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Container, Header, Icon, Segment } from 'semantic-ui-react';
-import FeedContainer from '../feed/feed_container';
+import ExplorePanel from './explore_panel';
 
 class Home extends React.Component {
 	componentWillMount() {
-		this.props.updateFilters({ resource: 'tracks', sortType: 'influential' });
+		this.props.updateFilters({ resource: 'playlists' });
 	}
 
 	render() {
@@ -18,7 +18,11 @@ class Home extends React.Component {
 					</Header>
 
 				</Segment>
-				<FeedContainer />
+				<Segment padded basic>
+					{this.props.playlists
+						? <ExplorePanel playlists={this.props.playlists} />
+						: null}
+				</Segment>
 			</Container>
 		);
 	}
@@ -26,7 +30,8 @@ class Home extends React.Component {
 
 const { func, instanceOf, objectOf } = PropTypes;
 Home.propTypes = {
-	updateFilters: func.isRequired
+	updateFilters: func.isRequired,
+	playlists: objectOf(instanceOf(Array))
 };
 
 export default Home;

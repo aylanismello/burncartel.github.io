@@ -12,7 +12,7 @@ class App extends React.Component {
 	}
 
 	componentWillMount() {
-		this.props.initFB();
+		// this.props.initFB();
 		this.addShortcutsToWindow();
 	}
 
@@ -47,11 +47,11 @@ class App extends React.Component {
 		return (
 			<Container className="fixed-components">
 				{/* <MediaQuery query="(min-device-width: 451px)"> */}
-				<SideNav
+				{/* <SideNav
 					trackUrl={this.props.trackUrl}
 					currentUserId={this.props.currentUser.id}
 					currentUserPhotoUrl={this.props.currentUser.photo_url}
-				/>
+				/> */}
 				{/* </MediaQuery> */}
 
 				<TopNav

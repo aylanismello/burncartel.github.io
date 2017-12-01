@@ -16,12 +16,12 @@ const initialState = Object.freeze({
 
 const UserReducer = (state = initialState, action) => {
 	switch (action.type) {
-		case REHYDRATE:
-			const incoming = action.payload.user;
-			if (incoming.currentUser && incoming.currentUser.id) {
-				return incoming;
-			}
-			return state;
+		// case REHYDRATE:
+		// 	const incoming = action.payload.user;
+		// 	if (incoming.currentUser && incoming.currentUser.id) {
+		// 		return incoming;
+		// 	}
+		// 	return state;
 		case userConstants.UPDATE_LIKED_TRACKS:
 			return {
 				...state,

@@ -155,7 +155,7 @@ class TopNav extends React.Component {
 			<Menu fixed="top" className="bc-nav" >
 				<div className="nav-buttons">
 
-					<BCSearchBar q={q} />
+					{/* <BCSearchBar q={q} /> */}
 					{/* <Link to="/help">
 						<FontAwesome.FaQuestion
 							size={30}
@@ -164,7 +164,7 @@ class TopNav extends React.Component {
 						/>
 					</Link> */}
 
-					<div className="login-logout-container">
+					{/* <div className="login-logout-container">
 						{this.renderLoginOrLogoutButton()}
 						{this.renderSignupButton()}
 					</div>
@@ -175,7 +175,7 @@ class TopNav extends React.Component {
 						loginType={this.state.loginType}
 						style={style}
 						fbLoginCallback={this.facebookLogin.bind(this)}
-					/>
+					/> */}
 
 				</div>
 			</Menu>

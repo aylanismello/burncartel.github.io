@@ -2,7 +2,7 @@ import axios from 'axios';
 import { ENV } from './helpers';
 
 const { host, port } = ENV;
-const url = `http://${host}:${port}/api/v1`;
+const url = `http://${host}:${port}`;
 
 export const getFeed = (resource, filters, success, error) => {
 	let getUrl;
@@ -14,10 +14,14 @@ export const getFeed = (resource, filters, success, error) => {
 		page = filters.page;
 	}
 
-	if (resource === 'search') {
+	if (resource === 'tracks') {
+		// start with case where we are just getting a simple feed of tracks
+    // all sortTypes will be influential for now
+		getUrl = `${url}/tracks`;
+	} else if (resource === 'search') {
 		if (filters.resource_type) {
 			// getUrl = `${url}/feeds/search?q=${filters.q}&resource_type=${filters.resource_type}&tracks_page=${page}`;
-			getUrl = `${url}/feeds/search`
+			getUrl = `${url}/feeds/search`;
 		} else {
 			getUrl = `${url}/feeds/search`;
 			// getUrl = `${url}/feeds/search?q=${filters.q}&tracks_page=${page}`;
@@ -33,10 +37,7 @@ export const getFeed = (resource, filters, success, error) => {
 		getUrl = `${url}/${resource}`;
 	} else if (resource === 'tracks') {
 		getUrl = `${url}/tracks/${filters.id}`;
-	} else if (
-		resource === 'locations' &&
-		filters.parent_location !== undefined
-	) {
+	} else if (resource === 'locations' && filters.parent_location !== undefined) {
 		// THIS IS also FOR raw locations without sorted_tracks
 		getUrl = `${url}/${resource}/${filters.parent_location}/children_locations`;
 	} else if (resource === 'user_feed') {
@@ -54,14 +55,15 @@ export const getFeed = (resource, filters, success, error) => {
 		// getUrl = `${url}/feeds?sort_type=${filters.sortType}&tracks_page=${page}`;
 		getUrl = `${url}/feeds`;
 	}
+
 	axios
 		.get(getUrl, {
-			params: {...filters, tracks_page: page }
+			params: { ...filters, tracks_page: page }
 		})
 		.then(({ data }) => {
 			success(data);
 		})
-		.catch(err => {
+		.catch((err) => {
 			error(err);
 		});
 

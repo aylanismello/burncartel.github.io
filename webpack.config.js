@@ -4,8 +4,8 @@ const WebpackNotifierPlugin = require('webpack-notifier');
 
 const NODE_ENV = process.env.NODE_ENV || 'development';
 
-const EC2_HOST = NODE_ENV === 'development' ? 'localhost' : 'ec2-54-193-25-169.us-west-1.compute.amazonaws.com';
-const EC2_PORT = NODE_ENV === 'development' ? '3000' : '80';
+const EC2_HOST = NODE_ENV === 'development' ? 'localhost' : 'the-bc-api.herokuapp.com/';
+const EC2_PORT = NODE_ENV === 'development' ? '8000' : '80';
 
 module.exports = {
 	context: SharedWebpack.context,
